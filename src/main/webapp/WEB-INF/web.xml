@@ -7,4 +7,20 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.UserLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateContact</servlet-name>
+        <servlet-class>com.example.CreateContact</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateContact</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
 </web-app>

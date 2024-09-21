@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>User Registration</title>
+    <title>Enter the contact details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,20 +54,16 @@
 <body>
 
     <div class="container">
-        <h2>User Registration</h2>
-        <form action="register" method="post">
+        <h2>Create New Contact</h2>
+        <form action="create" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">Contact name:</label>
                 <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Set password:</label>
-                <input type="text" id="password" name="password" required>
             </div>
 
             <div class="form-group">
@@ -85,6 +81,10 @@
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
             </div>
 
             <div class="form-group">
