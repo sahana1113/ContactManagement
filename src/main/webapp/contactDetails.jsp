@@ -57,19 +57,19 @@
     <h2>Contact Details</h2>
 
     <%
-        String contactIdParam = request.getParameter("id");
-        int contactId = Integer.parseInt(contactIdParam);
+    String contactIdParam = request.getParameter("id");
+                        int contactId = Integer.parseInt(contactIdParam);
+                        String userId = request.getParameter("userId");
+                        UserContactDao contactDao = new UserContactDao();
+                        ContactDetailsBean contact = new ContactDetailsBean();
 
-        ContactDao contactDao = new ContactDao();
-        ContactDetailsBean contact = new ContactDetailsBean();
+                        try {
+                            contact = contactDao.getContactDetailsById(contactId);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
 
-        try {
-            contact = contactDao.getContactDetailsById(contactId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        if (contact != null) {
+                        if (contact != null) {
     %>
     <table>
         <tr>
@@ -103,7 +103,7 @@
     <% } %>
 
     <!-- Back button -->
-    <a href="home.jsp" class="back-btn">Back to Contacts</a>
+    <a href="home.jsp?id=<%=userId%>" class="back-btn">Back</a>
 </div>
 
 </body>

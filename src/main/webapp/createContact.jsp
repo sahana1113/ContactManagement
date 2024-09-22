@@ -69,7 +69,9 @@
             <div class="form-group">
                 <label for="gender">Gender:</label>
                 <div class="gender-group">
-                    <label><input type="text" name="gender" required></label>
+                	<input type="radio" name="gender" value="male"> Male<br>
+  					<input type="radio" name="gender" value="female"> Female<br>
+  					<input type="radio" name="gender" value="other"> Other
                 </div>
             </div>
 

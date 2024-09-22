@@ -10,15 +10,28 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class ContactDao {
+public class UserContactDao {
 	int user_id;
-	public ContactDao(int user_id){
+	public UserContactDao(int user_id){
 		this.user_id=user_id;
 	}
-	public ContactDao() {
+	public UserContactDao() {
 		
 	}
-	public List<ContactDetailsBean> display() throws SQLException
+	public String getUsername() throws SQLException
+	{
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select username from userDetails where user_id=?;");
+        pst.setInt(1,user_id);
+        ResultSet rs=pst.executeQuery();
+        if(rs.next())
+        {
+        	return rs.getString(1);
+        }
+        return "";
+        
+	}
+	public List<ContactDetailsBean> Contactdisplay() throws SQLException
 	{
 		List<ContactDetailsBean>list=new ArrayList<>();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -81,6 +94,40 @@ public class ContactDao {
         contact.setBirthday(rs.getString("birthday"));
         contact.setLocation(rs.getString("location"));
         }
+        return contact;
+        
+	}
+	public UserDetailsBean getUserDetailsById(int user_id) throws SQLException
+	{
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select * from userDetails where user_id=?;");
+        UserDetailsBean contact=new UserDetailsBean();
+        pst.setInt(1,user_id);
+        ResultSet rs=pst.executeQuery();
+        if (rs.next()) {
+        contact.setUsermail(rs.getString("usermail"));
+        contact.setUsername(rs.getString("username"));
+        contact.setPhonenumber(rs.getString("phonenumber"));
+        contact.setGender(rs.getString("gender"));
+        contact.setBirthday(rs.getString("birthday"));
+        }
+        
+        PreparedStatement pst1=con.prepareStatement("select user_email from all_mail where user_id=? && is_primary=false;");
+        pst1.setInt(1, user_id);
+        ResultSet rs1=pst1.executeQuery();
+        List<String>mail=new ArrayList<>();
+        while (rs1.next()) {
+        	mail.add(rs1.getString(1));
+        }
+        contact.setAllMail(mail);
+        PreparedStatement pst2=con.prepareStatement("select phone from all_phone where user_id=? && is_primary=false;");
+        pst2.setInt(1, user_id);
+        ResultSet rs2=pst2.executeQuery();
+        List<String>phone=new ArrayList<>();
+        while (rs2.next()) {
+        	phone.add(rs2.getString(1));
+        }
+        contact.setAllPhone(phone);
         return contact;
         
 	}

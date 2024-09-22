@@ -23,4 +23,12 @@
         <servlet-name>CreateContact</servlet-name>
         <url-pattern>/create</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>com.example.EditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
 </web-app>

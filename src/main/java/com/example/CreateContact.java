@@ -29,13 +29,16 @@ public class CreateContact extends HttpServlet {
         contact.setBirthday(request.getParameter("birthday"));
         contact.setPhonenumber(request.getParameter("phone"));
         contact.setLocation(request.getParameter("location"));
-        ContactDao cd=new ContactDao((int)session.getAttribute("user_id"));
+        UserContactDao cd=new UserContactDao((int)session.getAttribute("user_id"));
         try {
               if(cd.contactDetailsRegister(contact))
             {
-                  List<ContactDetailsBean> contactList = cd.display();
-                  request.setAttribute("contactList", contactList);
-                  request.getRequestDispatcher("home.jsp").forward(request, response);
+//                  List<ContactDetailsBean> contactList = cd.display();
+//                  request.setAttribute("contactList", contactList);
+//                  request.getRequestDispatcher("home.jsp").forward(request, response);
+                //  <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>">
+            	  int userid=(int) request.getSession().getAttribute("user_id");
+            	  response.sendRedirect("home.jsp?id="+ userid);
             }
             else
             {

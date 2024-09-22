@@ -1,5 +1,8 @@
 package com.example;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDetailsBean {
      String username;
      String usermail;
@@ -8,7 +11,36 @@ public class UserDetailsBean {
      String birthday;
      String password;
      int user_id;
-     public UserDetailsBean() {
+     String altmail;
+     String altphone;
+     List<String>allMail=new ArrayList<>();
+     List<String>allPhone=new ArrayList<>();
+     
+     public List<String> getAllMail() {
+		return allMail;
+	}
+	public void setAllMail(List<String> allMail) {
+		this.allMail = allMail;
+	}
+	public List<String> getAllPhone() {
+		return allPhone;
+	}
+	public void setAllPhone(List<String> allPhone) {
+		this.allPhone = allPhone;
+	}
+	public String getAltmail() {
+		return altmail;
+	}
+	public void setAltmail(String altmail) {
+		this.altmail = altmail;
+	}
+	public String getAltphone() {
+		return altphone;
+	}
+	public void setAltphone(String altphone) {
+		this.altphone = altphone;
+	}
+	public UserDetailsBean() {
     	 
      }
 	public UserDetailsBean(String username, String phonenumber) {

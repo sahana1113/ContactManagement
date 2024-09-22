@@ -26,10 +26,12 @@ public class UserLogin extends HttpServlet {
 			HttpSession session = request.getSession();
 	        session.setAttribute("user_id", user_id);
 	        session.setMaxInactiveInterval(30 * 60);	
-	        ContactDao contactDao = new ContactDao(user_id);
-            List<ContactDetailsBean> contactList = contactDao.display();
-            request.setAttribute("contactList", contactList);
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+//	        UserContactDao contactDao = new UserContactDao(user_id);
+//            List<ContactDetailsBean> contactList = contactDao.display();
+//            request.setAttribute("contactList", contactList);
+//            request.getRequestDispatcher("home.jsp").forward(request, response);
+            int userid=(int) request.getSession().getAttribute("user_id");
+            response.sendRedirect("home.jsp?id="+ userid);
 		}
 		else {
             response.sendRedirect("login.jsp?error=Invalid Username or Password");

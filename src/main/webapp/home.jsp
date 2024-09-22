@@ -4,12 +4,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="com.example.*" %>
-<%    // Assuming user object is stored in session
-  //  String username = (String) session.getAttribute("username");
-
-    // Assuming contacts and categories are fetched from your database
- //   List<Contact> contacts = (List<Contact>) request.getAttribute("contacts");
-   // Map<String, List<Contact>> categories = (Map<String, List<Contact>>) request.getAttribute("categories");
+<%
+String userId = request.getParameter("id");
+int uId = Integer.parseInt(userId);
+UserContactDao cd=new UserContactDao(uId);
+String s=cd.getUsername();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,43 +74,9 @@
 </head>
 <body>
     <!-- Welcome Section -->
-    <h2>Welcome back!</h2>
+    <h2>Welcome back <%=s+"!" %></h2>
 
     <div class="container">
-        <!-- My Account Column -->
-        <div class="column">
-            <h3>My Account</h3>
-            <ul>
-                <li><a href="editDetails.jsp">Edit My Details</a></li>
-                <li><a href="showDetails.jsp">Show My Details</a></li>
-                <li><a href="addAltEmail.jsp">Add Alternate Email ID</a></li>
-                <li><a href="addAltPhone.jsp">Add Alternate Phone Number</a></li>
-            </ul>
-            <a href="logout.jsp" class="logout-btn">Logout</a>
-        </div>
-
-        <!-- My Contacts Column -->
-        <div class="column">
-            <h3>My Contacts</h3>
-            <ul>
-                <%
-                List<ContactDetailsBean> contactList=(List<ContactDetailsBean>)request.getAttribute("contactList");
-                if (contactList != null && !contactList.isEmpty()) { 
-                    for (ContactDetailsBean contact : contactList) { %>
-                    <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>">
-                        <li class="contact-item">
-                            <%= contact.getContactname() %> -
-                            <%= contact.getPhonenumber() %>
-                        </li></a>
-                <%  }
-                } else { %>
-                    <li>No contacts available.</li>
-                <% } %>
-            </ul>
-             <a href="createContact.jsp" class="logout-btn">Create New</a>
-        </div>
-
-        <!-- Categories Column -->
         <div class="column">
             <h3>Categories</h3>
             <ul>
@@ -123,6 +88,39 @@
                 <li><a href="category.jsp?name=blocked">Blocked</a></li>
             </ul>
             <a href="createNew.jsp" class="logout-btn">Create New</a>
+        </div>
+
+        <!-- My Contacts Column -->
+        <div class="column">
+            <h3>My Contacts</h3>
+            <ul>
+                <%
+                
+               
+                List<ContactDetailsBean> contactList=cd.Contactdisplay();
+                if (contactList != null && !contactList.isEmpty()) { 
+                    for (ContactDetailsBean contact : contactList) { %>
+                    <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>&userId=<%= uId %>">
+                        <li class="contact-item">
+                            <%= contact.getContactname() %> -
+                            <%= contact.getPhonenumber() %>
+                        </li></a>
+                <%  }
+                } else { %>
+                    <li>No contacts available.</li>
+                <% } %>
+            </ul>
+             <a href="createContact.jsp" class="logout-btn">Create New</a>
+        </div>
+        
+        <div class="column">
+            <h3>My Account</h3>
+            <ul>
+                <li><a href="myDetails.jsp?uid=<%= uId %>">My Details</a></li>
+                <li><a href="EditDetails.jsp?uid=<%= uId %>">Edit My Details</a></li>
+                <li><a href="prime.jsp?uid=<%= uId %>">Edit Primary Credentials</a></li>
+            </ul>
+            <a href="login.jsp" class="logout-btn">Logout</a>
         </div>
     </div>
 </body>

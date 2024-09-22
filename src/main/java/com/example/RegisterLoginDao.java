@@ -125,6 +125,62 @@ public class RegisterLoginDao implements Dao{
             throw new RuntimeException(e);
         }
     }
+	public boolean updateUserDetails(UserDetailsBean user) {
+		boolean rs=false;
+		String updateQuery = "UPDATE userDetails SET username = ?, gender = ?, birthday = ? WHERE user_id = ?";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(updateQuery);
+		        ps.setString(1, user.getUsername());
+		        ps.setString(2, user.getGender());
+		        ps.setString(3, user.getBirthday());
+		        ps.setInt(4, user.getUser_id());
+               
+		        ps.executeUpdate();
+
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		return rs;
+	}
+	public boolean addAltMail(UserDetailsBean user) {
+		boolean rs=false;
+		String query="Insert into all_mail(user_id,user_email,is_primary) values(?,?,false)";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+		        
+		        ps.setInt(1, user.getUser_id());
+		        ps.setString(2, user.getAltmail());
+               
+		        ps.executeUpdate();
+
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+	}
+	public boolean addAltPhone(UserDetailsBean user) {
+		boolean rs=false;
+		String query="Insert into all_phone(user_id,phone,is_primary) values(?,?,false)";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+		        
+		        ps.setInt(1, user.getUser_id());
+		        ps.setString(2, user.getAltphone());
+               
+		        ps.executeUpdate();
+
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+	}
 
 
 }
