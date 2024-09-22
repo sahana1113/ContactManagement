@@ -22,14 +22,15 @@ public class ContactDao {
 	{
 		List<ContactDetailsBean>list=new ArrayList<>();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select name,phonenumber from contactDetails where user_id=?;");
+        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=?;");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
      //   System.out.print(user_id);
         while(rs.next())
         {
         	//System.out.println(rs.getString("name"));
-        	list.add(new ContactDetailsBean(rs.getString("name"),rs.getString("phonenumber")));
+        	ContactDetailsBean c=new ContactDetailsBean(rs.getString("name"),rs.getString("phonenumber"),rs.getInt("contact_id"));
+        	list.add(c);
         }
        // System.out.println(list.get(0));
         return list;
@@ -64,6 +65,24 @@ public class ContactDao {
           
         }
 		return rs;
+	}
+	public ContactDetailsBean getContactDetailsById(int contact_id) throws SQLException
+	{
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select * from contactDetails where contact_id=?;");
+        ContactDetailsBean contact=new ContactDetailsBean();
+        pst.setInt(1,contact_id);
+        ResultSet rs=pst.executeQuery();
+        if (rs.next()) {
+        contact.setContactmail(rs.getString("mail"));
+        contact.setContactname(rs.getString("name"));
+        contact.setPhonenumber(rs.getString("phonenumber"));
+        contact.setGender(rs.getString("gender"));
+        contact.setBirthday(rs.getString("birthday"));
+        contact.setLocation(rs.getString("location"));
+        }
+        return contact;
+        
 	}
 
 }

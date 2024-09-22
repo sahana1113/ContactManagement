@@ -10,7 +10,6 @@
     // Assuming contacts and categories are fetched from your database
  //   List<Contact> contacts = (List<Contact>) request.getAttribute("contacts");
    // Map<String, List<Contact>> categories = (Map<String, List<Contact>>) request.getAttribute("categories");
-
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,24 +94,20 @@
         <div class="column">
             <h3>My Contacts</h3>
             <ul>
-        <% 
-        try {
-            ContactDao cd = new ContactDao(); // Ensure ContactDao is correctly implemented
-            List<String> contactList = cd.display(); // Call the display() method
-            
-            // Iterate through the contact list
-            if (contactList != null && !contactList.isEmpty()) {
-                for (String contact : contactList) { %>
-                    <li class="contact-item"><%= contact %> </li>
-                <% }
-            } else { %>
-                <li>No contacts available.</li>
-            <% }
-        } catch (Exception e) {
-            e.printStackTrace(); %>
-            <li>Error fetching contacts: <%= e.getMessage() %></li>
-        <% } %>
-    </ul>
+                <%
+                List<ContactDetailsBean> contactList=(List<ContactDetailsBean>)request.getAttribute("contactList");
+                if (contactList != null && !contactList.isEmpty()) { 
+                    for (ContactDetailsBean contact : contactList) { %>
+                    <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>">
+                        <li class="contact-item">
+                            <%= contact.getContactname() %> -
+                            <%= contact.getPhonenumber() %>
+                        </li></a>
+                <%  }
+                } else { %>
+                    <li>No contacts available.</li>
+                <% } %>
+            </ul>
              <a href="createContact.jsp" class="logout-btn">Create New</a>
         </div>
 

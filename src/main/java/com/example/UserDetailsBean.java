@@ -8,7 +8,13 @@ public class UserDetailsBean {
      String birthday;
      String password;
      int user_id;
-     
+     public UserDetailsBean() {
+    	 
+     }
+	public UserDetailsBean(String username, String phonenumber) {
+		this.username = username;
+		this.phonenumber = phonenumber;
+	}
 	public int getUser_id() {
 		return user_id;
 	}

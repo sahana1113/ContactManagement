@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,10 @@ public class UserLogin extends HttpServlet {
 			HttpSession session = request.getSession();
 	        session.setAttribute("user_id", user_id);
 	        session.setMaxInactiveInterval(30 * 60);	
-			response.sendRedirect("home.jsp");
+	        ContactDao contactDao = new ContactDao(user_id);
+            List<ContactDetailsBean> contactList = contactDao.display();
+            request.setAttribute("contactList", contactList);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
 		}
 		else {
             response.sendRedirect("login.jsp?error=Invalid Username or Password");

@@ -8,13 +8,14 @@ public class ContactDetailsBean {
      String birthday;
      String location;
      int contact_id;
-	public ContactDetailsBean(String contactname, String phonenumber) {
+	public ContactDetailsBean() {
+
+	}
+	public ContactDetailsBean(String contactname, String phonenumber,int contact_id) {
 
 		this.contactname = contactname;
 		this.phonenumber = phonenumber;
-	}
-	public ContactDetailsBean() {
-		// TODO Auto-generated constructor stub
+		this.contact_id=contact_id;
 	}
 	public String getContactname() {
 		return contactname;

@@ -33,8 +33,9 @@ public class CreateContact extends HttpServlet {
         try {
               if(cd.contactDetailsRegister(contact))
             {
-            	 // response.getWriter().print(cd.display());
-                 response.sendRedirect("home.jsp");
+                  List<ContactDetailsBean> contactList = cd.display();
+                  request.setAttribute("contactList", contactList);
+                  request.getRequestDispatcher("home.jsp").forward(request, response);
             }
             else
             {
