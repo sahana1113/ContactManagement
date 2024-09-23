@@ -10,7 +10,7 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class UserContactDao {
+public class UserContactDao implements Dao{
 	int user_id;
 	public UserContactDao(int user_id){
 		this.user_id=user_id;
@@ -31,11 +31,24 @@ public class UserContactDao {
         return "";
         
 	}
+	public String getUsermail() throws SQLException
+	{
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select usermail from userDetails where user_id=?;");
+        pst.setInt(1,user_id);
+        ResultSet rs=pst.executeQuery();
+        if(rs.next())
+        {
+        	return rs.getString(1);
+        }
+        return "";
+        
+	}
 	public List<ContactDetailsBean> Contactdisplay() throws SQLException
 	{
 		List<ContactDetailsBean>list=new ArrayList<>();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=?;");
+        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name;");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
      //   System.out.print(user_id);
@@ -131,5 +144,16 @@ public class UserContactDao {
         return contact;
         
 	}
-
+    public UserDetailsBean getPrimeDetailsById(int userId) throws SQLException{
+    	UserDetailsBean user=new UserDetailsBean();
+    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select usermail,phonenumber from userDetails where user_id=?;");
+        pst.setInt(1, userId);
+        ResultSet rs=pst.executeQuery();
+        if(rs.next()) {
+        user.setUsermail(rs.getString("usermail"));
+        user.setPhonenumber(rs.getString("phonenumber"));
+        }
+        return user;
+    }
 }

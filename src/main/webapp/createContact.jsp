@@ -9,38 +9,51 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
         .container {
             width: 50%;
-            margin: auto;
-            padding: 20px;
+            margin: 50px auto;
+            padding: 30px;
             background-color: white;
-            box-shadow: 0px 0px 10px 0px #aaa;
-            margin-top: 50px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         h2 {
             text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         label {
             font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
         }
         .form-group {
             margin-bottom: 15px;
         }
         input[type="text"], input[type="email"], input[type="date"], input[type="tel"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #f9f9f9;
         }
         input[type="submit"] {
             width: 100%;
-            padding: 10px;
-            background-color: blue;
+            padding: 12px;
+            background-color: #007BFF;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
             background-color: #45a049;
@@ -48,6 +61,23 @@
         .gender-group {
             display: flex;
             justify-content: space-between;
+            margin-top: 10px;
+        }
+        .gender-group input {
+            margin-right: 5px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 80%;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            .gender-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>

@@ -19,45 +19,83 @@
         };
     </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0px 0px 10px 0px #aaa;
-            margin-top: 50px;
-        }
-        h2 {
-            text-align: center;
-        }
-        label {
-            font-weight: bold;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            background-color: blue;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color:  #ECF0F1;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+	color:white;
+    width: 600px; /* Fixed width for better alignment */
+    padding: 20px;
+    background-color: #2C3E50;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Improved shadow for better effect */
+    border-radius: 8px; /* Rounded corners */
+    margin: 20px auto; 
+}
+
+h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+label {
+    font-weight: bold;
+    display: block; /* Ensures label stays above the input */
+    margin-bottom: 8px;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus {
+    border-color: #007BFF; /* Border color change on focus */
+    outline: none;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%; /* Adjusts to 90% of the viewport on smaller screens */
+    }
+}
+
+        
     </style>
 </head>
 <body>

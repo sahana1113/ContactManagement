@@ -1,7 +1,7 @@
 <web-app>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.example.UserRegister</servlet-class>
+        <servlet-class>com.example.UserRegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -9,7 +9,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.example.UserLogin</servlet-class>
+        <servlet-class>com.example.UserLoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -17,7 +17,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>CreateContact</servlet-name>
-        <servlet-class>com.example.CreateContact</servlet-class>
+        <servlet-class>com.example.CreateContactServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateContact</servlet-name>
@@ -30,5 +30,13 @@
     <servlet-mapping>
         <servlet-name>UpdateUser</servlet-name>
         <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Prime</servlet-name>
+        <servlet-class>com.example.primeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Prime</servlet-name>
+        <url-pattern>/prime</url-pattern>
     </servlet-mapping>
 </web-app>

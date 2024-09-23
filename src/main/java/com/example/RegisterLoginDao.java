@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class RegisterLoginDao implements Dao{
+public class RegisterLoginDao implements DetailsDao{
 	public boolean UserDetailsRegister(UserDetailsBean user) {
 		boolean rs=false;
 		try {
@@ -180,6 +180,65 @@ public class RegisterLoginDao implements Dao{
             e.printStackTrace();
         }
 		return rs;
+	}
+	public boolean updatePrimaryMail(UserDetailsBean user) {
+		boolean rs=false;
+		String query="update userDetails set usermail=? where user_id=? ";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+		        
+		        ps.setString(1,user.getUsermail());
+                ps.setInt(2,user.getUser_id());
+		        ps.executeUpdate();
+		    
+            PreparedStatement ps1=con.prepareStatement("update all_mail set user_email=? where user_id=? && is_primary=true;");
+            ps1.setString(1, user.getUsermail());
+            ps1.setInt(2, user.getUser_id());
+            ps1.executeUpdate();
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+	}
+	public boolean updatePrimaryPhone(UserDetailsBean user) {
+		boolean rs=false;
+		String query="update userDetails set phonenumber=? where user_id=?;";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+		        
+		        ps.setString(1,user.getPhonenumber());
+                ps.setInt(2,user.getUser_id());
+		        ps.executeUpdate();
+            PreparedStatement ps2=con.prepareStatement("update all_phone set phone=? where user_id=? && is_primary=true;");
+            ps2.setString(1, user.getPhonenumber());
+            ps2.setInt(2, user.getUser_id());
+            ps2.executeUpdate();
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+	}
+	public boolean changePassword(UserDetailsBean user) {
+		String query="update credentials set password=? where user_id=?;";
+		boolean rs=false;
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+			 String hash=hashPassword(user.getPassword());
+			 ps.setString(1, hash);
+			 ps.setInt(2, user.getUser_id());
+			 ps.executeUpdate();
+			 rs=true;
+		}
+		catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+		
 	}
 
 
