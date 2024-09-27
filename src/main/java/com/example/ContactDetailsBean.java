@@ -1,13 +1,28 @@
 package com.example;
-
+import java.util.*;
 public class ContactDetailsBean {
-     String contactname;
+    
+	String contactname;
      String contactmail;
      String gender;
      String phonenumber;
      String birthday;
      String location;
-     int contact_id;
+     int contact_id,user_id;
+     public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	String alt_mail,alt_phone;
+     List<String>category;
+	public  List<String> getCategory() {
+		return category;
+	}
+	public void setCategory(List<String> category) {
+		this.category = category;
+	}
 	public ContactDetailsBean() {
 
 	}
@@ -17,6 +32,18 @@ public class ContactDetailsBean {
 		this.phonenumber = phonenumber;
 		this.contact_id=contact_id;
 	}
+	 public String getAlt_mail() {
+			return alt_mail;
+		}
+		public void setAlt_mail(String alt_mail) {
+			this.alt_mail = alt_mail;
+		}
+		public String getAlt_phone() {
+			return alt_phone;
+		}
+		public void setAlt_phone(String alt_phone) {
+			this.alt_phone = alt_phone;
+		}
 	public String getContactname() {
 		return contactname;
 	}

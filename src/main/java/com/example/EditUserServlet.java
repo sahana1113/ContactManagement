@@ -11,15 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class EditServlet extends HttpServlet {
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/update")
+public class EditUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
-   	 if (session == null || session.getAttribute("user_id") == null) {
-            response.sendRedirect("login.jsp?error=SessionExpired");
-            return;
-        }
    	int userid=(int) request.getSession().getAttribute("user_id");
     	UserDetailsBean user=new UserDetailsBean();
         user.setUsername(request.getParameter("username"));
@@ -40,7 +37,7 @@ public class EditServlet extends HttpServlet {
             	  {
             		  rld.addAltPhone(user);
             	  }
-            	response.sendRedirect("home.jsp?id="+ userid);
+            	response.sendRedirect("home.jsp");
             }
             else
             {

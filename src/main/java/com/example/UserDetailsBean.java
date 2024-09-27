@@ -8,9 +8,21 @@ public class UserDetailsBean {
      String usermail;
      String gender;
      String phonenumber;
-     String birthday;
+     public int getTotal_contacts() {
+		return total_contacts;
+	}
+	public void setTotal_contacts(int total_contacts) {
+		this.total_contacts = total_contacts;
+	}
+	public int getTotal_categories() {
+		return total_categories;
+	}
+	public void setTotal_categories(int total_categories) {
+		this.total_categories = total_categories;
+	}
+	String birthday;
      String password;
-     int user_id;
+     int user_id,total_contacts,total_categories;
      String altmail;
      String altphone;
      List<String>allMail=new ArrayList<>();

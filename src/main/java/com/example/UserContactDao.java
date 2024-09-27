@@ -18,6 +18,19 @@ public class UserContactDao implements Dao{
 	public UserContactDao() {
 		
 	}
+	public List<String> getAllCategories(int user_id) throws SQLException
+	{
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("select category_name from categories where user_id=?;");
+        pst.setInt(1, user_id);
+        ResultSet rs=pst.executeQuery();
+        List<String>list =new ArrayList<>();
+        while(rs.next())
+        {
+        	list.add(rs.getString("category_name"));
+        }
+        return list;
+	}
 	public String getUsername() throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -48,7 +61,7 @@ public class UserContactDao implements Dao{
 	{
 		List<ContactDetailsBean>list=new ArrayList<>();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name;");
+        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name ");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
      //   System.out.print(user_id);
@@ -84,8 +97,24 @@ public class UserContactDao implements Dao{
 	                contact_id = key.getInt(1); // Fetch the generated contact ID
 	                user.setContact_id(contact_id); 
 	            }
-	
+	            List<String> category=user.getCategory();
+	            for(String s:category) {
+	            PreparedStatement pst1=con.prepareStatement("Select category_id from categories where category_name=? && user_id=?;");
+	            pst1.setString(1, s);
+	            pst1.setInt(2, user_id);
+	            ResultSet rs1=pst1.executeQuery();
+	            int c_id=0;
+	            if(rs1.next())
+	            {
+	            	c_id=rs1.getInt("category_id");
+	            }
+	            PreparedStatement pst2=con.prepareStatement("Insert into category_users(category_id,contact_id) values (?,?);");
+	            pst2.setInt(1,c_id);
+	            pst2.setInt(2, user.getContact_id());
+	            pst2.executeUpdate();
+	            
 	     }
+		}
 		catch (Exception e) {
             e.printStackTrace();
           
@@ -102,11 +131,21 @@ public class UserContactDao implements Dao{
         if (rs.next()) {
         contact.setContactmail(rs.getString("mail"));
         contact.setContactname(rs.getString("name"));
+        
         contact.setPhonenumber(rs.getString("phonenumber"));
         contact.setGender(rs.getString("gender"));
         contact.setBirthday(rs.getString("birthday"));
-        contact.setLocation(rs.getString("location"));
+        contact.setLocation(rs.getString("location"));  
         }
+        PreparedStatement pst1=con.prepareStatement("Select category_name from categories c INNER JOIN category_users cm ON c.category_id=cm.category_id where cm.contact_id=?");
+        pst1.setInt(1, contact_id);
+        ResultSet rs1=pst1.executeQuery();
+        List<String>list=new ArrayList<>();
+        while(rs1.next())
+        {
+        	list.add(rs1.getString("category_name"));
+        }
+        contact.setCategory(list);
         return contact;
         
 	}
@@ -141,6 +180,7 @@ public class UserContactDao implements Dao{
         	phone.add(rs2.getString(1));
         }
         contact.setAllPhone(phone);
+        	contact.setTotal_contacts(getTotalContacts(user_id));
         return contact;
         
 	}
@@ -156,4 +196,31 @@ public class UserContactDao implements Dao{
         }
         return user;
     }
+    public int getTotalContacts(int userId) throws SQLException {
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM contactDetails WHERE user_id = ?");
+        pst.setInt(1, userId);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        
+        return 0;
+    }
+    public List<String> getCategoriesByUserId() throws SQLException
+    {
+    	List<String>categories=new ArrayList<>();
+    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        PreparedStatement pst = con.prepareStatement("Select category_name from categories where user_id=?");
+        pst.setInt(1, user_id);
+        ResultSet rs = pst.executeQuery();
+        while(rs.next())
+        {
+        	categories.add(rs.getString("category_name"));
+        }
+		return categories;
+    	
+    }
+    
 }

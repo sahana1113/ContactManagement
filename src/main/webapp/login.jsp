@@ -1,4 +1,9 @@
-
+<%@ page session="true" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+    response.setDateHeader("Expires", 0); // Proxies
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +39,7 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Improved shadow for better effect */
     border-radius: 8px; /* Rounded corners */
     margin: 20px auto; 
+    margin-top:200px;
 }
 
 h2 {

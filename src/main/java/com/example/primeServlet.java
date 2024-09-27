@@ -11,15 +11,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/prime")
 public class primeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
-   	 if (session == null || session.getAttribute("user_id") == null) {
-            response.sendRedirect("login.jsp?error=SessionExpired");
-            return;
-        }
+   	 
    	int userid=(int) request.getSession().getAttribute("user_id");
     	UserDetailsBean user=new UserDetailsBean();
         String curr=(request.getParameter("currentPassword"));
@@ -54,7 +64,7 @@ public class primeServlet extends HttpServlet {
         		{
         			rld.updatePrimaryPhone(user);
         		}
-        		response.sendRedirect("home.jsp?id="+ userid);
+        		response.sendRedirect("home.jsp");
         		
         	}
         	else

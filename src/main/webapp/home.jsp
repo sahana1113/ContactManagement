@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page session="true" %>
-<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
-<%    
-String userId = request.getParameter("id");
-int uId = Integer.parseInt(userId);
+<%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page session="true" %>
+<%@ include file="sessionValidation.jsp" %>
+<%
+
+int uId = (int) session.getAttribute("user_id");
 UserContactDao cd = new UserContactDao(uId);
 String s = cd.getUsername();
 %>
@@ -14,20 +15,16 @@ String s = cd.getUsername();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Home</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #2C3E50;
-        }
-        h2{
-       color: white;
+            background-color: #ECF0F1;
         }
         .container {
             display: flex;
-            flex-direction: row-reverse; /* Sidebar moves to the right */
             height: 100vh;
         }
         .sidebar {
@@ -64,21 +61,25 @@ String s = cd.getUsername();
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
-            display: flex; /* Enable flexbox for main content */
         }
-        .contacts-list, .categories-list {
-            width: 50%; /* Each column takes up half the width */
+        .details-list {
+            width: 100%;
             padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            
         }
-        .contacts-list h3, .categories-list h3 {
+        .details-list h2 {
             margin-bottom: 20px;
+            font-size:40px;
+          /*  text-align: center;*/
         }
-        /* Contact list styling */
-        .contacts-list ul {
+        .details-list ul {
             list-style-type: none;
             padding: 0;
         }
-        .contacts-list ul li {
+        .details-list ul li {
             background-color: white;
             border: 1px solid #ddd;
             padding: 15px;
@@ -86,18 +87,14 @@ String s = cd.getUsername();
             font-size: 18px;
             border-radius: 5px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content:space-between;
+            align-items: center; 
+            text-align:center;
         }
-        .contacts-list ul li:hover {
+        .details-list ul li:hover {
             background-color: #f9f9f9;
             cursor: pointer;
         }
-        .tab {
-  display: inline-block;
-  margin-left: 400px;
-}
-        /* Button styles */
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -107,67 +104,93 @@ String s = cd.getUsername();
             border-radius: 5px;
             text-decoration: none;
             text-align: center;
+            margin-top: 20px;
         }
         .btn:hover {
             background-color: #2980B9;
         }
-        a {
-            color: black; /* Link color */
-            text-decoration: none; /* Remove underline */
-        }
+        
     </style>
 </head>
 <body>
-    <h2>Welcome back <%=s+"!" %></h2>
+
     <div class="container">
 
+        <!-- Sidebar -->
         <div class="sidebar">
-            <h3>My Account</h3>
+            <h2>My Account</h2>
             <ul>
-                <li><a href="myDetails.jsp?uid=<%= uId %>">My Details</a></li>
-                <li><a href="EditDetails.jsp?uid=<%= uId %>">Edit My Details</a></li>
-                <li><a href="prime.jsp?uid=<%= uId %>">Edit Primary Credentials</a></li>
-                <li><a href="login.jsp">Logout</a></li>
+                <li><a href="myDetails.jsp">My Details</a></li>
+                <li><a href="category.jsp">View Categories</a></li>
+                <li><a href="contacts.jsp">View Contacts</a></li>
+                <li><a href="logout">Logout</a></li>
             </ul>
         </div>
 
+        <!-- Main Content -->
         <div class="main-content">
-             <div class="contacts-list">
-                <h3>Categories</h3>
-                <ul>
-                    <li><a href="category.jsp?name=family">Family</a></li>
-                    <li><a href="category.jsp?name=work">Work</a></li>
-                    <li><a href="category.jsp?name=friends">Friends</a></li>
-                    <li><a href="category.jsp?name=favourites">Favourites</a></li>
-                    <li><a href="category.jsp?name=archived">Archived</a></li>
-                    <li><a href="category.jsp?name=blocked">Blocked</a></li>
-                </ul>
-                <a href="createNew.jsp" class="btn">Create New</a>
-            </div>
-            <div class="contacts-list">
-                <h3>My Contacts</h3>
-                <h3>Contact Name <span class="tab"></span> Phone Number</h3>
-                <ul>
-                    <%
-                    List<ContactDetailsBean> contactList = cd.Contactdisplay();
-                    if (contactList != null && !contactList.isEmpty()) {
-                        for (ContactDetailsBean contact : contactList) { %>
-                        <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>&userId=<%= uId %>">
-                        <li>
-                            <span><%= contact.getContactname() %></span>
-                            <span><%= contact.getPhonenumber() %></span>
-                        </li>
-                        </a>
-                    <%  }
-                    } else { %>
-                        <li>No contacts available.</li>
-                    <% } %>
-                </ul>
-                <a href="createContact.jsp" class="btn">Create New Contact</a>
-            </div>
+            <div class="details-list">
+                <h1>Welcome back <%=s+"!" %></h1>
+                <h3>My Account Details</h3>
+                <%
 
-           
+                    UserContactDao contactDao = new UserContactDao();
+                    UserDetailsBean user = null;
+
+                    try {
+                        user = contactDao.getUserDetailsById(uId);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (user != null) {
+                %>
+                <ul>
+                    <li><strong>Username:</strong> <span><%= user.getUsername() %></span></li>
+                    <li><strong>Primary Email:</strong> <span><%= user.getUsermail() %></span></li>
+                    <li><strong>Gender:</strong> <span><%= user.getGender() %></span></li>
+                    <li><strong>Primary Phone Number:</strong> <span><%= user.getPhonenumber() %></span></li>
+                    <li><strong>Birthday:</strong> <span><%= user.getBirthday() %></span></li>
+                    <li><strong>Alternate Emails:</strong>
+                        <ul>
+                            <%
+                            boolean r=false;
+                            for (String email : user.getAllMail()) {
+                                if (!email.isEmpty()) {
+                                	r=true;%>
+                                    <li><%= email %></li>
+                            <% } }if(!r)
+                            	out.print("No alternate mails assigned"); %>
+                        </ul>
+                    </li>
+                    <li><strong>Alternate Phone Numbers:</strong>
+                        <ul>
+                            <% 
+                            boolean r1=false;
+                            for (String phone : user.getAllPhone()) {
+                                if (!phone.isEmpty()) {
+                                	r1=true;%>
+                                    <li><%= phone %></li>
+                            <% } }if(!r)
+                            	out.print("No alternate phonenumber assigned"); %>
+                        </ul>
+                    </li>
+                    <li><strong>Total Contacts:</strong> <span><%= user.getTotal_contacts() %></span></li>
+                </ul>
+                <a href="EditDetails.jsp" class="btn">Edit My Details</a>
+                &emsp;
+                 <a href="prime.jsp" class="btn">Edit Primary Details</a>
+                <%
+                    } else {
+                %>
+                    <p>No user details found. Please ensure you are logged in.</p>
+                <%
+                    }
+                %>
+            </div>
         </div>
+
     </div>
+
 </body>
 </html>

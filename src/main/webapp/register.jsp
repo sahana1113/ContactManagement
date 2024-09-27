@@ -1,3 +1,9 @@
+<%@ page session="true" %>
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+    response.setHeader("Pragma", "no-cache"); 
+    response.setDateHeader("Expires", 0); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +17,13 @@
             padding: 0;
         }
         .container {
-            width: 600px; /* Fixed width for better layout */
+            width: 600px; 
             padding: 20px;
             background-color: #2C3E50;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             margin: 40px auto; /* Centers the container with a top margin */
+            margin-top:100px;
         }
         h2 {
             text-align: center;
