@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="true" %>
+
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.*" %>
+<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
 
 <%
@@ -24,7 +25,7 @@ UserContactDao cd = new UserContactDao(uId);
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -32,6 +33,9 @@ UserContactDao cd = new UserContactDao(uId);
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -42,6 +46,7 @@ UserContactDao cd = new UserContactDao(uId);
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -52,14 +57,18 @@ UserContactDao cd = new UserContactDao(uId);
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
+             height: 100%;
         }
         .main-content {
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
+            display: flex;
+    		flex-direction: column;
         }
         .contacts-list {
             padding: 20px;
@@ -104,8 +113,7 @@ UserContactDao cd = new UserContactDao(uId);
             background-color: #2980B9;
         }
         a {
-  all: unset; /* remove all styles */
-  /* add custom styles here, e.g. */
+  all: unset; 
   color: #333;
   text-decoration: none;
 }
@@ -125,18 +133,22 @@ UserContactDao cd = new UserContactDao(uId);
         </div>
         
         <div class="main-content">
-            
+            <%
+    int userId = (int) session.getAttribute("user_id");
+    UserContactDao categoryDao = new UserContactDao(userId);
+    List<CategoryBean> categories = categoryDao.getCategoriesByUserId();
+%>
             <div class="contacts-list">
                 <h2>Categories</h2>
                 <ul>
-                    <a href="category.jsp?name=family"><li>Family</li></a>
-                    <a href="category.jsp?name=work"><li>Work</li></a>
-                    <a href="category.jsp?name=friends"><li>Friends</li></a>
-                    <a href="category.jsp?name=favourites"><li>Favourites</li></a>
-                    <a href="category.jsp?name=archived"><li>Archived</li></a>
-                    <a href="category.jsp?name=blocked"><li>Blocked</li></a>
+                     <% if (categories != null && !categories.isEmpty()) {
+            for (CategoryBean category : categories) { %>
+                    <a href="categoryDetails.jsp?id=<%= category.getC_id() %>"><li><%= category.getCategory() %></li></a>
+                  <% } } else { %>
+            <li>No categories found.</li>
+        <% } %> 
                 </ul>
-                <a href="createNew.jsp" class="btn">Create New</a>
+                <a href="createCategory.jsp" class="btn">Create New</a>
             </div>
         </div>
     </div>

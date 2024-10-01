@@ -16,36 +16,61 @@ import javax.servlet.annotation.WebServlet;
 public class EditUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	HttpSession session = request.getSession(false);
-   	int userid=(int) request.getSession().getAttribute("user_id");
-    	UserDetailsBean user=new UserDetailsBean();
-        user.setUsername(request.getParameter("username"));
-        user.setGender(request.getParameter("gender"));
-        user.setBirthday(request.getParameter("birthday"));
-        user.setAltmail(request.getParameter("altEmail"));
-        user.setAltphone(request.getParameter("altPhone"));
-        user.setUser_id(userid);
-        RegisterLoginDao rld=new RegisterLoginDao();
+    	 HttpSession session = request.getSession(false);
+    	int userId = (int) session.getAttribute("user_id");
+
+        String action = request.getParameter("action");
+        RegisterLoginDao rld = new RegisterLoginDao();
+        UserDetailsBean user = new UserDetailsBean();
+        user.setUser_id(userId);
+
         try {
-              if(rld.updateUserDetails(user))
-            {
-            	  if(user.getAltmail().length()!=0)
-            	  {
-            		  rld.addAltMail(user);
-            	  }
-            	  if(user.getAltphone().length()!=0)
-            	  {
-            		  rld.addAltPhone(user);
-            	  }
-            	response.sendRedirect("home.jsp");
-            }
-            else
-            {
-            	response.getWriter().println("Updation unsuccessful!");
+            if ("deleteEmail".equals(action)) {
+                user.setAltmail(request.getParameter("altEmail"));
+                rld.deleteAltMail(user);
+                response.sendRedirect("EditDetails.jsp");
+                return;
+            } else if ("deletePhone".equals(action)) {
+                user.setAltphone(request.getParameter("altPhone"));
+                rld.deleteAltPhone(user);
+                response.sendRedirect("EditDetails.jsp");
+                return;
+            } else if ("addEmail".equals(action)) {
+                user.setAltmail(request.getParameter("newAltEmail"));
+                rld.addAltMail(user);
+                response.sendRedirect("EditDetails.jsp");
+                return;
+            } else if ("addPhone".equals(action)) {
+                user.setAltphone(request.getParameter("newAltPhone"));
+                rld.addAltPhone(user); 
+                response.sendRedirect("EditDetails.jsp");
+                return;
+            } else if ("updateUserDetails".equals(action)){
+                
+                user.setUsername(request.getParameter("username"));
+                user.setGender(request.getParameter("gender"));
+                user.setBirthday(request.getParameter("birthday"));
+                user.setUsermail(request.getParameter("primaryEmail"));
+                user.setPhonenumber(request.getParameter("primaryPhone"));
+                if(user.getUsermail().length()!=0)
+        		{
+        			rld.updatePrimaryMail(user);
+        		}
+        		if(user.getPhonenumber().length()!=0)
+        		{
+        			rld.updatePrimaryPhone(user);
+        		}
+                if (rld.updateUserDetails(user)) {
+                    response.sendRedirect("home.jsp");
+                } else {
+                    response.getWriter().println("Update unsuccessful!");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
 }
+
 

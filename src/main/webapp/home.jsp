@@ -25,7 +25,7 @@ String s = cd.getUsername();
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -33,6 +33,9 @@ String s = cd.getUsername();
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		 
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -43,6 +46,7 @@ String s = cd.getUsername();
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -53,6 +57,7 @@ String s = cd.getUsername();
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
@@ -61,6 +66,8 @@ String s = cd.getUsername();
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
+            display: flex;
+    		flex-direction: column;
         }
         .details-list {
             width: 100%;
@@ -120,14 +127,13 @@ String s = cd.getUsername();
         <div class="sidebar">
             <h2>My Account</h2>
             <ul>
-                <li><a href="myDetails.jsp">My Details</a></li>
+               <li><a href="myDetails.jsp">My Details</a></li>
                 <li><a href="category.jsp">View Categories</a></li>
                 <li><a href="contacts.jsp">View Contacts</a></li>
                 <li><a href="logout">Logout</a></li>
             </ul>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <div class="details-list">
                 <h1>Welcome back <%=s+"!" %></h1>
@@ -179,7 +185,7 @@ String s = cd.getUsername();
                 </ul>
                 <a href="EditDetails.jsp" class="btn">Edit My Details</a>
                 &emsp;
-                 <a href="prime.jsp" class="btn">Edit Primary Details</a>
+                 <a href="prime.jsp" class="btn">Change Password</a>
                 <%
                     } else {
                 %>

@@ -14,7 +14,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Important Details</title>
+    <title>Change Details</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -32,6 +32,9 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -42,6 +45,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -52,6 +56,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
@@ -63,6 +68,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
             display: flex;
             justify-content: center;
             align-items: center;
+    		flex-direction: column;
         }
         .edit-container {
             margin-bottom: 110px;
@@ -149,30 +155,12 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
     <!-- Main Content -->
     <div class="main-content">
         <div class="edit-container">
-            <h2>Change Primary Email, Phone Number, and Password</h2>
+            <h2>Change Password</h2>
 
-            <%
-            int user_Id = (int) session.getAttribute("user_id");
-            UserContactDao contactDao = new UserContactDao();
-            UserDetailsBean user = new UserDetailsBean();
-
-            try {
-                user = contactDao.getPrimeDetailsById(user_Id);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            if (user != null) {
-            %>
+           
             <form action="prime" method="post">
                 <label for="currentPassword">Current Password:</label>
                 <input type="password" id="currentPassword" name="currentPassword" required>
-
-                <label for="primaryEmail">Primary Email:</label>
-                <input type="email" id="primaryEmail" name="primaryEmail" value="<%= user.getUsermail() %>" required>
-
-                <label for="primaryPhone">Primary Phone Number:</label>
-                <input type="text" id="primaryPhone" name="primaryPhone" value="<%= user.getPhonenumber() %>" required>
 
                 <label for="newPassword">New Password:</label>
                 <input type="password" id="newPassword" name="newPassword">
@@ -183,9 +171,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
                 <input type="submit" class="button" value="Save Changes">
             </form>
 
-            <% } else { %>
-                <p class="error">No user details found. Please log in.</p>
-            <% } %>
+           
         </div>
     </div>
 

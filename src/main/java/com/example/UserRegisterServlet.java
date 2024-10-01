@@ -26,16 +26,17 @@ public class UserRegisterServlet extends HttpServlet {
         try {
               if(rld.UserDetailsRegister(user))
             {
+            	  rld.allMailInsert(user);
+                  rld.credentialsInsert(user);
+                  rld.allPhoneInsert(user);
+                  rld.defaultGroup(user);
             	response.sendRedirect("login.jsp");
             }
             else
             {
             	response.getWriter().println("Registration unsuccessful!");
             }
-            rld.allMailInsert(user);
-            rld.credentialsInsert(user);
-            rld.allPhoneInsert(user);
-            response.getWriter().println("Registration successful!");
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

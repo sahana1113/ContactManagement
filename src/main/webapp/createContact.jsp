@@ -16,7 +16,7 @@
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -24,6 +24,13 @@
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		    		  position: fixed; 
+    		top: 0; 
+    		left: 0; 
+            height: 100%;
+            overflow-y: auto;
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -34,6 +41,7 @@
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -44,6 +52,7 @@
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
@@ -55,6 +64,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
         }
         .form-container {
         margin-bottom:120px;
@@ -173,7 +183,7 @@
             <h2>Create New Contact</h2>
             <%
             UserContactDao ucd=new UserContactDao((int)session.getAttribute("user_id"));
-            List<String>categories=ucd.getCategoriesByUserId();
+            List<CategoryBean>categories=ucd.getCategoriesByUserId();
             %>
             <form action="create" method="post">
                 <div class="form-group">
@@ -212,11 +222,11 @@
                 <div class="form-group">
     <label>Select Categories:</label>
     <%
-        for (String category : categories) {
+        for (CategoryBean category : categories) {
     %>
         <div class="checkbox-group">
-            <input type="checkbox" id="<%= category %>" name="categories" value="<%= category %>">
-            &nbsp;<label for="<%= category %>"><%= category %></label>
+            <input type="checkbox" id="<%= category.getC_id() %>" name="categories" value="<%= category.getCategory() %>">
+            &nbsp;<label for="<%= category.getC_id() %>"><%= category.getCategory() %></label>
         </div>
     <%
         }

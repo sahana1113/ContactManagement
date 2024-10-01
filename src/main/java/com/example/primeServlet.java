@@ -56,14 +56,7 @@ public class primeServlet extends HttpServlet {
             			response.getWriter().println("Both passwords do not match!!!");
             		}
         		}
-        		if(user.getUsermail().length()!=0)
-        		{
-        			rld.updatePrimaryMail(user);
-        		}
-        		if(user.getPhonenumber().length()!=0)
-        		{
-        			rld.updatePrimaryPhone(user);
-        		}
+        		
         		response.sendRedirect("home.jsp");
         		
         	}

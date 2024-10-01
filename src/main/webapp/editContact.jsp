@@ -19,7 +19,7 @@
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -27,6 +27,13 @@
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		    		  position: fixed; 
+    		top: 0; 
+    		left: 0; 
+            height: 100%;
+            overflow-y: auto;
         }
         .sidebar h2 {
             color: #ECF0F1;
@@ -36,6 +43,7 @@
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -46,6 +54,7 @@
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
@@ -97,6 +106,8 @@
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
+            display: flex;
+    		flex-direction: column;
         }
         .form-container {
             width: 60%;
@@ -178,11 +189,11 @@
             <h2>Edit Contact Details</h2>
 
             <%
-            int cont_Id = Integer.parseInt(String.valueOf(session.getAttribute("contact")));
+            int cont_Id = Integer.parseInt(request.getParameter("id"));
             int uId= (int) session.getAttribute("user_id");
-                UserContactDao contactDao = new UserContactDao();
+                UserContactDao contactDao = new UserContactDao(uId);
                 ContactDetailsBean user = new ContactDetailsBean();
-                List<String>all_categories=contactDao.getAllCategories(uId);
+                List<CategoryBean>all_categories=contactDao.getCategoriesByUserId();
                 session.setAttribute("cont_Id",cont_Id);
                 try {
                     user = contactDao.getContactDetailsById(cont_Id);
@@ -216,11 +227,11 @@
                    <label for="category">Categories:</label>
                    <%
             if (all_categories != null && !all_categories.isEmpty()) {
-                for (String s : all_categories) {
-                    boolean isChecked = user.getCategory().contains(s);
+                for (CategoryBean s : all_categories) {
+                    boolean isChecked = user.getCategory().contains(s.getCategory());
             %>
-                    <input type="checkbox" name="categoryContact" value="<%= s %>" <%= isChecked ? "checked" : "" %> />
-                    <label for="category_<%= s %>"><%= s %></label><br/>
+                    <input type="checkbox" name="categoryContact" value="<%= s.getCategory() %>" <%= isChecked ? "checked" : "" %> />
+                    <label for="category_<%= s.getCategory() %>"><%= s.getCategory() %></label><br/>
             <% 
                 }
             } else {

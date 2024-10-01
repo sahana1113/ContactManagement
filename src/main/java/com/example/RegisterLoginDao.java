@@ -21,7 +21,6 @@ public class RegisterLoginDao implements DetailsDao{
 	public boolean UserDetailsRegister(UserDetailsBean user) {
 		boolean rs=false;
 		try {
-	          //  Class.forName("com.mysql.cj.jdbc.Driver");
 	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
 	            PreparedStatement pst = con.prepareStatement("INSERT INTO userDetails (username,usermail,gender,phonenumber,birthday) VALUES (?, ?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 	            pst.setString(1,user.getUsername());
@@ -200,11 +199,14 @@ public class RegisterLoginDao implements DetailsDao{
 		        ps.setString(1,user.getUsermail());
                 ps.setInt(2,user.getUser_id());
 		        ps.executeUpdate();
-		    
-            PreparedStatement ps1=con.prepareStatement("update all_mail set user_email=? where user_id=? && is_primary=true;");
-            ps1.setString(1, user.getUsermail());
-            ps1.setInt(2, user.getUser_id());
-            ps1.executeUpdate();
+		        PreparedStatement ps1=con.prepareStatement("update all_mail set is_primary=false where user_id=? && is_primary=true;");
+	           
+	            ps1.setInt(1, user.getUser_id());
+	            ps1.executeUpdate();
+            PreparedStatement ps2=con.prepareStatement("update all_mail set is_primary=true where user_email=? && user_id=?");
+            ps2.setString(1, user.getUsermail());
+            ps2.setInt(2, user.getUser_id());
+            ps2.executeUpdate();
 		        rs = true;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -264,16 +266,12 @@ public class RegisterLoginDao implements DetailsDao{
                
 		        ps.executeUpdate();
              List<String>list =user.getCategory();
-             for(String s:list)
-             {
-            	 PreparedStatement pst = con.prepareStatement("Select category_id from categories where category_name=?");
-            	 pst.setString(1, s);
-            	 ResultSet rs1=pst.executeQuery();
-            	 if(rs1.next())
-            	 {
-            		 
-            	 }
-             }
+			 PreparedStatement ps1 = con.prepareStatement("delete from category_users where contact_id=?;");
+			 ps1.setInt(1, user.getContact_id());
+			 ps1.executeUpdate();
+			 if(list!=null)
+			 insertCategory(user);
+
 		        rs = true;
 		}catch (Exception e) {
             e.printStackTrace();
@@ -286,6 +284,9 @@ public class RegisterLoginDao implements DetailsDao{
 		boolean rs=false;
 		try {
     	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+    	 PreparedStatement pst1 =con.prepareStatement("delete from category_users where contact_id=?;");
+    	 pst1.setInt(1, id);
+    	 pst1.executeUpdate();
          PreparedStatement pst = con.prepareStatement("delete from contactDetails where contact_id=?;");
          pst.setInt(1, id);
          pst.executeUpdate();
@@ -315,7 +316,6 @@ public class RegisterLoginDao implements DetailsDao{
         PreparedStatement pst2=con.prepareStatement("Insert into category_users(category_id,contact_id) values (?,?);");
         pst2.setInt(1,c_id);
         pst2.setInt(2, user.getContact_id());
-        System.out.println(user.getContact_id());
         pst2.executeUpdate();
         }
 		}
@@ -325,6 +325,120 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		
 	}
+	public void deleteAltMail(UserDetailsBean user) {
+		try {
+    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+         PreparedStatement pst = con.prepareStatement("delete from all_mail where user_email=? && user_id=?;");
+         pst.setString(1, user.getAltmail());
+         pst.setInt(2, user.getUser_id());
+         pst.executeUpdate();
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+		
+	}
+	public void deleteAltPhone(UserDetailsBean user) {
+		try {
+	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	         PreparedStatement pst = con.prepareStatement("delete from all_phone where phone=? && user_id=?;");
+	         pst.setString(1, user.getAltphone());
+	         pst.setInt(2, user.getUser_id());
+	         pst.executeUpdate();
+			}catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		
+	}
+	public boolean deleteContactFromCategory(int contactId,int c_id) {
+		boolean rs=false;
+		try {
+	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=? && contact_id=?;");
+	         pst.setInt(1, c_id);
+	         pst.setInt(2, contactId);
+	         pst.executeUpdate();
+	         rs=true;
+			}catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		return rs;
+		
+	}
+	public boolean insertCategoryById(int contactId,int c_id)
+	{
+		boolean rs=false;
+		try {
+	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	         PreparedStatement pst = con.prepareStatement("insert into category_users(category_id,contact_id) values(? ,?);");
+	         pst.setInt(1, c_id);
+	         pst.setInt(2, contactId);
+	         pst.executeUpdate();
+	         rs=true;
+			}catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		return rs;
+	}
+	public boolean deleteCategory(int c_id) {
+		boolean rs=false;
+		try {
+	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=?;");
+	         pst.setInt(1, c_id);
+	         pst.executeUpdate();
+	         PreparedStatement pst1 = con.prepareStatement("delete from categories where category_id=?;");
+	         pst1.setInt(1, c_id);
+	         pst1.executeUpdate();
+	         rs=true;
+			}catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		return rs;
+		
+	}
+	public int insertCategoryByName(String categoryName) {
+		try {
+	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	            PreparedStatement pst = con.prepareStatement("INSERT INTO categories (category_name,user_id) VALUES (?, ?)",Statement.RETURN_GENERATED_KEYS);
+	            pst.setString(1,categoryName);
+	            pst.setInt(2,user_id);
+	            pst.executeUpdate();
+	            ResultSet key=pst.getGeneratedKeys();
+	            if(key.next())
+	            {
+	            	return key.getInt(1);
+	            }
+	
+	     }
+		catch (Exception e) {
+          e.printStackTrace();
+        
+      }
+		return 0;
+	}
+	public boolean defaultGroup(UserDetailsBean user) {
+		boolean rs=false;
+		String query="INSERT INTO categories (category_name, user_id) VALUES('Family', ?),('Work', ?),('Friends', ?),('Favourites', ?);";
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+			 PreparedStatement ps = con.prepareStatement(query);
+		        
+		        ps.setInt(1, user.getUser_id());
+		        ps.setInt(2, user.getUser_id());
+		        ps.setInt(3, user.getUser_id());
+		        ps.setInt(4, user.getUser_id());
+               
+		        ps.executeUpdate();
+
+		        rs = true;
+		}catch (Exception e) {
+            e.printStackTrace();
+        }
+		return rs;
+		
+	}
+	
 
 
 }

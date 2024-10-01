@@ -6,7 +6,7 @@
 <%@ page import="java.util.*" %>
 
 <%
-    int contactId = Integer.parseInt(String.valueOf(session.getAttribute("contact")));
+    int contactId = Integer.parseInt(request.getParameter("id"));
     int uId= (int) session.getAttribute("user_id");
     UserContactDao contactDao = new UserContactDao();
     ContactDetailsBean contact = new ContactDetailsBean();
@@ -33,7 +33,7 @@
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -41,6 +41,9 @@
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -51,6 +54,7 @@
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -61,14 +65,18 @@
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
+            height: 100%;
         }
         .main-content {
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
+            display: flex;
+    		flex-direction: column;
         }
         .details-list {
             width: 100%;
@@ -112,7 +120,36 @@
             margin-top: 20px;
             font-size:17px;
         }
+        .alternate-email-wrapper, .alternate-phone-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
+.alternate-email-input, .alternate-phone-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px; /* To create space between the input and delete button */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.delete-btn {
+    background-color: #E74C3C;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.delete-btn:hover {
+    background-color: #C0392B;
+}
+        
         .edit-btn {
             background-color: #3498DB;
             color: white;
@@ -182,26 +219,9 @@
                         </ul>
                     </li>
             </ul>
-
-            <div class="button-container">
-
-                <form action="update2" method="post">
-
-                    <input type="hidden" name="edit" value=<%= contact.getContact_id() %>></input>
-
-                    <input type="submit" class="btn edit-btn" value="Edit Contact"></input>
-
-                </form>
-                   &emsp; &emsp;
-                <form action="update2" method="post">
-
-                    <input type="hidden" name="delete" value=<%= contact.getContact_id() %>></input>
-
-                    <input type="submit" class="btn delete-btn" value="Delete Contact" onclick="return confirm('Are you sure you want to delete this contact?');"></input>
-
-                </form>
-
-            </div>
+               <a href="editContact.jsp?id=<%= contactId %>" class="btn edit-btn">Edit Contact</a> &emsp;
+            <a href="deleteContact.jsp?id=<%= contactId %>" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete this contact?');">Delete Contact</a>
+            
             <% } else { %>
                 <p>No contact details found.</p>
             <% } %>

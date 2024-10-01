@@ -20,7 +20,7 @@
         }
         .container {
             display: flex;
-            height: 100vh;
+            min-height: 100vh;
         }
         .sidebar {
             width: 250px;
@@ -28,6 +28,9 @@
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+    		flex-direction: column;
+    		    
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -38,6 +41,7 @@
             padding-left: 0;
         }
         .sidebar ul li {
+            display: block;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #34495E;
@@ -48,6 +52,7 @@
             background-color: #1ABC9C;
         }
         .sidebar ul li a {
+            display: block;
             color: white;
             text-decoration: none;
             font-size: 18px;
@@ -56,6 +61,8 @@
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
+            display: flex;
+    		flex-direction: column;
         }
         .details-list {
             width: 100%;
@@ -104,6 +111,7 @@
         .btn:hover {
             background-color: #2980B9;
         }
+        
     </style>
 </head>
 <body>
@@ -175,8 +183,8 @@
                     <li><strong>Total Contacts:</strong> <span><%= user.getTotal_contacts() %></span></li>
                 </ul>
                 <a href="EditDetails.jsp" class="btn">Edit Details</a>
-                
-                <a href="prime.jsp" class="btn">Edit Primary Details</a>
+                &emsp;
+                <a href="prime.jsp" class="btn">Change Password</a>
                 <%
                     } else {
                 %>

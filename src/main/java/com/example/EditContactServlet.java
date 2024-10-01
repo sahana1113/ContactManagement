@@ -18,28 +18,6 @@ public class EditContactServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
-   	
-   	 String action=request.getParameter("action");
-   	 if(action!=null && action.length()!=0)
-   	 {
-   		session.setAttribute("contact", action);
-   		response.sendRedirect("contactDetails.jsp");
-   		return;
-   	 }
-   	 String edit=request.getParameter("edit");
-   	 if(edit!=null && edit.length()!=0)
-   	 {
-   		 session.setAttribute("edit", edit);
-   		 response.sendRedirect("editContact.jsp");
-   		 return;
-   	 }
-   	 String delete=request.getParameter("delete");
-   	 if(delete!=null &&delete.length()!=0)
-   	 {
-   		 session.setAttribute("delete", delete);
-   		 response.sendRedirect("deleteContact.jsp");
-   		 return;
-   	 }
    	 int contactid=(int) request.getSession().getAttribute("cont_Id");
    	int userid=(int) request.getSession().getAttribute("user_id");
     	ContactDetailsBean user=new ContactDetailsBean();
@@ -50,8 +28,9 @@ public class EditContactServlet extends HttpServlet {
         user.setPhonenumber(request.getParameter("primaryPhone"));
         user.setContact_id(contactid);
         String[] list=request.getParameterValues("categoryContact");
+        if(list!=null && list.length!=0)
         user.setCategory(Arrays.asList(list));
-        RegisterLoginDao rld=new RegisterLoginDao();
+        RegisterLoginDao rld=new RegisterLoginDao(userid);
         try {
               if(rld.updateContactDetails(user))
             {
