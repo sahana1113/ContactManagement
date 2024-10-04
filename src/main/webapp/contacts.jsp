@@ -117,7 +117,7 @@ List<ContactDetailsBean> contactList = cd.Contactdisplay();
 <body>
     <div class="container">
         <div class="sidebar">
-            <h3>My Account</h3>
+            <h2>My Account</h2>
             <ul>
                 <li><a href="myDetails.jsp">My Details</a></li>
                 

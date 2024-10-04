@@ -4,11 +4,6 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
-<%
-
-response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-    response.setDateHeader("Expires", 0); // Proxies%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -139,8 +134,6 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
 <body>
 
 <div class="container">
-
-    <!-- Sidebar -->
     <div class="sidebar">
         <h2>My Account</h2>
         <ul>
@@ -152,7 +145,6 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // H
         </ul>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <div class="edit-container">
             <h2>Change Password</h2>

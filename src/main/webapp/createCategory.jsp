@@ -135,7 +135,7 @@ List<ContactDetailsBean> allContacts = cd.Contactdisplay();
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h3>My Account</h3>
+            <h2>My Account</h2>
             <ul>
                 <li><a href="myDetails.jsp">My Details</a></li>
                 <li><a href="category.jsp">View Categories</a></li>
@@ -144,7 +144,6 @@ List<ContactDetailsBean> allContacts = cd.Contactdisplay();
             </ul>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <h2>Create New Category</h2>
             <form action="createCategory" method="POST">

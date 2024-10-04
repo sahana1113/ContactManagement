@@ -1,4 +1,76 @@
 <web-app>
+<servlet>
+        <servlet-name>UserRegisterServlet</servlet-name>
+        <servlet-class>com.example.UserRegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserRegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <servlet-class>com.example.UserLoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>primeServlet</servlet-name>
+        <servlet-class>com.example.primeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>primeServlet</servlet-name>
+        <url-pattern>/prime</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.example.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditUserServlet</servlet-name>
+        <servlet-class>com.example.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditUserServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EditContactServlet</servlet-name>
+        <servlet-class>com.example.EditContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditContactServlet</servlet-name>
+        <url-pattern>/update2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateContactServlet</servlet-name>
+        <servlet-class>com.example.CreateContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateContactServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <servlet-class>com.example.CreateCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryServlet</servlet-name>
+        <url-pattern>/createCategory</url-pattern>
+    </servlet-mapping>
+
  <filter>
     <filter-name>SessionFilter</filter-name>
     <filter-class>com.example.SessionFilter</filter-class>

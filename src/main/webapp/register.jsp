@@ -101,7 +101,7 @@
 
     <div class="container">
         <h2>User Registration</h2>
-        <form action="register" method="post">
+        <form action="register" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>

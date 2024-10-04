@@ -35,7 +35,6 @@ UserContactDao cd = new UserContactDao(uId);
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
-    		
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -122,10 +121,9 @@ UserContactDao cd = new UserContactDao(uId);
 <body>
     <div class="container">
         <div class="sidebar">
-            <h3>My Account</h3>
+            <h2>My Account</h2>
             <ul>
                 <li><a href="myDetails.jsp">My Details</a></li>
-                
                 <li><a href="category.jsp">View Categories</a></li>
                 <li><a href="contacts.jsp">View Contacts</a></li>
                 <li><a href="logout">Logout</a></li>

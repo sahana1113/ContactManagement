@@ -84,13 +84,11 @@ public class UserContactDao implements Dao{
         {
         	c_id=rs.getInt("category_id");
         }
-       // System.out.println(c_id);
         PreparedStatement pst1=con.prepareStatement("select * from category_users where category_id=? && contact_id=?;");
         pst1.setInt(1, c_id);
         pst1.setInt(2, con_id);
         ResultSet rs1=pst1.executeQuery();
         if(rs1.next()) {
-        	//System.out.println(con_id);
         	return true;
         }
 		return false;

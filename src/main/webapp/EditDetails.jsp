@@ -193,8 +193,6 @@ input[readonly] {
         <h2>My Account</h2>
         <ul>
             <li><a href="myDetails.jsp">My Details</a></li>
-            
-            
             <li><a href="category.jsp">View Categories</a></li>
             <li><a href="contacts.jsp">View Contacts</a></li>
             <li><a href="logout">Logout</a></li>

@@ -75,7 +75,7 @@ input[type="password"] {
 
 input[type="text"]:focus, 
 input[type="password"]:focus {
-    border-color: #007BFF; /* Border color change on focus */
+    border-color: #007BFF; 
     outline: none;
 }
 
@@ -92,12 +92,12 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3; 
 }
 
 @media (max-width: 600px) {
     .container {
-        width: 90%; /* Adjusts to 90% of the viewport on smaller screens */
+        width: 90%; 
     }
 }
 
@@ -108,12 +108,11 @@ input[type="submit"]:hover {
 
     <div class="container">
         <h2>User Login</h2>
-        <form action="login" method="post">
+        <form action="login" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" required>
             </div>
-
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>

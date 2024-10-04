@@ -1,5 +1,5 @@
 package com.example;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -101,14 +101,23 @@ public class RegisterLoginDao implements DetailsDao{
 		int user_id=-1;
 	     try {
 	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? AND c.password = ? ;");
+	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id,c.password FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? ;");
 	            pst.setString(1, usermail);
-	            pst.setString(2, hashPassword(password));
 	            ResultSet rs = pst.executeQuery();
 	            if (rs.next()) {
-	            	user_id=rs.getInt("user_id");
-	            	return user_id;
-	            } 
+	            	 String storedHash = rs.getString("password");
+	                 if (checkSHA512Hash(password, storedHash)) {
+	                	 String bcryptHash = hashPassword(password);
+	                     updateUserHashInDatabase(rs.getInt("user_id"), bcryptHash); // Update the hash in the database
+	                     user_id = rs.getInt("user_id");
+	                     System.out.println("Password migrated to bcrypt.");
+	                     return user_id;
+	                 }
+	                 if (BCrypt.checkpw(password, storedHash)) {
+	                     user_id = rs.getInt("user_id");
+	                     return user_id;
+	                 }
+	            }
 	            return -1;
 
 	     }catch (Exception e) {
@@ -116,22 +125,35 @@ public class RegisterLoginDao implements DetailsDao{
 	        }
 	     return -1;
 	}
+	private boolean checkSHA512Hash(String password,String sha512Hash) {
+		try {
+	        MessageDigest md = MessageDigest.getInstance("SHA-512");
+	        byte[] hash = md.digest(password.getBytes());
+	        StringBuilder hexString = new StringBuilder();
+
+	        for (byte b : hash) {
+	            String hex = Integer.toHexString(0xff & b);
+	            if (hex.length() == 1) hexString.append('0');
+	            hexString.append(hex);
+	        }
+	        return hexString.toString().equals(sha512Hash);
+	    } catch (NoSuchAlgorithmException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+	public void updateUserHashInDatabase(int userId, String bcryptHash) {
+	    String sql = "UPDATE credentials SET password = ? WHERE user_id = ?";
+	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	        pstmt.setString(1, bcryptHash);
+	        pstmt.setInt(2, userId);
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 	public  String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            byte[] hash = md.digest(password.getBytes());
-            StringBuilder hexString = new StringBuilder();
-
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+		return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 	public boolean updateUserDetails(UserDetailsBean user) {
 		boolean rs=false;
