@@ -7,7 +7,7 @@
 
 <%
     int contactId = Integer.parseInt(request.getParameter("id"));
-    int uId= (int) session.getAttribute("user_id");
+    int uId= (Integer) request.getAttribute("user_id"); 
     UserContactDao contactDao = new UserContactDao();
     ContactDetailsBean contact = new ContactDetailsBean();
 

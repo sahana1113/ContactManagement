@@ -5,9 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,24 +33,28 @@ public class UserLoginServlet extends HttpServlet {
             throws ServletException, IOException {
 		String useremail=request.getParameter("email");
 		String password=request.getParameter("password");
+		SessionDao sessionDAO = new SessionDao();
 		RegisterLoginDao rld=new RegisterLoginDao();
 		try {
 			int user_id=rld.validateLogin(useremail, password);
-			//response.getWriter().println(user_id);
 		if(user_id!=-1)
 		{
-			HttpSession session = request.getSession();
-	        session.setAttribute("user_id", user_id);
-	        session.setMaxInactiveInterval(30 * 60);	
-//	        UserContactDao contactDao = new UserContactDao(user_id);
-//            List<ContactDetailsBean> contactList = contactDao.display();
-//            request.setAttribute("contactList", contactList);
-//            request.getRequestDispatcher("home.jsp").forward(request, response);
-            int userid=(int) request.getSession().getAttribute("user_id");
-            response.sendRedirect("home.jsp");
+			String sessionId = generateSessionId();
+			LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(3);
+            boolean sessionCreated = sessionDAO.createSession(sessionId, user_id, expiryTime);
+
+            if (sessionCreated) {
+                Cookie sessionCookie1 = new Cookie("SESSIONID", sessionId);
+                sessionCookie1.setMaxAge(60 * 60 * 24);
+                sessionCookie1.setHttpOnly(true); 
+                response.addCookie(sessionCookie1);
+                response.sendRedirect("home.jsp");
+            } else {
+                response.sendRedirect("login.jsp?error=Session Creation Failed");
+            }
 		}
 		else {
-            response.sendRedirect("login.jsp?error=Invalid Username or Password");
+            response.sendRedirect("login.jsp");
 		}
 		}
 		catch (Exception e) {
@@ -56,5 +62,8 @@ public class UserLoginServlet extends HttpServlet {
         }
 		
 	}
+	private String generateSessionId() {
+        return java.util.UUID.randomUUID().toString(); // Generate a random unique ID
+    }
 }
 

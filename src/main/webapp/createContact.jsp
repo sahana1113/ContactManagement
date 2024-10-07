@@ -182,7 +182,7 @@
         <div class="form-container">
             <h2>Create New Contact</h2>
             <%
-            UserContactDao ucd=new UserContactDao((int)session.getAttribute("user_id"));
+            UserContactDao ucd=new UserContactDao((Integer) request.getAttribute("user_id") );
             List<CategoryBean>categories=ucd.getCategoriesByUserId();
             %>
             <form action="create" method="post">

@@ -6,7 +6,7 @@
 
 <%
 
-int uId  = (int) session.getAttribute("user_id");
+int uId  = (Integer) request.getAttribute("user_id"); 
 UserContactDao cd = new UserContactDao(uId);
 List<ContactDetailsBean> allContacts = cd.Contactdisplay();
 %>

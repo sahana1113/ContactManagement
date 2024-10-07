@@ -7,7 +7,7 @@
 <%
 
 int c_id= Integer.parseInt(request.getParameter("category"));
-int uId= (int) session.getAttribute("user_id");
+int uId= (Integer) request.getAttribute("user_id"); 
     RegisterLoginDao contactDao = new RegisterLoginDao(uId);
 
     boolean deletionSuccess = false;

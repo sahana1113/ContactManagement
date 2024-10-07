@@ -24,7 +24,7 @@ public class CreateContactServlet extends HttpServlet {
         contact.setLocation(request.getParameter("location"));
         String[] selectedCategories = request.getParameterValues("categories");
         contact.setCategory(Arrays.asList(selectedCategories));
-        UserContactDao cd=new UserContactDao((int)session.getAttribute("user_id"));
+        UserContactDao cd=new UserContactDao((int)request.getAttribute("user_id"));
         try {
               if(cd.contactDetailsRegister(contact))
             {

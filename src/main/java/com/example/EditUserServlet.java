@@ -17,7 +17,7 @@ public class EditUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	 HttpSession session = request.getSession(false);
-    	int userId = (int) session.getAttribute("user_id");
+    	int userId = (int) request.getAttribute("user_id");
 
         String action = request.getParameter("action");
         RegisterLoginDao rld = new RegisterLoginDao();

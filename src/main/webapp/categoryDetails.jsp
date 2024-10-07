@@ -156,7 +156,7 @@
         <div class="contacts-list">
             <%
             int category = Integer.parseInt(request.getParameter("id"));
-            int userId = (int) session.getAttribute("user_id");
+            int userId = (Integer) request.getAttribute("user_id"); 
 
             UserContactDao categoryDao = new UserContactDao(userId);
             List<ContactDetailsBean> contactsInCategory = categoryDao.getContactsInCategory(category);

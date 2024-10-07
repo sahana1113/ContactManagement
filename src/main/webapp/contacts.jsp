@@ -5,7 +5,7 @@
 <%@ include file="sessionValidation.jsp" %>
 <%
 
-int uId= (int) session.getAttribute("user_id");
+int uId= (Integer) request.getAttribute("user_id"); 
 UserContactDao cd = new UserContactDao(uId);
 String s = cd.getUsername();
 List<ContactDetailsBean> contactList = cd.Contactdisplay();

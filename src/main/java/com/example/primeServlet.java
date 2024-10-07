@@ -30,7 +30,7 @@ public class primeServlet extends HttpServlet {
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
    	 
-   	int userid=(int) request.getSession().getAttribute("user_id");
+   	int userid=(int) request.getAttribute("user_id");
     	UserDetailsBean user=new UserDetailsBean();
         String curr=(request.getParameter("currentPassword"));
         user.setUsermail(request.getParameter("primaryEmail"));

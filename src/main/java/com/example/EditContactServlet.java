@@ -19,7 +19,7 @@ public class EditContactServlet extends HttpServlet {
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
    	 int contactid=(int) request.getSession().getAttribute("cont_Id");
-   	int userid=(int) request.getSession().getAttribute("user_id");
+   	int userid=(int) request.getAttribute("user_id");
     	ContactDetailsBean user=new ContactDetailsBean();
         user.setContactname(request.getParameter("username"));
         user.setGender(request.getParameter("gender"));

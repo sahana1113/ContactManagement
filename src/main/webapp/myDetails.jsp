@@ -136,7 +136,7 @@
                 <h3>My Account Details</h3>
                 
                 <%
-                    int user_Id = (int) session.getAttribute("user_id");
+                    int user_Id = (Integer) request.getAttribute("user_id"); 
 
                     UserContactDao contactDao = new UserContactDao();
                     UserDetailsBean user = null;

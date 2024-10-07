@@ -205,7 +205,7 @@ input[readonly] {
             <h2>Edit User Details</h2>
 
             <%
-            int user_Id = (int) session.getAttribute("user_id");
+            int user_Id = (Integer) request.getAttribute("user_id"); 
             UserContactDao contactDao = new UserContactDao();
             UserDetailsBean user = new UserDetailsBean();
 

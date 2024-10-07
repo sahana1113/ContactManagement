@@ -17,7 +17,7 @@ public class CreateCategoryServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
-        int userId = (int) session.getAttribute("user_id");
+        int userId = (int) request.getAttribute("user_id");
         String categoryName = request.getParameter("categoryName");
 
         String[] contactIds = request.getParameterValues("contactIds");

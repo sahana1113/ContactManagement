@@ -190,11 +190,11 @@
 
             <%
             int cont_Id = Integer.parseInt(request.getParameter("id"));
-            int uId= (int) session.getAttribute("user_id");
+            int uId= (Integer) request.getAttribute("user_id"); 
                 UserContactDao contactDao = new UserContactDao(uId);
                 ContactDetailsBean user = new ContactDetailsBean();
                 List<CategoryBean>all_categories=contactDao.getCategoriesByUserId();
-                session.setAttribute("cont_Id",cont_Id);
+                request.setAttribute("cont_Id",cont_Id);
                 try {
                     user = contactDao.getContactDetailsById(cont_Id);
                 } catch (SQLException e) {

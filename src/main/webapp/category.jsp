@@ -5,11 +5,7 @@
 <%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
 
-<%
 
-int uId  = (int) session.getAttribute("user_id");
-UserContactDao cd = new UserContactDao(uId);
-%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -132,7 +128,7 @@ UserContactDao cd = new UserContactDao(uId);
         
         <div class="main-content">
             <%
-    int userId = (int) session.getAttribute("user_id");
+    int userId =(Integer) request.getAttribute("user_id"); 
     UserContactDao categoryDao = new UserContactDao(userId);
     List<CategoryBean> categories = categoryDao.getCategoriesByUserId();
 %>
