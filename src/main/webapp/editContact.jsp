@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
-<%@ page session="true" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.*" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +29,10 @@
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
-    		flex-direction: column;
-    		    		  position: fixed; 
-    		top: 0; 
-    		left: 0; 
+            flex-direction: column;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
             height: 100%;
             overflow-y: auto;
         }
@@ -60,54 +61,27 @@
             font-size: 18px;
         }
         .checkbox-group {
-    margin-top: 20px;
-}
-
-.checkbox-group label {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-.checkbox-group input[type="checkbox"] {
-    margin-right: 10px;
-    transform: scale(1.2); /* Enlarge checkbox */
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.checkbox-group input[type="checkbox"]:checked {
-    background-color: #3498DB; /* Change checked color */
-}
-
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.checkbox-group label {
-    margin-right: 15px;
-    margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-    .checkbox-group {
-        display: block;
-    }
-
-    .checkbox-group label {
-        margin-right: 0;
-        margin-bottom: 5px;
-    }
-}
-        
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .checkbox-group label {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
         .main-content {
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
             display: flex;
-    		flex-direction: column;
+            flex-direction: column;
         }
         .form-container {
             width: 60%;
@@ -117,7 +91,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
         h2 {
             text-align: center;
             color: #333;
@@ -156,7 +129,6 @@
             text-align: center;
             transition: background-color 0.3s ease;
         }
-               
         .button:hover {
             background-color: #2980B9;
         }
@@ -189,16 +161,32 @@
             <h2>Edit Contact Details</h2>
 
             <%
-            int cont_Id = Integer.parseInt(request.getParameter("id"));
-            int uId= (Integer) request.getAttribute("user_id"); 
-                UserContactDao contactDao = new UserContactDao(uId);
-                ContactDetailsBean user = new ContactDetailsBean();
-                List<CategoryBean>all_categories=contactDao.getCategoriesByUserId();
-                request.setAttribute("cont_Id",cont_Id);
+                int cont_Id = -1;
+                int uId = (Integer) request.getAttribute("user_id");
+                String idParam = request.getParameter("id");
+
+                if (idParam == null || idParam.isEmpty()) {
+                    out.println("Invalid ID parameter.");
+                    return;
+                }
+
+                try {
+                    cont_Id = Integer.parseInt(idParam);
+                } catch (NumberFormatException e) {
+                    out.println("Invalid ID format.");
+                    return;
+                }
+
+                DaoUserContact contactDao = new DaoUserContact(uId);
+                BeanContactDetails user = null;
+                List<BeanCategory> all_categories = contactDao.getCategoriesByUserId();
+
                 try {
                     user = contactDao.getContactDetailsById(cont_Id);
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    out.println("Error retrieving contact details.");
+                    return; // Handle error gracefully
                 }
 
                 if (user != null) {
@@ -210,9 +198,9 @@
 
                 <label for="gender">Gender:</label>
                 <select id="gender" name="gender" required>
-                    <option value="male" <%= (user.getGender() != null && user.getGender().equals("male")) ? "selected" : "" %>>Male</option>
-                    <option value="female" <%= (user.getGender() != null && user.getGender().equals("female")) ? "selected" : "" %>>Female</option>
-                    <option value="other" <%= (user.getGender() != null && user.getGender().equals("other")) ? "selected" : "" %>>Other</option>
+                    <option value="male" <%= user.getGender() != null && user.getGender().equals("male") ? "selected" : "" %>>Male</option>
+                    <option value="female" <%= user.getGender() != null && user.getGender().equals("female") ? "selected" : "" %>>Female</option>
+                    <option value="other" <%= user.getGender() != null && user.getGender().equals("other") ? "selected" : "" %>>Other</option>
                 </select>
 
                 <label for="birthday">Birthday:</label>
@@ -223,22 +211,23 @@
 
                 <label for="primaryPhone">Primary Phone Number:</label>
                 <input type="text" id="primaryPhone" name="primaryPhone" value="<%= user.getPhonenumber() %>">
+
                 <div class="checkbox-group"> 
-                   <label for="category">Categories:</label>
-                   <%
-            if (all_categories != null && !all_categories.isEmpty()) {
-                for (CategoryBean s : all_categories) {
-                    boolean isChecked = user.getCategory().contains(s.getCategory());
-            %>
-                    <input type="checkbox" name="categoryContact" value="<%= s.getCategory() %>" <%= isChecked ? "checked" : "" %> />
-                    <label for="category_<%= s.getCategory() %>"><%= s.getCategory() %></label><br/>
-            <% 
-                }
-            } else {
-            %>
-                <p>No categories found.</p>
-            <% } %>
-            </div>
+                    <label>Categories:</label>
+                    <%
+                    if (all_categories != null && !all_categories.isEmpty()) {
+                        for (BeanCategory category : all_categories) {
+                            boolean isChecked = user.getCategory() != null && user.getCategory().contains(category.getCategory());
+                    %>
+                        <input type="checkbox" name="categoryContact" value="<%= category.getCategory() %>" <%= isChecked ? "checked" : "" %> />
+                        <label for="category_<%= category.getCategory() %>"><%= category.getCategory() %></label><br/>
+                    <% 
+                        }
+                    } else {
+                    %>
+                        <p>No categories found.</p>
+                    <% } %>
+                </div>
                 <input type="submit" class="button" value="Save Changes">
             </form>
 

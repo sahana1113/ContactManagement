@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
-<%@ page session="true" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.*" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,19 +206,21 @@ input[readonly] {
             <h2>Edit User Details</h2>
 
             <%
-            int user_Id = (Integer) request.getAttribute("user_id"); 
-            UserContactDao contactDao = new UserContactDao();
-            UserDetailsBean user = new UserDetailsBean();
+            
 
-            try {
-                user = contactDao.getUserDetailsById(user_Id);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+                                    int user_Id = (Integer) request.getAttribute("user_id"); 
+                                    DaoUserContact contactDao = new DaoUserContact();
+                                    BeanUserDetails user = new BeanUserDetails();
 
-            if (user != null) {
-            	List<String>altEmails=user.getAllMail();
-            	List<String>altPhone=user.getAllPhone();
+                                    try {
+                                        user = contactDao.getUserDetailsById(user_Id);
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    if (user != null) {
+                                    	List<String>altEmails=user.getAllMail();
+                                    	List<String>altPhone=user.getAllPhone();
             %>
 
             <form action="update" method="post">

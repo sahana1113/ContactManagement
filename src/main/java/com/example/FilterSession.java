@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class SessionFilter implements Filter {
+import com.Dao.DaoSession;
+
+public class FilterSession implements Filter {
 
     public void init(FilterConfig filterConfig) throws ServletException {}
 
@@ -39,12 +41,11 @@ public class SessionFilter implements Filter {
                 }
             }
         }
-        SessionDao sessionDAO = SessionDao.getInstance(session_id);
+        DaoSession sessionDAO = DaoSession.getInstance(session_id);
 
         boolean isValidSession = false;
         if (session_id!=null) {
-        	user_id=sessionDAO.validateSession(session_id);
-        	
+        	user_id=sessionDAO.validateSession(session_id,cookies);
             if(user_id!=0)
 			{
 				 isValidSession = true;

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="true" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.*" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <%
-
 int uId= (Integer) request.getAttribute("user_id"); 
-UserContactDao cd = new UserContactDao(uId);
+DaoUserContact cd = new DaoUserContact(uId);
 String s = cd.getUsername();
-List<ContactDetailsBean> contactList = cd.Contactdisplay();
+List<BeanContactDetails> contactList = cd.Contactdisplay();
 %>
 
 <!DOCTYPE html>
@@ -35,7 +35,8 @@ List<ContactDetailsBean> contactList = cd.Contactdisplay();
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
-    		
+    		position: fixed;
+    		height:100vh;
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -44,6 +45,7 @@ List<ContactDetailsBean> contactList = cd.Contactdisplay();
         .sidebar ul {
             list-style-type: none;
             padding-left: 0;
+            
         }
         .sidebar ul li {
         	display: block;
@@ -64,6 +66,7 @@ List<ContactDetailsBean> contactList = cd.Contactdisplay();
             height: 100%;
         }
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
@@ -133,9 +136,10 @@ List<ContactDetailsBean> contactList = cd.Contactdisplay();
                 <h2>My Contacts</h2>
                 <a href="createContact.jsp" class="btn">Create New Contact</a>
                 <ul>
-                    <% 
+                    <%
                     if (contactList != null && !contactList.isEmpty()) {
-                        for (ContactDetailsBean contact : contactList) { %>
+                                            for (BeanContactDetails contact : contactList) {
+                    %>
                         <li>
                             <span><%= contact.getContactname() %></span>
                             <span><%= contact.getPhonenumber() %></span>

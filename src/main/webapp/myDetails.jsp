@@ -2,9 +2,9 @@
 <%@ page import="com.example.*" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
-
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +30,8 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
-    		    
+    		position: fixed;
+    		height:100vh;   
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -58,6 +59,7 @@
             font-size: 18px;
         }
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
@@ -136,19 +138,19 @@
                 <h3>My Account Details</h3>
                 
                 <%
-                    int user_Id = (Integer) request.getAttribute("user_id"); 
+                                int user_Id = (Integer) request.getAttribute("user_id"); 
 
-                    UserContactDao contactDao = new UserContactDao();
-                    UserDetailsBean user = null;
+                                                                                    DaoUserContact contactDao = new DaoUserContact();
+                                                                                    BeanUserDetails user = null;
 
-                    try {
-                        user = contactDao.getUserDetailsById(user_Id);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                                                                                    try {
+                                                                                        user = contactDao.getUserDetailsById(user_Id);
+                                                                                    } catch (SQLException e) {
+                                                                                        e.printStackTrace();
+                                                                                    }
 
-                    if (user != null) {
-                %>
+                                                                                    if (user != null) {
+                                %>
                 <ul>
                     <li><strong>Username:</strong> <span><%= user.getUsername() %></span></li>
                     <li><strong>Primary Email:</strong> <span><%= user.getUsermail() %></span></li>

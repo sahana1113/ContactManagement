@@ -1,4 +1,4 @@
-package com.example;
+package com.Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.Dao.DaoRegisterLogin;
+import com.Dao.DaoSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,13 +32,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.WebServlet;
 //@WebServlet("/login")
-public class UserLoginServlet extends HttpServlet {
+public class ServletUserLogin extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		String useremail=request.getParameter("email");
 		String password=request.getParameter("password");
-		SessionDao sessionDAO = new SessionDao();
-		RegisterLoginDao rld=new RegisterLoginDao();
+		DaoSession sessionDAO = new DaoSession();
+		DaoRegisterLogin rld=new DaoRegisterLogin();
 		try {
 			int user_id=rld.validateLogin(useremail, password);
 		if(user_id!=-1)

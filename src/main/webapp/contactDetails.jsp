@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
-<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 
 <%
-    int contactId = Integer.parseInt(request.getParameter("id"));
+int contactId = Integer.parseInt(request.getParameter("id"));
     int uId= (Integer) request.getAttribute("user_id"); 
-    UserContactDao contactDao = new UserContactDao();
-    ContactDetailsBean contact = new ContactDetailsBean();
+    DaoUserContact contactDao = new DaoUserContact();
+    BeanContactDetails contact = new BeanContactDetails();
 
     try {
         contact = contactDao.getContactDetailsById(contactId);
@@ -43,7 +44,8 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
-    		
+    		position: fixed;
+    		height:100vh;
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -72,6 +74,7 @@
             height: 100%;
         }
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;

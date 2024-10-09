@@ -2,11 +2,13 @@
 <%@ page import="com.example.*" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <%
 
 int contactId = Integer.parseInt(request.getParameter("id"));
 int uId= (Integer) request.getAttribute("user_id"); 
-    RegisterLoginDao contactDao = new RegisterLoginDao();
+    DaoRegisterLogin contactDao = new DaoRegisterLogin();
 
     boolean deletionSuccess = false;
 

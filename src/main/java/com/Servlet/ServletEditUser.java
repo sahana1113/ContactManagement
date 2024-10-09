@@ -1,4 +1,4 @@
-package com.example;
+package com.Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,17 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.Bean.BeanUserDetails;
+import com.Dao.DaoRegisterLogin;
+
 import javax.servlet.annotation.WebServlet;
 //@WebServlet("/update")
-public class EditUserServlet extends HttpServlet {
+public class ServletEditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	 HttpSession session = request.getSession(false);
     	int userId = (int) request.getAttribute("user_id");
 
         String action = request.getParameter("action");
-        RegisterLoginDao rld = new RegisterLoginDao();
-        UserDetailsBean user = new UserDetailsBean();
+        DaoRegisterLogin rld = new DaoRegisterLogin();
+        BeanUserDetails user = new BeanUserDetails();
         user.setUser_id(userId);
 
         try {

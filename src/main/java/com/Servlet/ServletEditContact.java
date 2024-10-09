@@ -1,4 +1,4 @@
-package com.example;
+package com.Servlet;
 import java.io.IOException;
 import java.util.*;
 import java.sql.Connection;
@@ -12,15 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.Bean.BeanContactDetails;
+import com.Dao.DaoRegisterLogin;
+
 import javax.servlet.annotation.WebServlet;
 //@WebServlet("/update2")
-public class EditContactServlet extends HttpServlet {
+public class ServletEditContact extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
    	 int contactid=(int) request.getSession().getAttribute("cont_Id");
    	int userid=(int) request.getAttribute("user_id");
-    	ContactDetailsBean user=new ContactDetailsBean();
+    	BeanContactDetails user=new BeanContactDetails();
         user.setContactname(request.getParameter("username"));
         user.setGender(request.getParameter("gender"));
         user.setBirthday(request.getParameter("birthday"));
@@ -30,7 +34,7 @@ public class EditContactServlet extends HttpServlet {
         String[] list=request.getParameterValues("categoryContact");
         if(list!=null && list.length!=0)
         user.setCategory(Arrays.asList(list));
-        RegisterLoginDao rld=new RegisterLoginDao(userid);
+        DaoRegisterLogin rld=new DaoRegisterLogin(userid);
         try {
               if(rld.updateContactDetails(user))
             {

@@ -2,7 +2,8 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.*" %>
-<%@ page session="true" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <%@ include file="sessionValidation.jsp" %>
 
 
@@ -31,6 +32,8 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
+    		position: fixed;
+    		height:100vh;
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -59,6 +62,7 @@
              height: 100%;
         }
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
@@ -128,15 +132,17 @@
         
         <div class="main-content">
             <%
-    int userId =(Integer) request.getAttribute("user_id"); 
-    UserContactDao categoryDao = new UserContactDao(userId);
-    List<CategoryBean> categories = categoryDao.getCategoriesByUserId();
-%>
+            int userId =(Integer) request.getAttribute("user_id"); 
+                            DaoUserContact categoryDao = new DaoUserContact(userId);
+                            List<BeanCategory> categories = categoryDao.getCategoriesByUserId();
+            %>
             <div class="contacts-list">
                 <h2>Categories</h2>
                 <ul>
-                     <% if (categories != null && !categories.isEmpty()) {
-            for (CategoryBean category : categories) { %>
+                     <%
+                     if (categories != null && !categories.isEmpty()) {
+                                 for (BeanCategory category : categories) {
+                     %>
                     <a href="categoryDetails.jsp?id=<%= category.getC_id() %>"><li><%= category.getCategory() %></li></a>
                   <% } } else { %>
             <li>No categories found.</li>

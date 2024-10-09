@@ -1,6 +1,6 @@
-package com.example;
+package com.Bean;
 import java.util.*;
-public class ContactDetailsBean {
+public class BeanContactDetails {
     
 	String contactname;
      String contactmail;
@@ -23,10 +23,10 @@ public class ContactDetailsBean {
 	public void setCategory(List<String> category) {
 		this.category = category;
 	}
-	public ContactDetailsBean() {
+	public BeanContactDetails() {
 
 	}
-	public ContactDetailsBean(String contactname, String phonenumber,int contact_id) {
+	public BeanContactDetails(String contactname, String phonenumber,int contact_id) {
 
 		this.contactname = contactname;
 		this.phonenumber = phonenumber;

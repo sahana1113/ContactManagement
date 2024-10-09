@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="true" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.*" %>
 <%@ include file="sessionValidation.jsp" %>
-
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <%
-
 int uId  = (Integer) request.getAttribute("user_id"); 
-UserContactDao cd = new UserContactDao(uId);
-List<ContactDetailsBean> allContacts = cd.Contactdisplay();
+DaoUserContact cd = new DaoUserContact(uId);
+List<BeanContactDetails> allContacts = cd.Contactdisplay();
 %>
 
 <!DOCTYPE html>
@@ -34,6 +33,8 @@ List<ContactDetailsBean> allContacts = cd.Contactdisplay();
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+    		height:100vh;
         }
         .sidebar h3 {
             margin-bottom: 20px;
@@ -59,6 +60,7 @@ List<ContactDetailsBean> allContacts = cd.Contactdisplay();
             font-size: 18px;
         }
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
@@ -152,7 +154,9 @@ List<ContactDetailsBean> allContacts = cd.Contactdisplay();
                 <h3>Add Contacts to Category</h3>
                 <div class="contacts-list">
                     <ul>
-                        <% for (ContactDetailsBean contact : allContacts) { %>
+                        <%
+                        for (BeanContactDetails contact : allContacts) {
+                        %>
                             <li>
                                 <span><%= contact.getContactname() %> - <%= contact.getPhonenumber() %></span>
                                 <div class="add-container">

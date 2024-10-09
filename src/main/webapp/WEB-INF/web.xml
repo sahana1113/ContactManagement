@@ -1,7 +1,7 @@
 <web-app>
 <servlet>
         <servlet-name>UserRegisterServlet</servlet-name>
-        <servlet-class>com.example.UserRegisterServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletUserRegister</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserRegisterServlet</servlet-name>
@@ -10,7 +10,7 @@
 
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
-        <servlet-class>com.example.UserLoginServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletUserLogin</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>primeServlet</servlet-name>
-        <servlet-class>com.example.primeServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletChangePassword</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>primeServlet</servlet-name>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.example.LogoutServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletLogout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -37,7 +37,7 @@
 
     <servlet>
         <servlet-name>EditUserServlet</servlet-name>
-        <servlet-class>com.example.EditUserServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletEditUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditUserServlet</servlet-name>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>EditContactServlet</servlet-name>
-        <servlet-class>com.example.EditContactServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletEditContact</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditContactServlet</servlet-name>
@@ -55,7 +55,7 @@
 
     <servlet>
         <servlet-name>CreateContactServlet</servlet-name>
-        <servlet-class>com.example.CreateContactServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletCreateContact</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateContactServlet</servlet-name>
@@ -64,7 +64,7 @@
 
     <servlet>
         <servlet-name>CreateCategoryServlet</servlet-name>
-        <servlet-class>com.example.CreateCategoryServlet</servlet-class>
+        <servlet-class>com.Servlet.ServletCreateCategory</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateCategoryServlet</servlet-name>
@@ -73,7 +73,7 @@
 
  <filter>
     <filter-name>SessionFilter</filter-name>
-    <filter-class>com.example.SessionFilter</filter-class>
+    <filter-class>com.example.FilterSession</filter-class>
 </filter>
 
 <filter-mapping>

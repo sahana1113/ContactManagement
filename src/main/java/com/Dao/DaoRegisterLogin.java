@@ -1,5 +1,9 @@
-package com.example;
+package com.Dao;
 import org.mindrot.jbcrypt.BCrypt;
+
+import com.Bean.BeanContactDetails;
+import com.Bean.BeanUserDetails;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -9,16 +13,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-public class RegisterLoginDao implements DetailsDao{
+public class DaoRegisterLogin{
 	static int user_id;
-	public RegisterLoginDao()
+	public DaoRegisterLogin()
 	{
 	}
-	public RegisterLoginDao(int user_id)
+	public DaoRegisterLogin(int user_id)
 	{
 		this.user_id=user_id;
 	}
-	public boolean UserDetailsRegister(UserDetailsBean user) {
+	public boolean UserDetailsRegister(BeanUserDetails user) {
 		boolean rs=false;
 		try {
 	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -44,7 +48,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean credentialsInsert(UserDetailsBean user)
+	public boolean credentialsInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
 		try {
@@ -62,7 +66,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean allMailInsert(UserDetailsBean user)
+	public boolean allMailInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
 		try {
@@ -79,7 +83,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean allPhoneInsert(UserDetailsBean user)
+	public boolean allPhoneInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
 		try {
@@ -155,7 +159,7 @@ public class RegisterLoginDao implements DetailsDao{
 	public  String hashPassword(String password) {
 		return BCrypt.hashpw(password, BCrypt.gensalt());
     }
-	public boolean updateUserDetails(UserDetailsBean user) {
+	public boolean updateUserDetails(BeanUserDetails user) {
 		boolean rs=false;
 		String updateQuery = "UPDATE userDetails SET username = ?, gender = ?, birthday = ? WHERE user_id = ?";
 		try {
@@ -175,7 +179,7 @@ public class RegisterLoginDao implements DetailsDao{
 		
 		return rs;
 	}
-	public boolean addAltMail(UserDetailsBean user) {
+	public boolean addAltMail(BeanUserDetails user) {
 		boolean rs=false;
 		String query="Insert into all_mail(user_id,user_email,is_primary) values(?,?,false)";
 		try {
@@ -193,7 +197,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean addAltPhone(UserDetailsBean user) {
+	public boolean addAltPhone(BeanUserDetails user) {
 		boolean rs=false;
 		String query="Insert into all_phone(user_id,phone,is_primary) values(?,?,false)";
 		try {
@@ -211,7 +215,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean updatePrimaryMail(UserDetailsBean user) {
+	public boolean updatePrimaryMail(BeanUserDetails user) {
 		boolean rs=false;
 		String query="update userDetails set usermail=? where user_id=? ";
 		try {
@@ -235,7 +239,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean updatePrimaryPhone(UserDetailsBean user) {
+	public boolean updatePrimaryPhone(BeanUserDetails user) {
 		boolean rs=false;
 		String query="update userDetails set phonenumber=? where user_id=?;";
 		try {
@@ -255,7 +259,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		return rs;
 	}
-	public boolean changePassword(UserDetailsBean user) {
+	public boolean changePassword(BeanUserDetails user) {
 		String query="update credentials set password=? where user_id=?;";
 		boolean rs=false;
 		try {
@@ -273,7 +277,7 @@ public class RegisterLoginDao implements DetailsDao{
 		return rs;
 		
 	}
-	public boolean updateContactDetails(ContactDetailsBean user) {
+	public boolean updateContactDetails(BeanContactDetails user) {
 		boolean rs=false;
 		String updateQuery = "UPDATE contactDetails SET name = ?, gender = ?, birthday = ?,mail=?,phonenumber=? WHERE contact_id = ?";
 		try {
@@ -320,7 +324,7 @@ public class RegisterLoginDao implements DetailsDao{
 		return rs;
          
     }
-	public static void insertCategory(ContactDetailsBean user) throws SQLException {
+	public static void insertCategory(BeanContactDetails user) throws SQLException {
 		try {
 			 
 	     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -347,7 +351,7 @@ public class RegisterLoginDao implements DetailsDao{
         }
 		
 	}
-	public void deleteAltMail(UserDetailsBean user) {
+	public void deleteAltMail(BeanUserDetails user) {
 		try {
     	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
          PreparedStatement pst = con.prepareStatement("delete from all_mail where user_email=? && user_id=?;");
@@ -360,7 +364,7 @@ public class RegisterLoginDao implements DetailsDao{
 		
 		
 	}
-	public void deleteAltPhone(UserDetailsBean user) {
+	public void deleteAltPhone(BeanUserDetails user) {
 		try {
 	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
 	         PreparedStatement pst = con.prepareStatement("delete from all_phone where phone=? && user_id=?;");
@@ -439,7 +443,7 @@ public class RegisterLoginDao implements DetailsDao{
       }
 		return 0;
 	}
-	public boolean defaultGroup(UserDetailsBean user) {
+	public boolean defaultGroup(BeanUserDetails user) {
 		boolean rs=false;
 		String query="INSERT INTO categories (category_name, user_id) VALUES('Family', ?),('Work', ?),('Friends', ?),('Favourites', ?);";
 		try {

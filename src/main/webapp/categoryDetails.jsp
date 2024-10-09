@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
 <%@ page import="java.util.List" %>
-<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,8 @@
             color: white;
             padding: 20px;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+    		height:100vh;
         }
 
         .sidebar h3 {
@@ -62,6 +65,7 @@
         }
 
         .main-content {
+            margin-left:280px;
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;
@@ -74,13 +78,13 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        .contacts-list h2 {
             text-align: center;
             color: #333;
             margin-bottom: 30px;
             font-size: 24px;
         }
-
+        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -156,14 +160,14 @@
         <div class="contacts-list">
             <%
             int category = Integer.parseInt(request.getParameter("id"));
-            int userId = (Integer) request.getAttribute("user_id"); 
+                                    int userId = (Integer) request.getAttribute("user_id"); 
 
-            UserContactDao categoryDao = new UserContactDao(userId);
-            List<ContactDetailsBean> contactsInCategory = categoryDao.getContactsInCategory(category);
-            List<ContactDetailsBean> contactsNotInCategory = categoryDao.getContactsNotInCategory(category); 
+                                    DaoUserContact categoryDao = new DaoUserContact(userId);
+                                    List<BeanContactDetails> contactsInCategory = categoryDao.getContactsInCategory(category);
+                                    List<BeanContactDetails> contactsNotInCategory = categoryDao.getContactsNotInCategory(category);
             %>
 
-            <h2>Contacts in Category: <%= categoryDao.getCategoryName(category) %></h2>
+            <h2>Contacts in Category: <%=categoryDao.getCategoryName(category)%></h2>
 
             <table>
                 <tr>
@@ -171,20 +175,26 @@
                     <th>Phone Number</th>
                     <th>Action</th>
                 </tr>
-                <% if (contactsInCategory != null && !contactsInCategory.isEmpty()) {
-                    for (ContactDetailsBean contact : contactsInCategory) { %>
+                <%
+                if (contactsInCategory != null && !contactsInCategory.isEmpty()) {
+                                    for (BeanContactDetails contact : contactsInCategory) {
+                %>
                         <tr>
-                            <td><%= contact.getContactname() %></td>
-                            <td><%= contact.getPhonenumber() %></td>
+                            <td><%=contact.getContactname()%></td>
+                            <td><%=contact.getPhonenumber()%></td>
                             <td>
-                                <a href="deleteContactCategory.jsp?contactId=<%= contact.getContact_id() %>&category=<%= category %>" class="btn delete-btn" onclick="return confirm('Are you sure you want to remove this contact?');">Remove</a>
+                                <a href="deleteContactCategory.jsp?contactId=<%=contact.getContact_id()%>&category=<%=category%>" class="btn delete-btn" onclick="return confirm('Are you sure you want to remove this contact?');">Remove</a>
                             </td>
                         </tr>
-                <% } } else { %>
+                <%
+                } } else {
+                %>
                     <tr>
                         <td colspan="3">No contacts found in this category.</td>
                     </tr>
-                <% } %>
+                <%
+                }
+                %>
             </table>
 
             <h2>Add Contacts to Category</h2>
@@ -195,8 +205,10 @@
                     <th>Phone Number</th>
                     <th>Action</th>
                 </tr>
-                <% if (contactsNotInCategory != null && !contactsNotInCategory.isEmpty()) {
-                    for (ContactDetailsBean contact : contactsNotInCategory) { %>
+                <%
+                if (contactsNotInCategory != null && !contactsNotInCategory.isEmpty()) {
+                                    for (BeanContactDetails contact : contactsNotInCategory) {
+                %>
                         <tr>
                             <td><%= contact.getContactname() %></td>
                             <td><%= contact.getPhonenumber() %></td>

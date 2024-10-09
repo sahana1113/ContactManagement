@@ -2,7 +2,6 @@
 <%@ page import="com.example.*" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +45,8 @@
             background-color: #34495E;
             border-radius: 5px;
             transition: background-color 0.3s;
+            position: fixed;
+    		height:100vh;
         }
         .sidebar ul li:hover {
             background-color: #1ABC9C;
@@ -57,6 +58,7 @@
             font-size: 18px;
         }
         .main-content {
+            
             flex-grow: 1;
             background-color: #ECF0F1;
             padding: 20px;

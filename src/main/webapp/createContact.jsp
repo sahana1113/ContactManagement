@@ -2,6 +2,8 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.example.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +28,7 @@
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
             display: flex;
     		flex-direction: column;
-    		    		  position: fixed; 
+    		position: fixed; 
     		top: 0; 
     		left: 0; 
             height: 100%;
@@ -182,8 +184,8 @@
         <div class="form-container">
             <h2>Create New Contact</h2>
             <%
-            UserContactDao ucd=new UserContactDao((Integer) request.getAttribute("user_id") );
-            List<CategoryBean>categories=ucd.getCategoriesByUserId();
+            DaoUserContact ucd=new DaoUserContact((Integer) request.getAttribute("user_id") );
+                                    List<BeanCategory>categories=ucd.getCategoriesByUserId();
             %>
             <form action="create" method="post">
                 <div class="form-group">
@@ -222,7 +224,7 @@
                 <div class="form-group">
     <label>Select Categories:</label>
     <%
-        for (CategoryBean category : categories) {
+    for (BeanCategory category : categories) {
     %>
         <div class="checkbox-group">
             <input type="checkbox" id="<%= category.getC_id() %>" name="categories" value="<%= category.getCategory() %>">

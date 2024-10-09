@@ -1,4 +1,4 @@
-package com.example;
+package com.Servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.Dao.DaoRegisterLogin;
+
 //@WebServlet("/createCategory")
-public class CreateCategoryServlet extends HttpServlet {
+public class ServletCreateCategory extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -22,7 +24,7 @@ public class CreateCategoryServlet extends HttpServlet {
 
         String[] contactIds = request.getParameterValues("contactIds");
 
-        RegisterLoginDao rld = new RegisterLoginDao(userId);
+        DaoRegisterLogin rld = new DaoRegisterLogin(userId);
 		int categoryId = rld.insertCategoryByName(categoryName);
 
 		if (contactIds != null && contactIds.length > 0) {

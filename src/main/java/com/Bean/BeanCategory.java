@@ -1,9 +1,9 @@
-package com.example;
+package com.Bean;
 
-public class CategoryBean {
+public class BeanCategory {
    int c_id;
    String category;
-   public CategoryBean(int c_id, String category) {
+   public BeanCategory(int c_id, String category) {
 	this.c_id = c_id;
 	this.category = category;
   }

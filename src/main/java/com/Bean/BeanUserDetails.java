@@ -1,9 +1,9 @@
-package com.example;
+package com.Bean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDetailsBean {
+public class BeanUserDetails {
      String username;
      String usermail;
      String gender;
@@ -52,10 +52,10 @@ public class UserDetailsBean {
 	public void setAltphone(String altphone) {
 		this.altphone = altphone;
 	}
-	public UserDetailsBean() {
+	public BeanUserDetails() {
     	 
      }
-	public UserDetailsBean(String username, String phonenumber) {
+	public BeanUserDetails(String username, String phonenumber) {
 		this.username = username;
 		this.phonenumber = phonenumber;
 	}

@@ -1,4 +1,4 @@
-package com.example;
+package com.Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.Bean.BeanUserDetails;
+import com.Dao.DaoRegisterLogin;
+import com.Dao.DaoUserContact;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,13 +30,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.annotation.WebServlet;
 //@WebServlet("/prime")
-public class primeServlet extends HttpServlet {
+public class ServletChangePassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	HttpSession session = request.getSession(false);
    	 
    	int userid=(int) request.getAttribute("user_id");
-    	UserDetailsBean user=new UserDetailsBean();
+    	BeanUserDetails user=new BeanUserDetails();
         String curr=(request.getParameter("currentPassword"));
         user.setUsermail(request.getParameter("primaryEmail"));
         user.setPhonenumber(request.getParameter("primaryPhone"));
@@ -39,8 +44,8 @@ public class primeServlet extends HttpServlet {
         String cnfmPass=(request.getParameter("confirmPassword"));
         user.setUser_id(userid);
         
-        RegisterLoginDao rld=new RegisterLoginDao();
-        UserContactDao cd=new UserContactDao(userid);
+        DaoRegisterLogin rld=new DaoRegisterLogin();
+        DaoUserContact cd=new DaoUserContact(userid);
         try {
         	if(rld.validateLogin(cd.getUsermail(), curr)>0)
         	{

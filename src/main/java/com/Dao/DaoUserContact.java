@@ -1,4 +1,4 @@
-package com.example;
+package com.Dao;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,12 +10,16 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class UserContactDao implements Dao{
+import com.Bean.BeanCategory;
+import com.Bean.BeanContactDetails;
+import com.Bean.BeanUserDetails;
+
+public class DaoUserContact{
 	int user_id;
-	public UserContactDao(int user_id){
+	public DaoUserContact(int user_id){
 		this.user_id=user_id;
 	}
-	public UserContactDao() {
+	public DaoUserContact() {
 		
 	}
 	public String getCategoryName(int id) throws SQLException{
@@ -55,9 +59,9 @@ public class UserContactDao implements Dao{
         return "";
         
 	}
-	public List<ContactDetailsBean> Contactdisplay() throws SQLException
+	public List<BeanContactDetails> Contactdisplay() throws SQLException
 	{
-		List<ContactDetailsBean>list=new ArrayList<>();
+		List<BeanContactDetails>list=new ArrayList<>();
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name ");
         pst.setInt(1,user_id);
@@ -65,7 +69,7 @@ public class UserContactDao implements Dao{
         while(rs.next())
         {
         	if(!in_archieve(rs.getInt("contact_id"),user_id)) {
-        	ContactDetailsBean c=new ContactDetailsBean(rs.getString("name"),rs.getString("phonenumber"),rs.getInt("contact_id"));
+        	BeanContactDetails c=new BeanContactDetails(rs.getString("name"),rs.getString("phonenumber"),rs.getInt("contact_id"));
         	//System.out.print(rs.getString("name"));
         	list.add(c);
         	}
@@ -93,7 +97,7 @@ public class UserContactDao implements Dao{
         }
 		return false;
 	}
-	public boolean contactDetailsRegister(ContactDetailsBean user) {
+	public boolean contactDetailsRegister(BeanContactDetails user) {
 		boolean rs=false;
 		try {
 	          //  Class.forName("com.mysql.cj.jdbc.Driver");
@@ -115,7 +119,7 @@ public class UserContactDao implements Dao{
 	                contact_id = key.getInt(1);
 	                user.setContact_id(contact_id); 
 	            }
-	            RegisterLoginDao rld=new RegisterLoginDao(user_id);
+	            DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
 	            rld.insertCategory(user);
 		}
 		catch (Exception e) {
@@ -124,11 +128,11 @@ public class UserContactDao implements Dao{
         }
 		return rs;
 	}
-	public ContactDetailsBean getContactDetailsById(int contact_id) throws SQLException
+	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select * from contactDetails where contact_id=?;");
-        ContactDetailsBean contact=new ContactDetailsBean();
+        BeanContactDetails contact=new BeanContactDetails();
         pst.setInt(1,contact_id);
         ResultSet rs=pst.executeQuery();
         if (rs.next()) {
@@ -153,11 +157,11 @@ public class UserContactDao implements Dao{
         return contact;
         
 	}
-	public UserDetailsBean getUserDetailsById(int user_id) throws SQLException
+	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select * from userDetails where user_id=?;");
-        UserDetailsBean contact=new UserDetailsBean();
+        BeanUserDetails contact=new BeanUserDetails();
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
         if (rs.next()) {
@@ -188,8 +192,8 @@ public class UserContactDao implements Dao{
         return contact;
         
 	}
-    public UserDetailsBean getPrimeDetailsById(int userId) throws SQLException{
-    	UserDetailsBean user=new UserDetailsBean();
+    public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException{
+    	BeanUserDetails user=new BeanUserDetails();
     	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select usermail,phonenumber from userDetails where user_id=?;");
         pst.setInt(1, userId);
@@ -212,23 +216,23 @@ public class UserContactDao implements Dao{
         
         return 0;
     }
-    public List<CategoryBean> getCategoriesByUserId() throws SQLException
+    public List<BeanCategory> getCategoriesByUserId() throws SQLException
     {
-    	List<CategoryBean>categories=new ArrayList<>();
+    	List<BeanCategory>categories=new ArrayList<>();
     	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("Select category_name,category_id from categories where user_id=?");
         pst.setInt(1, user_id);
         ResultSet rs = pst.executeQuery();
         while(rs.next())
         {
-        	categories.add(new CategoryBean(rs.getInt("category_id"),rs.getString("category_name")));
+        	categories.add(new BeanCategory(rs.getInt("category_id"),rs.getString("category_name")));
         }
 		return categories;
     	
     }
-    public List<ContactDetailsBean> getContactsInCategory(int category) throws SQLException
+    public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException
     {
-    	List<ContactDetailsBean>categories=new ArrayList<>();
+    	List<BeanContactDetails>categories=new ArrayList<>();
     	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
        
         int c_id=category;
@@ -241,13 +245,13 @@ public class UserContactDao implements Dao{
         return categories;
         
     }
-    public List<ContactDetailsBean> getContactsNotInCategory(int category) throws SQLException {
-    	List<ContactDetailsBean> contactsNotInCategory = new ArrayList<>();
+    public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException {
+    	List<BeanContactDetails> contactsNotInCategory = new ArrayList<>();
         
-        List<ContactDetailsBean> contactsInCategory = getContactsInCategory(category);
+        List<BeanContactDetails> contactsInCategory = getContactsInCategory(category);
 
         Set<Integer> contactsInCategoryIds = new HashSet<>();
-        for (ContactDetailsBean contact : contactsInCategory) {
+        for (BeanContactDetails contact : contactsInCategory) {
             contactsInCategoryIds.add(contact.getContact_id());
         }
 

@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page session="true" %>
 <%@ include file="sessionValidation.jsp" %>
-
+<%@ page import="com.Dao.*" %>
+<%@ page import="com.Bean.*" %>
 <%
 
 int c_id= Integer.parseInt(request.getParameter("category"));
 int uId= (Integer) request.getAttribute("user_id"); 
-    RegisterLoginDao contactDao = new RegisterLoginDao(uId);
+    DaoRegisterLogin contactDao = new DaoRegisterLogin(uId);
 
     boolean deletionSuccess = false;
         deletionSuccess = contactDao.deleteCategory(c_id); 
