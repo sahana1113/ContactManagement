@@ -54,7 +54,7 @@ public class DaoRegisterLogin{
 		try {
 	          //  Class.forName("com.mysql.cj.jdbc.Driver");
 	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password) values(?,?)");
+	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password,flag) values(?,?,0)");
 	            pst2.setInt(1,user.getUser_id());
 	            String hashPassword=hashPassword(user.getPassword());
 	            pst2.setString(2, hashPassword);
@@ -105,19 +105,19 @@ public class DaoRegisterLogin{
 		int user_id=-1;
 	     try {
 	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id,c.password FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? ;");
+	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id,c.password,c.flag FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? ;");
 	            pst.setString(1, usermail);
 	            ResultSet rs = pst.executeQuery();
 	            if (rs.next()) {
 	            	 String storedHash = rs.getString("password");
-	                 if (checkSHA512Hash(password, storedHash)) {
+	                 if (rs.getInt("flag")==1) {
 	                	 String bcryptHash = hashPassword(password);
 	                     updateUserHashInDatabase(rs.getInt("user_id"), bcryptHash); // Update the hash in the database
 	                     user_id = rs.getInt("user_id");
 	                     System.out.println("Password migrated to bcrypt.");
 	                     return user_id;
 	                 }
-	                 if (BCrypt.checkpw(password, storedHash)) {
+	                 if (rs.getInt("flag")==0) {
 	                     user_id = rs.getInt("user_id");
 	                     return user_id;
 	                 }
@@ -146,7 +146,7 @@ public class DaoRegisterLogin{
 	    }
 	}
 	public void updateUserHashInDatabase(int userId, String bcryptHash) {
-	    String sql = "UPDATE credentials SET password = ? WHERE user_id = ?";
+	    String sql = "UPDATE credentials SET password = ?,flag=0 WHERE user_id = ?";
 	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setString(1, bcryptHash);

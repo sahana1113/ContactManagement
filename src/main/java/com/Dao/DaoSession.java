@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +25,11 @@ public class DaoSession {
 	            instance = new DaoSession();
 	        }
 	        if(session!=null)
-            SessionListUpdate.updateLastAccessed(session, LocalDateTime.now());
+				try {
+					SessionTreeUpdate.updateLastAccessed(session, LocalDateTime.now());
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 	        return instance;
 	    }
     boolean check=true;
@@ -46,7 +51,7 @@ public class DaoSession {
 	        }
 	    }
 
-	public static boolean updateSession(List<BeanSession> list) throws SQLException {
+	public static boolean updateSession(TreeSet<BeanSession> list) throws SQLException {
 		 int[] rowsAffected;
 		 String sql = "UPDATE session SET last_accessed = ?, expiry_time = ? WHERE sessionid = ? AND last_accessed <> ?";
 		 try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -66,22 +71,19 @@ public class DaoSession {
 		 list.clear();
 		 return rowsAffected.length > 0;
     }
-	public static boolean autoDeleteExpiredSessions(List<BeanSession> sessionList) throws SQLException {
-	    int[] rowsDeleted;
-	    String sql = "DELETE FROM session WHERE sessionid = ? AND DATE_ADD(?, INTERVAL 3 MINUTE) < CURRENT_TIMESTAMP";
-	    
-	    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-	         PreparedStatement stmt = con.prepareStatement(sql)) {
-	        
-	        for (BeanSession obj : sessionList) {
-	            stmt.setString(1, obj.getSession_id()); 
-	            stmt.setTimestamp(2, Timestamp.valueOf(obj.getAccessed_time()));  
-	            stmt.addBatch(); 
-	        }
-	        rowsDeleted = stmt.executeBatch();  
-	        System.out.println("In delete");
-	    }
-	    return rowsDeleted.length > 0;
+	public static void autoDeleteExpiredSessions() throws SQLException {
+		 String sql = "DELETE FROM session WHERE expiry_time < CURRENT_TIMESTAMP LIMIT 200";
+		    int rowsDeleted;
+
+		    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+		         PreparedStatement stmt = con.prepareStatement(sql)) {
+
+		        do {
+		            rowsDeleted = stmt.executeUpdate();
+		            System.out.println(rowsDeleted + " session(s) deleted in this batch.");
+		        } while (rowsDeleted > 0); 
+		    }
+		    System.out.print("in delete");
 	}
 	 public int validateSession(String sessionId, Cookie[] cookies) {
 	        String sql = "SELECT user_id,expiry_time FROM session WHERE sessionid = ?";
@@ -109,7 +111,7 @@ public class DaoSession {
 	    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
 	    	PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, sessionId);
-            SessionListUpdate.removeObj(sessionId);
+            SessionTreeUpdate.removeObj(sessionId);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

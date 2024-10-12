@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class BeanSession {
+public class BeanSession implements Comparable<BeanSession>{
       String session_id;
       int user_id;
       LocalDateTime creation_time;
       LocalDateTime accessed_time;
       LocalDateTime expiry_time;
-      private static List<BeanSession> list=new ArrayList<>();
 	public BeanSession(String session_id, LocalDateTime accessed_time) {
 		this.session_id = session_id;
 		this.accessed_time = accessed_time;
@@ -46,12 +45,25 @@ public class BeanSession {
 	public void setExpiry_time(LocalDateTime expiry_time) {
 		this.expiry_time = expiry_time;
 	}
-	public static List<BeanSession> getList() {
-		return list;
-	}
-	public static void setList(List<BeanSession> list) {
-		BeanSession.list = list;
-	} 
+	 @Override
+	    public int compareTo(BeanSession other) {
+		 int timeComparison = this.accessed_time.compareTo(other.accessed_time);
+	  	        if (timeComparison == 0) {
+	            return this.session_id.compareTo(other.session_id);
+	        }
+	        return timeComparison;
+	 }
+	    @Override
+	    public boolean equals(Object obj) {
+	        if (this == obj) return true;
+	        if (obj == null || getClass() != obj.getClass()) return false;
+	        BeanSession that = (BeanSession) obj;
+	        return session_id.equals(that.session_id);
+	    }
+	    @Override
+	    public int hashCode() {
+	        return session_id.hashCode();
+	    }
 	 
 		 
 }

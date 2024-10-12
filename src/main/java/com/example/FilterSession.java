@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import com.Dao.DaoSession;
 
 public class FilterSession implements Filter {
-
     public void init(FilterConfig filterConfig) throws ServletException {}
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -29,7 +28,6 @@ public class FilterSession implements Filter {
         String registerServlet = req.getContextPath() + "/register";
         String index = req.getContextPath() + "/index.jsp"; 
         String register = req.getContextPath() + "/register.jsp"; 
-        
         Cookie[] cookies = req.getCookies();
         String session_id=null;
         int user_id=0;
@@ -51,7 +49,6 @@ public class FilterSession implements Filter {
 				 isValidSession = true;
 			}
         }
-      //  boolean loggedIn = (session != null && session.getAttribute("user_id") != null);
         boolean loginReq = req.getRequestURI().equals(login);
         boolean loginSer = req.getRequestURI().equals(loginServlet);
         boolean regSer = req.getRequestURI().equals(registerServlet);
