@@ -1,38 +1,43 @@
 package com.Servlet;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoSession;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.annotation.WebServlet;
-//@WebServlet("/login")
+/**
+ * Servlet that handles user login functionality. It validates user credentials 
+ * and creates a session upon successful login.
+ *
+ * @author Sahana
+ * @version 1.0
+ */
 public class ServletUserLogin extends HttpServlet {
+	/**
+     * Processes the login request by validating user credentials. If the credentials 
+     * are valid, it creates a session and redirects the user to the home page. 
+     * If the login fails, it redirects the user back to the login page.
+     *
+     * <p>This method retrieves the email and password from the request, 
+     * validates them using DaoRegisterLogin, generates a session ID, 
+     * and creates a session in the database. If successful, a session cookie 
+     * is created and added to the response.</p>
+     *
+     * @param request  The HttpServletRequest object that contains the 
+     *                 request data.
+     * @param response The HttpServletResponse object used to send a 
+     *                 response to the client.
+     * @throws ServletException If an error occurs during request processing.
+     * @throws IOException If an input or output error is detected while 
+     *                     handling the request.
+     */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 		String useremail=request.getParameter("email");
@@ -44,7 +49,7 @@ public class ServletUserLogin extends HttpServlet {
 		if(user_id!=-1)
 		{
 			String sessionId = generateSessionId();
-			LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(3);
+			LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30);
             boolean sessionCreated = sessionDAO.createSession(sessionId, user_id, expiryTime);
 
             if (sessionCreated) {
@@ -66,6 +71,11 @@ public class ServletUserLogin extends HttpServlet {
         }
 		
 	}
+	/**
+     * Generates a unique session ID using a randomly generated UUID.
+     *
+     * @return A unique session ID as a String.
+     */
 	private String generateSessionId() {
         return java.util.UUID.randomUUID().toString(); // Generate a random unique ID
     }

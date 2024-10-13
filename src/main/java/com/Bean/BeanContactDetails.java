@@ -7,7 +7,7 @@ import java.util.List;
  * This class encapsulates various attributes related to a contact, 
  * including name, email, phone number, and other personal details.
  * 
- * @author Your Name
+ * @author Sahana
  * @version 1.0
  */
 public class BeanContactDetails {

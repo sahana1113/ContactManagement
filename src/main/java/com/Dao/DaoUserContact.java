@@ -6,22 +6,40 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import com.example.ContactDetailsBean;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.Bean.BeanCategory;
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
-
+/**
+ * Data Access Object (DAO) for managing user contact details.
+ * This class provides methods to retrieve, add, and manage user contacts 
+ * and associated categories.
+ *
+ * @author Sahana
+ * @version 1.0
+ */
 public class DaoUserContact{
 	int user_id;
+	/**
+	 * Constructs a DaoUserContact instance with the specified user ID.
+	 *
+	 * @param user_id The ID of the user whose contacts are being managed.
+	 */
 	public DaoUserContact(int user_id){
 		this.user_id=user_id;
 	}
+	/**
+	 * Default constructor for DaoUserContact.
+	 */
 	public DaoUserContact() {
 		
 	}
+	/**
+	 * Retrieves the category name associated with a given category ID.
+	 *
+	 * @param id The ID of the category.
+	 * @return The name of the category, or an empty string if not found.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public String getCategoryName(int id) throws SQLException{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select category_name from categories where category_id=?;");
@@ -33,6 +51,12 @@ public class DaoUserContact{
         }
         return "";
 	}
+	/**
+	 * Retrieves the username associated with the current user ID.
+	 *
+	 * @return The username, or an empty string if not found.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public String getUsername() throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -46,6 +70,12 @@ public class DaoUserContact{
         return "";
         
 	}
+	/**
+	 * Retrieves the email associated with the current user ID.
+	 *
+	 * @return The email address, or an empty string if not found.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public String getUsermail() throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -59,6 +89,12 @@ public class DaoUserContact{
         return "";
         
 	}
+	/**
+	 * Retrieves a list of contact details for the current user, excluding archived contacts.
+	 *
+	 * @return A list of BeanContactDetails representing the user's contacts.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public List<BeanContactDetails> Contactdisplay() throws SQLException
 	{
 		List<BeanContactDetails>list=new ArrayList<>();
@@ -77,7 +113,14 @@ public class DaoUserContact{
         
         return list;
 	}
-
+	/**
+	 * Checks if a contact is in the "Archived" category.
+	 *
+	 * @param con_id The contact ID.
+	 * @param user_id The user ID.
+	 * @return true if the contact is archived, false otherwise.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	private boolean in_archieve(int con_id, int user_id) throws SQLException {
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("select category_id from categories where category_name=?");
@@ -97,6 +140,12 @@ public class DaoUserContact{
         }
 		return false;
 	}
+	/**
+	 * Registers a new contact for the current user.
+	 *
+	 * @param user The BeanContactDetails object containing contact information.
+	 * @return true if the contact was successfully registered, false otherwise.
+	 */
 	public boolean contactDetailsRegister(BeanContactDetails user) {
 		boolean rs=false;
 		try {
@@ -128,6 +177,13 @@ public class DaoUserContact{
         }
 		return rs;
 	}
+	/**
+	 * Retrieves the contact details for a specific contact ID.
+	 *
+	 * @param contact_id The ID of the contact to retrieve.
+	 * @return A BeanContactDetails object containing the contact information.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -157,6 +213,13 @@ public class DaoUserContact{
         return contact;
         
 	}
+	/**
+	 * Retrieves the user details for a specific user ID.
+	 *
+	 * @param user_id The ID of the user to retrieve.
+	 * @return A BeanUserDetails object containing the user's information.
+	 * @throws SQLException if a database access error occurs.
+	 */
 	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException
 	{
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -192,6 +255,13 @@ public class DaoUserContact{
         return contact;
         
 	}
+	/**
+	 * Retrieves the primary email and phone details for a specific user ID.
+	 *
+	 * @param userId The ID of the user to retrieve.
+	 * @return A BeanUserDetails object containing the primary user information.
+	 * @throws SQLException if a database access error occurs.
+	 */
     public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException{
     	BeanUserDetails user=new BeanUserDetails();
     	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
@@ -204,6 +274,13 @@ public class DaoUserContact{
         }
         return user;
     }
+    /**
+     * Counts the total number of contacts for a specific user ID.
+     *
+     * @param userId The ID of the user to count contacts for.
+     * @return The total number of contacts.
+     * @throws SQLException if a database access error occurs.
+     */
     public int getTotalContacts(int userId) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
         PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM contactDetails WHERE user_id = ?");
@@ -216,6 +293,12 @@ public class DaoUserContact{
         
         return 0;
     }
+    /**
+     * Retrieves a list of categories associated with the current user ID.
+     *
+     * @return A list of BeanCategory objects representing the user's categories.
+     * @throws SQLException if a database access error occurs.
+     */
     public List<BeanCategory> getCategoriesByUserId() throws SQLException
     {
     	List<BeanCategory>categories=new ArrayList<>();
@@ -230,6 +313,13 @@ public class DaoUserContact{
 		return categories;
     	
     }
+    /**
+     * Retrieves a list of contacts that belong to a specific category.
+     *
+     * @param category The ID of the category.
+     * @return A list of BeanContactDetails representing the contacts in the category.
+     * @throws SQLException if a database access error occurs.
+     */
     public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException
     {
     	List<BeanContactDetails>categories=new ArrayList<>();
@@ -245,6 +335,13 @@ public class DaoUserContact{
         return categories;
         
     }
+    /**
+     * Retrieves a list of contacts that do not belong to a specific category.
+     *
+     * @param category The ID of the category.
+     * @return A list of BeanContactDetails representing contacts not in the category.
+     * @throws SQLException if a database access error occurs.
+     */
     public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException {
     	List<BeanContactDetails> contactsNotInCategory = new ArrayList<>();
         
