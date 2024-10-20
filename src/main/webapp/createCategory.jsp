@@ -4,6 +4,8 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page session="false" %>
+
 <%
 int uId  = (Integer) request.getAttribute("user_id"); 
 DaoUserContact cd = new DaoUserContact(uId);

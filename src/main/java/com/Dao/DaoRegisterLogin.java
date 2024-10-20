@@ -1,16 +1,18 @@
 package com.Dao;
 import org.mindrot.jbcrypt.BCrypt;
-
-
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
+import com.example.HikariCPDataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import javax.naming.NamingException;
 /**
  * Data Access Object (DAO) for user registration and login operations.
  * This class handles interactions with the database for user details,
@@ -49,7 +51,7 @@ public class DaoRegisterLogin{
 	public boolean UserDetailsRegister(BeanUserDetails user) {
 		boolean rs=false;
 		try {
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	            Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst = con.prepareStatement("INSERT INTO userDetails (username,usermail,gender,phonenumber,birthday) VALUES (?, ?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 	            pst.setString(1,user.getUsername());
 	            pst.setString(2,user.getUsermail());
@@ -81,8 +83,7 @@ public class DaoRegisterLogin{
 	{
 		boolean rs=false;
 		try {
-	          //  Class.forName("com.mysql.cj.jdbc.Driver");
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+                Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password,flag) values(?,?,0)");
 	            pst2.setInt(1,user.getUser_id());
 	            String hashPassword=hashPassword(user.getPassword());
@@ -105,8 +106,7 @@ public class DaoRegisterLogin{
 	{
 		boolean rs=false;
 		try {
-	          //  Class.forName("com.mysql.cj.jdbc.Driver");
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_mail(user_id,user_email,is_primary) values(?,?,true)");
 	            pst3.setInt(1,user.getUser_id());
 	            pst3.setString(2,user.getUsermail());
@@ -129,7 +129,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		try {
 	          //  Class.forName("com.mysql.cj.jdbc.Driver");
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_phone(user_id,phone,is_primary) values(?,?,true)");
 	            pst3.setInt(1,user.getUser_id());
 	            pst3.setString(2,user.getPhonenumber());
@@ -152,21 +152,26 @@ public class DaoRegisterLogin{
 	{
 		int user_id=-1;
 	     try {
-	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	            Connection con = HikariCPDataSource.getConnection();
 	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id,c.password,c.flag FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? ;");
 	            pst.setString(1, usermail);
 	            ResultSet rs = pst.executeQuery();
 	            if (rs.next()) {
+	                String storedHash = rs.getString("password");
 	                 if (rs.getInt("flag")==1) {
+	                	 if (checkSHA512Hash(password, storedHash)) {
 	                	 String bcryptHash = hashPassword(password);
 	                     updateUserHashInDatabase(rs.getInt("user_id"), bcryptHash); // Update the hash in the database
 	                     user_id = rs.getInt("user_id");
 	                     System.out.println("Password migrated to bcrypt.");
 	                     return user_id;
+	                	 }
 	                 }
 	                 if (rs.getInt("flag")==0) {
-	                     user_id = rs.getInt("user_id");
-	                     return user_id;
+	                	 if (BCrypt.checkpw(password, storedHash)) {
+	                         user_id = rs.getInt("user_id");
+	                         return user_id;  
+	                     }
 	                 }
 	            }
 	            return -1;
@@ -184,7 +189,8 @@ public class DaoRegisterLogin{
 	 */
 	public void updateUserHashInDatabase(int userId, String bcryptHash) {
 	    String sql = "UPDATE credentials SET password = ?,flag=0 WHERE user_id = ?";
-	    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+	    try (Connection conn = HikariCPDataSource.getConnection();
+
 	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	        pstmt.setString(1, bcryptHash);
 	        pstmt.setInt(2, userId);
@@ -213,7 +219,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String updateQuery = "UPDATE userDetails SET username = ?, gender = ?, birthday = ? WHERE user_id = ?";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(updateQuery);
 		        ps.setString(1, user.getUsername());
 		        ps.setString(2, user.getGender());
@@ -239,7 +245,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String query="Insert into all_mail(user_id,user_email,is_primary) values(?,?,false)";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());
@@ -263,7 +269,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String query="Insert into all_phone(user_id,phone,is_primary) values(?,?,false)";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());
@@ -287,7 +293,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String query="update userDetails set usermail=? where user_id=? ";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setString(1,user.getUsermail());
@@ -317,7 +323,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String query="update userDetails set phonenumber=? where user_id=?;";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setString(1,user.getPhonenumber());
@@ -333,6 +339,19 @@ public class DaoRegisterLogin{
         }
 		return rs;
 	}
+	public boolean checkSHA512Hash(String password, String storedHash) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] hashedPasswordBytes = md.digest(password.getBytes());
+            String hashedPassword = Base64.getEncoder().encodeToString(hashedPasswordBytes);
+            return hashedPassword.equals(storedHash);
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return false; 
+    }
 	/**
      * Changes the password for the user.
      *
@@ -343,7 +362,7 @@ public class DaoRegisterLogin{
 		String query="update credentials set password=? where user_id=?;";
 		boolean rs=false;
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 			 String hash=hashPassword(user.getPassword());
 			 ps.setString(1, hash);
@@ -367,7 +386,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String updateQuery = "UPDATE contactDetails SET name = ?, gender = ?, birthday = ?,mail=?,phonenumber=? WHERE contact_id = ?";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(updateQuery);
 		        ps.setString(1, user.getContactname());
 		        ps.setString(2, user.getGender());
@@ -402,7 +421,7 @@ public class DaoRegisterLogin{
     {
 		boolean rs=false;
 		try {
-    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
     	 PreparedStatement pst1 =con.prepareStatement("delete from category_users where contact_id=?;");
     	 pst1.setInt(1, id);
     	 pst1.executeUpdate();
@@ -425,8 +444,7 @@ public class DaoRegisterLogin{
      */
 	public void insertCategory(BeanContactDetails user) throws SQLException {
 		try {
-			 
-	     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection(); 
 		List<String> category=user.getCategory();
         for(String s:category) {
         PreparedStatement pst1=con.prepareStatement("Select category_id from categories where category_name=? && user_id=?;");
@@ -457,7 +475,7 @@ public class DaoRegisterLogin{
      */
 	public void deleteAltMail(BeanUserDetails user) {
 		try {
-    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
          PreparedStatement pst = con.prepareStatement("delete from all_mail where user_email=? && user_id=?;");
          pst.setString(1, user.getAltmail());
          pst.setInt(2, user.getUser_id());
@@ -475,7 +493,7 @@ public class DaoRegisterLogin{
      */
 	public void deleteAltPhone(BeanUserDetails user) {
 		try {
-	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	         PreparedStatement pst = con.prepareStatement("delete from all_phone where phone=? && user_id=?;");
 	         pst.setString(1, user.getAltphone());
 	         pst.setInt(2, user.getUser_id());
@@ -495,7 +513,7 @@ public class DaoRegisterLogin{
 	public boolean deleteContactFromCategory(int contactId,int c_id) {
 		boolean rs=false;
 		try {
-	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=? && contact_id=?;");
 	         pst.setInt(1, c_id);
 	         pst.setInt(2, contactId);
@@ -518,7 +536,7 @@ public class DaoRegisterLogin{
 	{
 		boolean rs=false;
 		try {
-	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	         PreparedStatement pst = con.prepareStatement("insert into category_users(category_id,contact_id) values(? ,?);");
 	         pst.setInt(1, c_id);
 	         pst.setInt(2, contactId);
@@ -538,7 +556,7 @@ public class DaoRegisterLogin{
 	public boolean deleteCategory(int c_id) {
 		boolean rs=false;
 		try {
-	    	 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=?;");
 	         pst.setInt(1, c_id);
 	         pst.executeUpdate();
@@ -560,7 +578,7 @@ public class DaoRegisterLogin{
 	 */
 	public int insertCategoryByName(String categoryName) {
 		try {
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst = con.prepareStatement("INSERT INTO categories (category_name,user_id) VALUES (?, ?)",Statement.RETURN_GENERATED_KEYS);
 	            pst.setString(1,categoryName);
 	            pst.setInt(2,user_id);
@@ -588,7 +606,7 @@ public class DaoRegisterLogin{
 		boolean rs=false;
 		String query="INSERT INTO categories (category_name, user_id) VALUES('Family', ?),('Work', ?),('Friends', ?),('Favourites', ?);";
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+            Connection con = HikariCPDataSource.getConnection();
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());

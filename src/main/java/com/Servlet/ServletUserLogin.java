@@ -1,4 +1,5 @@
 package com.Servlet;
+import org.apache.log4j.Logger;
 import java.io.IOException;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ import com.Dao.DaoSession;
  * @version 1.0
  */
 public class ServletUserLogin extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(ServletUserLogin.class.getName()); // Initialize Logger
 	/**
      * Processes the login request by validating user credentials. If the credentials 
      * are valid, it creates a session and redirects the user to the home page. 
@@ -53,6 +55,7 @@ public class ServletUserLogin extends HttpServlet {
             boolean sessionCreated = sessionDAO.createSession(sessionId, user_id, expiryTime);
 
             if (sessionCreated) {
+            	logger.info("User logged in: user_id=" + user_id);
                 Cookie sessionCookie1 = new Cookie("SESSIONID", sessionId);
                 sessionCookie1.setMaxAge(60 * 60 * 24);
                 sessionCookie1.setHttpOnly(true); 

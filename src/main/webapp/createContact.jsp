@@ -3,7 +3,7 @@
 <%@ page import="com.example.*" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.Dao.*" %>
-<%@ page import="com.Bean.*" %>
+<%@ page import="com.Bean.*" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>

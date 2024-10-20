@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Database Schema",
+  "type": "object",
+  "properties": {
+    "database": {
+      "type": "object",
+      "properties": {
+        "tables": {
+          "type": "object",
+          "properties": {
+            "userDetails": {
+              "type": "object",
+              "properties": {
+                "columns": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "int",
+                          "varchar(50)",
+                          "varchar(10)",
+                          "varchar(20)",
+                          "date"
+                        ]
+                      },
+                      "null": {
+                        "type": "boolean"
+                      },
+                      "key": {
+                        "type": ["string", "null"],
+                        "enum": ["PRI", "UNI", null]
+                      },
+                      "default": {
+                        "type": ["string", "null"]
+                      },
+                      "extra": {
+                        "type": ["string", "null"],
+                        "enum": ["auto_increment", null]
+                      }
+                    },
+                    "required": ["name", "type", "null"],
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "name": { "const": "username" }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "type": { "enum": ["varchar(50)"] }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "name": { "const": "usermail" }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "type": { "enum": ["varchar(50)"] }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "name": { "const": "gender" }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "type": { "enum": ["varchar(10)"] }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "name": { "const": "phonenumber" }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "type": { "enum": ["varchar(20)"] }
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "name": { "const": "birthday" }
+                          }
+                        },
+                        "then": {
+                          "properties": {
+                            "type": { "enum": ["date"] }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": ["columns"]
+            }
+          },
+          "required": ["userDetails"]
+        }
+      },
+      "required": ["tables"]
+    }
+  },
+  "required": ["database"]
+}
+

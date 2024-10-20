@@ -1,22 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
-
+<%@ page session="false" %>
+<%@ page import="java.time.*" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <%
 int contactId = Integer.parseInt(request.getParameter("id"));
     int uId= (Integer) request.getAttribute("user_id"); 
     DaoUserContact contactDao = new DaoUserContact();
     BeanContactDetails contact = new BeanContactDetails();
-
     try {
         contact = contactDao.getContactDetailsById(contactId);
     } catch (SQLException e) {
         e.printStackTrace();
     }
+    
+    String selectedTimeZone = String.valueOf(request.getAttribute("selectedTimeZone"));
+    if (selectedTimeZone.equals("null") || selectedTimeZone.isEmpty()) {
+        selectedTimeZone = "Asia/Kolkata"; 
+    }
+    long createdTimeEpoch = contact.getCreatedTimeInEpoch(); 
+ 	Instant createdTimeInstant = Instant.ofEpochSecond(createdTimeEpoch);
+ 	ZonedDateTime contactZonedDateTime = createdTimeInstant.atZone(ZoneId.of("UTC")); 
+ 	ZonedDateTime convertedTime = contactZonedDateTime.withZoneSameInstant(ZoneId.of(selectedTimeZone));
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
+    String formattedTime = convertedTime.format(formatter); 
 %>
 
 <!DOCTYPE html>
@@ -176,8 +188,37 @@ int contactId = Integer.parseInt(request.getParameter("id"));
             justify-content: space-between;
             width: 200px;
         }
+        select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+select:focus {
+    border-color: #3498DB;
+    outline: none;
+    background-color: #ECF0F1;
+}
+
+option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+}
+
+option:hover {
+    background-color: #f0f0f0;
+}
+        
     </style>
 </head>
+  
 <body>
 
 <div class="container">
@@ -197,17 +238,47 @@ int contactId = Integer.parseInt(request.getParameter("id"));
     <div class="main-content">
         <div class="details-list">
             <h2>Contact Details</h2>
-
+             
             <%
             if (contact != null) {
             %>
             <ul>
+                <li>
+                    <strong>Created Time:</strong>
+    <div style="display: flex; align-items: center;">
+        <form action="convertTimeZone" method="GET">
+            <input type="hidden" name="contactId" value=<%= contactId %>/>
+            <select name="timeZone" id="timeZone" onchange="this.form.submit()">
+                <%
+                String[] selectedTimeZones = {
+                    "America/New_York",
+                    "Europe/London",
+                    "Asia/Tokyo",
+                    "Australia/Sydney",
+                    "America/Los_Angeles",
+                    "Europe/Berlin",
+                    "Asia/Kolkata",
+                    "UTC"
+                };
+                for (String timeZone : selectedTimeZones) {
+                    String selected = timeZone.equals(selectedTimeZone) ? "selected" : "";
+                %>
+                    <option value="<%= timeZone %>" <%= selected %>><%= timeZone %></option>
+                <%
+                }
+                %>
+            </select>               
+        </form>&emsp;
+                <p style="margin-right: 20px;"><%= formattedTime %></p>
+    </div>
+                </li>
                 <li><strong>Name:</strong> <span><%= contact.getContactname() %></span></li>
                 <li><strong>Email:</strong> <span><%= contact.getContactmail() %></span></li>
                 <li><strong>Phone Number:</strong> <span><%= contact.getPhonenumber() %></span></li>
                 <li><strong>Gender:</strong> <span><%= contact.getGender() %></span></li>
                 <li><strong>Birthday:</strong> <span><%= contact.getBirthday() %></span></li>
                 <li><strong>Location:</strong> <span><%= contact.getLocation() %></span></li>
+                 
                 <li><strong>Groups:</strong>
                         <ul>
                             <% List<String> categories = contact.getCategory();

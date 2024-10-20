@@ -1,7 +1,9 @@
 package com.Dao;
 import java.util.*;
+
+import javax.naming.NamingException;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +11,7 @@ import java.sql.Statement;
 import com.Bean.BeanCategory;
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
+import com.example.HikariCPDataSource;
 /**
  * Data Access Object (DAO) for managing user contact details.
  * This class provides methods to retrieve, add, and manage user contacts 
@@ -39,10 +42,11 @@ public class DaoUserContact{
 	 * @param id The ID of the category.
 	 * @return The name of the category, or an empty string if not found.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public String getCategoryName(int id) throws SQLException{
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select category_name from categories where category_id=?;");
+	public String getCategoryName(int id) throws SQLException, NamingException{
+        Connection con = HikariCPDataSource.getConnection();
+		PreparedStatement pst = con.prepareStatement("select category_name from categories where category_id=?;");
         pst.setInt(1,id);
         ResultSet rs=pst.executeQuery();
         if(rs.next())
@@ -56,10 +60,11 @@ public class DaoUserContact{
 	 *
 	 * @return The username, or an empty string if not found.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public String getUsername() throws SQLException
+	public String getUsername() throws SQLException, NamingException
 	{
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("select username from userDetails where user_id=?;");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
@@ -75,10 +80,11 @@ public class DaoUserContact{
 	 *
 	 * @return The email address, or an empty string if not found.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public String getUsermail() throws SQLException
+	public String getUsermail() throws SQLException, NamingException
 	{
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("select usermail from userDetails where user_id=?;");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
@@ -94,12 +100,13 @@ public class DaoUserContact{
 	 *
 	 * @return A list of BeanContactDetails representing the user's contacts.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public List<BeanContactDetails> Contactdisplay() throws SQLException
+	public List<BeanContactDetails> Contactdisplay() throws SQLException, NamingException
 	{
 		List<BeanContactDetails>list=new ArrayList<>();
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name ");
+        Connection con = HikariCPDataSource.getConnection();
+		PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name ");
         pst.setInt(1,user_id);
         ResultSet rs=pst.executeQuery();
         while(rs.next())
@@ -120,10 +127,11 @@ public class DaoUserContact{
 	 * @param user_id The user ID.
 	 * @return true if the contact is archived, false otherwise.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	private boolean in_archieve(int con_id, int user_id) throws SQLException {
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-        PreparedStatement pst = con.prepareStatement("select category_id from categories where category_name=?");
+	private boolean in_archieve(int con_id, int user_id) throws SQLException, NamingException {
+        Connection con = HikariCPDataSource.getConnection();
+		PreparedStatement pst = con.prepareStatement("select category_id from categories where category_name=?");
         pst.setString(1,"Archieved");
         ResultSet rs=pst.executeQuery();
         int c_id=0;
@@ -148,11 +156,9 @@ public class DaoUserContact{
 	 */
 	public boolean contactDetailsRegister(BeanContactDetails user) {
 		boolean rs=false;
-		try {
-	          //  Class.forName("com.mysql.cj.jdbc.Driver");
-			 
-	            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-	            PreparedStatement pst = con.prepareStatement("INSERT INTO contactDetails (name,mail,phonenumber,gender,birthday,location,user_id) VALUES (?, ?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+		try {		
+            Connection con = HikariCPDataSource.getConnection();
+	            PreparedStatement pst = con.prepareStatement("INSERT INTO contactDetails (name,mail,phonenumber,gender,birthday,location,user_id,created_time) VALUES (?, ?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 	            pst.setString(1,user.getContactname());
 	            pst.setString(2,user.getContactmail());
 	            pst.setString(3,user.getPhonenumber()); 
@@ -160,6 +166,7 @@ public class DaoUserContact{
 	            pst.setString(5,user.getBirthday());
 	            pst.setString(6, user.getLocation());
 	            pst.setInt(7,user_id);
+	            pst.setLong(8, user.getCreatedTimeInEpoch());
 	            pst.executeUpdate();
 	            rs=true;
 	            ResultSet key=pst.getGeneratedKeys();
@@ -183,10 +190,11 @@ public class DaoUserContact{
 	 * @param contact_id The ID of the contact to retrieve.
 	 * @return A BeanContactDetails object containing the contact information.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException
+	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException, NamingException
 	{
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("select * from contactDetails where contact_id=?;");
         BeanContactDetails contact=new BeanContactDetails();
         pst.setInt(1,contact_id);
@@ -194,7 +202,7 @@ public class DaoUserContact{
         if (rs.next()) {
         contact.setContactmail(rs.getString("mail"));
         contact.setContactname(rs.getString("name"));
-        
+        contact.setCreatedTimeInEpoch(rs.getLong("created_time"));
         contact.setPhonenumber(rs.getString("phonenumber"));
         contact.setGender(rs.getString("gender"));
         contact.setBirthday(rs.getString("birthday"));
@@ -219,10 +227,11 @@ public class DaoUserContact{
 	 * @param user_id The ID of the user to retrieve.
 	 * @return A BeanUserDetails object containing the user's information.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException
+	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException, NamingException
 	{
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("select * from userDetails where user_id=?;");
         BeanUserDetails contact=new BeanUserDetails();
         pst.setInt(1,user_id);
@@ -261,10 +270,11 @@ public class DaoUserContact{
 	 * @param userId The ID of the user to retrieve.
 	 * @return A BeanUserDetails object containing the primary user information.
 	 * @throws SQLException if a database access error occurs.
+	 * @throws NamingException 
 	 */
-    public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException{
+    public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException, NamingException{
     	BeanUserDetails user=new BeanUserDetails();
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("select usermail,phonenumber from userDetails where user_id=?;");
         pst.setInt(1, userId);
         ResultSet rs=pst.executeQuery();
@@ -280,9 +290,10 @@ public class DaoUserContact{
      * @param userId The ID of the user to count contacts for.
      * @return The total number of contacts.
      * @throws SQLException if a database access error occurs.
+     * @throws NamingException 
      */
-    public int getTotalContacts(int userId) throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+    public int getTotalContacts(int userId) throws SQLException, NamingException {
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM contactDetails WHERE user_id = ?");
         pst.setInt(1, userId);
         ResultSet rs = pst.executeQuery();
@@ -298,11 +309,12 @@ public class DaoUserContact{
      *
      * @return A list of BeanCategory objects representing the user's categories.
      * @throws SQLException if a database access error occurs.
+     * @throws NamingException 
      */
-    public List<BeanCategory> getCategoriesByUserId() throws SQLException
+    public List<BeanCategory> getCategoriesByUserId() throws SQLException, NamingException
     {
     	List<BeanCategory>categories=new ArrayList<>();
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("Select category_name,category_id from categories where user_id=?");
         pst.setInt(1, user_id);
         ResultSet rs = pst.executeQuery();
@@ -319,12 +331,12 @@ public class DaoUserContact{
      * @param category The ID of the category.
      * @return A list of BeanContactDetails representing the contacts in the category.
      * @throws SQLException if a database access error occurs.
+     * @throws NamingException 
      */
-    public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException
+    public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException, NamingException
     {
     	List<BeanContactDetails>categories=new ArrayList<>();
-    	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
-       
+        Connection con = HikariCPDataSource.getConnection();       
         int c_id=category;
         PreparedStatement pst1 = con.prepareStatement("select contact_id from category_users where category_id=?;");
         pst1.setInt(1, c_id);
@@ -341,8 +353,9 @@ public class DaoUserContact{
      * @param category The ID of the category.
      * @return A list of BeanContactDetails representing contacts not in the category.
      * @throws SQLException if a database access error occurs.
+     * @throws NamingException 
      */
-    public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException {
+    public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException, NamingException {
     	List<BeanContactDetails> contactsNotInCategory = new ArrayList<>();
         
         List<BeanContactDetails> contactsInCategory = getContactsInCategory(category);
@@ -351,8 +364,7 @@ public class DaoUserContact{
         for (BeanContactDetails contact : contactsInCategory) {
             contactsInCategoryIds.add(contact.getContact_id());
         }
-
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ContactManagement", "root", "root");
+        Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("SELECT contact_id FROM contactDetails WHERE user_id=?;");
         pst.setInt(1, user_id);
         ResultSet rs = pst.executeQuery();

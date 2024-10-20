@@ -83,7 +83,4 @@
  <listener>
     <listener-class>com.example.AppContextListener</listener-class>
 </listener>
-    
-    
-    
 </web-app>

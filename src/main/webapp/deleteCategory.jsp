@@ -4,6 +4,7 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page session="false" %>
 <%
 
 int c_id= Integer.parseInt(request.getParameter("category"));

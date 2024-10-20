@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page session="false" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.*" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
 <%@ include file="sessionValidation.jsp" %>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

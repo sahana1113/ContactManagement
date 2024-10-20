@@ -23,8 +23,16 @@ public class BeanContactDetails {
     private String alt_mail;
     private String alt_phone;
     private List<String> category;
+    private long createdTimeInEpoch; // Store the created time in seconds
+    public long getCreatedTimeInEpoch() {
+		return createdTimeInEpoch;
+	}
 
-    /**
+	public void setCreatedTimeInEpoch(long createdTimeInEpoch) {
+		this.createdTimeInEpoch = createdTimeInEpoch;
+	}
+
+	/**
      * Default constructor for BeanContactDetails.
      * Initializes a new instance with default values.
      */

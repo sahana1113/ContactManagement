@@ -1,0 +1,54 @@
+{
+  "database": {
+    "tables": {
+      "userDetails": {
+        "columns": [
+          {
+            "name": "user_id",
+            "type": "int",
+            "null": false,
+            "key": "PRI",
+            "default": null,
+            "extra": "auto_increment"
+          },
+          {
+            "name": "username",
+            "type": "varchar(50)",
+            "null": false,
+            "key": "UNI",
+            "default": null
+          },
+          {
+            "name": "usermail",
+            "type": "varchar(50)",
+            "null": true,
+            "key": null,
+            "default": null
+          },
+          {
+            "name": "gender",
+            "type": "varchar(10)",
+            "null": true,
+            "key": null,
+            "default": null
+          },
+          {
+            "name": "phonenumber",
+            "type": "varchar(20)",
+            "null": true,
+            "key": null,
+            "default": null
+          },
+          {
+            "name": "birthday",
+            "type": "date",
+            "null": true,
+            "key": null,
+            "default": null
+          }
+        ]
+      }
+    }
+  }
+}
+

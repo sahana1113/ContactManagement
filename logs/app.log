@@ -1,0 +1,59 @@
+2024-10-18 14:11:12 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-18 14:22:05 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-18 14:24:25 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-18 14:29:49 INFO  FilterSession - 127.0.0.1 - - [Fri Oct 18 14:29:49 IST 2024] "GET / HTTP/1.1"
+2024-10-18 14:29:50 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:29:50 IST 2024] "GET / HTTP/1.1"
+2024-10-18 14:29:50 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:29:50 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-18 14:29:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:29:57 IST 2024] "POST /login HTTP/1.1"
+2024-10-18 14:29:57 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-18 14:29:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:29:57 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-18 14:29:59 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:29:59 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-18 14:30:01 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:30:01 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-10-18 14:47:44 INFO  AppContextListener - Server started at Fri Oct 18 14:47:44 IST 2024
+2024-10-18 14:47:45 INFO  FilterSession - 127.0.0.1 - - [Fri Oct 18 14:47:45 IST 2024] "GET / HTTP/1.1"
+2024-10-18 14:47:45 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:45 IST 2024] "GET / HTTP/1.1"
+2024-10-18 14:47:47 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:47 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-18 14:47:54 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:54 IST 2024] "POST /login HTTP/1.1"
+2024-10-18 14:47:54 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-18 14:47:54 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:54 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-18 14:47:56 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:56 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-18 14:47:58 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:47:58 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-10-18 14:48:02 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:48:02 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-18 14:48:03 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:48:03 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-18 14:48:05 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:48:05 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-10-18 14:48:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:48:11 IST 2024] "GET /logout HTTP/1.1"
+2024-10-18 14:48:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Oct 18 14:48:11 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-18 14:49:20 INFO  AppContextListener - Server stopped at Fri Oct 18 14:49:20 IST 2024
+2024-10-20 19:21:46 INFO  AppContextListener - Server started at Sun Oct 20 19:21:46 IST 2024
+2024-10-20 19:21:47 INFO  FilterSession - 127.0.0.1 - - [Sun Oct 20 19:21:47 IST 2024] "GET / HTTP/1.1"
+2024-10-20 19:21:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:21:48 IST 2024] "GET / HTTP/1.1"
+2024-10-20 19:21:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:21:48 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:29:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:29:17 IST 2024] "POST /login HTTP/1.1"
+2024-10-20 19:29:17 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-20 19:29:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:29:17 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:29:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:29:28 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:29:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:29:28 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:33:28 INFO  AppContextListener - Server stopped at Sun Oct 20 19:33:28 IST 2024
+2024-10-20 19:33:28 INFO  AppContextListener - Server started at Sun Oct 20 19:33:28 IST 2024
+2024-10-20 19:35:18 INFO  AppContextListener - Server stopped at Sun Oct 20 19:35:18 IST 2024
+2024-10-20 19:35:18 INFO  AppContextListener - Server started at Sun Oct 20 19:35:18 IST 2024
+2024-10-20 19:35:46 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:35:46 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:35:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:35:48 IST 2024] "GET /logout HTTP/1.1"
+2024-10-20 19:35:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:35:48 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:35:48 INFO  AppContextListener - Server stopped at Sun Oct 20 19:35:48 IST 2024
+2024-10-20 19:35:48 INFO  AppContextListener - Server started at Sun Oct 20 19:35:48 IST 2024
+2024-10-20 19:36:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:11 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:36:18 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:18 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:36:36 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:36 IST 2024] "POST /login HTTP/1.1"
+2024-10-20 19:36:36 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-20 19:36:36 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:36 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:36:40 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:40 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:36:40 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:40 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:36:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:44 IST 2024] "GET / HTTP/1.1"
+2024-10-20 19:36:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:44 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:36:50 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:50 IST 2024] "GET /logout HTTP/1.1"
+2024-10-20 19:36:50 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:50 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:36:52 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:52 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:36:52 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:52 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:36:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:57 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:36:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:57 IST 2024] "GET /login.jsp HTTP/1.1"

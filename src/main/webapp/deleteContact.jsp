@@ -4,6 +4,8 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page session="false" %>
+
 <%
 
 int contactId = Integer.parseInt(request.getParameter("id"));

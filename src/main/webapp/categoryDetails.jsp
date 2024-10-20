@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.example.*" %>
 <%@ page import="java.util.List" %>
+<%@ page session="false" %>
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>

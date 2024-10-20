@@ -1,6 +1,6 @@
 package com.example;
 import java.io.IOException;
-
+import org.apache.log4j.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -22,6 +22,7 @@ import com.Dao.DaoSession;
  *  @version 1.0
  */
 public class FilterSession implements Filter {
+    private static final Logger logger = Logger.getLogger(FilterSession.class);
 	 /**
      * Initializes the filter. This method is called once when the filter is 
      * instantiated.
@@ -48,6 +49,8 @@ public class FilterSession implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        logger.info(req.getRemoteAddr() + " - - [" + new java.util.Date() + "] \"" +
+                req.getMethod() + " " + req.getRequestURI() + " HTTP/1.1\"");
         String login = req.getContextPath() + "/login.jsp";
         String loginServlet = req.getContextPath() + "/login";
         String registerServlet = req.getContextPath() + "/register";
@@ -74,13 +77,19 @@ public class FilterSession implements Filter {
 				 isValidSession = true;
 			}
         }
-        boolean loginReq = req.getRequestURI().equals(login);
-        boolean loginSer = req.getRequestURI().equals(loginServlet);
-        boolean regSer = req.getRequestURI().equals(registerServlet);
-        boolean indexReq = req.getRequestURI().equals(index);
-        boolean regReq = req.getRequestURI().equals(register);
+        String requestedUri = req.getRequestURI();
+        boolean loginReq = requestedUri.equals(login);
+        boolean loginSer = requestedUri.equals(loginServlet);
+        boolean regSer = requestedUri.equals(registerServlet);
+        boolean indexReq = requestedUri.equals(index);
+        boolean regReq = requestedUri.equals(register);
+    	req.setAttribute("user_id", user_id);
+        if(isValidSession && (loginReq || requestedUri.equals("/")))
+        {
+        	res.sendRedirect("home.jsp");
+            return;
+        }
         if (isValidSession || loginReq|| indexReq || regReq || loginSer || regSer) {
-        	req.setAttribute("user_id", user_id);
             chain.doFilter(request, response); 
         } else {
             res.sendRedirect("login.jsp"); 

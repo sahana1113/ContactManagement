@@ -3,6 +3,8 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ include file="sessionValidation.jsp" %>
+<%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
