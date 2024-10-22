@@ -1,0 +1,17 @@
+2024-10-21 17:06:00 INFO  AppContextListener - Server started at Mon Oct 21 17:06:00 IST 2024
+2024-10-21 17:06:01 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 17:06:01 IST 2024] "GET / HTTP/1.1"
+2024-10-21 17:06:02 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:02 IST 2024] "GET / HTTP/1.1"
+2024-10-21 17:06:02 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:02 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 17:06:14 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:14 IST 2024] "POST /login HTTP/1.1"
+2024-10-21 17:06:14 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-21 17:06:14 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:14 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-21 17:06:17 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:17 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-21 17:06:38 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:38 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-10-21 17:06:40 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:06:40 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-10-21 17:07:46 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:07:46 IST 2024] "POST /register HTTP/1.1"
+2024-10-21 17:07:46 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:07:46 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 17:07:46 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:07:46 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-21 17:07:52 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:07:52 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-10-21 17:08:00 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:08:00 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-10-21 17:08:19 INFO  FilterSession - User Id 24 in session 2aaac3b3-7147-4a61-8a67-0fdae98068f1: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 17:08:19 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-10-21 17:08:52 INFO  AppContextListener - Server stoped at Mon Oct 21 17:08:52 IST 2024

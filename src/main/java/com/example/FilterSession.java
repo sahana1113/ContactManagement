@@ -49,8 +49,7 @@ public class FilterSession implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        logger.info(req.getRemoteAddr() + " - - [" + new java.util.Date() + "] \"" +
-                req.getMethod() + " " + req.getRequestURI() + " HTTP/1.1\"");
+        
         String login = req.getContextPath() + "/login.jsp";
         String loginServlet = req.getContextPath() + "/login";
         String registerServlet = req.getContextPath() + "/register";
@@ -76,6 +75,16 @@ public class FilterSession implements Filter {
 			{
 				 isValidSession = true;
 			}
+        }
+        if(session_id!=null && user_id!=0)
+        {
+        	logger.info(" "+ user_id+" "+session_id+": "+req.getRemoteAddr() + " - - [" + new java.util.Date() + "] \"" +
+                    req.getMethod() + " " + req.getRequestURI() + " HTTP/1.1\"");
+        }
+        else
+        {
+        	logger.info(req.getRemoteAddr() + " - - [" + new java.util.Date() + "] \"" +
+                    req.getMethod() + " " + req.getRequestURI() + " HTTP/1.1\"");
         }
         String requestedUri = req.getRequestURI();
         boolean loginReq = requestedUri.equals(login);

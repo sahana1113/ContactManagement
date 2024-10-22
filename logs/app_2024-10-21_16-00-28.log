@@ -1,0 +1,15 @@
+2024-10-21 16:00:28 INFO  AppContextListener - Server started at Mon Oct 21 16:00:28 IST 2024
+2024-10-21 16:00:30 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 16:00:30 IST 2024] "GET / HTTP/1.1"
+2024-10-21 16:00:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:31 IST 2024] "GET / HTTP/1.1"
+2024-10-21 16:00:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:31 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 16:00:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:31 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 16:00:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:31 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 16:00:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:44 IST 2024] "POST /login HTTP/1.1"
+2024-10-21 16:00:44 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-21 16:00:44 INFO  FilterSession - User Id 24 in session c14d5b8a-2500-4d8e-b21b-3c28e3908944: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:44 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-21 16:00:44 INFO  FilterSession - User Id 24 in session c14d5b8a-2500-4d8e-b21b-3c28e3908944: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:44 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 16:00:47 INFO  FilterSession - User Id 24 in session c14d5b8a-2500-4d8e-b21b-3c28e3908944: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:47 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-21 16:00:49 INFO  FilterSession - User Id 24 in session c14d5b8a-2500-4d8e-b21b-3c28e3908944: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:00:49 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-21 16:03:59 INFO  FilterSession - User Id 24 in session c14d5b8a-2500-4d8e-b21b-3c28e3908944: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:03:59 IST 2024] "GET /logout HTTP/1.1"
+2024-10-21 16:03:59 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 16:03:59 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 16:23:19 INFO  AppContextListener - Server stoped at Mon Oct 21 16:23:19 IST 2024

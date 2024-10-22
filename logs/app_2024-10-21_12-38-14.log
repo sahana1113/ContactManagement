@@ -1,0 +1,9 @@
+2024-10-21 12:38:17 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 12:38:17 IST 2024] "GET / HTTP/1.1"
+2024-10-21 12:38:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:17 IST 2024] "GET / HTTP/1.1"
+2024-10-21 12:38:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:17 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 12:38:25 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:25 IST 2024] "POST /login HTTP/1.1"
+2024-10-21 12:38:25 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-21 12:38:25 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:25 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-21 12:38:27 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:27 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-21 12:38:30 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:30 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-21 12:38:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:38:31 IST 2024] "GET /myDetails.jsp HTTP/1.1"

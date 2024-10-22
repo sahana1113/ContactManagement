@@ -1,8 +1,13 @@
 package com.Query;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.example.HikariCPDataSource;
+
 public class PostgresQueryBuilder implements QueryBuilder {
     private StringBuilder query;
-
+    Connection con;
     public PostgresQueryBuilder() {
         this.query = new StringBuilder();
     }
@@ -60,5 +65,17 @@ public class PostgresQueryBuilder implements QueryBuilder {
     public String build() {
         return query.toString();
     }
+
+	@Override
+	public int executeInsert(String query, Object... obj) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setCon() throws SQLException {
+		// TODO Auto-generated method stub
+	 con = HikariCPDataSource.getConnection();
+	}
 }
 

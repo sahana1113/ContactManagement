@@ -1,9 +1,25 @@
 package com.Query;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.example.HikariCPDataSource;
+
 public class MySQLQueryBuilder implements QueryBuilder {
+	Connection con ;
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon() throws SQLException {
+		this.con = HikariCPDataSource.getConnection();
+	}
 
 	private StringBuilder query;
-
+	private PreparedStatement preparedStatement;
     public MySQLQueryBuilder() {
         this.query = new StringBuilder();
     }
@@ -34,8 +50,15 @@ public class MySQLQueryBuilder implements QueryBuilder {
     }
 
     @Override
-    public QueryBuilder values(String... values) {
-        query.append(" VALUES (").append(String.join(", ", values)).append(")");
+    public QueryBuilder values(String... columns) {
+    	query.append("VALUES (");
+        for (int i = 0; i < columns.length; i++) {
+            query.append("?");  
+            if (i < columns.length - 1) {
+                query.append(", ");
+            }
+        }
+        query.append(")");
         return this;
     }
 
@@ -61,5 +84,23 @@ public class MySQLQueryBuilder implements QueryBuilder {
     public String build() {
         return query.toString();
     }
+
+	@Override
+	public int executeInsert(String query, Object... obj) throws SQLException {
+		preparedStatement = con.prepareStatement(query.toString(),Statement.RETURN_GENERATED_KEYS);
+
+        for (int i = 0; i < obj.length; i++) {
+            preparedStatement.setObject(i + 1, obj[i]);
+        }
+
+        preparedStatement.executeUpdate();
+        ResultSet key=preparedStatement.getGeneratedKeys();
+        if(key.next())
+        {
+        	return key.getInt(1);
+        }
+		return -1;
+	}
+    
 }
 

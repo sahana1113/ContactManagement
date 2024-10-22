@@ -2,6 +2,7 @@ package com.Dao;
 import org.mindrot.jbcrypt.BCrypt;
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
+import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,20 +52,25 @@ public class DaoRegisterLogin{
 	public boolean UserDetailsRegister(BeanUserDetails user) {
 		boolean rs=false;
 		try {
-	            Connection con = HikariCPDataSource.getConnection();
-	            PreparedStatement pst = con.prepareStatement("INSERT INTO userDetails (username,usermail,gender,phonenumber,birthday) VALUES (?, ?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-	            pst.setString(1,user.getUsername());
-	            pst.setString(2,user.getUsermail());
-	            pst.setString(3,user.getGender());
-	            pst.setString(4,user.getPhonenumber());      
-	            pst.setString(5,user.getBirthday());
-	            pst.executeUpdate();
-	            rs=true;
-	            ResultSet key=pst.getGeneratedKeys();
-	            if(key.next())
+	            String sql=QueryLayer.buildInsertQuery("userDetails");
+	            int key=QueryLayer.executeInsertQuery(sql,user.getUsername(),user.getUsermail(),user.getGender(),user.getPhonenumber(),user.getBirthday());
+	            if(key!=-1)
 	            {
-	            	user.setUser_id(key.getInt(1));
+	            	user.setUser_id(key);
 	            }
+	            if(key!=0)
+	            {
+	            	rs=true;
+	            }
+//	            PreparedStatement pst = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+//	            pst.setString(1,user.getUsername());
+//	            pst.setString(2,user.getUsermail());
+//	            pst.setString(3,user.getGender());
+//	            pst.setString(4,user.getPhonenumber());      
+//	            pst.setString(5,user.getBirthday());
+//	            pst.executeUpdate();
+//	            rs=true;
+//	            ResultSet key=pst.getGeneratedKeys();
 	
 	     }
 		catch (Exception e) {
@@ -82,14 +88,18 @@ public class DaoRegisterLogin{
 	public boolean credentialsInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
-		try {
-                Connection con = HikariCPDataSource.getConnection();
-	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password,flag) values(?,?,0)");
-	            pst2.setInt(1,user.getUser_id());
-	            String hashPassword=hashPassword(user.getPassword());
-	            pst2.setString(2, hashPassword);
-	            pst2.executeUpdate();
-	            rs=true;
+		try (Connection con = HikariCPDataSource.getConnection()){
+			String sql=QueryLayer.buildInsertQuery("credentials");
+			String hashPassword=hashPassword(user.getPassword());
+			int key=QueryLayer.executeInsertQuery(sql,con,user.getUser_id(),hashPassword,true);
+			if(key!=0)
+			{
+				rs=true;
+			}
+//	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password,flag) values(?,?,0)");
+//	            pst2.setInt(1,user.getUser_id());
+//	            pst2.executeUpdate();
+//	            rs=true;
 		}
 		catch (Exception e) {
             e.printStackTrace();
@@ -105,13 +115,19 @@ public class DaoRegisterLogin{
 	public boolean allMailInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
-	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_mail(user_id,user_email,is_primary) values(?,?,true)");
-	            pst3.setInt(1,user.getUser_id());
-	            pst3.setString(2,user.getUsermail());
-	            pst3.executeUpdate();
-	            rs=true;
+		try (Connection con = HikariCPDataSource.getConnection()){
+			String sql=QueryLayer.buildInsertQuery("all_mail");
+			String hashPassword=hashPassword(user.getPassword());
+			int key=QueryLayer.executeInsertQuery(sql,con,user.getUser_id(),user.getUsermail(),true);
+			if(key!=0)
+			{
+				rs=true;
+			}
+//	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_mail(user_id,user_email,is_primary) values(?,?,true)");
+//	            pst3.setInt(1,user.getUser_id());
+//	            pst3.setString(2,user.getUsermail());
+//	            pst3.executeUpdate();
+//	            rs=true;
 		}
 		catch (Exception e) {
             e.printStackTrace();
@@ -127,9 +143,7 @@ public class DaoRegisterLogin{
 	public boolean allPhoneInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
-		try {
-	          //  Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_phone(user_id,phone,is_primary) values(?,?,true)");
 	            pst3.setInt(1,user.getUser_id());
 	            pst3.setString(2,user.getPhonenumber());
@@ -151,8 +165,7 @@ public class DaoRegisterLogin{
 	public int validateLogin(String usermail,String password)
 	{
 		int user_id=-1;
-	     try {
-	            Connection con = HikariCPDataSource.getConnection();
+	     try (Connection con = HikariCPDataSource.getConnection()){
 	    	 PreparedStatement pst = con.prepareStatement("SELECT c.user_id,c.password,c.flag FROM credentials c INNER JOIN all_mail a ON c.user_id = a.user_id WHERE a.user_email = ? ;");
 	            pst.setString(1, usermail);
 	            ResultSet rs = pst.executeQuery();
@@ -218,8 +231,7 @@ public class DaoRegisterLogin{
 	public boolean updateUserDetails(BeanUserDetails user) {
 		boolean rs=false;
 		String updateQuery = "UPDATE userDetails SET username = ?, gender = ?, birthday = ? WHERE user_id = ?";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 			 PreparedStatement ps = con.prepareStatement(updateQuery);
 		        ps.setString(1, user.getUsername());
 		        ps.setString(2, user.getGender());
@@ -244,8 +256,7 @@ public class DaoRegisterLogin{
 	public boolean addAltMail(BeanUserDetails user) {
 		boolean rs=false;
 		String query="Insert into all_mail(user_id,user_email,is_primary) values(?,?,false)";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try(Connection con = HikariCPDataSource.getConnection()) {
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());
@@ -268,8 +279,7 @@ public class DaoRegisterLogin{
 	public boolean addAltPhone(BeanUserDetails user) {
 		boolean rs=false;
 		String query="Insert into all_phone(user_id,phone,is_primary) values(?,?,false)";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());
@@ -292,8 +302,7 @@ public class DaoRegisterLogin{
 	public boolean updatePrimaryMail(BeanUserDetails user) {
 		boolean rs=false;
 		String query="update userDetails set usermail=? where user_id=? ";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setString(1,user.getUsermail());
@@ -322,8 +331,7 @@ public class DaoRegisterLogin{
 	public boolean updatePrimaryPhone(BeanUserDetails user) {
 		boolean rs=false;
 		String query="update userDetails set phonenumber=? where user_id=?;";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setString(1,user.getPhonenumber());
@@ -361,8 +369,7 @@ public class DaoRegisterLogin{
 	public boolean changePassword(BeanUserDetails user) {
 		String query="update credentials set password=? where user_id=?;";
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 			 PreparedStatement ps = con.prepareStatement(query);
 			 String hash=hashPassword(user.getPassword());
 			 ps.setString(1, hash);
@@ -385,8 +392,7 @@ public class DaoRegisterLogin{
 	public boolean updateContactDetails(BeanContactDetails user) {
 		boolean rs=false;
 		String updateQuery = "UPDATE contactDetails SET name = ?, gender = ?, birthday = ?,mail=?,phonenumber=? WHERE contact_id = ?";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()) {
 			 PreparedStatement ps = con.prepareStatement(updateQuery);
 		        ps.setString(1, user.getContactname());
 		        ps.setString(2, user.getGender());
@@ -420,8 +426,7 @@ public class DaoRegisterLogin{
 	public boolean deleteContactById(int id) throws SQLException
     {
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try(Connection con = HikariCPDataSource.getConnection()) {
     	 PreparedStatement pst1 =con.prepareStatement("delete from category_users where contact_id=?;");
     	 pst1.setInt(1, id);
     	 pst1.executeUpdate();
@@ -443,8 +448,7 @@ public class DaoRegisterLogin{
      * @throws SQLException if a database access error occurs.
      */
 	public void insertCategory(BeanContactDetails user) throws SQLException {
-		try {
-            Connection con = HikariCPDataSource.getConnection(); 
+		try (Connection con = HikariCPDataSource.getConnection()){
 		List<String> category=user.getCategory();
         for(String s:category) {
         PreparedStatement pst1=con.prepareStatement("Select category_id from categories where category_name=? && user_id=?;");
@@ -474,8 +478,7 @@ public class DaoRegisterLogin{
      * @param user The BeanUserDetails object containing user information.
      */
 	public void deleteAltMail(BeanUserDetails user) {
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try(Connection con = HikariCPDataSource.getConnection()) {
          PreparedStatement pst = con.prepareStatement("delete from all_mail where user_email=? && user_id=?;");
          pst.setString(1, user.getAltmail());
          pst.setInt(2, user.getUser_id());
@@ -492,8 +495,7 @@ public class DaoRegisterLogin{
      * @param user The BeanUserDetails object containing user information.
      */
 	public void deleteAltPhone(BeanUserDetails user) {
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 	         PreparedStatement pst = con.prepareStatement("delete from all_phone where phone=? && user_id=?;");
 	         pst.setString(1, user.getAltphone());
 	         pst.setInt(2, user.getUser_id());
@@ -512,8 +514,7 @@ public class DaoRegisterLogin{
      */
 	public boolean deleteContactFromCategory(int contactId,int c_id) {
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try(Connection con = HikariCPDataSource.getConnection()){
 	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=? && contact_id=?;");
 	         pst.setInt(1, c_id);
 	         pst.setInt(2, contactId);
@@ -535,8 +536,7 @@ public class DaoRegisterLogin{
 	public boolean insertCategoryById(int contactId,int c_id)
 	{
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 	         PreparedStatement pst = con.prepareStatement("insert into category_users(category_id,contact_id) values(? ,?);");
 	         pst.setInt(1, c_id);
 	         pst.setInt(2, contactId);
@@ -555,8 +555,8 @@ public class DaoRegisterLogin{
 	 */
 	public boolean deleteCategory(int c_id) {
 		boolean rs=false;
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
+            
 	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=?;");
 	         pst.setInt(1, c_id);
 	         pst.executeUpdate();
@@ -577,8 +577,7 @@ public class DaoRegisterLogin{
 	 * @return The ID of the newly inserted category, or 0 if the insertion failed.
 	 */
 	public int insertCategoryByName(String categoryName) {
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try (Connection con = HikariCPDataSource.getConnection()){
 	            PreparedStatement pst = con.prepareStatement("INSERT INTO categories (category_name,user_id) VALUES (?, ?)",Statement.RETURN_GENERATED_KEYS);
 	            pst.setString(1,categoryName);
 	            pst.setInt(2,user_id);
@@ -605,8 +604,7 @@ public class DaoRegisterLogin{
 	public boolean defaultGroup(BeanUserDetails user) {
 		boolean rs=false;
 		String query="INSERT INTO categories (category_name, user_id) VALUES('Family', ?),('Work', ?),('Friends', ?),('Favourites', ?);";
-		try {
-            Connection con = HikariCPDataSource.getConnection();
+		try(Connection con = HikariCPDataSource.getConnection()) {
 			 PreparedStatement ps = con.prepareStatement(query);
 		        
 		        ps.setInt(1, user.getUser_id());

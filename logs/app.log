@@ -57,3 +57,30 @@
 2024-10-20 19:36:52 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:52 IST 2024] "GET /login.jsp HTTP/1.1"
 2024-10-20 19:36:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:57 IST 2024] "GET /home.jsp HTTP/1.1"
 2024-10-20 19:36:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:36:57 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:39:53 INFO  AppContextListener - Server stopped at Sun Oct 20 19:39:53 IST 2024
+2024-10-20 19:44:20 INFO  AppContextListener - Server started at Sun Oct 20 19:44:20 IST 2024
+2024-10-20 19:44:21 INFO  FilterSession - 127.0.0.1 - - [Sun Oct 20 19:44:21 IST 2024] "GET / HTTP/1.1"
+2024-10-20 19:44:30 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:30 IST 2024] "GET / HTTP/1.1"
+2024-10-20 19:44:30 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:30 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 19:44:45 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:45 IST 2024] "POST /login HTTP/1.1"
+2024-10-20 19:44:45 INFO  ServletUserLogin - User logged in: user_id=24
+2024-10-20 19:44:45 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:45 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-20 19:44:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:49 IST 2024] "GET /logout HTTP/1.1"
+2024-10-20 19:44:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sun Oct 20 19:44:49 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-20 21:57:15 INFO  AppContextListener - Server stopped at Sun Oct 20 21:57:15 IST 2024
+2024-10-21 10:59:20 INFO  AppContextListener - Server started at Mon Oct 21 10:59:20 IST 2024
+2024-10-21 10:59:22 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 10:59:22 IST 2024] "GET / HTTP/1.1"
+2024-10-21 10:59:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:28 IST 2024] "GET / HTTP/1.1"
+2024-10-21 10:59:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:28 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 10:59:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:28 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 10:59:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:28 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 10:59:42 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:42 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-10-21 10:59:42 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:42 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 10:59:42 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:42 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 10:59:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:44 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-10-21 10:59:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:44 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 10:59:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 10:59:44 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 11:00:10 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 11:00:10 IST 2024] "POST /register HTTP/1.1"
+2024-10-21 11:00:10 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 11:00:10 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-10-21 11:00:10 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 11:00:10 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 11:03:28 INFO  AppContextListener - Server stopped at Mon Oct 21 11:03:28 IST 2024

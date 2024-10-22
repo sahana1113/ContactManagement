@@ -1,0 +1,10 @@
+2024-10-21 13:41:37 INFO  AppContextListener - Server started at Mon Oct 21 13:41:37 IST 2024
+2024-10-21 13:41:40 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 13:41:40 IST 2024] "GET / HTTP/1.1"
+2024-10-21 13:41:40 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:40 IST 2024] "GET / HTTP/1.1"
+2024-10-21 13:41:40 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:40 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-21 13:41:42 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:42 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-21 13:41:43 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:43 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-21 13:41:46 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:46 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-10-21 13:41:47 INFO  FilterSession - User Id 24 in session 1546d653-4978-4ce9-a822-a4a9629a2a10: 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:47 IST 2024] "GET /logout HTTP/1.1"
+2024-10-21 13:41:47 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 13:41:47 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-21 15:10:57 INFO  AppContextListener - Server stoped at Mon Oct 21 15:10:57 IST 2024

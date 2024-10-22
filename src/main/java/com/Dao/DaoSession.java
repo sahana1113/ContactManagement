@@ -12,6 +12,7 @@ import javax.naming.NamingException;
 import javax.servlet.http.Cookie;
 import com.example.*;
 import com.Bean.BeanSession;
+import com.Session.SessionTreeUpdate;
 /**
  * Data Access Object (DAO) for managing user sessions in the database.
  * This singleton class provides methods to create, validate, update, and delete sessions.
