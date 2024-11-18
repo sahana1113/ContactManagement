@@ -47,8 +47,6 @@
             background-color: #34495E;
             border-radius: 5px;
             transition: background-color 0.3s;
-            position: fixed;
-    		height:100vh;
         }
         .sidebar ul li:hover {
             background-color: #1ABC9C;

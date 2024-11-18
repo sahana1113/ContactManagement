@@ -227,8 +227,8 @@
     for (BeanCategory category : categories) {
     %>
         <div class="checkbox-group">
-            <input type="checkbox" id="<%= category.getC_id() %>" name="categories" value="<%= category.getCategory() %>">
-            &nbsp;<label for="<%= category.getC_id() %>"><%= category.getCategory() %></label>
+            <input type="checkbox" id="<%=category.getCategory_id()%>" name="categories" value="<%=category.getCategory_name()%>">
+            &nbsp;<label for="<%=category.getCategory_id()%>"><%=category.getCategory_name()%></label>
         </div>
     <%
         }

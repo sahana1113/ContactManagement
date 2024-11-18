@@ -1,17 +1,25 @@
 package com.Dao;
-import java.util.*;
-
-import javax.naming.NamingException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.naming.NamingException;
+
 import com.Bean.BeanCategory;
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
+import com.Query.Column;
+import com.Query.Enum.Tables;
+import com.Query.Enum.UserDetails;
+import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
+import com.rowMapper.UserRowMapper;
 /**
  * Data Access Object (DAO) for managing user contact details.
  * This class provides methods to retrieve, add, and manage user contacts 
@@ -64,15 +72,24 @@ public class DaoUserContact{
 	 */
 	public String getUsername() throws SQLException, NamingException
 	{
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("select username from userDetails where user_id=?;");
-        pst.setInt(1,user_id);
-        ResultSet rs=pst.executeQuery();
-        if(rs.next())
-        {
-        	return rs.getString(1);
-        }
-        return "";
+		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
+				Tables.userDetails, 
+				new Column[] {UserDetails.username},
+				new Column[] {UserDetails.user_id},
+				null,
+		        BeanUserDetails.class,
+				new Object[] {user_id}
+		);
+//        Connection con = HikariCPDataSource.getConnection();
+//        PreparedStatement pst = con.prepareStatement("select username from userDetails where user_id=?;");
+//        pst.setInt(1,user_id);
+//        ResultSet rs=pst.executeQuery();
+//        if(rs.next())
+//        {
+//        	return rs.getString(1);
+//        
+	
+        return user.get(0).getUsername();
         
 	}
 	/**
@@ -84,14 +101,25 @@ public class DaoUserContact{
 	 */
 	public String getUsermail() throws SQLException, NamingException
 	{
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("select usermail from userDetails where user_id=?;");
-        pst.setInt(1,user_id);
-        ResultSet rs=pst.executeQuery();
-        if(rs.next())
-        {
-        	return rs.getString(1);
-        }
+//        Connection con = HikariCPDataSource.getConnection();
+//        PreparedStatement pst = con.prepareStatement("select usermail from userDetails where user_id=?;");
+//        pst.setInt(1,user_id);
+//        ResultSet rs=pst.executeQuery();
+//        if(rs.next())
+//        {
+//        	return rs.getString(1);
+//        }
+		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
+		            Tables.userDetails,
+		            new Column[] {UserDetails.usermail},  
+		            new Column[] {UserDetails.user_id},  
+		            null,
+		            BeanUserDetails.class,
+		            new Object[] {user_id}
+		    );
+		    if (!userDetailsList.isEmpty()) {
+		        return userDetailsList.get(0).getUsermail();  
+		    }
         return "";
         
 	}
@@ -159,14 +187,14 @@ public class DaoUserContact{
 		try {		
             Connection con = HikariCPDataSource.getConnection();
 	            PreparedStatement pst = con.prepareStatement("INSERT INTO contactDetails (name,mail,phonenumber,gender,birthday,location,user_id,created_time) VALUES (?, ?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-	            pst.setString(1,user.getContactname());
-	            pst.setString(2,user.getContactmail());
+	            pst.setString(1,user.getName());
+	            pst.setString(2,user.getMail());
 	            pst.setString(3,user.getPhonenumber()); 
 	            pst.setString(4,user.getGender());     
 	            pst.setString(5,user.getBirthday());
 	            pst.setString(6, user.getLocation());
 	            pst.setInt(7,user_id);
-	            pst.setLong(8, user.getCreatedTimeInEpoch());
+	            pst.setLong(8, user.getCreated_time());
 	            pst.executeUpdate();
 	            rs=true;
 	            ResultSet key=pst.getGeneratedKeys();
@@ -176,6 +204,7 @@ public class DaoUserContact{
 	                user.setContact_id(contact_id); 
 	            }
 	            DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
+	            if(user.getCategory()!=null)
 	            rld.insertCategory(user);
 		}
 		catch (Exception e) {
@@ -200,9 +229,9 @@ public class DaoUserContact{
         pst.setInt(1,contact_id);
         ResultSet rs=pst.executeQuery();
         if (rs.next()) {
-        contact.setContactmail(rs.getString("mail"));
-        contact.setContactname(rs.getString("name"));
-        contact.setCreatedTimeInEpoch(rs.getLong("created_time"));
+        contact.setMail(rs.getString("mail"));
+        contact.setName(rs.getString("name"));
+        contact.setCreated_time(rs.getLong("created_time"));
         contact.setPhonenumber(rs.getString("phonenumber"));
         contact.setGender(rs.getString("gender"));
         contact.setBirthday(rs.getString("birthday"));

@@ -142,7 +142,7 @@ List<BeanContactDetails> contactList = cd.Contactdisplay();
                                             for (BeanContactDetails contact : contactList) {
                     %>
                         <li>
-                            <span><%= contact.getContactname() %></span>
+                            <span><%=contact.getName()%></span>
                             <span><%= contact.getPhonenumber() %></span>
                             <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>" class="btn">View</a>
         

@@ -140,7 +140,7 @@
                      if (categories != null && !categories.isEmpty()) {
                                  for (BeanCategory category : categories) {
                      %>
-                    <a href="categoryDetails.jsp?id=<%= category.getC_id() %>"><li><%= category.getCategory() %></li></a>
+                    <a href="categoryDetails.jsp?id=<%=category.getCategory_id()%>"><li><%=category.getCategory_name()%></li></a>
                   <% } } else { %>
             <li>No categories found.</li>
         <% } %> 

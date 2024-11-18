@@ -35,13 +35,13 @@ public class ServletEditContact extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   	 int contactid=(int) request.getSession().getAttribute("cont_Id");
+   	 int contactid=Integer.parseInt(request.getParameter("contactTId"));
    	int userid=(int) request.getAttribute("user_id");
     	BeanContactDetails user=new BeanContactDetails();
-        user.setContactname(request.getParameter("username"));
+        user.setName(request.getParameter("username"));
         user.setGender(request.getParameter("gender"));
         user.setBirthday(request.getParameter("birthday"));
-        user.setContactmail(request.getParameter("primaryEmail"));
+        user.setMail(request.getParameter("primaryEmail"));
         user.setPhonenumber(request.getParameter("primaryPhone"));
         user.setContact_id(contactid);
         String[] list=request.getParameterValues("categoryContact");

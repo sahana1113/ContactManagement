@@ -1,0 +1,17 @@
+2024-11-18 11:07:45 INFO  AppContextListener - Server started at Mon Nov 18 11:07:45 IST 2024
+2024-11-18 11:07:46 INFO  FilterSession - 127.0.0.1 - - [Mon Nov 18 11:07:46 IST 2024] "GET / HTTP/1.1"
+2024-11-18 11:07:46 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:07:46 IST 2024] "GET / HTTP/1.1"
+2024-11-18 11:07:46 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:07:46 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-18 11:07:55 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:07:55 IST 2024] "POST /login HTTP/1.1"
+2024-11-18 11:07:55 INFO  ServletUserLogin - User logged in: user_id=24
+2024-11-18 11:07:55 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:07:55 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-18 11:07:59 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:07:59 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-11-18 11:08:18 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:18 IST 2024] "POST /update HTTP/1.1"
+2024-11-18 11:08:18 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:18 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-11-18 11:08:36 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:36 IST 2024] "POST /update HTTP/1.1"
+2024-11-18 11:08:36 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:36 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-18 11:08:49 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:49 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-11-18 11:08:57 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:57 IST 2024] "POST /update HTTP/1.1"
+2024-11-18 11:08:57 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:08:57 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-11-18 11:09:00 INFO  FilterSession -  24 21034165-6005-4d8b-a6fe-318029efa6a1: 0:0:0:0:0:0:0:1 - - [Mon Nov 18 11:09:00 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-11-18 11:09:10 INFO  AppContextListener - Server stoped at Mon Nov 18 11:09:10 IST 2024

@@ -160,7 +160,7 @@ List<BeanContactDetails> allContacts = cd.Contactdisplay();
                         for (BeanContactDetails contact : allContacts) {
                         %>
                             <li>
-                                <span><%= contact.getContactname() %> - <%= contact.getPhonenumber() %></span>
+                                <span><%=contact.getName()%> - <%= contact.getPhonenumber() %></span>
                                 <div class="add-container">
                                     <input type="checkbox" id="contact-<%= contact.getContact_id() %>" name="contactIds" value="<%= contact.getContact_id() %>">
                                     <button type="button" class="btn" onclick="toggleCheckbox('<%= contact.getContact_id() %>')">Add</button>

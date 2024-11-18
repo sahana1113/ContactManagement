@@ -1,0 +1,13 @@
+2024-11-14 20:43:14 INFO  AppContextListener - Server started at Thu Nov 14 20:43:14 IST 2024
+2024-11-14 20:43:14 INFO  FilterSession - 127.0.0.1 - - [Thu Nov 14 20:43:14 IST 2024] "GET / HTTP/1.1"
+2024-11-14 20:43:15 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:15 IST 2024] "GET / HTTP/1.1"
+2024-11-14 20:43:15 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:15 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-14 20:43:23 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:23 IST 2024] "POST /login HTTP/1.1"
+2024-11-14 20:43:23 INFO  ServletUserLogin - User logged in: user_id=24
+2024-11-14 20:43:23 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:23 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-14 20:43:26 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:26 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-14 20:43:30 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:30 IST 2024] "GET /createContact.jsp HTTP/1.1"
+2024-11-14 20:43:56 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:56 IST 2024] "POST /create HTTP/1.1"
+2024-11-14 20:43:56 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:43:56 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-14 20:44:02 INFO  FilterSession -  24 72cda004-7cb3-410c-8a32-60d188fc2546: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:44:02 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-11-14 20:44:18 INFO  AppContextListener - Server stoped at Thu Nov 14 20:44:18 IST 2024

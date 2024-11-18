@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
  * @author Sahana
  * @version 1.0
  */
-public class BeanSession implements Comparable<BeanSession> {
+public class BeanSession implements Comparable<BeanSession>,Bean{
 
-    private String session_id;
+    private String sessionid;
     private int user_id;
     private LocalDateTime creation_time;
     private LocalDateTime accessed_time;
@@ -24,30 +24,48 @@ public class BeanSession implements Comparable<BeanSession> {
     /**
      * Constructs a new BeanSession with the specified session ID and accessed time.
      *
-     * @param session_id The ID of the session.
+     * @param sessionid The ID of the session.
      * @param accessed_time The time when the session was last accessed.
      */
     public BeanSession(String session_id, LocalDateTime accessed_time) {
-        this.session_id = session_id;
+        this.sessionid = session_id;
         this.accessed_time = accessed_time;
     }
 
     /**
+	 * Retrieves the session ID.
+	 *
+	 * @return The ID of the session.
+	 */
+	public String getSession_id() {
+		return getSessionid();
+	}
+
+	/**
      * Retrieves the session ID.
      *
      * @return The ID of the session.
      */
-    public String getSession_id() {
-        return session_id;
+    public String getSessionid() {
+        return sessionid;
     }
 
     /**
+	 * Sets the session ID.
+	 *
+	 * @param session_id The new session ID.
+	 */
+	public void setSession_id(String session_id) {
+		setSessionid(session_id);
+	}
+
+	/**
      * Sets the session ID.
      *
-     * @param session_id The new session ID.
+     * @param sessionid The new session ID.
      */
-    public void setSession_id(String session_id) {
-        this.session_id = session_id;
+    public void setSessionid(String session_id) {
+        this.sessionid = session_id;
     }
 
     /**
@@ -133,7 +151,7 @@ public class BeanSession implements Comparable<BeanSession> {
     public int compareTo(BeanSession other) {
         int timeComparison = this.accessed_time.compareTo(other.accessed_time);
         if (timeComparison == 0) {
-            return this.session_id.compareTo(other.session_id);
+            return this.sessionid.compareTo(other.sessionid);
         }
         return timeComparison;
     }
@@ -149,7 +167,7 @@ public class BeanSession implements Comparable<BeanSession> {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         BeanSession that = (BeanSession) obj;
-        return session_id.equals(that.session_id);
+        return sessionid.equals(that.sessionid);
     }
 
     /**
@@ -159,6 +177,6 @@ public class BeanSession implements Comparable<BeanSession> {
      */
     @Override
     public int hashCode() {
-        return session_id.hashCode();
+        return sessionid.hashCode();
     }
 }

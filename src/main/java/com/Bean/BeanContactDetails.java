@@ -10,10 +10,10 @@ import java.util.List;
  * @author Sahana
  * @version 1.0
  */
-public class BeanContactDetails {
+public class BeanContactDetails implements Bean{
 
-    private String contactname;
-    private String contactmail;
+    private String name;
+    private String mail;
     private String gender;
     private String phonenumber;
     private String birthday;
@@ -23,13 +23,21 @@ public class BeanContactDetails {
     private String alt_mail;
     private String alt_phone;
     private List<String> category;
-    private long createdTimeInEpoch; // Store the created time in seconds
+    private long created_time; // Store the created time in seconds
     public long getCreatedTimeInEpoch() {
-		return createdTimeInEpoch;
+		return getCreated_time();
+	}
+
+	public long getCreated_time() {
+		return created_time;
 	}
 
 	public void setCreatedTimeInEpoch(long createdTimeInEpoch) {
-		this.createdTimeInEpoch = createdTimeInEpoch;
+		setCreated_time(createdTimeInEpoch);
+	}
+
+	public void setCreated_time(long createdTimeInEpoch) {
+		this.created_time = createdTimeInEpoch;
 	}
 
 	/**
@@ -42,12 +50,12 @@ public class BeanContactDetails {
     /**
      * Constructs a new BeanContactDetails with the specified name, phone number, and contact ID.
      *
-     * @param contactname The name of the contact.
+     * @param name The name of the contact.
      * @param phonenumber The phone number of the contact.
      * @param contact_id The ID of the contact.
      */
     public BeanContactDetails(String contactname, String phonenumber, int contact_id) {
-        this.contactname = contactname;
+        this.name = contactname;
         this.phonenumber = phonenumber;
         this.contact_id = contact_id;
     }
@@ -111,35 +119,53 @@ public class BeanContactDetails {
      *
      * @return The name of the contact.
      */
-    public String getContactname() {
-        return contactname;
+    public String getName() {
+        return name;
     }
 
     /**
      * Sets the name of the contact.
      *
-     * @param contactname The new name of the contact.
+     * @param name The new name of the contact.
      */
-    public void setContactname(String contactname) {
-        this.contactname = contactname;
+    public void setName(String contactname) {
+        this.name = contactname;
     }
 
     /**
+	 * Retrieves the email of the contact.
+	 *
+	 * @return The email of the contact.
+	 */
+	public String getContactmail() {
+		return getMail();
+	}
+
+	/**
      * Retrieves the email of the contact.
      *
      * @return The email of the contact.
      */
-    public String getContactmail() {
-        return contactmail;
+    public String getMail() {
+        return mail;
     }
 
     /**
+	 * Sets the email of the contact.
+	 *
+	 * @param contactmail The new email of the contact.
+	 */
+	public void setContactmail(String contactmail) {
+		setMail(contactmail);
+	}
+
+	/**
      * Sets the email of the contact.
      *
-     * @param contactmail The new email of the contact.
+     * @param mail The new email of the contact.
      */
-    public void setContactmail(String contactmail) {
-        this.contactmail = contactmail;
+    public void setMail(String contactmail) {
+        this.mail = contactmail;
     }
 
     /**

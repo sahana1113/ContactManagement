@@ -3,9 +3,20 @@ package com.Query;
 
 import java.util.Arrays;
 
-public class Enum {
+public class Enum { 
+	public enum Tables{
+		all_mail,
+		all_phone,
+		categories,
+		category_users,
+		contactDetails,
+		credentials,
+		session,
+		userDetails;
+	}
 
-    public enum UserDetails {
+    public enum UserDetails implements Column{
+    	user_id,
         username,
         usermail,
         gender,
@@ -23,13 +34,10 @@ public class Enum {
         }
     }
 
-    public enum AllMail {
+    public enum AllMail implements Column{
         user_id,
         user_email,
-        is_primary,
-        email_verified,
-        verify_token,
-        expiry_time;
+        is_primary;
 
         public String getColumnName() {
             return this.name();
@@ -42,7 +50,7 @@ public class Enum {
         }
     }
 
-    public enum AllPhone {
+    public enum AllPhone implements Column{
         user_id,
         phone,
         is_primary;
@@ -58,7 +66,7 @@ public class Enum {
         }
     }
 
-    public enum Categories {
+    public enum Categories implements Column{
         category_id,
         user_id,
         category_name;
@@ -74,7 +82,7 @@ public class Enum {
         }
     }
 
-    public enum CategoryUsers {
+    public enum CategoryUsers implements Column{
         category_id,
         contact_id;
 
@@ -89,7 +97,7 @@ public class Enum {
         }
     }
 
-    public enum ContactDetails {
+    public enum ContactDetails implements Column{
         contact_id,
         user_id,
         name,
@@ -112,7 +120,7 @@ public class Enum {
         }
     }
 
-    public enum Credentials {
+    public enum Credentials implements Column{
         user_id,
         password,
         flag;
@@ -128,7 +136,7 @@ public class Enum {
         }
     }
 
-    public enum Session {
+    public enum Session implements Column{
         sessionid,
         user_id,
         created_time,

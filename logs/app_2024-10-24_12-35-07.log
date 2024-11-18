@@ -1,0 +1,5 @@
+2024-10-24 12:35:07 INFO  AppContextListener - Server started at Thu Oct 24 12:35:07 IST 2024
+2024-10-24 12:37:01 INFO  FilterSession -  24 b2ea1b05-70d0-4994-b927-1c2df3eada17: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:37:01 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-10-24 12:37:06 INFO  FilterSession -  24 b2ea1b05-70d0-4994-b927-1c2df3eada17: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:37:06 IST 2024] "POST /update HTTP/1.1"
+2024-10-24 12:37:06 INFO  FilterSession -  24 b2ea1b05-70d0-4994-b927-1c2df3eada17: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:37:06 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-24 12:37:45 INFO  AppContextListener - Server stoped at Thu Oct 24 12:37:45 IST 2024

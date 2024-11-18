@@ -181,7 +181,7 @@
                                     for (BeanContactDetails contact : contactsInCategory) {
                 %>
                         <tr>
-                            <td><%=contact.getContactname()%></td>
+                            <td><%=contact.getName()%></td>
                             <td><%=contact.getPhonenumber()%></td>
                             <td>
                                 <a href="deleteContactCategory.jsp?contactId=<%=contact.getContact_id()%>&category=<%=category%>" class="btn delete-btn" onclick="return confirm('Are you sure you want to remove this contact?');">Remove</a>
@@ -208,10 +208,10 @@
                 </tr>
                 <%
                 if (contactsNotInCategory != null && !contactsNotInCategory.isEmpty()) {
-                                    for (BeanContactDetails contact : contactsNotInCategory) {
+                                                    for (BeanContactDetails contact : contactsNotInCategory) {
                 %>
                         <tr>
-                            <td><%= contact.getContactname() %></td>
+                            <td><%=contact.getName()%></td>
                             <td><%= contact.getPhonenumber() %></td>
                             <td>
                                 <a href="addContactToCategory.jsp?contactId=<%= contact.getContact_id() %>&category=<%= category %>" class="btn add-btn">Add</a>

@@ -1,0 +1,13 @@
+2024-10-24 18:17:47 INFO  AppContextListener - Server started at Thu Oct 24 18:17:47 IST 2024
+2024-10-24 18:17:47 INFO  FilterSession - 127.0.0.1 - - [Thu Oct 24 18:17:47 IST 2024] "GET / HTTP/1.1"
+2024-10-24 18:17:48 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:17:48 IST 2024] "GET / HTTP/1.1"
+2024-10-24 18:17:48 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:17:48 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-24 18:17:50 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:17:50 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-24 18:17:51 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:17:51 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-24 18:17:59 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:17:59 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-24 18:18:00 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:18:00 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-24 18:18:03 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:18:03 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-24 18:18:04 INFO  FilterSession -  24 402d830b-7464-4a72-a3ca-878f44d53422: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:18:04 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-24 18:19:29 INFO  AppContextListener - Server stoped at Thu Oct 24 18:19:29 IST 2024
+2024-10-24 18:19:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:19:29 IST 2024] "GET / HTTP/1.1"
+2024-10-24 18:19:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Oct 24 18:19:29 IST 2024] "GET / HTTP/1.1"

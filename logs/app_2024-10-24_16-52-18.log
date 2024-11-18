@@ -1,0 +1,6 @@
+2024-10-24 16:52:18 INFO  AppContextListener - Server started at Thu Oct 24 16:52:18 IST 2024
+2024-10-24 16:52:30 INFO  FilterSession -  24 3e2c7b40-9190-43c5-bb7b-ad8792a5865c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:52:30 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-10-24 16:52:32 INFO  FilterSession -  24 3e2c7b40-9190-43c5-bb7b-ad8792a5865c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:52:32 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-24 16:52:35 INFO  FilterSession -  24 3e2c7b40-9190-43c5-bb7b-ad8792a5865c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:52:35 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-24 16:52:38 INFO  FilterSession -  24 3e2c7b40-9190-43c5-bb7b-ad8792a5865c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:52:38 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-24 17:14:33 INFO  AppContextListener - Server stoped at Thu Oct 24 17:14:33 IST 2024

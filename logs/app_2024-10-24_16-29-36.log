@@ -1,0 +1,15 @@
+2024-10-24 16:29:36 INFO  AppContextListener - Server started at Thu Oct 24 16:29:36 IST 2024
+2024-10-24 16:29:36 INFO  FilterSession - 127.0.0.1 - - [Thu Oct 24 16:29:36 IST 2024] "GET / HTTP/1.1"
+2024-10-24 16:29:37 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:37 IST 2024] "GET / HTTP/1.1"
+2024-10-24 16:29:37 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:37 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-24 16:29:40 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:40 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-24 16:29:44 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:44 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-10-24 16:29:46 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:46 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-10-24 16:29:52 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:52 IST 2024] "POST /update HTTP/1.1"
+2024-10-24 16:29:52 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:52 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-10-24 16:29:58 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:58 IST 2024] "POST /update HTTP/1.1"
+2024-10-24 16:29:58 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:29:58 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-10-24 16:30:03 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:30:03 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-24 16:30:52 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:30:52 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-10-24 16:30:54 INFO  FilterSession -  24 5905cecc-5d5a-495d-b703-4175b2b13088: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:30:54 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-10-24 16:31:44 INFO  AppContextListener - Server stoped at Thu Oct 24 16:31:44 IST 2024

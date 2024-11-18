@@ -1,0 +1,10 @@
+2024-10-24 12:54:42 INFO  AppContextListener - Server started at Thu Oct 24 12:54:42 IST 2024
+2024-10-24 12:54:43 INFO  FilterSession - 127.0.0.1 - - [Thu Oct 24 12:54:43 IST 2024] "GET / HTTP/1.1"
+2024-10-24 12:54:51 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:54:51 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-10-24 12:54:54 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:54:54 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-10-24 12:54:54 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:54:54 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-10-24 12:54:56 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:54:56 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-10-24 12:54:59 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:54:59 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-10-24 12:55:01 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:55:01 IST 2024] "GET /editContact.jsp HTTP/1.1"
+2024-10-24 12:55:18 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:55:18 IST 2024] "POST /update2 HTTP/1.1"
+2024-10-24 13:01:28 INFO  AppContextListener - Server stoped at Thu Oct 24 13:01:28 IST 2024

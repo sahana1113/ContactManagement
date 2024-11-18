@@ -1,0 +1,15 @@
+2024-11-14 20:39:33 INFO  AppContextListener - Server started at Thu Nov 14 20:39:33 IST 2024
+2024-11-14 20:39:33 INFO  FilterSession - 127.0.0.1 - - [Thu Nov 14 20:39:33 IST 2024] "GET / HTTP/1.1"
+2024-11-14 20:39:41 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:39:41 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-11-14 20:39:43 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:39:43 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-14 20:39:51 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:39:51 IST 2024] "POST /login HTTP/1.1"
+2024-11-14 20:39:51 INFO  ServletUserLogin - User logged in: user_id=24
+2024-11-14 20:39:51 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:39:51 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-14 20:39:57 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:39:57 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-14 20:40:01 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:01 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-11-14 20:40:06 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:06 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-11-14 20:40:09 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:09 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-14 20:40:11 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:11 IST 2024] "GET /createContact.jsp HTTP/1.1"
+2024-11-14 20:40:41 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:41 IST 2024] "POST /create HTTP/1.1"
+2024-11-14 20:40:41 INFO  FilterSession -  24 bed6a802-2a8c-45bf-8457-02bdc5a05b33: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 20:40:41 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-14 20:41:16 INFO  AppContextListener - Server stoped at Thu Nov 14 20:41:16 IST 2024

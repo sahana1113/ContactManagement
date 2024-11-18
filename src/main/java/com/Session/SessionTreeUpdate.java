@@ -64,7 +64,7 @@ public class SessionTreeUpdate {
      * @param sessionId The ID of the session to remove.
      */
 	public static void removeObj(String sessionId) {
-        sessionSet.removeIf(session -> session.getSession_id().equals(sessionId)); 
+        sessionSet.removeIf(session -> session.getSessionid().equals(sessionId)); 
     }
 }
 

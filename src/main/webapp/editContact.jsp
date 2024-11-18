@@ -177,7 +177,7 @@
                     out.println("Invalid ID format.");
                     return;
                 }
-
+                request.setAttribute("cont_Id", cont_Id);
                 DaoUserContact contactDao = new DaoUserContact(uId);
                 BeanContactDetails user = null;
                 List<BeanCategory> all_categories = contactDao.getCategoriesByUserId();
@@ -194,8 +194,9 @@
             %>
 
             <form action="update2" method="post">
+                <input type="hidden" name="contactId" value="<%=cont_Id %>" >
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="<%= user.getContactname() %>" required>
+                <input type="text" id="username" name="username" value="<%=user.getName()%>" required>
 
                 <label for="gender">Gender:</label>
                 <select id="gender" name="gender" required>
@@ -208,7 +209,7 @@
                 <input type="date" id="birthday" name="birthday" value="<%= user.getBirthday() %>" required>
 
                 <label for="primaryEmail">Primary Email:</label>
-                <input type="email" id="primaryEmail" name="primaryEmail" value="<%= user.getContactmail() %>">
+                <input type="email" id="primaryEmail" name="primaryEmail" value="<%=user.getMail()%>">
 
                 <label for="primaryPhone">Primary Phone Number:</label>
                 <input type="text" id="primaryPhone" name="primaryPhone" value="<%= user.getPhonenumber() %>">
@@ -217,11 +218,11 @@
                     <label>Categories:</label>
                     <%
                     if (all_categories != null && !all_categories.isEmpty()) {
-                        for (BeanCategory category : all_categories) {
-                            boolean isChecked = user.getCategory() != null && user.getCategory().contains(category.getCategory());
+                                            for (BeanCategory category : all_categories) {
+                                                boolean isChecked = user.getCategory() != null && user.getCategory().contains(category.getCategory_name());
                     %>
-                        <input type="checkbox" name="categoryContact" value="<%= category.getCategory() %>" <%= isChecked ? "checked" : "" %> />
-                        <label for="category_<%= category.getCategory() %>"><%= category.getCategory() %></label><br/>
+                        <input type="checkbox" name="categoryContact" value="<%=category.getCategory_name()%>" <%=isChecked ? "checked" : ""%> />
+                        <label for="category_<%=category.getCategory_name()%>"><%=category.getCategory_name()%></label><br/>
                     <% 
                         }
                     } else {

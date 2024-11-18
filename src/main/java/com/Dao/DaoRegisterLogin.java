@@ -1,59 +1,37 @@
 package com.Dao;
 import org.mindrot.jbcrypt.BCrypt;
+
+import com.Bean.BeanCategory;
 import com.Bean.BeanContactDetails;
 import com.Bean.BeanUserDetails;
+import com.Query.Column;
+import com.Query.Enum.*;
 import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import javax.naming.NamingException;
-/**
- * Data Access Object (DAO) for user registration and login operations.
- * This class handles interactions with the database for user details,
- * credentials, and contact information.
- * 
- * <p>It includes methods for registering users, validating login credentials,
- * updating user details, and managing contact information.</p>
- * 
- * @author Sahana
- * @version 1.0
- */
 public class DaoRegisterLogin{
 	 int user_id;
-	 /**
-	     * Default constructor for DaoRegisterLogin.
-	     */
 	public DaoRegisterLogin()
 	{
 	}
-
-    /**
-     * Constructs a DaoRegisterLogin with a specified user ID.
-     *
-     * @param user_id The user ID to set.
-     */
 	public DaoRegisterLogin(int user_id)
 	{
 		this.user_id=user_id;
 	}
-	/**
-     * Registers a new user in the userDetails table.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if registration is successful, false otherwise.
-     */
 	public boolean UserDetailsRegister(BeanUserDetails user) {
 		boolean rs=false;
 		try {
-	            String sql=QueryLayer.buildInsertQuery("userDetails");
-	            int key=QueryLayer.executeInsertQuery(sql,user.getUsername(),user.getUsermail(),user.getGender(),user.getPhonenumber(),user.getBirthday());
+			     Object[]obj=new Object[] {user.getUsername(),user.getUsermail(),user.getGender(),user.getPhonenumber(),user.getBirthday()};
+			     Column[]col=new Column[] {UserDetails.username,UserDetails.usermail,UserDetails.gender,UserDetails.phonenumber,UserDetails.birthday};
+	            int key=QueryLayer.buildInsertQuery(Tables.userDetails,obj,col);
+	            System.out.print(key);
 	            if(key!=-1)
 	            {
 	            	user.setUser_id(key);
@@ -62,106 +40,63 @@ public class DaoRegisterLogin{
 	            {
 	            	rs=true;
 	            }
-//	            PreparedStatement pst = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-//	            pst.setString(1,user.getUsername());
-//	            pst.setString(2,user.getUsermail());
-//	            pst.setString(3,user.getGender());
-//	            pst.setString(4,user.getPhonenumber());      
-//	            pst.setString(5,user.getBirthday());
-//	            pst.executeUpdate();
-//	            rs=true;
-//	            ResultSet key=pst.getGeneratedKeys();
-	
-	     }
+	            
+		}
 		catch (Exception e) {
             e.printStackTrace();
           
         }
 		return rs;
 	}
-	/**
-     * Inserts user credentials into the credentials table.
-     *
-     * @param user The BeanUserDetails object containing user credentials.
-     * @return true if insertion is successful, false otherwise.
-     */
 	public boolean credentialsInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-			String sql=QueryLayer.buildInsertQuery("credentials");
+		try {
 			String hashPassword=hashPassword(user.getPassword());
-			int key=QueryLayer.executeInsertQuery(sql,con,user.getUser_id(),hashPassword,true);
+			Object[] object=new Object[] {user.getUser_id(),hashPassword,true};
+			int key=QueryLayer.buildInsertQuery(Tables.credentials,object);
 			if(key!=0)
 			{
 				rs=true;
 			}
-//	            PreparedStatement pst2 = con.prepareStatement("INSERT INTO credentials(user_id,password,flag) values(?,?,0)");
-//	            pst2.setInt(1,user.getUser_id());
-//	            pst2.executeUpdate();
-//	            rs=true;
 		}
 		catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	/**
-     * Inserts the primary email for the user into the all_mail table.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if insertion is successful, false otherwise.
-     */
-	public boolean allMailInsert(BeanUserDetails user)
+	public boolean allMailInsert(BeanUserDetails user) throws SQLException
 	{
 		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-			String sql=QueryLayer.buildInsertQuery("all_mail");
-			String hashPassword=hashPassword(user.getPassword());
-			int key=QueryLayer.executeInsertQuery(sql,con,user.getUser_id(),user.getUsermail(),true);
+		try {
+			Object[] object=new Object[] {user.getUser_id(),user.getUsermail(),true};
+			int key=QueryLayer.buildInsertQuery(Tables.all_mail,object);
 			if(key!=0)
 			{
 				rs=true;
 			}
-//	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_mail(user_id,user_email,is_primary) values(?,?,true)");
-//	            pst3.setInt(1,user.getUser_id());
-//	            pst3.setString(2,user.getUsermail());
-//	            pst3.executeUpdate();
-//	            rs=true;
 		}
 		catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	/**
-     * Inserts the primary phone number for the user into the all_phone table.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if insertion is successful, false otherwise.
-     */
 	public boolean allPhoneInsert(BeanUserDetails user)
 	{
 		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-	            PreparedStatement pst3 = con.prepareStatement("INSERT INTO all_phone(user_id,phone,is_primary) values(?,?,true)");
-	            pst3.setInt(1,user.getUser_id());
-	            pst3.setString(2,user.getPhonenumber());
-	            pst3.executeUpdate();
-	            rs=true;
+		try {
+			Object[] object=new Object[] {user.getUser_id(),user.getPhonenumber(),true};
+			int key=QueryLayer.buildInsertQuery(Tables.all_phone,object);
+			if(key!=0)
+			{
+				rs=true;
+			}
 		}
 		catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	 /**
-     * Validates user login credentials.
-     *
-     * @param usermail The email of the user.
-     * @param password The password of the user.
-     * @return The user ID if validation is successful, -1 otherwise.
-     */
 	public int validateLogin(String usermail,String password)
 	{
 		int user_id=-1;
@@ -194,154 +129,151 @@ public class DaoRegisterLogin{
 	        }
 	     return -1;
 	}
-	/**
-	 * Updates the password hash and sets the flag to 0 for the specified user.
-	 *
-	 * @param userId    The ID of the user to update.
-	 * @param bcryptHash The new bcrypt password hash.
-	 */
 	public void updateUserHashInDatabase(int userId, String bcryptHash) {
-	    String sql = "UPDATE credentials SET password = ?,flag=0 WHERE user_id = ?";
-	    try (Connection conn = HikariCPDataSource.getConnection();
-
-	         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	        pstmt.setString(1, bcryptHash);
-	        pstmt.setInt(2, userId);
-	        pstmt.executeUpdate();
+	
+		try {
+			Column[] condition=new Column[] {Credentials.user_id};
+			Column[] setColumns=new Column[] {Credentials.password,Credentials.flag};
+			Object[]obj=new Object[] {bcryptHash,true,userId};
+			int key=QueryLayer.buildUpdateQuery(Tables.credentials,condition,null,obj,setColumns);
+			
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 	}
-	 /**
-     * Hashes a password using bcrypt.
-     *
-     * @param password The password to hash.
-     * @return The hashed password.
-     */
 	public  String hashPassword(String password) {
 		return BCrypt.hashpw(password, BCrypt.gensalt());
     }
-
-    /**
-     * Updates user details in the userDetails table.
-     *
-     * @param user The BeanUserDetails object containing updated information.
-     * @return true if the update is successful, false otherwise.
-     */
 	public boolean updateUserDetails(BeanUserDetails user) {
 		boolean rs=false;
-		String updateQuery = "UPDATE userDetails SET username = ?, gender = ?, birthday = ? WHERE user_id = ?";
-		try (Connection con = HikariCPDataSource.getConnection()){
-			 PreparedStatement ps = con.prepareStatement(updateQuery);
-		        ps.setString(1, user.getUsername());
-		        ps.setString(2, user.getGender());
-		        ps.setString(3, user.getBirthday());
-		        ps.setInt(4, user.getUser_id());
-               
-		        ps.executeUpdate();
-
-		        rs = true;
+		try {
+			Column[] condition=new Column[] {UserDetails.user_id};
+			Column[] setColumns=new Column[] {UserDetails.username,UserDetails.gender,UserDetails.birthday};
+			Object[]obj=new Object[] {user.getUsername(),user.getGender(),user.getBirthday(),user.getUser_id()};
+			int key=QueryLayer.buildUpdateQuery(Tables.userDetails,condition,null,obj,setColumns);
+			if(key!=0)
+			{
+				rs=true;
+			}
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		
 		return rs;
 	}
-    /**
-     * Adds an alternative email for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if the addition is successful, false otherwise.
-     */
 	public boolean addAltMail(BeanUserDetails user) {
 		boolean rs=false;
-		String query="Insert into all_mail(user_id,user_email,is_primary) values(?,?,false)";
-		try(Connection con = HikariCPDataSource.getConnection()) {
-			 PreparedStatement ps = con.prepareStatement(query);
-		        
-		        ps.setInt(1, user.getUser_id());
-		        ps.setString(2, user.getAltmail());
-               
-		        ps.executeUpdate();
-
-		        rs = true;
+		Object[]obj=new Object[] {user.getUser_id(),user.getAltmail(),false };
+		try {
+			int k=QueryLayer.buildInsertQuery(Tables.all_mail,obj);
+			if(k!=0)
+			{
+				rs=true;
+			}
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	 /**
-     * Adds an alternative phone number for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if the addition is successful, false otherwise.
-     */
 	public boolean addAltPhone(BeanUserDetails user) {
 		boolean rs=false;
-		String query="Insert into all_phone(user_id,phone,is_primary) values(?,?,false)";
-		try (Connection con = HikariCPDataSource.getConnection()){
-			 PreparedStatement ps = con.prepareStatement(query);
-		        
-		        ps.setInt(1, user.getUser_id());
-		        ps.setString(2, user.getAltphone());
-               
-		        ps.executeUpdate();
-
-		        rs = true;
+		Object[]obj=new Object[] {user.getUser_id(),user.getAltphone(),false };
+		try {
+			int k=QueryLayer.buildInsertQuery(Tables.all_phone,obj);
+			if(k!=0)
+			{
+				rs=true;
+			}
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	 /**
-     * Updates the primary email for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if the update is successful, false otherwise.
-     */
 	public boolean updatePrimaryMail(BeanUserDetails user) {
 		boolean rs=false;
-		String query="update userDetails set usermail=? where user_id=? ";
-		try (Connection con = HikariCPDataSource.getConnection()){
-			 PreparedStatement ps = con.prepareStatement(query);
-		        
-		        ps.setString(1,user.getUsermail());
-                ps.setInt(2,user.getUser_id());
-		        ps.executeUpdate();
-		        PreparedStatement ps1=con.prepareStatement("update all_mail set is_primary=false where user_id=? && is_primary=true;");
-	           
-	            ps1.setInt(1, user.getUser_id());
-	            ps1.executeUpdate();
-            PreparedStatement ps2=con.prepareStatement("update all_mail set is_primary=true where user_email=? && user_id=?");
-            ps2.setString(1, user.getUsermail());
-            ps2.setInt(2, user.getUser_id());
-            ps2.executeUpdate();
-		        rs = true;
+		try {
+			Column[]condition=new Column[] {UserDetails.user_id};
+			Column[]column=new Column[] {UserDetails.usermail};
+			Object[]obj=new Object[] {user.getUsermail(),user.getUser_id()};
+			
+			int k=QueryLayer.buildUpdateQuery(
+					Tables.userDetails,
+					condition,
+					null, 
+					obj,
+					column);
+			
+			condition=new Column[] {AllMail.user_id,AllMail.is_primary};
+			String[] logic=new String[] {"AND"};
+			column=new Column[] {AllMail.is_primary};
+			obj=new Object[] {false,user.getUser_id(),true};
+			
+			int k2=QueryLayer.buildUpdateQuery(
+					Tables.all_mail, 
+					condition,
+					logic,
+					obj,
+					column);
+			
+			condition=new Column[] {AllMail.user_email,AllMail.user_id};
+			column=new Column[] {AllMail.is_primary};
+			obj=new Object[] {true,user.getUsermail(),user.getUser_id()};
+			
+			int k1=QueryLayer.buildUpdateQuery(
+					Tables.all_mail,
+					condition,
+					logic,
+					obj,
+					column);
+			
+			if(k1!=0 && k!=0 && k2!=0)
+			{
+				rs=true;
+			}
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		return rs;
 	}
-	/**
-     * Updates the primary phone number for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if the update is successful, false otherwise.
-     */
 	public boolean updatePrimaryPhone(BeanUserDetails user) {
 		boolean rs=false;
-		String query="update userDetails set phonenumber=? where user_id=?;";
-		try (Connection con = HikariCPDataSource.getConnection()){
-			 PreparedStatement ps = con.prepareStatement(query);
-		        
-		        ps.setString(1,user.getPhonenumber());
-                ps.setInt(2,user.getUser_id());
-		        ps.executeUpdate();
-            PreparedStatement ps2=con.prepareStatement("update all_phone set phone=? where user_id=? && is_primary=true;");
-            ps2.setString(1, user.getPhonenumber());
-            ps2.setInt(2, user.getUser_id());
-            ps2.executeUpdate();
-		        rs = true;
+		try {
+	        Column[] userDetailsCondition = new Column[] { UserDetails.user_id };
+	        Column[] userDetailsColumns = new Column[] { UserDetails.phonenumber };
+	        Object[] userDetailsValues = new Object[] { user.getPhonenumber(), user.getUser_id() };
+
+	        int userDetailsUpdateCount = QueryLayer.buildUpdateQuery(
+	            Tables.userDetails,
+	            userDetailsCondition,
+	            null,
+	            userDetailsValues,
+	            userDetailsColumns
+	        );
+	        Column[] allPhoneCondition = new Column[] { AllPhone.user_id, AllPhone.is_primary };
+	        String[] logic = new String[] { "AND" };
+	        Column[] allPhoneColumns = new Column[] { AllPhone.is_primary };
+	        Object[] allPhoneValues = new Object[] { false, user.getUser_id(), true };
+
+	        int allPhoneUpdateCount = QueryLayer.buildUpdateQuery(
+	            Tables.all_phone,
+	            allPhoneCondition,
+	            logic,
+	            allPhoneValues,
+	            allPhoneColumns
+	        );
+	        Column[] primaryPhoneCondition = new Column[] { AllPhone.phone, AllPhone.user_id };
+	        Object[] primaryPhoneValues = new Object[] { true,user.getPhonenumber(), user.getUser_id() };
+	        Column[] primaryPhoneColumns = new Column[] { AllPhone.is_primary };
+
+	        int primaryPhoneUpdateCount = QueryLayer.buildUpdateQuery(
+	            Tables.all_phone,
+	            primaryPhoneCondition,
+	            null,
+	            primaryPhoneValues,
+	            primaryPhoneColumns
+	        );
+
+	        rs = (userDetailsUpdateCount > 0 && allPhoneUpdateCount > 0 && primaryPhoneUpdateCount > 0);
 		}catch (Exception e) {
             e.printStackTrace();
         }
@@ -360,22 +292,21 @@ public class DaoRegisterLogin{
 
         return false; 
     }
-	/**
-     * Changes the password for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     * @return true if the password change is successful, false otherwise.
-     */
 	public boolean changePassword(BeanUserDetails user) {
-		String query="update credentials set password=? where user_id=?;";
-		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-			 PreparedStatement ps = con.prepareStatement(query);
-			 String hash=hashPassword(user.getPassword());
-			 ps.setString(1, hash);
-			 ps.setInt(2, user.getUser_id());
-			 ps.executeUpdate();
-			 rs=true;
+		boolean rs = false;
+		try {
+		    String hash = hashPassword(user.getPassword());
+		    Column[] condition = new Column[] { Credentials.user_id };
+		    Object[] values = new Object[] { hash, user.getUser_id() };
+		    int updateCount = QueryLayer.buildUpdateQuery(
+		        Tables.credentials,
+		        condition,
+		        null,  
+		        values,
+		        new Column[] { Credentials.password }
+		    );
+
+		    rs = (updateCount > 0);
 		}
 		catch (Exception e) {
             e.printStackTrace();
@@ -383,57 +314,66 @@ public class DaoRegisterLogin{
 		return rs;
 		
 	}
-	/**
-     * Updates contact details in the contactDetails table.
-     *
-     * @param user The BeanContactDetails object containing updated contact information.
-     * @return true if the update is successful, false otherwise.
-     */
 	public boolean updateContactDetails(BeanContactDetails user) {
-		boolean rs=false;
-		String updateQuery = "UPDATE contactDetails SET name = ?, gender = ?, birthday = ?,mail=?,phonenumber=? WHERE contact_id = ?";
-		try (Connection con = HikariCPDataSource.getConnection()) {
-			 PreparedStatement ps = con.prepareStatement(updateQuery);
-		        ps.setString(1, user.getContactname());
-		        ps.setString(2, user.getGender());
-		        ps.setString(3, user.getBirthday());
-		        ps.setString(4, user.getContactmail());
-		        ps.setString(5, user.getPhonenumber());
-		        ps.setInt(6, user.getContact_id());
-               
-		        ps.executeUpdate();
-             List<String>list =user.getCategory();
-			 PreparedStatement ps1 = con.prepareStatement("delete from category_users where contact_id=?;");
-			 ps1.setInt(1, user.getContact_id());
-			 ps1.executeUpdate();
-			 if(list!=null)
-			 insertCategory(user);
-
-		        rs = true;
+		boolean rs = false;
+		try {
+		    Column[] contactDetailsCondition = new Column[] { ContactDetails.contact_id };
+		    Object[] contactDetailsValues = new Object[] {
+		        user.getName(),
+		        user.getGender(),
+		        user.getBirthday(),
+		        user.getMail(),
+		        user.getPhonenumber(),
+		        user.getContact_id()
+		    };
+		    int contactDetailsUpdateCount = QueryLayer.buildUpdateQuery(
+		        Tables.contactDetails,
+		        contactDetailsCondition,
+		        null,
+		        contactDetailsValues,
+		        new Column[] {
+		            ContactDetails.name,
+		            ContactDetails.gender,
+		            ContactDetails.birthday,
+		            ContactDetails.mail,
+		            ContactDetails.phonenumber
+		        }
+		    );
+		    Column[] categoryCondition = new Column[] { CategoryUsers.contact_id };
+		    Object[] categoryValues = new Object[] { user.getContact_id() };
+		    int categoryDeleteCount = QueryLayer.buildDeleteQuery(Tables.category_users,categoryCondition,null,categoryValues);
+		    List<String> list = user.getCategory();
+		    if (list != null) {
+		        insertCategory(user);
+		    }
+		    rs = (contactDetailsUpdateCount > 0 || categoryDeleteCount > 0);
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		
 		return rs;
 	}
-	 /**
-     * Deletes a contact by its ID.
-     *
-     * @param id The ID of the contact to delete.
-     * @return true if the deletion is successful, false otherwise.
-     * @throws SQLException if a database access error occurs.
-     */
 	public boolean deleteContactById(int id) throws SQLException
     {
-		boolean rs=false;
-		try(Connection con = HikariCPDataSource.getConnection()) {
-    	 PreparedStatement pst1 =con.prepareStatement("delete from category_users where contact_id=?;");
-    	 pst1.setInt(1, id);
-    	 pst1.executeUpdate();
-         PreparedStatement pst = con.prepareStatement("delete from contactDetails where contact_id=?;");
-         pst.setInt(1, id);
-         pst.executeUpdate();
-         rs=true;
+		boolean rs = false;
+		try {
+		    Column[] categoryCondition = new Column[] { CategoryUsers.contact_id };
+		    Object[] categoryValues = new Object[] { id };
+		    int categoryDeleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.category_users,
+		        categoryCondition,
+		        null,
+		        categoryValues
+		    );
+		    Column[] contactDetailsCondition = new Column[] { ContactDetails.contact_id };
+		    Object[] contactDetailsValues = new Object[] { id };
+		    int contactDetailsDeleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.contactDetails,
+		        contactDetailsCondition,
+		        null,
+		        contactDetailsValues
+		    );
+		    rs = (categoryDeleteCount > 0 || contactDetailsDeleteCount > 0);
 		}catch (Exception e) {
             e.printStackTrace();
         }
@@ -441,153 +381,120 @@ public class DaoRegisterLogin{
 		return rs;
          
     }
-	/**
-     * Inserts categories for a contact.
-     *
-     * @param user The BeanContactDetails object containing category information.
-     * @throws SQLException if a database access error occurs.
-     */
 	public void insertCategory(BeanContactDetails user) throws SQLException {
-		try (Connection con = HikariCPDataSource.getConnection()){
 		List<String> category=user.getCategory();
-        for(String s:category) {
-        PreparedStatement pst1=con.prepareStatement("Select category_id from categories where category_name=? && user_id=?;");
-        pst1.setString(1, s);
-        pst1.setInt(2, user_id);
-        ResultSet rs1=pst1.executeQuery();
-        int c_id=0;
-        if(rs1.next())
-        {
-        	c_id=rs1.getInt("category_id");
-        }
-        PreparedStatement pst2=con.prepareStatement("Insert into category_users(category_id,contact_id) values (?,?);");
-        pst2.setInt(1,c_id);
-        pst2.setInt(2, user.getContact_id());
-        pst2.executeUpdate();
-        }
+      for(String s:category) {
+		List<BeanCategory>list=QueryLayer.buildSelectQuery(
+				Tables.categories,
+				new Column[] {Categories.category_id},
+				new Column[] {Categories.category_name,Categories.user_id},
+				new String[] {"AND"},
+				BeanCategory.class,
+				new Object[] {s,user_id});
+		int c_id=list.get(0).getCategory_id();
+		int k=QueryLayer.buildInsertQuery(
+				Tables.category_users, 
+				new Object[] {c_id,user.getContact_id()},
+				new Column[] {CategoryUsers.category_id,CategoryUsers.contact_id});
 		}
-		catch (Exception e) {
-            e.printStackTrace();
-          
-        }
 		
 	}
-	/**
-     * Deletes an alternative email for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     */
 	public void deleteAltMail(BeanUserDetails user) {
-		try(Connection con = HikariCPDataSource.getConnection()) {
-         PreparedStatement pst = con.prepareStatement("delete from all_mail where user_email=? && user_id=?;");
-         pst.setString(1, user.getAltmail());
-         pst.setInt(2, user.getUser_id());
-         pst.executeUpdate();
+		try {
+			Column[] condition=new Column[] {AllMail.user_id,AllMail.user_email};
+			String[]logics= {"AND"};
+			Object[]obj=new Object[] {user.getUser_id(),user.getAltmail()};
+			int k=QueryLayer.buildDeleteQuery(Tables.all_mail, condition, logics,obj);
 		}catch (Exception e) {
             e.printStackTrace();
         }
 		
 		
 	}
-	/**
-     * Deletes an alternative phone number for the user.
-     *
-     * @param user The BeanUserDetails object containing user information.
-     */
 	public void deleteAltPhone(BeanUserDetails user) {
-		try (Connection con = HikariCPDataSource.getConnection()){
-	         PreparedStatement pst = con.prepareStatement("delete from all_phone where phone=? && user_id=?;");
-	         pst.setString(1, user.getAltphone());
-	         pst.setInt(2, user.getUser_id());
-	         pst.executeUpdate();
+		try  {
+		    Column[] condition = new Column[] { AllPhone.phone, AllPhone.user_id };
+		    Object[] values = new Object[] { user.getAltphone(), user.getUser_id() };
+		    int deleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.all_phone,
+		        condition,
+		        null, 
+		        values
+		    );
 			}catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		
 	}
-	 /**
-     * Deletes a contact from a specified category.
-     *
-     * @param contactId The ID of the contact to delete.
-     * @param c_id The ID of the category from which to delete the contact.
-     * @return true if the deletion is successful, false otherwise.
-     */
 	public boolean deleteContactFromCategory(int contactId,int c_id) {
 		boolean rs=false;
-		try(Connection con = HikariCPDataSource.getConnection()){
-	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=? && contact_id=?;");
-	         pst.setInt(1, c_id);
-	         pst.setInt(2, contactId);
-	         pst.executeUpdate();
-	         rs=true;
+		try{
+			Column[] condition = new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id };
+		    Object[] values = new Object[] { c_id, contactId };
+		    int deleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.category_users,
+		        condition,
+		        null,  
+		        values
+		    );
+		    rs = (deleteCount > 0);
 			}catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		return rs;
 		
 	}
-    /**
-     * Inserts a contact into a specified category.
-     *
-     * @param contactId The ID of the contact to insert.
-     * @param c_id The ID of the category to which to insert the contact.
-     * @return true if the insertion is successful, false otherwise.
-     */
 	public boolean insertCategoryById(int contactId,int c_id)
 	{
 		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-	         PreparedStatement pst = con.prepareStatement("insert into category_users(category_id,contact_id) values(? ,?);");
-	         pst.setInt(1, c_id);
-	         pst.setInt(2, contactId);
-	         pst.executeUpdate();
-	         rs=true;
+		try {
+			 Column[] insertColumns = new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id };
+			    Object[] insertValues = new Object[] { c_id, contactId };
+
+			    int insertCount = QueryLayer.buildInsertQuery(
+			        Tables.category_users,
+			        insertValues,
+			        insertColumns
+			    );
+			    rs = (insertCount > 0);
 			}catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		return rs;
 	}
-	/**
-	 * Deletes a category and its associated entries in the category_users table.
-	 *
-	 * @param c_id The ID of the category to delete.
-	 * @return true if the deletion was successful, false otherwise.
-	 */
 	public boolean deleteCategory(int c_id) {
 		boolean rs=false;
-		try (Connection con = HikariCPDataSource.getConnection()){
-            
-	         PreparedStatement pst = con.prepareStatement("delete from category_users where category_id=?;");
-	         pst.setInt(1, c_id);
-	         pst.executeUpdate();
-	         PreparedStatement pst1 = con.prepareStatement("delete from categories where category_id=?;");
-	         pst1.setInt(1, c_id);
-	         pst1.executeUpdate();
-	         rs=true;
+		try {
+			Column[] categoryUsersCondition = new Column[] { CategoryUsers.category_id };
+		    Object[] categoryUsersValues = new Object[] { c_id };
+
+		    int categoryUsersDeleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.category_users,
+		        categoryUsersCondition,
+		        null,  
+		        categoryUsersValues
+		    );
+		    Column[] categoriesCondition = new Column[] { Categories.category_id };
+		    Object[] categoriesValues = new Object[] { c_id };
+
+		    int categoriesDeleteCount = QueryLayer.buildDeleteQuery(
+		        Tables.categories,
+		        categoriesCondition,
+		        null, 
+		        categoriesValues
+		    );
+		    rs = (categoryUsersDeleteCount > 0 || categoriesDeleteCount > 0);
 			}catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		return rs;
 		
 	}
-	/**
-	 * Inserts a new category with the specified name for the current user.
-	 *
-	 * @param categoryName The name of the category to insert.
-	 * @return The ID of the newly inserted category, or 0 if the insertion failed.
-	 */
 	public int insertCategoryByName(String categoryName) {
 		try (Connection con = HikariCPDataSource.getConnection()){
-	            PreparedStatement pst = con.prepareStatement("INSERT INTO categories (category_name,user_id) VALUES (?, ?)",Statement.RETURN_GENERATED_KEYS);
-	            pst.setString(1,categoryName);
-	            pst.setInt(2,user_id);
-	            pst.executeUpdate();
-	            ResultSet key=pst.getGeneratedKeys();
-	            if(key.next())
-	            {
-	            	return key.getInt(1);
-	            }
-	
+			Object[] values = new Object[] { categoryName, user_id };
+		    Column[] columns = new Column[] { Categories.category_name, Categories.user_id };
+		    return QueryLayer.buildInsertQuery(Tables.categories, values, columns);
 	     }
 		catch (Exception e) {
           e.printStackTrace();
@@ -595,12 +502,6 @@ public class DaoRegisterLogin{
       }
 		return 0;
 	}
-	/**
-	 * Inserts default categories (Family, Work, Friends, Favourites) for the specified user.
-	 *
-	 * @param user The user for whom default categories are to be added.
-	 * @return true if the insertion was successful, false otherwise.
-	 */
 	public boolean defaultGroup(BeanUserDetails user) {
 		boolean rs=false;
 		String query="INSERT INTO categories (category_name, user_id) VALUES('Family', ?),('Work', ?),('Friends', ?),('Favourites', ?);";

@@ -38,13 +38,13 @@ public class ServletCreateContact extends HttpServlet {
             throws ServletException, IOException {
     	
     	BeanContactDetails contact=new BeanContactDetails();
-        contact.setContactmail(request.getParameter("email"));
-        contact.setContactname(request.getParameter("username"));
+        contact.setMail(request.getParameter("email"));
+        contact.setName(request.getParameter("username"));
         contact.setGender(request.getParameter("gender"));
         contact.setBirthday(request.getParameter("birthday"));
         contact.setPhonenumber(request.getParameter("phone"));
         contact.setLocation(request.getParameter("location"));
-        contact.setCreatedTimeInEpoch(System.currentTimeMillis() / 1000);
+        contact.setCreated_time(System.currentTimeMillis() / 1000);
         String[] selectedCategories = request.getParameterValues("categories");
         if(selectedCategories!=null && selectedCategories.length!=0)
         contact.setCategory(Arrays.asList(selectedCategories));

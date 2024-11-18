@@ -30,8 +30,8 @@ public class HikariCPDataSource {
 
         config.setMaximumPoolSize(50);
         config.setMinimumIdle(2);
-        config.setConnectionTimeout(60000);
-        config.setIdleTimeout(600000);
+        config.setConnectionTimeout(30000);
+        config.setIdleTimeout(300000);
         config.setMaxLifetime(1800000);
         ds = new HikariDataSource(config);
     }

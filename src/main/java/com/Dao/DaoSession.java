@@ -85,7 +85,7 @@ public class DaoSession {
 		        for (BeanSession obj : list1) {
 		            stmt.setTimestamp(1, Timestamp.valueOf(obj.getAccessed_time())); 
 		            stmt.setTimestamp(2, Timestamp.valueOf(obj.getAccessed_time().plusMinutes(30))); 
-		            stmt.setString(3, obj.getSession_id());
+		            stmt.setString(3, obj.getSessionid());
 		            stmt.setTimestamp(4, Timestamp.valueOf(obj.getAccessed_time())); 
 		            stmt.addBatch();  
 		        }

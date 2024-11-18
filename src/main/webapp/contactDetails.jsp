@@ -23,12 +23,12 @@ int contactId = Integer.parseInt(request.getParameter("id"));
     if (selectedTimeZone.equals("null") || selectedTimeZone.isEmpty()) {
         selectedTimeZone = "Asia/Kolkata"; 
     }
-    long createdTimeEpoch = contact.getCreatedTimeInEpoch(); 
+    long createdTimeEpoch = contact.getCreated_time(); 
  	Instant createdTimeInstant = Instant.ofEpochSecond(createdTimeEpoch);
  	ZonedDateTime contactZonedDateTime = createdTimeInstant.atZone(ZoneId.of("UTC")); 
  	ZonedDateTime convertedTime = contactZonedDateTime.withZoneSameInstant(ZoneId.of(selectedTimeZone));
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
-    String formattedTime = convertedTime.format(formatter); 
+    String formattedTime = convertedTime.format(formatter);
 %>
 
 <!DOCTYPE html>
@@ -272,8 +272,8 @@ option:hover {
                 <p style="margin-right: 20px;"><%= formattedTime %></p>
     </div>
                 </li>
-                <li><strong>Name:</strong> <span><%= contact.getContactname() %></span></li>
-                <li><strong>Email:</strong> <span><%= contact.getContactmail() %></span></li>
+                <li><strong>Name:</strong> <span><%=contact.getName()%></span></li>
+                <li><strong>Email:</strong> <span><%=contact.getMail()%></span></li>
                 <li><strong>Phone Number:</strong> <span><%= contact.getPhonenumber() %></span></li>
                 <li><strong>Gender:</strong> <span><%= contact.getGender() %></span></li>
                 <li><strong>Birthday:</strong> <span><%= contact.getBirthday() %></span></li>
