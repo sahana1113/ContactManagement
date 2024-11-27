@@ -14,8 +14,8 @@ import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoSession;
 
 /**
- * Servlet that handles user login functionality. It validates user credentials 
- * and creates a session upon successful login.
+ * Servlet that handles user login functionality. It validates user CREDENTIALS 
+ * and creates a SESSION upon successful login.
  *
  * @author Sahana
  * @version 1.0
@@ -23,13 +23,13 @@ import com.Dao.DaoSession;
 public class ServletUserLogin extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ServletUserLogin.class.getName()); // Initialize Logger
 	/**
-     * Processes the login request by validating user credentials. If the credentials 
-     * are valid, it creates a session and redirects the user to the home page. 
+     * Processes the login request by validating user CREDENTIALS. If the CREDENTIALS 
+     * are valid, it creates a SESSION and redirects the user to the home page. 
      * If the login fails, it redirects the user back to the login page.
      *
      * <p>This method retrieves the email and password from the request, 
-     * validates them using DaoRegisterLogin, generates a session ID, 
-     * and creates a session in the database. If successful, a session cookie 
+     * validates them using DaoRegisterLogin, generates a SESSION ID, 
+     * and creates a SESSION in the database. If successful, a SESSION cookie 
      * is created and added to the response.</p>
      *
      * @param request  The HttpServletRequest object that contains the 
@@ -75,9 +75,9 @@ public class ServletUserLogin extends HttpServlet {
 		
 	}
 	/**
-     * Generates a unique session ID using a randomly generated UUID.
+     * Generates a unique SESSION ID using a randomly generated UUID.
      *
-     * @return A unique session ID as a String.
+     * @return A unique SESSION ID as a String.
      */
 	private String generateSessionId() {
         return java.util.UUID.randomUUID().toString(); // Generate a random unique ID

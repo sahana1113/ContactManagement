@@ -24,9 +24,9 @@ public class DaoSession {
 	private static DaoSession instance;
 	/**
 	 * Retrieves the singleton instance of DaoSession. 
-	 * If a session ID is provided, updates the last accessed time.
+	 * If a SESSION ID is provided, updates the last accessed time.
 	 *
-	 * @param session The session ID to update last accessed time.
+	 * @param SESSION The SESSION ID to update last accessed time.
 	 * @return The singleton instance of DaoSession.
 	 * @since 1.0
 	 */
@@ -43,12 +43,12 @@ public class DaoSession {
 	        return instance;
 	    }
 	/**
-	 * Creates a new session in the database.
+	 * Creates a new SESSION in the database.
 	 *
-	 * @param sessionId The unique ID of the session.
-	 * @param userId The ID of the user associated with the session.
-	 * @param expiryTime The expiration time of the session.
-	 * @return true if the session was created successfully, false otherwise.
+	 * @param sessionId The unique ID of the SESSION.
+	 * @param userId The ID of the user associated with the SESSION.
+	 * @param expiryTime The expiration time of the SESSION.
+	 * @return true if the SESSION was created successfully, false otherwise.
 	 */
 	 public boolean createSession(String sessionId, int userId, LocalDateTime expiryTime) {
 	        String sql = "INSERT INTO session (sessionid, user_id, expiry_time, last_accessed) VALUES (?, ?, ?, ?)";
@@ -70,7 +70,7 @@ public class DaoSession {
 	 /**
 	  * Updates the last accessed time and expiry time for a set of sessions.
 	  *
-	  * @param list A TreeSet of BeanSession objects containing session details.
+	  * @param list A TreeSet of BeanSession objects containing SESSION details.
 	  * @return true if any sessions were updated, false otherwise.
 	  * @throws SQLException if a database access error occurs.
 	  */
@@ -108,17 +108,17 @@ public class DaoSession {
 
 		        do {
 		            rowsDeleted = stmt.executeUpdate();
-		            System.out.println(rowsDeleted + " session(s) deleted in this batch.");
+		            System.out.println(rowsDeleted + " SESSION(s) deleted in this batch.");
 		        } while (rowsDeleted > 0); 
 		    } 
 		    System.out.print("in delete");
 	}
 	/**
-	 * Validates a session by checking its existence and expiry time.
+	 * Validates a SESSION by checking its existence and expiry time.
 	 *
-	 * @param sessionId The ID of the session to validate.
-	 * @param cookies An array of cookies associated with the session.
-	 * @return The user ID if the session is valid; 0 if the session is invalid or expired.
+	 * @param sessionId The ID of the SESSION to validate.
+	 * @param cookies An array of cookies associated with the SESSION.
+	 * @return The user ID if the SESSION is valid; 0 if the SESSION is invalid or expired.
 	 */
 	 public int validateSession(String sessionId, Cookie[] cookies) {
 	        String sql = "SELECT user_id,expiry_time FROM session WHERE sessionid = ?";
@@ -141,10 +141,10 @@ public class DaoSession {
 	        return 0;
 	    }
 	 /**
-	  * Invalidates a session by deleting it from the database.
+	  * Invalidates a SESSION by deleting it from the database.
 	  *
-	  * @param sessionId The ID of the session to invalidate.
-	  * @return true if the session was successfully invalidated, false otherwise.
+	  * @param sessionId The ID of the SESSION to invalidate.
+	  * @return true if the SESSION was successfully invalidated, false otherwise.
 	  */
 	public boolean invalidateSession(String sessionId) {
         String sql = "DELETE FROM session WHERE sessionid = ?";

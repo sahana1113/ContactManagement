@@ -1,15 +1,16 @@
 package com.Servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.Bean.*;
 import com.Dao.DaoRegisterLogin;
 /**
- * Servlet that handles the creation of new categories for a user.
+ * Servlet that handles the creation of new CATEGORIES for a user.
  *
  * @author Sahana
  * @version 1.0
@@ -36,7 +37,12 @@ public class ServletCreateCategory extends HttpServlet {
         String[] contactIds = request.getParameterValues("contactIds");
 
         DaoRegisterLogin rld = new DaoRegisterLogin(userId);
-		int categoryId = rld.insertCategoryByName(categoryName);
+		int categoryId=0;
+		try {
+			categoryId = rld.insertCategoryByName(new BeanCategory(categoryName));
+		} catch (NoSuchFieldException | IllegalAccessException | SQLException e) {
+			e.printStackTrace();
+		}
 
 		if (contactIds != null && contactIds.length > 0) {
 		    for (String contactId : contactIds) {

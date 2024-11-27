@@ -10,8 +10,22 @@ public class BeanCategory implements Bean{
 
     // Category ID
     private int category_id;
+    private int user_id;
+    private int contact_id;
+    public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+	public int getContact_id() {
+		return contact_id;
+	}
+	public void setContact_id(int contact_id) {
+		this.contact_id = contact_id;
+	}
 
-    // Category name
+	// Category name
     private String category_name;
 
     /**
@@ -27,7 +41,10 @@ public class BeanCategory implements Bean{
     public BeanCategory() {
     	
     }
-    /**
+    public BeanCategory(String categoryName) {
+		this.category_name=categoryName;
+	}
+	/**
 	 * Retrieves the category_name ID.
 	 *
 	 * @return The ID of the category_name.

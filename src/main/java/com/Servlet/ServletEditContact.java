@@ -35,7 +35,7 @@ public class ServletEditContact extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   	 int contactid=Integer.parseInt(request.getParameter("contactTId"));
+   	 int contactid=Integer.parseInt(request.getParameter("contactId"));
    	int userid=(int) request.getAttribute("user_id");
     	BeanContactDetails user=new BeanContactDetails();
         user.setName(request.getParameter("username"));

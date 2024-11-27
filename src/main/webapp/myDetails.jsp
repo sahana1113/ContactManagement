@@ -184,7 +184,6 @@
                             	out.print("No alternate phone assigned"); %>
                         </ul>
                     </li>
-                    <li><strong>Total Contacts:</strong> <span><%= user.getTotal_contacts() %></span></li>
                 </ul>
                 <a href="EditDetails.jsp" class="btn">Edit Details</a>
                 &emsp;

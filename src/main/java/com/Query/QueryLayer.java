@@ -44,77 +44,96 @@ public class QueryLayer {
         }
     }
 
-    public static <T> List<T> buildSelectQuery(Tables table, Column[] columns, Column[] conditions, String[] logics, Class<T> type,Object[]obj) throws SQLException {
-        QueryBuilder builder = getQueryBuilder().select(columns).from(table);
- 
-        if (conditions != null && conditions.length > 0) {
-            builder = ((MySQLQueryBuilder) builder).conditions(conditions, logics);
+    public static <T> List<T> buildSelectQuery(Tables[] table, Column[] columns, Column[] conditions, String[] logics, Class<T> type,Object obj,Column[][]join) throws SQLException {
+        QueryBuilder builder = getQueryBuilder().select(columns).from(table[0]);
+        for (int i = 1; i < table.length; i++) {
+        	String left=join[i-1][0].getAlias()+"."+join[i-1][0];
+        	String right=join[i-1][1].getAlias()+"."+join[i-1][1];
+            builder = ((MySQLQueryBuilder) builder).innerJoin(table[i], left + " = " + right);  
         }
+        if (conditions != null && conditions.length > 0) {
+            builder = ((MySQLQueryBuilder) builder).conditions(conditions, logics,true);
+        }
+        
         String query=builder.build();
-        System.out.print(query);
-        return getQueryBuilder().executeSelect(query,obj,type);
+        System.out.println(query);
+        return getQueryBuilder().executeSelect(query,obj,type,conditions);
     }
 
 
-    public static int buildInsertQuery(Tables table,Object[] obj) throws SQLException {
-        String[] columns = getColumnsByTable(table);
-        String query= getQueryBuilder().insert(table, columns).values(columns).build();
-        return getQueryBuilder().executeInsert(query, obj);
+    public static int buildInsertQuery(Tables table,Object obj) throws SQLException, NoSuchFieldException, IllegalAccessException{
+        Column[] columns = getColumnsByTable(table);
+        String[] columnNames = new String[columns.length];
+        for (int i = 0; i < columns.length; i++) {
+            columnNames[i] = columns[i].getColumnName();
+        }
+        String query= getQueryBuilder().insert(table, columnNames).values(columnNames).build();
+        return getQueryBuilder().executeInsert(query, obj,columns);
     }
-    public static int buildInsertQuery(Tables table,Object[] obj, Column... columns) throws SQLException {
+    public static int buildInsertQuery(Tables table,Object obj, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
         String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
         String query=getQueryBuilder().insert(table, columnNames).values(columnNames).build();
-        return getQueryBuilder().executeInsert(query, obj);
+        return getQueryBuilder().executeInsert(query, obj,columns);
     }
 
-    public static int buildUpdateQuery(Tables table, Column[] conditionsColumns, String[] logics,Object[]obj, Column... columns) throws SQLException {
+    public static int buildUpdateQuery(Tables table, Column[] conditionsColumns, String[] logics,Object obj, Column... columns) throws SQLException {
         String[] columnValuePairs = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnValuePairs[i] = columns[i].getColumnName() + " = ?";
         }
         QueryBuilder builder = getQueryBuilder().update(table).set(columnValuePairs);
         if (conditionsColumns != null && conditionsColumns.length > 0) {
-        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics);
+        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics,false);
         }
         String query=builder.build();
-        return getQueryBuilder().executeUpdateDelete(query, obj);
+        Column[] all=combineColumns(columns,conditionsColumns);
+        return getQueryBuilder().executeUpdateDelete(query, obj,all);
     }
 
     
 
-	public static int buildDeleteQuery(Tables table, Column[] conditionsColumns, String[] logics,Object[]obj) throws SQLException {
+	public static int buildDeleteQuery(Tables table, Column[] conditionsColumns, String[] logics,Object obj) throws SQLException {
         QueryBuilder builder = getQueryBuilder().deleteFrom(table);
         if (conditionsColumns != null && conditionsColumns.length > 0) {
-        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics);
+        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics,false);
         }
         String query=builder.build();
-        return getQueryBuilder().executeUpdateDelete(query, obj);
+        return getQueryBuilder().executeUpdateDelete(query, obj,conditionsColumns);
     }
+    
 
-
-    public static String[] getColumnsByTable(Tables table) {
+    public static Column[] getColumnsByTable(Tables table) {
         switch (String.valueOf(table)) {
-            case "userDetails":
+            case "USER_DETAILS":
                 return Enum.UserDetails.getColumnNames();
-            case "all_mail":
+            case "ALL_MAIL":
                 return Enum.AllMail.getColumnNames();
-            case "all_phone":
+            case "ALL_PHONE":
                 return Enum.AllPhone.getColumnNames();
-            case "categories":
+            case "CATEGORIES":
                 return Enum.Categories.getColumnNames();
-            case "category_users":
+            case "CATEGORY_USERS":
                 return Enum.CategoryUsers.getColumnNames();
-            case "contactDetails":
+            case "CONTACT_DETAILS":
                 return Enum.ContactDetails.getColumnNames();
-            case "credentials":
+            case "CREDENTIALS":
                 return Enum.Credentials.getColumnNames();
-            case "session":
+            case "SESSION":
                 return Enum.Session.getColumnNames();
             default:
                 throw new IllegalArgumentException("Unsupported table: " + String.valueOf(table));
         }
+    }
+    private static Column[] combineColumns(Column[] updateColumns, Column[] conditionColumns) {
+        if (conditionColumns == null || conditionColumns.length == 0) {
+            return updateColumns; 
+        }
+        Column[] allColumns = new Column[updateColumns.length + conditionColumns.length];
+        System.arraycopy(updateColumns, 0, allColumns, 0, updateColumns.length);
+        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionColumns.length);
+        return allColumns;
     }
 }

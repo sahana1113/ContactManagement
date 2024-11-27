@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import com.Dao.DaoSession;
 /**
- * A servlet filter that checks for a valid user session before allowing access 
- * to protected resources. If no valid session is found, the user is redirected 
+ * A servlet filter that checks for a valid user SESSION before allowing access 
+ * to protected resources. If no valid SESSION is found, the user is redirected 
  * to the login page.
  *
  *  @author Sahana
@@ -33,7 +33,7 @@ public class FilterSession implements Filter {
      */
     public void init(FilterConfig filterConfig) throws ServletException {}
     /**
-     * Checks if a valid session exists for the user. If a valid session is found, 
+     * Checks if a valid SESSION exists for the user. If a valid SESSION is found, 
      * the request is forwarded to the next filter or servlet in the chain. 
      * Otherwise, the user is redirected to the login page.
      *

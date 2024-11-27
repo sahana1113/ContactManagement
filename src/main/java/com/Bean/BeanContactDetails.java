@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Represents the contact details of a person.
  * This class encapsulates various attributes related to a contact, 
- * including name, email, phone number, and other personal details.
+ * including name, email, phonenumber number, and other personal details.
  * 
  * @author Sahana
  * @version 1.0
@@ -23,6 +23,7 @@ public class BeanContactDetails implements Bean{
     private String alt_mail;
     private String alt_phone;
     private List<String> category;
+    private String category_name;
     private long created_time; // Store the created time in seconds
     public long getCreatedTimeInEpoch() {
 		return getCreated_time();
@@ -48,10 +49,10 @@ public class BeanContactDetails implements Bean{
     }
 
     /**
-     * Constructs a new BeanContactDetails with the specified name, phone number, and contact ID.
+     * Constructs a new BeanContactDetails with the specified name, phonenumber number, and contact ID.
      *
      * @param name The name of the contact.
-     * @param phonenumber The phone number of the contact.
+     * @param phonenumber The phonenumber number of the contact.
      * @param contact_id The ID of the contact.
      */
     public BeanContactDetails(String contactname, String phonenumber, int contact_id) {
@@ -97,18 +98,18 @@ public class BeanContactDetails implements Bean{
     }
 
     /**
-     * Retrieves the alternative phone number of the contact.
+     * Retrieves the alternative phonenumber number of the contact.
      *
-     * @return The alternative phone number.
+     * @return The alternative phonenumber number.
      */
     public String getAlt_phone() {
         return alt_phone;
     }
 
     /**
-     * Sets the alternative phone number for the contact.
+     * Sets the alternative phonenumber number for the contact.
      *
-     * @param alt_phone The new alternative phone number.
+     * @param alt_phone The new alternative phonenumber number.
      */
     public void setAlt_phone(String alt_phone) {
         this.alt_phone = alt_phone;
@@ -187,18 +188,18 @@ public class BeanContactDetails implements Bean{
     }
 
     /**
-     * Retrieves the phone number of the contact.
+     * Retrieves the phonenumber number of the contact.
      *
-     * @return The phone number of the contact.
+     * @return The phonenumber number of the contact.
      */
     public String getPhonenumber() {
         return phonenumber;
     }
 
     /**
-     * Sets the phone number of the contact.
+     * Sets the phonenumber number of the contact.
      *
-     * @param phonenumber The new phone number of the contact.
+     * @param phonenumber The new phonenumber number of the contact.
      */
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
@@ -259,20 +260,28 @@ public class BeanContactDetails implements Bean{
     }
 
     /**
-     * Retrieves the categories associated with the contact.
+     * Retrieves the CATEGORIES associated with the contact.
      *
-     * @return A list of categories.
+     * @return A list of CATEGORIES.
      */
     public List<String> getCategory() {
         return category;
     }
 
     /**
-     * Sets the categories for the contact.
+     * Sets the CATEGORIES for the contact.
      *
-     * @param category A list of categories to associate with the contact.
+     * @param category A list of CATEGORIES to associate with the contact.
      */
     public void setCategory(List<String> category) {
         this.category = category;
     }
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
 }

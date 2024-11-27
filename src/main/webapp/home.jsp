@@ -183,7 +183,7 @@ String s = cd.getUsername();
                             	out.print("No alternate phonenumber assigned"); %>
                         </ul>
                     </li>
-                    <li><strong>Total Contacts:</strong> <span><%= user.getTotal_contacts() %></span></li>
+                    
                 </ul>
                 <a href="EditDetails.jsp" class="btn">Edit My Details</a>
                 &emsp;

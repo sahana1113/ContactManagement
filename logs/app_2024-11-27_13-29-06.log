@@ -1,0 +1,11 @@
+2024-11-27 13:29:06 INFO  AppContextListener - Server started at Wed Nov 27 13:29:06 IST 2024
+2024-11-27 13:29:07 INFO  FilterSession - 127.0.0.1 - - [Wed Nov 27 13:29:07 IST 2024] "GET / HTTP/1.1"
+2024-11-27 13:29:07 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:07 IST 2024] "GET / HTTP/1.1"
+2024-11-27 13:29:07 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:07 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-27 13:29:09 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:09 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-11-27 13:29:11 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:11 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-11-27 13:29:19 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:19 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1"
+2024-11-27 13:29:25 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:29:25 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-11-27 13:30:09 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:30:09 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1"
+2024-11-27 13:32:15 INFO  FilterSession -  24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:15 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-11-27 13:32:18 INFO  AppContextListener - Server stoped at Wed Nov 27 13:32:18 IST 2024

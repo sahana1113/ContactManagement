@@ -20,38 +20,14 @@ import com.Query.Enum.UserDetails;
 import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
 import com.rowMapper.UserRowMapper;
-/**
- * Data Access Object (DAO) for managing user contact details.
- * This class provides methods to retrieve, add, and manage user contacts 
- * and associated categories.
- *
- * @author Sahana
- * @version 1.0
- */
 public class DaoUserContact{
 	int user_id;
-	/**
-	 * Constructs a DaoUserContact instance with the specified user ID.
-	 *
-	 * @param user_id The ID of the user whose contacts are being managed.
-	 */
 	public DaoUserContact(int user_id){
 		this.user_id=user_id;
 	}
-	/**
-	 * Default constructor for DaoUserContact.
-	 */
 	public DaoUserContact() {
 		
 	}
-	/**
-	 * Retrieves the category name associated with a given category ID.
-	 *
-	 * @param id The ID of the category.
-	 * @return The name of the category, or an empty string if not found.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
 	public String getCategoryName(int id) throws SQLException, NamingException{
         Connection con = HikariCPDataSource.getConnection();
 		PreparedStatement pst = con.prepareStatement("select category_name from categories where category_id=?;");
@@ -63,73 +39,74 @@ public class DaoUserContact{
         }
         return "";
 	}
-	/**
-	 * Retrieves the username associated with the current user ID.
-	 *
-	 * @return The username, or an empty string if not found.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
 	public String getUsername() throws SQLException, NamingException
 	{
+		BeanUserDetails user1=new BeanUserDetails();
+		user1.setUser_id(user_id);
 		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
-				Tables.userDetails, 
+				new Tables[] {Tables.USER_DETAILS}, 
 				new Column[] {UserDetails.username},
 				new Column[] {UserDetails.user_id},
 				null,
 		        BeanUserDetails.class,
-				new Object[] {user_id}
+				user1,
+				null
 		);
 //        Connection con = HikariCPDataSource.getConnection();
-//        PreparedStatement pst = con.prepareStatement("select username from userDetails where user_id=?;");
+//        PreparedStatement pst = con.prepareStatement("select username from USER_DETAILS where user_id=?;");
 //        pst.setInt(1,user_id);
 //        ResultSet rs=pst.executeQuery();
 //        if(rs.next())
 //        {
 //        	return rs.getString(1);
-//        
-	
         return user.get(0).getUsername();
-        
-	}
-	/**
-	 * Retrieves the email associated with the current user ID.
-	 *
-	 * @return The email address, or an empty string if not found.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
+     }
+	
 	public String getUsermail() throws SQLException, NamingException
 	{
 //        Connection con = HikariCPDataSource.getConnection();
-//        PreparedStatement pst = con.prepareStatement("select usermail from userDetails where user_id=?;");
+//        PreparedStatement pst = con.prepareStatement("select usermail from USER_DETAILS where user_id=?;");
 //        pst.setInt(1,user_id);
 //        ResultSet rs=pst.executeQuery();
 //        if(rs.next())
 //        {
 //        	return rs.getString(1);
 //        }
+		BeanUserDetails user1=new BeanUserDetails();
+		user1.setUser_id(user_id);
 		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
-		            Tables.userDetails,
+		            new Tables[] {Tables.USER_DETAILS},
 		            new Column[] {UserDetails.usermail},  
 		            new Column[] {UserDetails.user_id},  
 		            null,
 		            BeanUserDetails.class,
-		            new Object[] {user_id}
+		            user1,
+		            null
 		    );
 		    if (!userDetailsList.isEmpty()) {
 		        return userDetailsList.get(0).getUsermail();  
 		    }
         return "";
-        
 	}
-	/**
-	 * Retrieves a list of contact details for the current user, excluding archived contacts.
-	 *
-	 * @return A list of BeanContactDetails representing the user's contacts.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
+	public String getUserphone() throws SQLException, NamingException
+	{
+		BeanUserDetails user1=new BeanUserDetails();
+		user1.setUser_id(user_id);
+		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
+		            new Tables[] {Tables.USER_DETAILS},
+		            new Column[] {UserDetails.phonenumber},  
+		            new Column[] {UserDetails.user_id},  
+		            null,
+		            BeanUserDetails.class,
+		            user1,
+		            null
+		    );
+		    if (!userDetailsList.isEmpty()) {
+		        return userDetailsList.get(0).getPhonenumber();  
+		    }
+        return "";
+	}
+	
 	public List<BeanContactDetails> Contactdisplay() throws SQLException, NamingException
 	{
 		List<BeanContactDetails>list=new ArrayList<>();
@@ -148,15 +125,6 @@ public class DaoUserContact{
         
         return list;
 	}
-	/**
-	 * Checks if a contact is in the "Archived" category.
-	 *
-	 * @param con_id The contact ID.
-	 * @param user_id The user ID.
-	 * @return true if the contact is archived, false otherwise.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
 	private boolean in_archieve(int con_id, int user_id) throws SQLException, NamingException {
         Connection con = HikariCPDataSource.getConnection();
 		PreparedStatement pst = con.prepareStatement("select category_id from categories where category_name=?");
@@ -176,12 +144,6 @@ public class DaoUserContact{
         }
 		return false;
 	}
-	/**
-	 * Registers a new contact for the current user.
-	 *
-	 * @param user The BeanContactDetails object containing contact information.
-	 * @return true if the contact was successfully registered, false otherwise.
-	 */
 	public boolean contactDetailsRegister(BeanContactDetails user) {
 		boolean rs=false;
 		try {		
@@ -213,14 +175,6 @@ public class DaoUserContact{
         }
 		return rs;
 	}
-	/**
-	 * Retrieves the contact details for a specific contact ID.
-	 *
-	 * @param contact_id The ID of the contact to retrieve.
-	 * @return A BeanContactDetails object containing the contact information.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
 	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException, NamingException
 	{
         Connection con = HikariCPDataSource.getConnection();
@@ -250,14 +204,6 @@ public class DaoUserContact{
         return contact;
         
 	}
-	/**
-	 * Retrieves the user details for a specific user ID.
-	 *
-	 * @param user_id The ID of the user to retrieve.
-	 * @return A BeanUserDetails object containing the user's information.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
 	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException, NamingException
 	{
         Connection con = HikariCPDataSource.getConnection();
@@ -273,7 +219,7 @@ public class DaoUserContact{
         contact.setBirthday(rs.getString("birthday"));
         }
         
-        PreparedStatement pst1=con.prepareStatement("select user_email from all_mail where user_id=? && is_primary=false;");
+        PreparedStatement pst1=con.prepareStatement("select usermail from all_mail where user_id=? && is_primary=false;");
         pst1.setInt(1, user_id);
         ResultSet rs1=pst1.executeQuery();
         List<String>mail=new ArrayList<>();
@@ -281,7 +227,7 @@ public class DaoUserContact{
         	mail.add(rs1.getString(1));
         }
         contact.setAllMail(mail);
-        PreparedStatement pst2=con.prepareStatement("select phone from all_phone where user_id=? && is_primary=false;");
+        PreparedStatement pst2=con.prepareStatement("select phonenumber from all_phone where user_id=? && is_primary=false;");
         pst2.setInt(1, user_id);
         ResultSet rs2=pst2.executeQuery();
         List<String>phone=new ArrayList<>();
@@ -289,18 +235,9 @@ public class DaoUserContact{
         	phone.add(rs2.getString(1));
         }
         contact.setAllPhone(phone);
-        	contact.setTotal_contacts(getTotalContacts(user_id));
         return contact;
         
 	}
-	/**
-	 * Retrieves the primary email and phone details for a specific user ID.
-	 *
-	 * @param userId The ID of the user to retrieve.
-	 * @return A BeanUserDetails object containing the primary user information.
-	 * @throws SQLException if a database access error occurs.
-	 * @throws NamingException 
-	 */
     public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException, NamingException{
     	BeanUserDetails user=new BeanUserDetails();
         Connection con = HikariCPDataSource.getConnection();
@@ -313,33 +250,6 @@ public class DaoUserContact{
         }
         return user;
     }
-    /**
-     * Counts the total number of contacts for a specific user ID.
-     *
-     * @param userId The ID of the user to count contacts for.
-     * @return The total number of contacts.
-     * @throws SQLException if a database access error occurs.
-     * @throws NamingException 
-     */
-    public int getTotalContacts(int userId) throws SQLException, NamingException {
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM contactDetails WHERE user_id = ?");
-        pst.setInt(1, userId);
-        ResultSet rs = pst.executeQuery();
-        
-        if (rs.next()) {
-            return rs.getInt(1);
-        }
-        
-        return 0;
-    }
-    /**
-     * Retrieves a list of categories associated with the current user ID.
-     *
-     * @return A list of BeanCategory objects representing the user's categories.
-     * @throws SQLException if a database access error occurs.
-     * @throws NamingException 
-     */
     public List<BeanCategory> getCategoriesByUserId() throws SQLException, NamingException
     {
     	List<BeanCategory>categories=new ArrayList<>();
@@ -354,14 +264,6 @@ public class DaoUserContact{
 		return categories;
     	
     }
-    /**
-     * Retrieves a list of contacts that belong to a specific category.
-     *
-     * @param category The ID of the category.
-     * @return A list of BeanContactDetails representing the contacts in the category.
-     * @throws SQLException if a database access error occurs.
-     * @throws NamingException 
-     */
     public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException, NamingException
     {
     	List<BeanContactDetails>categories=new ArrayList<>();
@@ -376,14 +278,6 @@ public class DaoUserContact{
         return categories;
         
     }
-    /**
-     * Retrieves a list of contacts that do not belong to a specific category.
-     *
-     * @param category The ID of the category.
-     * @return A list of BeanContactDetails representing contacts not in the category.
-     * @throws SQLException if a database access error occurs.
-     * @throws NamingException 
-     */
     public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException, NamingException {
     	List<BeanContactDetails> contactsNotInCategory = new ArrayList<>();
         
@@ -406,9 +300,5 @@ public class DaoUserContact{
         }
 
         return contactsNotInCategory;
-    }
-	
-    
-
-    
+    } 
 }

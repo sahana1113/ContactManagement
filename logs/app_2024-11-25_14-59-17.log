@@ -1,0 +1,5 @@
+2024-11-25 14:59:17 INFO  AppContextListener - Server started at Mon Nov 25 14:59:17 IST 2024
+2024-11-25 14:59:17 INFO  FilterSession - 127.0.0.1 - - [Mon Nov 25 14:59:17 IST 2024] "GET / HTTP/1.1"
+2024-11-25 14:59:18 INFO  FilterSession -  24 e4adee6d-fc45-4073-9ab5-ec17b442ae10: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:59:18 IST 2024] "GET / HTTP/1.1"
+2024-11-25 14:59:18 INFO  FilterSession -  24 e4adee6d-fc45-4073-9ab5-ec17b442ae10: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:59:18 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-25 15:00:48 INFO  AppContextListener - Server stoped at Mon Nov 25 15:00:48 IST 2024

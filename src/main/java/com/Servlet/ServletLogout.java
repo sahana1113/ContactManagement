@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.Dao.DaoSession;
 
 /**
- * Servlet that handles user logout by invalidating the user's session 
- * and clearing the session cookie.
+ * Servlet that handles user logout by invalidating the user's SESSION 
+ * and clearing the SESSION cookie.
  *
  * @author Sahana
  * @version 1.0
  */
 public class ServletLogout extends HttpServlet {
     /**
-     * Processes the logout request by invalidating the user session 
-     * and removing the session cookie. The user is then redirected 
+     * Processes the logout request by invalidating the user SESSION 
+     * and removing the SESSION cookie. The user is then redirected 
      * to the login page.
      *
      * <p>This method checks for the SESSIONID cookie, invalidates the 
-     * corresponding session if the user is logged in, and sets the 
+     * corresponding SESSION if the user is logged in, and sets the 
      * cookie's maximum age to zero to delete it.</p>
      *
      * @param request  The HttpServletRequest object that contains the 

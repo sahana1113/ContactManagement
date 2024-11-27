@@ -55,11 +55,6 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		return null;
 	}
 	@Override
-	public int executeInsert(String query, Object... obj) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
 	public QueryBuilder andWhere(String condition) {
 		// TODO Auto-generated method stub
 		return null;
@@ -70,22 +65,33 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		return null;
 	}
 	@Override
-	public int executeUpdateDelete(String sql, Object... parameters) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
 	public QueryBuilder deleteFrom(Tables table) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public QueryBuilder conditions(Column[] conditionsColumns, String[] logics) {
+	public int executeInsert(String query, Object obj, Column[] columns)
+			throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int executeUpdateDelete(String sql, Object entity, Column[] columns) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public QueryBuilder innerJoin(Tables table, String onCondition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public <T> List<T> executeSelect(String query, Object[] params, Class<T> type) throws SQLException {
+	public <T> List<T> executeSelect(String query, Object entity, Class<T> type, Column[] columns) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public QueryBuilder conditions(Column[] conditionsColumns, String[] logics, boolean alias) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,8 +9,8 @@ import java.util.TreeSet;
 import com.Bean.BeanSession;
 import com.Dao.DaoSession;
 /**
- * Manages the updates and storage of session data in a tree set. 
- * This class tracks session access times and ensures that the 
+ * Manages the updates and storage of SESSION data in a tree set. 
+ * This class tracks SESSION access times and ensures that the 
  * maximum number of sessions stored does not exceed a specified limit.
  *
  *  @author Sahana
@@ -20,13 +20,13 @@ public class SessionTreeUpdate {
     private static int maxSize = 200; 
     private static TreeSet<BeanSession> sessionSet = new TreeSet<>();
     /**
-     * Updates the last accessed time for a given session ID. If the session 
+     * Updates the last accessed time for a given SESSION ID. If the SESSION 
      * already exists, it is removed and re-added with the new access time. 
-     * If the size of the session set exceeds the maximum allowed size, 
+     * If the size of the SESSION set exceeds the maximum allowed size, 
      * it triggers an update to the database.
      *
-     * @param sessionId       The ID of the session to update.
-     * @param newLastAccessed The new last accessed time for the session.
+     * @param sessionId       The ID of the SESSION to update.
+     * @param newLastAccessed The new last accessed time for the SESSION.
      * @throws SQLException If a database access error occurs.
      */
     public static void updateLastAccessed(String sessionId, LocalDateTime newLastAccessed) throws SQLException {
@@ -51,7 +51,7 @@ public class SessionTreeUpdate {
 		return sessionSet;
 	}
     /**
-     * Sets the session set to a new TreeSet of sessions.
+     * Sets the SESSION set to a new TreeSet of sessions.
      *
      * @param sessionSet The new TreeSet of sessions to set.
      */
@@ -59,9 +59,9 @@ public class SessionTreeUpdate {
 		SessionTreeUpdate.sessionSet = sessionSet;
 	}
 	/**
-     * Removes a session from the set based on the session ID.
+     * Removes a SESSION from the set based on the SESSION ID.
      *
-     * @param sessionId The ID of the session to remove.
+     * @param sessionId The ID of the SESSION to remove.
      */
 	public static void removeObj(String sessionId) {
         sessionSet.removeIf(session -> session.getSessionid().equals(sessionId)); 

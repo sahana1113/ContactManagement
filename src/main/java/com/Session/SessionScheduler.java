@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import com.Bean.BeanSession;
 import com.Dao.DaoSession;
 /**
- * Manages the scheduling of session updates and automatic deletion of 
+ * Manages the scheduling of SESSION updates and automatic deletion of 
  * expired sessions in the application. This class uses a scheduled 
  * executor service to run these tasks at fixed intervals.
  *
@@ -20,7 +20,7 @@ import com.Dao.DaoSession;
 public class SessionScheduler {
 	private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 	/**
-     * Starts the session scheduler. This method schedules tasks to 
+     * Starts the SESSION scheduler. This method schedules tasks to 
      * update sessions and delete expired sessions at fixed intervals 
      * (every 2 minutes).
      */
@@ -35,7 +35,7 @@ public class SessionScheduler {
         }, 0, 2, TimeUnit.MINUTES);  
     }
 	  /**
-     * Stops the session scheduler. This method gracefully shuts down 
+     * Stops the SESSION scheduler. This method gracefully shuts down 
      * the scheduled executor service, stopping all scheduled tasks.
      */
     public static void stopScheduler() {

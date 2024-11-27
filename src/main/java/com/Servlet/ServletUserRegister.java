@@ -25,7 +25,7 @@ public class ServletUserRegister extends HttpServlet {
      * login page; otherwise, an error message is displayed.
      *
      * <p>This method retrieves the user's email, username, gender, 
-     * birthday, phone number, and password from the request, and 
+     * birthday, phonenumber number, and password from the request, and 
      * attempts to register the user using the DaoRegisterLogin class.</p>
      *
      * @param request  The HttpServletRequest object that contains the 

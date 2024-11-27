@@ -3,8 +3,8 @@ package com.Bean;
 import java.time.LocalDateTime;
 
 /**
- * Represents a user session in the application.
- * This class encapsulates session-related details, including the session ID,
+ * Represents a user SESSION in the application.
+ * This class encapsulates SESSION-related details, including the SESSION ID,
  * user ID, and timestamps for creation, access, and expiration.
  * 
  * <p>This class implements the Comparable interface to allow sorting based
@@ -22,10 +22,10 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     private LocalDateTime expiry_time;
 
     /**
-     * Constructs a new BeanSession with the specified session ID and accessed time.
+     * Constructs a new BeanSession with the specified SESSION ID and accessed time.
      *
-     * @param sessionid The ID of the session.
-     * @param accessed_time The time when the session was last accessed.
+     * @param sessionid The ID of the SESSION.
+     * @param accessed_time The time when the SESSION was last accessed.
      */
     public BeanSession(String session_id, LocalDateTime accessed_time) {
         this.sessionid = session_id;
@@ -33,43 +33,43 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-	 * Retrieves the session ID.
+	 * Retrieves the SESSION ID.
 	 *
-	 * @return The ID of the session.
+	 * @return The ID of the SESSION.
 	 */
 	public String getSession_id() {
 		return getSessionid();
 	}
 
 	/**
-     * Retrieves the session ID.
+     * Retrieves the SESSION ID.
      *
-     * @return The ID of the session.
+     * @return The ID of the SESSION.
      */
     public String getSessionid() {
         return sessionid;
     }
 
     /**
-	 * Sets the session ID.
+	 * Sets the SESSION ID.
 	 *
-	 * @param session_id The new session ID.
+	 * @param session_id The new SESSION ID.
 	 */
 	public void setSession_id(String session_id) {
 		setSessionid(session_id);
 	}
 
 	/**
-     * Sets the session ID.
+     * Sets the SESSION ID.
      *
-     * @param sessionid The new session ID.
+     * @param sessionid The new SESSION ID.
      */
     public void setSessionid(String session_id) {
         this.sessionid = session_id;
     }
 
     /**
-     * Retrieves the user ID associated with this session.
+     * Retrieves the user ID associated with this SESSION.
      *
      * @return The user ID.
      */
@@ -78,7 +78,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Sets the user ID for this session.
+     * Sets the user ID for this SESSION.
      *
      * @param user_id The new user ID.
      */
@@ -87,7 +87,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Retrieves the creation time of the session.
+     * Retrieves the creation time of the SESSION.
      *
      * @return The creation time.
      */
@@ -96,7 +96,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Sets the creation time for the session.
+     * Sets the creation time for the SESSION.
      *
      * @param creation_time The new creation time.
      */
@@ -105,7 +105,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Retrieves the last accessed time of the session.
+     * Retrieves the last accessed time of the SESSION.
      *
      * @return The last accessed time.
      */
@@ -114,7 +114,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Sets the last accessed time for the session.
+     * Sets the last accessed time for the SESSION.
      *
      * @param accessed_time The new last accessed time.
      */
@@ -123,7 +123,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Retrieves the expiry time of the session.
+     * Retrieves the expiry time of the SESSION.
      *
      * @return The expiry time.
      */
@@ -132,7 +132,7 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Sets the expiry time for the session.
+     * Sets the expiry time for the SESSION.
      *
      * @param expiry_time The new expiry time.
      */
@@ -141,11 +141,11 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Compares this session to another session based on accessed time.
+     * Compares this SESSION to another SESSION based on accessed time.
      *
-     * @param other The other session to compare against.
-     * @return A negative integer, zero, or a positive integer as this session
-     *         is less than, equal to, or greater than the specified session.
+     * @param other The other SESSION to compare against.
+     * @return A negative integer, zero, or a positive integer as this SESSION
+     *         is less than, equal to, or greater than the specified SESSION.
      */
     @Override
     public int compareTo(BeanSession other) {
@@ -157,10 +157,10 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Indicates whether some other object is "equal to" this session.
+     * Indicates whether some other object is "equal to" this SESSION.
      *
      * @param obj The reference object with which to compare.
-     * @return true if this session is the same as the obj argument; false otherwise.
+     * @return true if this SESSION is the same as the obj argument; false otherwise.
      */
     @Override
     public boolean equals(Object obj) {
@@ -171,9 +171,9 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
     }
 
     /**
-     * Returns a hash code value for this session.
+     * Returns a hash code value for this SESSION.
      *
-     * @return A hash code value for this session.
+     * @return A hash code value for this SESSION.
      */
     @Override
     public int hashCode() {

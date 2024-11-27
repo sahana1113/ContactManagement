@@ -1,0 +1,33 @@
+2024-11-27 12:41:30 INFO  AppContextListener - Server started at Wed Nov 27 12:41:30 IST 2024
+2024-11-27 12:41:31 INFO  FilterSession - 127.0.0.1 - - [Wed Nov 27 12:41:31 IST 2024] "GET / HTTP/1.1"
+2024-11-27 12:41:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:35 IST 2024] "GET / HTTP/1.1"
+2024-11-27 12:41:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:35 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:41:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:35 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-11-27 12:41:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:35 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:41:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:48 IST 2024] "POST /login HTTP/1.1"
+2024-11-27 12:41:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:49 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:41:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:49 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-11-27 12:41:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:41:49 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:42:19 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:19 IST 2024] "POST /login HTTP/1.1"
+2024-11-27 12:42:19 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:19 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:42:19 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:19 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-11-27 12:42:20 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:20 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:42:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:31 IST 2024] "POST /login HTTP/1.1"
+2024-11-27 12:42:31 INFO  ServletUserLogin - User logged in: user_id=24
+2024-11-27 12:42:31 INFO  FilterSession -  24 735cd67b-ea53-46bf-bcb7-ad450b356828: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:31 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-27 12:42:31 INFO  FilterSession -  24 735cd67b-ea53-46bf-bcb7-ad450b356828: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:31 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-11-27 12:42:35 INFO  FilterSession -  24 735cd67b-ea53-46bf-bcb7-ad450b356828: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:35 IST 2024] "GET /logout HTTP/1.1"
+2024-11-27 12:42:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:35 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:42:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:48 IST 2024] "POST /login HTTP/1.1"
+2024-11-27 12:42:48 INFO  ServletUserLogin - User logged in: user_id=22
+2024-11-27 12:42:48 INFO  FilterSession -  22 d07fb678-4be7-4d59-ab1f-19e005435228: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:48 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-27 12:42:51 INFO  FilterSession -  22 d07fb678-4be7-4d59-ab1f-19e005435228: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:51 IST 2024] "GET /logout HTTP/1.1"
+2024-11-27 12:42:51 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:42:51 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:43:01 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:01 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-11-27 12:43:03 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:03 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-11-27 12:43:33 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:33 IST 2024] "POST /register HTTP/1.1"
+2024-11-27 12:43:34 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:34 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-27 12:43:43 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:43 IST 2024] "POST /login HTTP/1.1"
+2024-11-27 12:43:43 INFO  ServletUserLogin - User logged in: user_id=42
+2024-11-27 12:43:43 INFO  FilterSession -  42 c0019c6c-05a7-4b07-a7b0-e65f3790fd70: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:43:43 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-27 12:46:21 INFO  AppContextListener - Server stoped at Wed Nov 27 12:46:21 IST 2024

@@ -1,0 +1,11 @@
+25/Nov/2024:22:31:33 +0530  - - [25/Nov/2024:22:31:33 +0530] "Server started at Mon Nov 25 22:31:33 IST 2024 %U HTTP/1.1" %s %b
+25/Nov/2024:22:31:34 +0530  - - [25/Nov/2024:22:31:34 +0530] "127.0.0.1 - - [Mon Nov 25 22:31:34 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:31:34 +0530  - - [25/Nov/2024:22:31:34 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:31:34 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:31:34 +0530  - - [25/Nov/2024:22:31:34 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:31:34 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:31:36 +0530  - - [25/Nov/2024:22:31:36 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:31:36 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:31:39 +0530  - - [25/Nov/2024:22:31:39 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:31:39 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:32:08 +0530  - - [25/Nov/2024:22:32:08 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:32:08 IST 2024] "GET /deleteContact.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:33:00 +0530  - - [25/Nov/2024:22:33:00 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:33:00 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:33:02 +0530  - - [25/Nov/2024:22:33:02 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:33:02 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:33:03 +0530  - - [25/Nov/2024:22:33:03 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:33:03 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+25/Nov/2024:22:33:03 +0530  - - [25/Nov/2024:22:33:03 +0530] "Server stoped at Mon Nov 25 22:33:03 IST 2024 %U HTTP/1.1" %s %b

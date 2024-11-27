@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebListener;
 import com.Session.SessionScheduler;
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 /**
- * A servlet context listener that initializes and stops the session scheduler 
+ * A servlet context listener that initializes and stops the SESSION scheduler 
  * when the web application context is created and destroyed.
  *
  *  @author Sahana
@@ -22,7 +22,7 @@ import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 public class AppContextListener implements ServletContextListener {
 	/**
      * Called when the servlet context is initialized. 
-     * Starts the session scheduler.
+     * Starts the SESSION scheduler.
      *
      * @param sce the ServletContextEvent containing the servlet context that 
      *            was initialized.
@@ -41,7 +41,7 @@ public class AppContextListener implements ServletContextListener {
     }
     /**
      * Called when the servlet context is destroyed. 
-     * Stops the session scheduler.
+     * Stops the SESSION scheduler.
      *
      * @param sce the ServletContextEvent containing the servlet context that 
      *            was destroyed.

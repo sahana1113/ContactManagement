@@ -1,0 +1,9 @@
+2024-11-25 22:24:46 INFO  AppContextListener - Server started at Mon Nov 25 22:24:46 IST 2024
+2024-11-25 22:24:47 INFO  FilterSession - 127.0.0.1 - - [Mon Nov 25 22:24:47 IST 2024] "GET / HTTP/1.1"
+2024-11-25 22:24:47 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:47 IST 2024] "GET / HTTP/1.1"
+2024-11-25 22:24:47 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:47 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-11-25 22:24:49 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:49 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-25 22:24:52 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:52 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-11-25 22:24:54 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:54 IST 2024] "GET /editContact.jsp HTTP/1.1"
+2024-11-25 22:25:13 INFO  FilterSession -  24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:25:13 IST 2024] "POST /update2 HTTP/1.1"
+2024-11-25 22:27:46 INFO  AppContextListener - Server stoped at Mon Nov 25 22:27:46 IST 2024

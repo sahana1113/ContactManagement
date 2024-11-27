@@ -42,10 +42,10 @@ public class ServletCreateContact extends HttpServlet {
         contact.setName(request.getParameter("username"));
         contact.setGender(request.getParameter("gender"));
         contact.setBirthday(request.getParameter("birthday"));
-        contact.setPhonenumber(request.getParameter("phone"));
+        contact.setPhonenumber(request.getParameter("phonenumber"));
         contact.setLocation(request.getParameter("location"));
         contact.setCreated_time(System.currentTimeMillis() / 1000);
-        String[] selectedCategories = request.getParameterValues("categories");
+        String[] selectedCategories = request.getParameterValues("CATEGORIES");
         if(selectedCategories!=null && selectedCategories.length!=0)
         contact.setCategory(Arrays.asList(selectedCategories));
         DaoUserContact cd=new DaoUserContact((int)request.getAttribute("user_id"));

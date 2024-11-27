@@ -5,14 +5,32 @@ import java.util.Arrays;
 
 public class Enum { 
 	public enum Tables{
-		all_mail,
-		all_phone,
-		categories,
-		category_users,
-		contactDetails,
-		credentials,
-		session,
-		userDetails;
+		ALL_MAIL("all_mail","a"),
+		ALL_PHONE("all_phone","p"),
+		CATEGORIES("categories","cat"),
+		CATEGORY_USERS("category_users","cu"),
+		CONTACT_DETAILS("contactDetails","cd"),
+		CREDENTIALS("credentials","c"),
+		SESSION("session","s"),
+		USER_DETAILS("userDetails","ud");
+		private final String tableName;
+	    private final String alias;
+
+	    Tables(String tableName, String alias) {
+	        this.tableName = tableName;
+	        this.alias = alias;
+	    }
+	    
+	    public String getTableName() {
+	        return tableName;
+	    }
+
+	    public String getAlias() {
+	        return alias;
+	    }
+	    public String withAlias() {
+	        return tableName + " " + alias;
+	    }
 	}
 
     public enum UserDetails implements Column{
@@ -27,42 +45,70 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(UserDetails::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        
+        private static final String alias = "ud";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "userDetails";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
     public enum AllMail implements Column{
         user_id,
-        user_email,
+        usermail,
         is_primary;
 
         public String getColumnName() {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(AllMail::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "a";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "all_mail";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
     public enum AllPhone implements Column{
         user_id,
-        phone,
+        phonenumber,
         is_primary;
 
         public String getColumnName() {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(AllPhone::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "p";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "all_phone";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
@@ -75,10 +121,19 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(Categories::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "cat";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "categories";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
@@ -90,10 +145,19 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(CategoryUsers::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "cu";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "category_users";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
@@ -113,10 +177,19 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(ContactDetails::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "cd";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "contactDetails";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
@@ -129,10 +202,19 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(Credentials::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "c";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "credentials";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 
@@ -148,10 +230,19 @@ public class Enum {
             return this.name();
         }
 
-        public static String[] getColumnNames() {
-            return Arrays.stream(values())
-                         .map(Session::getColumnName)
-                         .toArray(String[]::new);
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "s";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "session";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
         }
     }
 }

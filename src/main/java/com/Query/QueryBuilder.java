@@ -17,11 +17,12 @@ public interface QueryBuilder {
     QueryBuilder set(String... columnValuePairs);
     QueryBuilder deleteFrom(Tables table);
     String build();  
-	int executeInsert(String query, Object... obj) throws SQLException;
 	QueryBuilder andWhere(String condition);
 	QueryBuilder orWhere(String condition);
-	int executeUpdateDelete(String sql, Object... parameters) throws SQLException;
-	QueryBuilder conditions(Column[] conditionsColumns, String[] logics);
-	<T> List<T> executeSelect(String query, Object[] params, Class<T> type) throws SQLException;
+	int executeInsert(String query, Object obj, Column[] columns) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException;
+	int executeUpdateDelete(String sql, Object entity, Column[] columns) throws SQLException;
+	QueryBuilder innerJoin(Tables table, String onCondition);
+	<T> List<T> executeSelect(String query, Object entity, Class<T> type, Column[] columns) throws SQLException;
+	QueryBuilder conditions(Column[] conditionsColumns, String[] logics, boolean alias);
 	
 }

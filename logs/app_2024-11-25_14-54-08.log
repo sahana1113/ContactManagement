@@ -1,0 +1,7 @@
+2024-11-25 14:54:08 INFO  AppContextListener - Server started at Mon Nov 25 14:54:08 IST 2024
+2024-11-25 14:54:09 INFO  FilterSession - 127.0.0.1 - - [Mon Nov 25 14:54:09 IST 2024] "GET / HTTP/1.1"
+2024-11-25 14:54:09 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:54:09 IST 2024] "GET / HTTP/1.1"
+2024-11-25 14:54:09 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:54:09 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-25 14:54:09 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:54:09 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-11-25 14:54:09 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Nov 25 14:54:09 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-11-25 14:54:17 INFO  AppContextListener - Server stoped at Mon Nov 25 14:54:17 IST 2024

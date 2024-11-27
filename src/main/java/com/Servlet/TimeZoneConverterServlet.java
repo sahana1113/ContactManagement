@@ -24,7 +24,7 @@ public class TimeZoneConverterServlet extends HttpServlet {
         String contactIdParam = request.getParameter("contactId");
         int contactId = Integer.parseInt(contactIdParam.substring(0,contactIdParam.length()-1));
         request.setAttribute("selectedTimeZone", selectedTimeZone);
-    	RequestDispatcher rd=request.getRequestDispatcher("contactDetails.jsp?id="+contactId);  
+    	RequestDispatcher rd=request.getRequestDispatcher("CONTACT_DETAILS.jsp?id="+contactId);  
         rd.forward(request, response);  
     }
 }

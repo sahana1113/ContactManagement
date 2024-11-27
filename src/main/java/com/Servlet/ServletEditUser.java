@@ -23,7 +23,7 @@ public class ServletEditUser extends HttpServlet {
      * from the form.
      *
      * <p>This method can handle various actions such as adding or 
-     * deleting email and phone numbers, as well as updating primary 
+     * deleting email and phonenumber numbers, as well as updating primary 
      * user information. It redirects the user to the appropriate page 
      * based on the action performed.</p>
      *
@@ -46,22 +46,22 @@ public class ServletEditUser extends HttpServlet {
 
         try {
             if ("deleteEmail".equals(action)) {
-                user.setAltmail(request.getParameter("altEmail"));
+                user.setUsermail(request.getParameter("altEmail"));
                 rld.deleteAltMail(user);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("deletePhone".equals(action)) {
-                user.setAltphone(request.getParameter("altPhone"));
+                user.setPhonenumber(request.getParameter("altPhone"));
                 rld.deleteAltPhone(user);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addEmail".equals(action)) {
-                user.setAltmail(request.getParameter("newAltEmail"));
+                user.setUsermail(request.getParameter("newAltEmail"));
                 rld.addAltMail(user);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addPhone".equals(action)) {
-                user.setAltphone(request.getParameter("newAltPhone"));
+                user.setPhonenumber(request.getParameter("newAltPhone"));
                 rld.addAltPhone(user); 
                 response.sendRedirect("EditDetails.jsp");
                 return;
