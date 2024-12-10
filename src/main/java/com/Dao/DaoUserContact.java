@@ -32,7 +32,7 @@ public class DaoUserContact{
 	public String getCategoryName(int id) throws Exception{
 		BeanCategory obj=new BeanCategory();
 		obj.setCategory_id(id);
-		Condition condition=new Condition(Categories.category_id,"=");
+		Condition condition=new Condition(Categories.category_id,"=",false);
 		List<BeanCategory>list=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.CATEGORIES}, 
 				new Column[] {Categories.category_name} , 
@@ -47,7 +47,7 @@ public class DaoUserContact{
 	{
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
-		Condition condition=new Condition(UserDetails.user_id,"=");
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
 		//List<BeanUserDetails>list=QueryLayer.getQueryBuilder().select(new Column[] {UserDetails.username}).from(Tables.USER_DETAILS).conditions(new Column[] {UserDetails.user_id}, null, true).build();
 		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.USER_DETAILS},
@@ -64,7 +64,7 @@ public class DaoUserContact{
 	{
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
-		Condition condition=new Condition(UserDetails.user_id,"=");
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
 		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
 		            new Tables[] {Tables.USER_DETAILS},
 		            new Column[] {UserDetails.usermail},  
@@ -82,7 +82,7 @@ public class DaoUserContact{
 	{
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
-		Condition condition=new Condition(UserDetails.user_id,"=");
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
 		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
 		            new Tables[] {Tables.USER_DETAILS},
 		            new Column[] {UserDetails.phonenumber},  
@@ -101,12 +101,9 @@ public class DaoUserContact{
 	{
 		BeanContactDetails obj=new BeanContactDetails(user_id);
 		obj.setIs_archive(false);
-        Condition condition1=new Condition(ContactDetails.user_id,"=");
-        Condition condition2=new Condition(ContactDetails.is_archive,"=");
+        Condition condition1=new Condition(ContactDetails.user_id,"=",false);
+        Condition condition2=new Condition(ContactDetails.is_archive,"=",false);
         Condition and=new Condition("AND").addSubCondition(condition1).addSubCondition(condition2);
-        Condition condition3=new Condition(ContactDetails.name,"=");
-        Condition or=new Condition("OR").addSubCondition(and).addSubCondition(condition3);
-        System.out.print(or.toString());
 		List<BeanContactDetails>list=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.CONTACT_DETAILS},
 				new Column[] {ContactDetails.name,ContactDetails.phonenumber,ContactDetails.contact_id}, 
@@ -137,7 +134,7 @@ public class DaoUserContact{
 	{
 		  BeanContactDetails obj=new BeanContactDetails();
 		  obj.setContact_id(contact_id);
-			Condition condition=new Condition(ContactDetails.contact_id,"=");
+			Condition condition=new Condition(ContactDetails.contact_id,"=",false);
 		  List<BeanContactDetails>list=QueryLayer.buildSelectQuery(
 				  new Tables[] {Tables.CONTACT_DETAILS},
 				  ContactDetails.getColumnNames(), 
@@ -160,7 +157,7 @@ public class DaoUserContact{
 	{
 		BeanUserDetails obj=new BeanUserDetails();
 		obj.setUser_id(user_id);
-		Condition condition=new Condition(UserDetails.user_id,"=");
+		Condition condition=new Condition(UserDetails.user_id,"=",true);
 		List<BeanUserDetails> user=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.USER_DETAILS,Tables.ALL_MAIL,Tables.ALL_PHONE},
 				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,AllMail.altMail,AllPhone.altPhone},
@@ -204,7 +201,7 @@ public class DaoUserContact{
     public BeanUserDetails getPrimeDetailsById(int userId) throws Exception{
     	BeanUserDetails user=new BeanUserDetails();
     	user.setUser_id(userId);
-		Condition condition=new Condition(UserDetails.user_id,"=");
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
     	List<BeanUserDetails> list=QueryLayer.buildSelectQuery(
     			new Tables[] {Tables.USER_DETAILS},
     			new Column[] {UserDetails.phonenumber,UserDetails.usermail},
@@ -218,7 +215,7 @@ public class DaoUserContact{
     {
     	BeanCategory obj=new BeanCategory();
     	obj.setUser_id(user_id);
-		Condition condition=new Condition(Categories.user_id,"=");
+		Condition condition=new Condition(Categories.user_id,"=",false);
     	List<BeanCategory>categories=QueryLayer.buildSelectQuery(
     			new Tables[] {Tables.CATEGORIES},
     			new Column[] {Categories.category_name,Categories.category_id},
@@ -232,7 +229,7 @@ public class DaoUserContact{
     {
     	BeanCategory obj=new BeanCategory();
     	obj.setCategory_id(category);
-		Condition condition=new Condition(CategoryUsers.category_id,"=");
+		Condition condition=new Condition(CategoryUsers.category_id,"=",true);
     	List<BeanContactDetails>categories=QueryLayer.buildSelectQuery(
     			new Tables[] {Tables.CONTACT_DETAILS,Tables.CATEGORY_USERS},
     			new Column[] {ContactDetails.contact_id,ContactDetails.name,ContactDetails.phonenumber},

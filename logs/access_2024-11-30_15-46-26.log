@@ -1,8 +1,0 @@
-30/Nov/2024:15:46:26 +0530  - - [30/Nov/2024:15:46:26 +0530] "Server started at Sat Nov 30 15:46:26 IST 2024 %U HTTP/1.1" %s %b
-30/Nov/2024:15:46:27 +0530  - - [30/Nov/2024:15:46:27 +0530] "127.0.0.1 - - [Sat Nov 30 15:46:27 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:46:27 +0530  - - [30/Nov/2024:15:46:27 +0530] " 24 d6bc2fde-9a75-4a78-86a4-825bde7bb7a9: 0:0:0:0:0:0:0:1 - - [Sat Nov 30 15:46:27 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:46:27 +0530  - - [30/Nov/2024:15:46:27 +0530] " 24 d6bc2fde-9a75-4a78-86a4-825bde7bb7a9: 0:0:0:0:0:0:0:1 - - [Sat Nov 30 15:46:27 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:47:19 +0530  - - [30/Nov/2024:15:47:19 +0530] " 24 d6bc2fde-9a75-4a78-86a4-825bde7bb7a9: 0:0:0:0:0:0:0:1 - - [Sat Nov 30 15:47:19 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:47:22 +0530  - - [30/Nov/2024:15:47:22 +0530] " 24 d6bc2fde-9a75-4a78-86a4-825bde7bb7a9: 0:0:0:0:0:0:0:1 - - [Sat Nov 30 15:47:22 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:47:31 +0530  - - [30/Nov/2024:15:47:31 +0530] " 24 d6bc2fde-9a75-4a78-86a4-825bde7bb7a9: 0:0:0:0:0:0:0:1 - - [Sat Nov 30 15:47:31 IST 2024] "GET /convertTimeZone HTTP/1.1" %U HTTP/1.1" %s %b
-30/Nov/2024:15:48:46 +0530  - - [30/Nov/2024:15:48:46 +0530] "Server stoped at Sat Nov 30 15:48:46 IST 2024 %U HTTP/1.1" %s %b

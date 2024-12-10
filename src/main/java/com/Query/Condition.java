@@ -9,13 +9,12 @@ public class Condition {
     private String value="?";            
     private String logicalOperator;  
     private List<Condition> subConditions; 
+    private boolean alias=false;
 
     public Condition(Column field, String operator,Boolean alias) {
-    	if(alias) {
-    		this.field=field.getColumnNamesWithAlias();
-    	}
         this.field = field;
         this.operator = operator;
+        this.alias=alias;
         this.logicalOperator = null;  
         this.subConditions = null;   
     }
@@ -63,6 +62,8 @@ public class Condition {
             builder.append(")");
             return builder.toString();
         } else {
+        	if(alias)
+        		return field.getColumnNamesWithAlias()+" "+operator+" "+value;
             return field + " " + operator + " " + value;
         }
     }

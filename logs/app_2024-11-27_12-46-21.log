@@ -1,4 +1,0 @@
-2024-11-27 12:46:21 INFO  AppContextListener - Server started at Wed Nov 27 12:46:21 IST 2024
-2024-11-27 12:46:59 INFO  FilterSession -  42 c0019c6c-05a7-4b07-a7b0-e65f3790fd70: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:46:59 IST 2024] "GET /logout HTTP/1.1"
-2024-11-27 12:46:59 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Nov 27 12:46:59 IST 2024] "GET /login.jsp HTTP/1.1"
-2024-11-27 12:47:13 INFO  AppContextListener - Server stoped at Wed Nov 27 12:47:13 IST 2024

@@ -1,7 +1,0 @@
-2024-11-14 17:20:04 INFO  AppContextListener - Server started at Thu Nov 14 17:20:04 IST 2024
-2024-11-14 17:20:05 INFO  FilterSession - 127.0.0.1 - - [Thu Nov 14 17:20:05 IST 2024] "GET / HTTP/1.1"
-2024-11-14 17:20:06 INFO  FilterSession -  24 0ac92b8c-fb98-426a-af35-8ed1abd7e4ac: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 17:20:06 IST 2024] "GET / HTTP/1.1"
-2024-11-14 17:20:06 INFO  FilterSession -  24 0ac92b8c-fb98-426a-af35-8ed1abd7e4ac: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 17:20:06 IST 2024] "GET /home.jsp HTTP/1.1"
-2024-11-14 17:20:11 INFO  FilterSession -  24 0ac92b8c-fb98-426a-af35-8ed1abd7e4ac: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 17:20:11 IST 2024] "GET /prime.jsp HTTP/1.1"
-2024-11-14 17:20:21 INFO  FilterSession -  24 0ac92b8c-fb98-426a-af35-8ed1abd7e4ac: 0:0:0:0:0:0:0:1 - - [Thu Nov 14 17:20:21 IST 2024] "POST /prime HTTP/1.1"
-2024-11-14 17:24:54 INFO  AppContextListener - Server stoped at Thu Nov 14 17:24:54 IST 2024

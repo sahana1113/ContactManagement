@@ -1,5 +1,0 @@
-2024-12-09 22:17:19 INFO  AppContextListener - Server started at Mon Dec 09 22:17:19 IST 2024
-2024-12-09 22:17:20 INFO  FilterSession - 127.0.0.1 - - [Mon Dec 09 22:17:20 IST 2024] "GET / HTTP/1.1"
-2024-12-09 22:17:21 INFO  FilterSession -  24 fc8a4782-64e6-4f93-9bca-324487d8407c: 0:0:0:0:0:0:0:1 - - [Mon Dec 09 22:17:21 IST 2024] "GET / HTTP/1.1"
-2024-12-09 22:17:21 INFO  FilterSession -  24 fc8a4782-64e6-4f93-9bca-324487d8407c: 0:0:0:0:0:0:0:1 - - [Mon Dec 09 22:17:21 IST 2024] "GET /home.jsp HTTP/1.1"
-2024-12-09 22:22:20 INFO  AppContextListener - Server stoped at Mon Dec 09 22:22:20 IST 2024

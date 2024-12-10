@@ -1,5 +1,0 @@
-2024-10-24 12:50:15 INFO  AppContextListener - Server started at Thu Oct 24 12:50:15 IST 2024
-2024-10-24 12:50:21 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:50:21 IST 2024] "GET /editContact.jsp HTTP/1.1"
-2024-10-24 12:50:25 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:50:25 IST 2024] "GET /editContact.jsp HTTP/1.1"
-2024-10-24 12:50:39 INFO  FilterSession -  24 4950856b-3209-4647-a30c-c87aba0c9216: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 12:50:39 IST 2024] "POST /update2 HTTP/1.1"
-2024-10-24 12:54:35 INFO  AppContextListener - Server stoped at Thu Oct 24 12:54:35 IST 2024

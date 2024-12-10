@@ -1,4 +1,0 @@
-27/Nov/2024:13:43:27 +0530  - - [27/Nov/2024:13:43:27 +0530] "Server started at Wed Nov 27 13:43:27 IST 2024 %U HTTP/1.1" %s %b
-27/Nov/2024:13:43:28 +0530  - - [27/Nov/2024:13:43:28 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:43:28 IST 2024] "POST /update HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:43:28 +0530  - - [27/Nov/2024:13:43:28 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:43:28 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:44:07 +0530  - - [27/Nov/2024:13:44:07 +0530] "Server stoped at Wed Nov 27 13:44:07 IST 2024 %U HTTP/1.1" %s %b

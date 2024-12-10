@@ -1,9 +1,0 @@
-25/Nov/2024:22:34:46 +0530  - - [25/Nov/2024:22:34:46 +0530] "Server started at Mon Nov 25 22:34:46 IST 2024 %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:47 +0530  - - [25/Nov/2024:22:34:47 +0530] "127.0.0.1 - - [Mon Nov 25 22:34:47 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:47 +0530  - - [25/Nov/2024:22:34:47 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:47 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:47 +0530  - - [25/Nov/2024:22:34:47 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:47 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:50 +0530  - - [25/Nov/2024:22:34:50 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:50 IST 2024] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:54 +0530  - - [25/Nov/2024:22:34:54 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:54 IST 2024] "POST /update HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:54 +0530  - - [25/Nov/2024:22:34:54 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:54 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:34:57 +0530  - - [25/Nov/2024:22:34:57 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:34:57 IST 2024] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:35:12 +0530  - - [25/Nov/2024:22:35:12 +0530] "Server stoped at Mon Nov 25 22:35:12 IST 2024 %U HTTP/1.1" %s %b

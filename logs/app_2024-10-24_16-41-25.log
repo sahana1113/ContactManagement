@@ -1,8 +1,0 @@
-2024-10-24 16:41:25 INFO  AppContextListener - Server started at Thu Oct 24 16:41:25 IST 2024
-2024-10-24 16:41:26 INFO  FilterSession - 127.0.0.1 - - [Thu Oct 24 16:41:26 IST 2024] "GET / HTTP/1.1"
-2024-10-24 16:41:27 INFO  FilterSession -  24 d9538339-8a09-4fc2-8fcd-f09bd715b22c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:41:27 IST 2024] "GET / HTTP/1.1"
-2024-10-24 16:41:27 INFO  FilterSession -  24 d9538339-8a09-4fc2-8fcd-f09bd715b22c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:41:27 IST 2024] "GET /home.jsp HTTP/1.1"
-2024-10-24 16:41:36 INFO  FilterSession -  24 d9538339-8a09-4fc2-8fcd-f09bd715b22c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:41:36 IST 2024] "GET /category.jsp HTTP/1.1"
-2024-10-24 16:41:37 INFO  FilterSession -  24 d9538339-8a09-4fc2-8fcd-f09bd715b22c: 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:41:37 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
-2024-10-24 16:42:26 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Oct 24 16:42:26 IST 2024] "GET /myDetails.jsp HTTP/1.1"
-2024-10-24 16:42:26 INFO  AppContextListener - Server stoped at Thu Oct 24 16:42:26 IST 2024

@@ -127,7 +127,7 @@ public class DaoSession {
 	 public int validateSession(String sessionId, Cookie[] cookies) throws Exception {
 		    BeanSession obj=new BeanSession();
 		    obj.setSessionid(sessionId);
-			Condition condition=new Condition(Session.sessionid,"=");
+			Condition condition=new Condition(Session.sessionid,"=",false);
 		     List<BeanSession> list=QueryLayer.buildSelectQuery(
 		    		 new Tables[] {Tables.SESSION},
 		    		 new Column[] {Session.user_id,Session.expiry_time},

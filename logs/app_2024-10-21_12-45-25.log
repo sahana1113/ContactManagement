@@ -1,6 +1,0 @@
-2024-10-21 12:45:25 INFO  AppContextListener - Server started at Mon Oct 21 12:45:25 IST 2024
-2024-10-21 12:45:27 INFO  FilterSession - 127.0.0.1 - - [Mon Oct 21 12:45:27 IST 2024] "GET / HTTP/1.1"
-2024-10-21 12:45:27 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:45:27 IST 2024] "GET /index.jsp HTTP/1.1"
-2024-10-21 12:45:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:45:29 IST 2024] "GET /register.jsp HTTP/1.1"
-2024-10-21 12:48:14 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Oct 21 12:48:14 IST 2024] "POST /register HTTP/1.1"
-2024-10-21 12:53:27 INFO  AppContextListener - Server stoped at Mon Oct 21 12:53:27 IST 2024

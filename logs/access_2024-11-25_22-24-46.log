@@ -1,9 +1,0 @@
-25/Nov/2024:22:24:46 +0530  - - [25/Nov/2024:22:24:46 +0530] "Server started at Mon Nov 25 22:24:46 IST 2024 %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:47 +0530  - - [25/Nov/2024:22:24:47 +0530] "127.0.0.1 - - [Mon Nov 25 22:24:47 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:47 +0530  - - [25/Nov/2024:22:24:47 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:47 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:47 +0530  - - [25/Nov/2024:22:24:47 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:47 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:49 +0530  - - [25/Nov/2024:22:24:49 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:49 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:52 +0530  - - [25/Nov/2024:22:24:52 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:52 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:24:54 +0530  - - [25/Nov/2024:22:24:54 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:24:54 IST 2024] "GET /editContact.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:25:13 +0530  - - [25/Nov/2024:22:25:13 +0530] " 24 d0c2cfd7-3baf-49b0-9565-fabacb24f941: 0:0:0:0:0:0:0:1 - - [Mon Nov 25 22:25:13 IST 2024] "POST /update2 HTTP/1.1" %U HTTP/1.1" %s %b
-25/Nov/2024:22:27:46 +0530  - - [25/Nov/2024:22:27:46 +0530] "Server stoped at Mon Nov 25 22:27:46 IST 2024 %U HTTP/1.1" %s %b

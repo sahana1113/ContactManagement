@@ -1,8 +1,0 @@
-27/Nov/2024:13:32:36 +0530  - - [27/Nov/2024:13:32:36 +0530] "Server started at Wed Nov 27 13:32:36 IST 2024 %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:37 +0530  - - [27/Nov/2024:13:32:37 +0530] "127.0.0.1 - - [Wed Nov 27 13:32:37 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:38 +0530  - - [27/Nov/2024:13:32:38 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:38 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:38 +0530  - - [27/Nov/2024:13:32:38 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:38 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:40 +0530  - - [27/Nov/2024:13:32:40 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:40 IST 2024] "GET /category.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:41 +0530  - - [27/Nov/2024:13:32:41 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:41 IST 2024] "GET /categoryDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:32:46 +0530  - - [27/Nov/2024:13:32:46 +0530] " 24 71e8a06d-b113-4eba-8ea2-4d982e8defc3: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 13:32:46 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-27/Nov/2024:13:33:16 +0530  - - [27/Nov/2024:13:33:16 +0530] "Server stoped at Wed Nov 27 13:33:16 IST 2024 %U HTTP/1.1" %s %b

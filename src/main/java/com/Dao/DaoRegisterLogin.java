@@ -90,7 +90,7 @@ public class DaoRegisterLogin {
 		int user_id = -1;
 		BeanMail user=new BeanMail();
 		user.setAltMail(usermail);
-		Condition condition=new Condition(AllMail.altMail,"=");
+		Condition condition=new Condition(AllMail.altMail,"=",true);
 		List<BeanUserDetails> userList=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.CREDENTIALS,Tables.ALL_MAIL},
 				new Column[] {Credentials.user_id,Credentials.password,Credentials.flag},
@@ -333,8 +333,8 @@ public class DaoRegisterLogin {
 		for (BeanCategory s : category) {
 			user.setCategory_name(s.getCategory_name());
 			user.setUser_id(user_id);
-			Condition con1=new Condition(Categories.category_name,"=");
-			Condition con2=new Condition(Categories.user_id,"=");
+			Condition con1=new Condition(Categories.category_name,"=",false);
+			Condition con2=new Condition(Categories.user_id,"=",false);
 			Condition and=new Condition("AND").addSubCondition(con1).addSubCondition(con2);
 			List<BeanCategory> list = QueryLayer.buildSelectQuery(new Tables[] {Tables.CATEGORIES},
 					new Column[] { Categories.category_id },
