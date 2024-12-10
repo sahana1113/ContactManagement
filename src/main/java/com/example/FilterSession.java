@@ -1,5 +1,7 @@
 package com.example;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -70,7 +72,11 @@ public class FilterSession implements Filter {
 
         boolean isValidSession = false;
         if (session_id!=null) {
-        	user_id=sessionDAO.validateSession(session_id,cookies);
+        	try {
+				user_id=sessionDAO.validateSession(session_id,cookies);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
             if(user_id!=0)
 			{
 				 isValidSession = true;

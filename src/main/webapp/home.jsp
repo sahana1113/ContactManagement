@@ -163,22 +163,24 @@ String s = cd.getUsername();
                         <ul>
                             <%
                             boolean r=false;
-                            for (String email : user.getAllMail()) {
-                                if (!email.isEmpty()) {
-                                	r=true;%>
-                                    <li><%= email %></li>
+                                                        for (BeanMail email : user.getAltMail()) {
+                                                            if (email!=null) {
+                                                            	r=true;
+                            %>
+                                    <li><%=email.getAltMail()%></li>
                             <% } }if(!r)
                             	out.print("No alternate mails assigned"); %>
                         </ul>
                     </li>
                     <li><strong>Alternate Phone Numbers:</strong>
                         <ul>
-                            <% 
+                            <%
                             boolean r1=false;
-                            for (String phone : user.getAllPhone()) {
-                                if (!phone.isEmpty()) {
-                                	r1=true;%>
-                                    <li><%= phone %></li>
+                                                        for (BeanPhone phone : user.getAltPhone()) {
+                                                            if (phone!=null) {
+                                                            	r1=true;
+                            %>
+                                    <li><%=phone.getAltPhone()%></li>
                             <% } }if(!r)
                             	out.print("No alternate phonenumber assigned"); %>
                         </ul>

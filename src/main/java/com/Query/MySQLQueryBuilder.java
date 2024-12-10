@@ -1,5 +1,6 @@
 package com.Query;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,12 +9,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.naming.NamingException;
 
+import com.Bean.Bean;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoUserContact;
 import com.Query.Enum.AllMail;
@@ -48,13 +53,13 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		return this;
 	}
 	@Override
-	public QueryBuilder innerJoin(Tables table, String onCondition) {
-	    query.append(" INNER JOIN ").append(table.withAlias()).append(" ON ").append(onCondition);
+	public QueryBuilder join(Tables table, String onCondition,String join) {
+	    query.append(join).append(table.withAlias()).append(" ON ").append(onCondition);
 	    return this;
 	}
 
 	@Override
-	public QueryBuilder where(String condition) {
+	public QueryBuilder where(Condition condition) {
 		query.append(" WHERE ").append(condition);
 		return this;
 	}
@@ -73,12 +78,12 @@ public class MySQLQueryBuilder implements QueryBuilder {
 
 	@Override
 	public QueryBuilder conditions(Column[] conditionsColumns, String[] logics,boolean alias) {
-		if(alias) {
-		this.where(conditionsColumns[0].getColumnNamesWithAlias() + " = ?");
-		}
-		else {
-			this.where(conditionsColumns[0].getColumnName() + " = ?");
-		}
+//		if(alias) {
+//		this.where(conditionsColumns[0].getColumnNamesWithAlias() + " = ?");
+//		}
+//		else {
+//			this.where(conditionsColumns[0].getColumnName() + " = ?");
+//		}
 		for (int i = 1; i < conditionsColumns.length; i++) {
 			String condition;
 			if(alias) {
@@ -143,7 +148,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeInsert(String query, Object entity, Column[] columns) throws SQLException{
+	public int executeInsert(String query, Bean entity, Column[] columns) throws SQLException{
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		System.out.println(query);
@@ -171,7 +176,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeUpdateDelete(String sql, Object entity,Column[]columns) throws SQLException {
+	public int executeUpdateDelete(String sql, Bean entity,Column[]columns) throws SQLException {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(sql);
 		System.out.println(sql);
@@ -193,13 +198,14 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public <T> List<T> executeSelect(String query, Object entity, Class<T> type,Column[]columns) throws SQLException {
+	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type,List<Column> columns) throws Exception {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query);
+		System.out.println(query);
 		Class<?> clazz = entity.getClass();
 	    try {
-	        for (int i = 0; i < columns.length; i++) {
-	            String fieldName = columns[i].getColumnName(); 
+	        for (int i = 0; i < columns.size(); i++) {
+	            String fieldName = columns.get(i).getColumnName(); 
 	            Field field = clazz.getDeclaredField(fieldName);
 	            field.setAccessible(true); 
 	            Object value = field.get(entity); 
@@ -208,51 +214,126 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 	        throw new RuntimeException("Error mapping object fields to query parameters", e);
 	    }
+	  //  System.out.println(preparedStatement.);
 		ResultSet resultSet = preparedStatement.executeQuery();
-		List<T> results = new ArrayList<>();
-
-		while (resultSet.next()) {
-			results.add(mapRowUsingReflection(resultSet, type));
-		}
+		List<T> results = mapUsingReflection(resultSet,type);
+     //   System.out.println(results);
+//		while (resultSet.next()) {
+//			results.add(mapRowUsingReflection(resultSet, type));
+//		}
 
 		resultSet.close();
 		con.close();
-		return results;
+		return results; 
 	}
 	
-	private <T> T mapRowUsingReflection(ResultSet rs, Class<T> type) throws SQLException {
-        try {
-            T instance = type.getDeclaredConstructor().newInstance();
-            ResultSetMetaData metaData = rs.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            Set<String> columnNames = new HashSet<>();
-            for (int i = 1; i <= columnCount; i++) {
-                columnNames.add(metaData.getColumnLabel(i));
-            }
-            //System.out.println(columnNames);
-            for (Field field : type.getDeclaredFields()) {
-                field.setAccessible(true);
-                String columnName = field.getName();
-                if (columnNames.contains(columnName)) {
-                	try {
-                		Object value = rs.getObject(columnName);
-                		if (value != null) {
-                			if (field.getType().equals(boolean.class) || field.getType().equals(Boolean.class)) {
-                                if (value instanceof Integer) {
-                                    value = ((Integer) value) == 1;
-                                }
-                            }
-                			field.set(instance, value);
-                		}
-                	} catch (SQLException e) {
-                		e.printStackTrace();
-                	}
-                }
-            }
-            return instance;
-        } catch (Exception e) {
-            throw new SQLException("Error mapping row to " + type.getName(), e);
-        }
+	private <T> List<T> mapUsingReflection(ResultSet rs, Class<T> type) throws Exception {
+		List<T> results = new ArrayList<>();
+	    Map<Object, T> groupedResults = new HashMap<>();
+	    ResultSetMetaData metaData = rs.getMetaData();
+	    int columnCount = metaData.getColumnCount();
+
+	    List<String> columnNames = new ArrayList<>();
+	    for (int i = 1; i <= columnCount; i++) {
+	        columnNames.add(metaData.getColumnLabel(i));
+	    }
+
+	    while (rs.next()) {
+	    	Object groupingKey = null;
+	    	try {
+	    	    groupingKey = rs.getObject("usermail"); 
+	    	} catch (SQLException e) {
+	    	    try {
+	    	        groupingKey = rs.getObject("username");
+	    	    } catch (SQLException ex) {
+	    	        try {
+	    	            groupingKey = rs.getObject("user_id");
+	    	        } catch (SQLException ex2) {
+	    	            groupingKey = UUID.randomUUID().toString();
+	    	        }
+	    	    }
+	    	}
+	        T instance = groupedResults.get(groupingKey);
+
+	        if (instance == null) {
+	            instance = type.getDeclaredConstructor().newInstance();
+	            populateMainFields(rs, instance, columnNames);
+	            groupedResults.put(groupingKey, instance);
+	        }
+
+	        if (hasNestedFields(instance)) {
+	            populateNestedFields(rs, instance, columnNames);
+	        }
+	    }
+
+	    results.addAll(groupedResults.values());
+	    return results;
     }
+	
+	private <T> void populateMainFields(ResultSet rs, T instance, List<String> columnNames) throws Exception {
+	    for (Field field : instance.getClass().getDeclaredFields()) {
+	        field.setAccessible(true);
+
+	        String columnName = field.getName();
+	        if (columnNames.contains(columnName)) {
+	            Object value = rs.getObject(columnName);
+	            if (value != null && !List.class.isAssignableFrom(field.getType())) {
+	            	//System.out.println("value:"+value+" feild:"+field);
+	                if (field.getType().equals(boolean.class) || field.getType().equals(Boolean.class)) {
+	                    if (value instanceof Integer) {
+	                        value = ((Integer) value) == 1;
+	                    }
+	                }
+	                field.set(instance, value);
+	            }
+	        }
+	    }
+	}
+
+	private <T> void populateNestedFields(ResultSet rs, T instance, List<String> columnNames) throws Exception {
+		for (Field field : instance.getClass().getDeclaredFields()) {
+	        field.setAccessible(true);
+
+	        if (List.class.isAssignableFrom(field.getType())) {
+	            ParameterizedType genericType = (ParameterizedType) field.getGenericType();
+	            Class<?> listType = (Class<?>) genericType.getActualTypeArguments()[0];
+
+	            Object nestedInstance = listType.getDeclaredConstructor().newInstance();
+	            boolean populated = false;
+                System.out.println(nestedInstance);
+	            for (Field nestedField : listType.getDeclaredFields()) {
+	            	//System.out.println("Feild:"+nestedField);
+	                nestedField.setAccessible(true);
+	                String columnName = nestedField.getName();
+	                if (columnNames.contains(columnName)) {
+	                    Object value = rs.getObject(columnName);
+	                    if (value != null) {
+	                        nestedField.set(nestedInstance, value);
+	                        populated = true;
+	                    }
+	                }
+	            }
+
+	            if (populated) {
+	                List<Object> nestedList = (List<Object>) field.get(instance);
+	                if((nestedList!=null && !nestedList.contains(nestedInstance)))
+	                nestedList.add(nestedInstance);
+	            }
+	        }
+	   }
+	}
+	
+	private <T> boolean hasNestedFields(T instance) {
+	    for (Field field : instance.getClass().getDeclaredFields()) {
+	        if (List.class.isAssignableFrom(field.getType())) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+
+
+
 	
 }

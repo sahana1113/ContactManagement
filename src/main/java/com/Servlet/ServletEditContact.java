@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanCategory;
 import com.Bean.BeanContactDetails;
 import com.Dao.DaoRegisterLogin;
 
@@ -44,9 +45,15 @@ public class ServletEditContact extends HttpServlet {
         user.setMail(request.getParameter("primaryEmail"));
         user.setPhonenumber(request.getParameter("primaryPhone"));
         user.setContact_id(contactid);
-        String[] list=request.getParameterValues("categoryContact");
-        if(list!=null && list.length!=0)
-        user.setCategory(Arrays.asList(list));
+        String[] list1=request.getParameterValues("categoryContact");
+        if(list1!=null && list1.length!=0) {
+    			List<BeanCategory>list=new ArrayList<>();
+    			for(String s:list1)
+    			{
+    				list.add(new BeanCategory(s));
+    			}
+    			user.setCategory(list);
+        }
         DaoRegisterLogin rld=new DaoRegisterLogin(userid);
         try {
               if(rld.updateContactDetails(user))

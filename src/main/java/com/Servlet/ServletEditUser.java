@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanMail;
+import com.Bean.BeanPhone;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 
@@ -23,7 +25,7 @@ public class ServletEditUser extends HttpServlet {
      * from the form.
      *
      * <p>This method can handle various actions such as adding or 
-     * deleting email and phonenumber numbers, as well as updating primary 
+     * deleting email and altPhone numbers, as well as updating primary 
      * user information. It redirects the user to the appropriate page 
      * based on the action performed.</p>
      *
@@ -41,28 +43,33 @@ public class ServletEditUser extends HttpServlet {
 
         String action = request.getParameter("action");
         DaoRegisterLogin rld = new DaoRegisterLogin();
-        BeanUserDetails user = new BeanUserDetails();
+        BeanUserDetails user=new BeanUserDetails();
         user.setUser_id(userId);
+        BeanMail mail=new BeanMail();
+        BeanPhone phone=new BeanPhone();
+        mail.setUser_id(userId);
+        phone.setUser_id(userId);
 
         try {
             if ("deleteEmail".equals(action)) {
-                user.setUsermail(request.getParameter("altEmail"));
-                rld.deleteAltMail(user);
+            	mail.setAltMail(request.getParameter("altEmail"));
+                rld.deleteAltMail(mail);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("deletePhone".equals(action)) {
-                user.setPhonenumber(request.getParameter("altPhone"));
-                rld.deleteAltPhone(user);
+            	phone.setAltPhone(request.getParameter("altPhone"));
+                rld.deleteAltPhone(phone);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addEmail".equals(action)) {
-                user.setUsermail(request.getParameter("newAltEmail"));
-                rld.addAltMail(user);
+            	
+                mail.setAltMail(request.getParameter("newAltEmail"));
+                rld.addAltMail(mail);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addPhone".equals(action)) {
-                user.setPhonenumber(request.getParameter("newAltPhone"));
-                rld.addAltPhone(user); 
+                phone.setAltPhone(request.getParameter("newAltPhone"));
+                rld.addAltPhone(phone); 
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("updateUserDetails".equals(action)){

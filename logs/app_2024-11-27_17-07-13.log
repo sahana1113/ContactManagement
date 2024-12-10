@@ -1,0 +1,6 @@
+2024-11-27 17:07:13 INFO  AppContextListener - Server started at Wed Nov 27 17:07:13 IST 2024
+2024-11-27 17:07:15 INFO  FilterSession -  24 75fb6465-68ab-4c48-8568-5c52a0c48a55: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 17:07:15 IST 2024] "GET /createContact.jsp HTTP/1.1"
+2024-11-27 17:07:48 INFO  FilterSession -  24 75fb6465-68ab-4c48-8568-5c52a0c48a55: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 17:07:48 IST 2024] "POST /create HTTP/1.1"
+2024-11-27 17:07:48 INFO  FilterSession -  24 75fb6465-68ab-4c48-8568-5c52a0c48a55: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 17:07:48 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-11-27 17:07:54 INFO  FilterSession -  24 75fb6465-68ab-4c48-8568-5c52a0c48a55: 0:0:0:0:0:0:0:1 - - [Wed Nov 27 17:07:54 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-11-27 17:09:53 INFO  AppContextListener - Server stoped at Wed Nov 27 17:09:53 IST 2024

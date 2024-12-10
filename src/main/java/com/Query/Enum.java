@@ -3,24 +3,30 @@ package com.Query;
 
 import java.util.Arrays;
 
-public class Enum { 
-	public enum Tables{
-		ALL_MAIL("all_mail","a"),
-		ALL_PHONE("all_phone","p"),
-		CATEGORIES("categories","cat"),
-		CATEGORY_USERS("category_users","cu"),
-		CONTACT_DETAILS("contactDetails","cd"),
-		CREDENTIALS("credentials","c"),
-		SESSION("session","s"),
-		USER_DETAILS("userDetails","ud");
-		private final String tableName;
-	    private final String alias;
+import com.Bean.*;
 
-	    Tables(String tableName, String alias) {
+public class Enum { 
+	public enum Tables {
+	    ALL_MAIL("all_mail", "a", BeanMail.class),
+	    ALL_PHONE("all_phone", "p", BeanPhone.class),
+	    CATEGORIES("categories", "cat", BeanCategory.class),
+	    CATEGORY_USERS("category_users", "cu", BeanCategory.class),
+	    CONTACT_DETAILS("contactDetails", "cd", BeanContactDetails.class),
+	    CREDENTIALS("credentials", "c", BeanUserDetails.class),
+	    SESSION("session", "s", BeanSession.class),
+	    USER_DETAILS("userDetails", "ud", BeanUserDetails.class),
+	    TEST("test", "t", Test.class);
+
+	    private final String tableName;
+	    private final String alias;
+	    private final Class<?> clazz; 
+
+	    Tables(String tableName, String alias, Class<?> clazz) {
 	        this.tableName = tableName;
 	        this.alias = alias;
+	        this.clazz = clazz;
 	    }
-	    
+
 	    public String getTableName() {
 	        return tableName;
 	    }
@@ -28,8 +34,22 @@ public class Enum {
 	    public String getAlias() {
 	        return alias;
 	    }
+       
+	    public Class<?> getClazz() {
+	        return clazz;
+	    }
+
 	    public String withAlias() {
 	        return tableName + " " + alias;
+	    }
+
+	    public static Tables fromTableName(String tableName) {
+	        for (Tables table : Tables.values()) {
+	            if (table.getTableName().equalsIgnoreCase(tableName)) {
+	                return table;
+	            }
+	        }
+	        throw new IllegalArgumentException("Table name not found: " + tableName);
 	    }
 	}
 
@@ -64,7 +84,7 @@ public class Enum {
 
     public enum AllMail implements Column{
         user_id,
-        usermail,
+        altMail,
         is_primary;
 
         public String getColumnName() {
@@ -89,7 +109,7 @@ public class Enum {
 
     public enum AllPhone implements Column{
         user_id,
-        phonenumber,
+        altPhone,
         is_primary;
 
         public String getColumnName() {
@@ -170,8 +190,8 @@ public class Enum {
         gender,
         birthday,
         location,
-        created_time;
-
+        created_time,
+        is_archive;
         
         public String getColumnName() {
             return this.name();
@@ -240,6 +260,34 @@ public class Enum {
         }
         public static String getTableName() {
             return "session";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
+        }
+    }
+    
+    public enum Test implements Column{
+        sessionid,
+        user_id,
+        created_time,
+        last_accessed,
+        expiry_time;
+
+
+        public String getColumnName() {
+            return this.name();
+        }
+
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "t";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "test";  
         }
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();

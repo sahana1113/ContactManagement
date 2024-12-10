@@ -207,21 +207,19 @@ input[readonly] {
             <h2>Edit User Details</h2>
 
             <%
-            
+            int user_Id = (Integer) request.getAttribute("user_id"); 
+                                                            DaoUserContact contactDao = new DaoUserContact();
+                                                            BeanUserDetails user = new BeanUserDetails();
 
-                                    int user_Id = (Integer) request.getAttribute("user_id"); 
-                                    DaoUserContact contactDao = new DaoUserContact();
-                                    BeanUserDetails user = new BeanUserDetails();
+                                                            try {
+                                                                user = contactDao.getUserDetailsById(user_Id);
+                                                            } catch (SQLException e) {
+                                                                e.printStackTrace();
+                                                            }
 
-                                    try {
-                                        user = contactDao.getUserDetailsById(user_Id);
-                                    } catch (SQLException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    if (user != null) {
-                                    	List<String>altEmails=user.getAllMail();
-                                    	List<String>altPhone=user.getAllPhone();
+                                                            if (user != null) {
+                                                            	List<BeanMail>altEmails=user.getAltMail();
+                                                            	List<BeanPhone>altPhone=user.getAltPhone();
             %>
 
             <form action="update" method="post">
@@ -242,19 +240,23 @@ input[readonly] {
                 <select id="primaryEmail" name="primaryEmail" required>
                     <option value="<%= user.getUsermail() %>"><%= user.getUsermail() %></option>
                     <%
-                    for (String email : altEmails) {
+                    for (BeanMail email : altEmails) {
                     %>
-                    <option value="<%= email %>"><%= email %></option>
-                    <% } %>
+                    <option value="<%= email %>"><%=email.getAltMail()%></option>
+                    <%
+                    }
+                    %>
                 </select>
                  <label for="primaryPhone">Primary Phone Number:</label>
                 <select id="primaryPhone" name="primaryPhone" required>
-                    <option value="<%= user.getPhonenumber() %>"><%= user.getPhonenumber() %></option>
+                    <option value="<%=user.getPhonenumber()%>"><%=user.getPhonenumber()%></option>
                     <%
-                    for (String phone : altPhone) {
+                    for (BeanPhone phone : altPhone) {
                     %>
-                    <option value="<%= phone %>"><%= phone %></option>
-                    <% } %>
+                    <option value="<%=phone%>"><%=phone.getAltPhone()%></option>
+                    <%
+                    }
+                    %>
                 </select>
                  <input type="hidden" name="action" value="updateUserDetails">
                 <input type="submit" class="button" value="Save">
@@ -267,16 +269,18 @@ input[readonly] {
                         <button type="submit" class="button">Add</button>
                     </form>
                     <%
-                    for (String email : altEmails) {
+                    for (BeanMail email : altEmails) {
                     %>
                     <div>
                         <form action="update" method="post" style="display:inline;">
-                            <input type="email" name="altEmail" value="<%= email %>" readonly />
+                            <input type="email" name="altEmail" value="<%=email.getAltMail()%>" readonly />
                             <input type="hidden" name="action" value="deleteEmail" />
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this email?')" class="delete-btn">Delete</button>
                         </form>
                     </div>
-                    <% } %>
+                    <%
+                    }
+                    %>
                 </div>
                  <br>
                 <label for="altPhone">Alternate Phone Number:</label>
@@ -287,11 +291,11 @@ input[readonly] {
                         <button type="submit" class="button">Add</button>
                     </form>
                     <%
-                    for (String phone : altPhone) {
+                    for (BeanPhone phone : altPhone) {
                     %>
                     <div>
                         <form action="update" method="post" style="display:inline;">
-                            <input type="text" name="altPhone" value="<%= phone %>" readonly />
+                            <input type="text" name="altPhone" value="<%=phone.getAltPhone()%>" readonly />
                             <input type="hidden" name="action" value="deletePhone" />
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this phone number?')" class="delete-btn">Delete</button>
                         </form>

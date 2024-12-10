@@ -1,6 +1,7 @@
 package com.Session;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,7 @@ public class SessionTreeUpdate {
      * @param newLastAccessed The new last accessed time for the SESSION.
      * @throws SQLException If a database access error occurs.
      */
-    public static void updateLastAccessed(String sessionId, LocalDateTime newLastAccessed) throws SQLException {
+    public static void updateLastAccessed(String sessionId, Timestamp newLastAccessed) throws SQLException {
     	BeanSession tempSession = new BeanSession(sessionId, newLastAccessed);
 
         if (sessionSet.contains(tempSession)) {

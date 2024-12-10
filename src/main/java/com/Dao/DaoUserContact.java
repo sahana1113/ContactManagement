@@ -1,25 +1,26 @@
 package com.Dao;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.naming.NamingException;
-
-import com.Bean.BeanCategory;
-import com.Bean.BeanContactDetails;
-import com.Bean.BeanUserDetails;
+import com.Bean.*;
 import com.Query.Column;
+import com.Query.Condition;
+import com.Query.Enum.AllMail;
+import com.Query.Enum.AllPhone;
+import com.Query.Enum.Categories;
+import com.Query.Enum.CategoryUsers;
+import com.Query.Enum.ContactDetails;
 import com.Query.Enum.Tables;
+import com.Query.Enum.Test;
 import com.Query.Enum.UserDetails;
 import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
-import com.rowMapper.UserRowMapper;
 public class DaoUserContact{
 	int user_id;
 	public DaoUserContact(int user_id){
@@ -28,78 +29,67 @@ public class DaoUserContact{
 	public DaoUserContact() {
 		
 	}
-	public String getCategoryName(int id) throws SQLException, NamingException{
-        Connection con = HikariCPDataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement("select category_name from categories where category_id=?;");
-        pst.setInt(1,id);
-        ResultSet rs=pst.executeQuery();
-        if(rs.next())
-        {
-        	return rs.getString(1);
-        }
-        return "";
+	public String getCategoryName(int id) throws Exception{
+		BeanCategory obj=new BeanCategory();
+		obj.setCategory_id(id);
+		Condition condition=new Condition(Categories.category_id,"=");
+		List<BeanCategory>list=QueryLayer.buildSelectQuery(
+				new Tables[] {Tables.CATEGORIES}, 
+				new Column[] {Categories.category_name} , 
+				condition, 
+				BeanCategory.class,
+				obj, 
+				null,null);
+		//System.out.print(list);
+        return list.get(0).getCategory_name();
 	}
-	public String getUsername() throws SQLException, NamingException
+	public String getUsername() throws Exception
 	{
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=");
+		//List<BeanUserDetails>list=QueryLayer.getQueryBuilder().select(new Column[] {UserDetails.username}).from(Tables.USER_DETAILS).conditions(new Column[] {UserDetails.user_id}, null, true).build();
 		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
-				new Tables[] {Tables.USER_DETAILS}, 
+				new Tables[] {Tables.USER_DETAILS},
 				new Column[] {UserDetails.username},
-				new Column[] {UserDetails.user_id},
-				null,
+				condition,
 		        BeanUserDetails.class,
 				user1,
-				null
+			   null,null
 		);
-//        Connection con = HikariCPDataSource.getConnection();
-//        PreparedStatement pst = con.prepareStatement("select username from USER_DETAILS where user_id=?;");
-//        pst.setInt(1,user_id);
-//        ResultSet rs=pst.executeQuery();
-//        if(rs.next())
-//        {
-//        	return rs.getString(1);
         return user.get(0).getUsername();
      }
 	
-	public String getUsermail() throws SQLException, NamingException
+	public String getUsermail() throws Exception
 	{
-//        Connection con = HikariCPDataSource.getConnection();
-//        PreparedStatement pst = con.prepareStatement("select usermail from USER_DETAILS where user_id=?;");
-//        pst.setInt(1,user_id);
-//        ResultSet rs=pst.executeQuery();
-//        if(rs.next())
-//        {
-//        	return rs.getString(1);
-//        }
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=");
 		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
 		            new Tables[] {Tables.USER_DETAILS},
 		            new Column[] {UserDetails.usermail},  
-		            new Column[] {UserDetails.user_id},  
-		            null,
+		            condition,
 		            BeanUserDetails.class,
 		            user1,
-		            null
+		            null,null
 		    );
 		    if (!userDetailsList.isEmpty()) {
 		        return userDetailsList.get(0).getUsermail();  
 		    }
         return "";
 	}
-	public String getUserphone() throws SQLException, NamingException
+	public String getUserphone() throws Exception
 	{
 		BeanUserDetails user1=new BeanUserDetails();
 		user1.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=");
 		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
 		            new Tables[] {Tables.USER_DETAILS},
 		            new Column[] {UserDetails.phonenumber},  
-		            new Column[] {UserDetails.user_id},  
-		            null,
+		            condition,
 		            BeanUserDetails.class,
 		            user1,
-		            null
+		            null,null
 		    );
 		    if (!userDetailsList.isEmpty()) {
 		        return userDetailsList.get(0).getPhonenumber();  
@@ -107,186 +97,171 @@ public class DaoUserContact{
         return "";
 	}
 	
-	public List<BeanContactDetails> Contactdisplay() throws SQLException, NamingException
+	public List<BeanContactDetails> Contactdisplay() throws Exception
 	{
-		List<BeanContactDetails>list=new ArrayList<>();
-        Connection con = HikariCPDataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement("select name,phonenumber,contact_id from contactDetails where user_id=? order by name ");
-        pst.setInt(1,user_id);
-        ResultSet rs=pst.executeQuery();
-        while(rs.next())
-        {
-        	if(!in_archieve(rs.getInt("contact_id"),user_id)) {
-        	BeanContactDetails c=new BeanContactDetails(rs.getString("name"),rs.getString("phonenumber"),rs.getInt("contact_id"));
-        	//System.out.print(rs.getString("name"));
-        	list.add(c);
-        	}
-        }
-        
+		BeanContactDetails obj=new BeanContactDetails(user_id);
+		obj.setIs_archive(false);
+        Condition condition1=new Condition(ContactDetails.user_id,"=");
+        Condition condition2=new Condition(ContactDetails.is_archive,"=");
+        Condition and=new Condition("AND").addSubCondition(condition1).addSubCondition(condition2);
+        Condition condition3=new Condition(ContactDetails.name,"=");
+        Condition or=new Condition("OR").addSubCondition(and).addSubCondition(condition3);
+        System.out.print(or.toString());
+		List<BeanContactDetails>list=QueryLayer.buildSelectQuery(
+				new Tables[] {Tables.CONTACT_DETAILS},
+				new Column[] {ContactDetails.name,ContactDetails.phonenumber,ContactDetails.contact_id}, 
+				and,
+				BeanContactDetails.class,
+				obj,
+				null,null);
         return list;
 	}
-	private boolean in_archieve(int con_id, int user_id) throws SQLException, NamingException {
-        Connection con = HikariCPDataSource.getConnection();
-		PreparedStatement pst = con.prepareStatement("select category_id from categories where category_name=?");
-        pst.setString(1,"Archieved");
-        ResultSet rs=pst.executeQuery();
-        int c_id=0;
-        if(rs.next())
-        {
-        	c_id=rs.getInt("category_id");
-        }
-        PreparedStatement pst1=con.prepareStatement("select * from category_users where category_id=? && contact_id=?;");
-        pst1.setInt(1, c_id);
-        pst1.setInt(2, con_id);
-        ResultSet rs1=pst1.executeQuery();
-        if(rs1.next()) {
-        	return true;
-        }
-		return false;
-	}
-	public boolean contactDetailsRegister(BeanContactDetails user) {
+	public boolean contactDetailsRegister(BeanContactDetails user) throws Exception {
 		boolean rs=false;
-		try {		
-            Connection con = HikariCPDataSource.getConnection();
-	            PreparedStatement pst = con.prepareStatement("INSERT INTO contactDetails (name,mail,phonenumber,gender,birthday,location,user_id,created_time) VALUES (?, ?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
-	            pst.setString(1,user.getName());
-	            pst.setString(2,user.getMail());
-	            pst.setString(3,user.getPhonenumber()); 
-	            pst.setString(4,user.getGender());     
-	            pst.setString(5,user.getBirthday());
-	            pst.setString(6, user.getLocation());
-	            pst.setInt(7,user_id);
-	            pst.setLong(8, user.getCreated_time());
-	            pst.executeUpdate();
-	            rs=true;
-	            ResultSet key=pst.getGeneratedKeys();
-	            int contact_id = 0;
-	            if (key.next()) {
-	                contact_id = key.getInt(1);
-	                user.setContact_id(contact_id); 
-	            }
-	            DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
-	            if(user.getCategory()!=null)
-	            rld.insertCategory(user);
+		user.setUser_id(user_id);
+		int key=QueryLayer.buildInsertQuery(
+				Tables.CONTACT_DETAILS, 
+				user, 
+				new Column[] {ContactDetails.name,ContactDetails.mail,ContactDetails.phonenumber,ContactDetails.gender,ContactDetails.birthday,ContactDetails.location,ContactDetails.user_id,ContactDetails.created_time});
+		if(key!=-1)
+		{
+			user.setContact_id(key);
+			rs=true;
 		}
-		catch (Exception e) {
-            e.printStackTrace();
-          
-        }
-		return rs;
+		 DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
+         if(user.getCategory()!=null)
+         rld.insertCategory(user);
+         return rs;
 	}
-	public BeanContactDetails getContactDetailsById(int contact_id) throws SQLException, NamingException
+	public BeanContactDetails getContactDetailsById(int contact_id) throws Exception
 	{
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("select * from contactDetails where contact_id=?;");
-        BeanContactDetails contact=new BeanContactDetails();
-        pst.setInt(1,contact_id);
-        ResultSet rs=pst.executeQuery();
-        if (rs.next()) {
-        contact.setMail(rs.getString("mail"));
-        contact.setName(rs.getString("name"));
-        contact.setCreated_time(rs.getLong("created_time"));
-        contact.setPhonenumber(rs.getString("phonenumber"));
-        contact.setGender(rs.getString("gender"));
-        contact.setBirthday(rs.getString("birthday"));
-        contact.setLocation(rs.getString("location"));  
-        }
-        PreparedStatement pst1=con.prepareStatement("Select category_name from categories c INNER JOIN category_users cm ON c.category_id=cm.category_id where cm.contact_id=?");
-        pst1.setInt(1, contact_id);
-        ResultSet rs1=pst1.executeQuery();
-        List<String>list=new ArrayList<>();
-        while(rs1.next())
-        {
-        	list.add(rs1.getString("category_name"));
-        }
-        contact.setContact_id(contact_id);
-        contact.setCategory(list);
-        return contact;
+		  BeanContactDetails obj=new BeanContactDetails();
+		  obj.setContact_id(contact_id);
+			Condition condition=new Condition(ContactDetails.contact_id,"=");
+		  List<BeanContactDetails>list=QueryLayer.buildSelectQuery(
+				  new Tables[] {Tables.CONTACT_DETAILS},
+				  ContactDetails.getColumnNames(), 
+				  condition, 
+				  BeanContactDetails.class,
+				  obj,
+				  null,null);
+		  List<BeanCategory> list2=QueryLayer.buildSelectQuery(
+				  new Tables[] {Tables.CATEGORIES,Tables.CATEGORY_USERS},
+				  new Column[] {Categories.category_name},
+				  condition,
+				  BeanCategory.class,
+				  obj,
+				  new Column[][] {{Categories.category_id,CategoryUsers.category_id}},"INNER JOIN");
+		  list.get(0).setCategory(list2);
+		  return list.get(0);
         
 	}
-	public BeanUserDetails getUserDetailsById(int user_id) throws SQLException, NamingException
+	public BeanUserDetails getUserDetailsById(int user_id) throws Exception
 	{
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("select * from userDetails where user_id=?;");
-        BeanUserDetails contact=new BeanUserDetails();
-        pst.setInt(1,user_id);
-        ResultSet rs=pst.executeQuery();
-        if (rs.next()) {
-        contact.setUsermail(rs.getString("usermail"));
-        contact.setUsername(rs.getString("username"));
-        contact.setPhonenumber(rs.getString("phonenumber"));
-        contact.setGender(rs.getString("gender"));
-        contact.setBirthday(rs.getString("birthday"));
-        }
-        
-        PreparedStatement pst1=con.prepareStatement("select usermail from all_mail where user_id=? && is_primary=false;");
-        pst1.setInt(1, user_id);
-        ResultSet rs1=pst1.executeQuery();
-        List<String>mail=new ArrayList<>();
-        while (rs1.next()) {
-        	mail.add(rs1.getString(1));
-        }
-        contact.setAllMail(mail);
-        PreparedStatement pst2=con.prepareStatement("select phonenumber from all_phone where user_id=? && is_primary=false;");
-        pst2.setInt(1, user_id);
-        ResultSet rs2=pst2.executeQuery();
-        List<String>phone=new ArrayList<>();
-        while (rs2.next()) {
-        	phone.add(rs2.getString(1));
-        }
-        contact.setAllPhone(phone);
-        return contact;
+		BeanUserDetails obj=new BeanUserDetails();
+		obj.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=");
+		List<BeanUserDetails> user=QueryLayer.buildSelectQuery(
+				new Tables[] {Tables.USER_DETAILS,Tables.ALL_MAIL,Tables.ALL_PHONE},
+				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,AllMail.altMail,AllPhone.altPhone},
+				condition,
+				BeanUserDetails.class,
+				obj,
+				new Column[][] {{UserDetails.user_id,AllMail.user_id},{UserDetails.user_id,AllPhone.user_id}},"LEFT JOIN");
+		return user.get(0);
+//        Connection con = HikariCPDataSource.getConnection();
+//        PreparedStatement pst = con.prepareStatement("select * from userDetails where user_id=?;");
+//        BeanUserDetails contact=new BeanUserDetails();
+//        pst.setInt(1,user_id);
+//        ResultSet rs=pst.executeQuery();
+//        if (rs.next()) {
+//        contact.setUsermail(rs.getString("altMail"));
+//        contact.setUsername(rs.getString("username"));
+//        contact.setPhonenumber(rs.getString("altPhone"));
+//        contact.setGender(rs.getString("gender"));
+//        contact.setBirthday(rs.getString("birthday"));
+//        }
+//        
+//        PreparedStatement pst1=con.prepareStatement("select altMail from all_mail where user_id=? && is_primary=false;");
+//        pst1.setInt(1, user_id);
+//        ResultSet rs1=pst1.executeQuery();
+//        List<BeanMail>mail=new ArrayList<>();
+//        while (rs1.next()) {
+//        	mail.add(new BeanMail(rs1.getString(1)));
+//        }
+//        contact.setAltMail(mail);
+//        PreparedStatement pst2=con.prepareStatement("select altPhone from all_phone where user_id=? && is_primary=false;");
+//        pst2.setInt(1, user_id);
+//        ResultSet rs2=pst2.executeQuery();
+//        List<BeanPhone>phone=new ArrayList<>();
+//        while (rs2.next()) {
+//        	phone.add(new BeanPhone(rs2.getString(1)));
+//        }
+//        contact.setAltPhone(phone);
+//        return contact;
         
 	}
-    public BeanUserDetails getPrimeDetailsById(int userId) throws SQLException, NamingException{
+    public BeanUserDetails getPrimeDetailsById(int userId) throws Exception{
     	BeanUserDetails user=new BeanUserDetails();
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("select usermail,phonenumber from userDetails where user_id=?;");
-        pst.setInt(1, userId);
-        ResultSet rs=pst.executeQuery();
-        if(rs.next()) {
-        user.setUsermail(rs.getString("usermail"));
-        user.setPhonenumber(rs.getString("phonenumber"));
-        }
-        return user;
+    	user.setUser_id(userId);
+		Condition condition=new Condition(UserDetails.user_id,"=");
+    	List<BeanUserDetails> list=QueryLayer.buildSelectQuery(
+    			new Tables[] {Tables.USER_DETAILS},
+    			new Column[] {UserDetails.phonenumber,UserDetails.usermail},
+    			condition,
+    			BeanUserDetails.class,
+    			user,
+    			null,null);
+        return list.get(0);
     }
-    public List<BeanCategory> getCategoriesByUserId() throws SQLException, NamingException
+    public List<BeanCategory> getCategoriesByUserId() throws Exception
     {
-    	List<BeanCategory>categories=new ArrayList<>();
-        Connection con = HikariCPDataSource.getConnection();
-        PreparedStatement pst = con.prepareStatement("Select category_name,category_id from categories where user_id=?");
-        pst.setInt(1, user_id);
-        ResultSet rs = pst.executeQuery();
-        while(rs.next())
-        {
-        	categories.add(new BeanCategory(rs.getInt("category_id"),rs.getString("category_name")));
-        }
+    	BeanCategory obj=new BeanCategory();
+    	obj.setUser_id(user_id);
+		Condition condition=new Condition(Categories.user_id,"=");
+    	List<BeanCategory>categories=QueryLayer.buildSelectQuery(
+    			new Tables[] {Tables.CATEGORIES},
+    			new Column[] {Categories.category_name,Categories.category_id},
+    			condition,
+    			BeanCategory.class, 
+    			obj, null,null);
 		return categories;
     	
     }
-    public List<BeanContactDetails> getContactsInCategory(int category) throws SQLException, NamingException
+    public List<BeanContactDetails> getContactsInCategory(int category) throws Exception
     {
-    	List<BeanContactDetails>categories=new ArrayList<>();
-        Connection con = HikariCPDataSource.getConnection();       
-        int c_id=category;
-        PreparedStatement pst1 = con.prepareStatement("select contact_id from category_users where category_id=?;");
-        pst1.setInt(1, c_id);
-        ResultSet rs1=pst1.executeQuery();
-        while(rs1.next()) {
-        	categories.add(getContactDetailsById(rs1.getInt("contact_id")));
-        }
+    	BeanCategory obj=new BeanCategory();
+    	obj.setCategory_id(category);
+		Condition condition=new Condition(CategoryUsers.category_id,"=");
+    	List<BeanContactDetails>categories=QueryLayer.buildSelectQuery(
+    			new Tables[] {Tables.CONTACT_DETAILS,Tables.CATEGORY_USERS},
+    			new Column[] {ContactDetails.contact_id,ContactDetails.name,ContactDetails.phonenumber},
+    			condition,
+    		    BeanContactDetails.class,
+    		    obj,
+    		    new Column[][] {{ContactDetails.contact_id,CategoryUsers.contact_id}},"INNER JOIN");
         return categories;
         
     }
-    public List<BeanContactDetails> getContactsNotInCategory(int category) throws SQLException, NamingException {
+    public List<BeanContactDetails> getContactsNotInCategory(int category) throws Exception {
+    	
+//    	List<BeanContactDetails> contactsNotInCategory = QueryLayer.buildSelectQuery(
+//    			new Tables[] {Tables.CONTACT_DETAILS,Tables.CATEGORY_USERS},
+//    			ContactDetails.getColumnNames(),
+//    			null, null, null, STR, null);
+//        
     	List<BeanContactDetails> contactsNotInCategory = new ArrayList<>();
-        
         List<BeanContactDetails> contactsInCategory = getContactsInCategory(category);
 
         Set<Integer> contactsInCategoryIds = new HashSet<>();
         for (BeanContactDetails contact : contactsInCategory) {
             contactsInCategoryIds.add(contact.getContact_id());
         }
+//    	List<BeanContactDetails> contactsNotInCategory = QueryLayer.buildSelectQuery(
+//		new Tables[] {Tables.CONTACT_DETAILS,Tables.CATEGORY_USERS},
+//		ContactDetails.getColumnNames(),
+//		null, null, null, STR, null);
+//
         Connection con = HikariCPDataSource.getConnection();
         PreparedStatement pst = con.prepareStatement("SELECT contact_id FROM contactDetails WHERE user_id=?;");
         pst.setInt(1, user_id);
@@ -302,3 +277,19 @@ public class DaoUserContact{
         return contactsNotInCategory;
     } 
 }
+//SELECT 
+//ud.usermail, 
+//ud.username, 
+//ud.phonenumber, 
+//ud.gender, 
+//ud.birthday, 
+//am.usermail AS alt_usermail, 
+//ap.phonenumber AS alt_phonenumber
+//FROM 
+//userDetails ud
+//LEFT JOIN 
+//all_mail am ON ud.user_id = am.user_id AND am.is_primary = false
+//LEFT JOIN 
+//all_phone ap ON ud.user_id = ap.user_id AND ap.is_primary = false
+//WHERE 
+//ud.user_id = ?

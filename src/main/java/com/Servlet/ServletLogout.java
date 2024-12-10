@@ -1,6 +1,7 @@
 package com.Servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -52,7 +53,11 @@ public class ServletLogout extends HttpServlet {
             }
         }
         if(request.getAttribute("user_id")!=null) {
-        	ses.invalidateSession(session_id);
+        	try {
+				ses.invalidateSession(session_id);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
         }
         response.sendRedirect("login.jsp");
     }

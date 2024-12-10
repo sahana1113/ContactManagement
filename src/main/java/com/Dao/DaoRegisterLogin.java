@@ -1,24 +1,17 @@
 package com.Dao;
 
 import org.mindrot.jbcrypt.BCrypt;
-
-import com.Bean.BeanCategory;
-import com.Bean.BeanContactDetails;
-import com.Bean.BeanUserDetails;
-import com.Query.Column;
+import com.Bean.*;
+import com.Query.*;
 import com.Query.Enum.*;
-import com.Query.QueryLayer;
 import com.example.HikariCPDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-
-import javax.naming.NamingException;
 
 public class DaoRegisterLogin {
 	int user_id;
@@ -65,10 +58,9 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean allMailInsert(BeanUserDetails user) throws SQLException {
+	public boolean allMailInsert(BeanMail user) throws SQLException {
 		boolean rs = false;
 		try {
-			// Object[] object=new Object[] {user.getUser_id(),user.getUsermail(),true};
 			user.setIs_primary(true);
 			int key = QueryLayer.buildInsertQuery(Tables.ALL_MAIL,user);
 			if (key != 0) {
@@ -80,11 +72,10 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean allPhoneInsert(BeanUserDetails user) {
+	public boolean allPhoneInsert(BeanPhone user) {
 		boolean rs = false;
 		try {
 			user.setIs_primary(true);
-			//Object[] object = new Object[] { user.getUser_id(), user.getPhonenumber(), true };
 			int key = QueryLayer.buildInsertQuery(Tables.ALL_PHONE, user);
 			if (key != 0) {
 				rs = true;
@@ -95,18 +86,19 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public int validateLogin(String usermail, String password) throws SQLException {
+	public int validateLogin(String usermail, String password) throws Exception {
 		int user_id = -1;
-		BeanUserDetails user=new BeanUserDetails();
-		user.setUsermail(usermail);
+		BeanMail user=new BeanMail();
+		user.setAltMail(usermail);
+		Condition condition=new Condition(AllMail.altMail,"=");
 		List<BeanUserDetails> userList=QueryLayer.buildSelectQuery(
 				new Tables[] {Tables.CREDENTIALS,Tables.ALL_MAIL},
 				new Column[] {Credentials.user_id,Credentials.password,Credentials.flag},
-				new Column[] {AllMail.usermail},
-				null,
+				condition,
 				BeanUserDetails.class,
 				user,
-				new Column[][] {{Credentials.user_id,AllMail.user_id}});
+				new Column[][] {{Credentials.user_id,AllMail.user_id}},
+				"INNER JOIN");
 			if (!userList.isEmpty()) {
 				String storedHash = userList.get(0).getPassword();
 				if (userList.get(0).isFlag()) {
@@ -164,11 +156,11 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean addAltMail(BeanUserDetails user) {
+	public boolean addAltMail(BeanMail mail) {
 		boolean rs = false;
-		user.setIs_primary(false);
+		mail.setIs_primary(false);
 		try {
-			int k = QueryLayer.buildInsertQuery(Tables.ALL_MAIL, user);
+			int k = QueryLayer.buildInsertQuery(Tables.ALL_MAIL, mail);
 			if (k != 0) {
 				rs = true;
 			}
@@ -178,11 +170,11 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean addAltPhone(BeanUserDetails user) {
+	public boolean addAltPhone(BeanPhone phone) {
 		boolean rs = false;
-		user.setIs_primary(false);
+		phone.setIs_primary(false);
 		try {
-			int k = QueryLayer.buildInsertQuery(Tables.ALL_PHONE, user);
+			int k = QueryLayer.buildInsertQuery(Tables.ALL_PHONE, phone);
 			if (k != 0) {
 				rs = true;
 			}
@@ -192,30 +184,28 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean updatePrimaryMail(BeanUserDetails user) throws SQLException, NamingException {
+	public boolean updatePrimaryMail(BeanUserDetails user) throws Exception {
 		boolean rs = false;
 		DaoUserContact obj1=new DaoUserContact(user.getUser_id());
 		String s=obj1.getUsermail();
 		try {
 			Column[] condition = new Column[] { UserDetails.user_id };
 			Column[] column = new Column[] { UserDetails.usermail };
-			//Object[] obj = new Object[] { user.getUsermail(), user.getUser_id() };
 
 			int k = QueryLayer.buildUpdateQuery(Tables.USER_DETAILS, condition, null, user, column);
             
 			user.setIs_primary(true);
 			String[] logic = new String[] { "AND" };
-			condition = new Column[] { AllMail.usermail, AllMail.user_id };
+			condition = new Column[] { AllMail.altMail, AllMail.user_id };
 			column = new Column[] { AllMail.is_primary };
-			//obj = new Object[] { true, user.getUsermail(), user.getUser_id() };
 
 			int k1 = QueryLayer.buildUpdateQuery(Tables.ALL_MAIL, condition, logic,user, column);
 
             user.setUsermail(s);
             user.setIs_primary(false);
-			condition = new Column[] { AllMail.user_id, AllMail.usermail };
+			condition = new Column[] { AllMail.user_id, AllMail.altMail };
 			column = new Column[] { AllMail.is_primary };
-			//obj = new Object[] { false, user.getUser_id(), true };
+			
 			int k2 = QueryLayer.buildUpdateQuery(Tables.ALL_MAIL, condition, logic, user, column);
              
 
@@ -228,31 +218,28 @@ public class DaoRegisterLogin {
 		return rs;
 	}
 
-	public boolean updatePrimaryPhone(BeanUserDetails user) throws SQLException, NamingException {
+	public boolean updatePrimaryPhone(BeanUserDetails user) throws Exception {
 		boolean rs = false;
 		DaoUserContact obj1=new DaoUserContact(user.getUser_id());
 		String s=obj1.getUserphone();
 		try {
 			Column[] userDetailsCondition = new Column[] { UserDetails.user_id };
 			Column[] userDetailsColumns = new Column[] { UserDetails.phonenumber };
-		//	Object[] userDetailsValues = new Object[] { user.getPhonenumber(), user.getUser_id() };
 
 			int userDetailsUpdateCount = QueryLayer.buildUpdateQuery(Tables.USER_DETAILS, userDetailsCondition, null,
 					user, userDetailsColumns);
 			
 			user.setIs_primary(true);
-			Column[] allPhoneCondition = new Column[] { AllPhone.phonenumber, AllPhone.user_id };
+			Column[] allPhoneCondition = new Column[] { AllPhone.altPhone, AllPhone.user_id };
 			String[] logic = new String[] { "AND" };
 			Column[] allPhoneColumns = new Column[] { AllPhone.is_primary };
-			//Object[] allPhoneValues = new Object[] { false, user.getUser_id(), true };
 
 			int allPhoneUpdateCount = QueryLayer.buildUpdateQuery(Tables.ALL_PHONE, allPhoneCondition, logic,
 					user, allPhoneColumns);
 			
 			user.setPhonenumber(s);
 			user.setIs_primary(false);
-			Column[] primaryPhoneCondition = new Column[] { AllPhone.user_id, AllPhone.phonenumber };
-			//Object[] primaryPhoneValues = new Object[] { true, user.getPhonenumber(), user.getUser_id() };
+			Column[] primaryPhoneCondition = new Column[] { AllPhone.user_id, AllPhone.altPhone };
 			Column[] primaryPhoneColumns = new Column[] { AllPhone.is_primary };
 
 			int primaryPhoneUpdateCount = QueryLayer.buildUpdateQuery(Tables.ALL_PHONE, primaryPhoneCondition, null,
@@ -285,7 +272,6 @@ public class DaoRegisterLogin {
 			String hash = hashPassword(user.getPassword());
 			user.setPassword(hash);
 			Column[] condition = new Column[] { Credentials.user_id };
-			//Object[] values = new Object[] { hash, user.getUser_id() };
 			int updateCount = QueryLayer.buildUpdateQuery(Tables.CREDENTIALS, condition, null, user,
 					new Column[] { Credentials.password });
 
@@ -301,8 +287,6 @@ public class DaoRegisterLogin {
 		boolean rs = false;
 		try {
 			Column[] contactDetailsCondition = new Column[] { ContactDetails.contact_id };
-			//Object[] contactDetailsValues = new Object[] { user.getName(), user.getGender(), user.getBirthday(),
-			//		user.getMail(), user.getPhonenumber(), user.getContact_id() };
 			int contactDetailsUpdateCount = QueryLayer.buildUpdateQuery(
 					Tables.CONTACT_DETAILS, 
 					contactDetailsCondition,
@@ -310,9 +294,8 @@ public class DaoRegisterLogin {
 					user, 
 					new Column[] { ContactDetails.name, ContactDetails.gender,ContactDetails.birthday, ContactDetails.mail, ContactDetails.phonenumber });
 			Column[] categoryCondition = new Column[] { CategoryUsers.contact_id };
-		//	Object[] categoryValues = new Object[] { user.getContact_id() };
 			int categoryDeleteCount = QueryLayer.buildDeleteQuery(Tables.CATEGORY_USERS, categoryCondition, null, user);
-			List<String> list = user.getCategory();
+			List<BeanCategory> list = user.getCategory();
 			if (list != null) {
 				insertCategory(user);
 			}
@@ -328,13 +311,11 @@ public class DaoRegisterLogin {
 		boolean rs = false;
 		try {
 			Column[] categoryCondition = new Column[] { CategoryUsers.contact_id };
-			//Object[] categoryValues = new Object[] { id };
 			BeanContactDetails user=new BeanContactDetails();
 			user.setContact_id(id);
 			int categoryDeleteCount = QueryLayer.buildDeleteQuery(Tables.CATEGORY_USERS, categoryCondition, null,
 					user);
 			Column[] contactDetailsCondition = new Column[] { ContactDetails.contact_id };
-			//Object[] contactDetailsValues = new Object[] { id };
 			int contactDetailsDeleteCount = QueryLayer.buildDeleteQuery(Tables.CONTACT_DETAILS, contactDetailsCondition,
 					null, user);
 			rs = (categoryDeleteCount > 0 || contactDetailsDeleteCount > 0);
@@ -347,42 +328,41 @@ public class DaoRegisterLogin {
 	}
 
 	public void insertCategory(BeanContactDetails user)
-			throws SQLException, NoSuchFieldException, IllegalAccessException {
-		List<String> category = user.getCategory();
-		for (String s : category) {
-			user.setCategory_name(s);
+			throws Exception {
+		List<BeanCategory> category = user.getCategory();
+		for (BeanCategory s : category) {
+			user.setCategory_name(s.getCategory_name());
 			user.setUser_id(user_id);
+			Condition con1=new Condition(Categories.category_name,"=");
+			Condition con2=new Condition(Categories.user_id,"=");
+			Condition and=new Condition("AND").addSubCondition(con1).addSubCondition(con2);
 			List<BeanCategory> list = QueryLayer.buildSelectQuery(new Tables[] {Tables.CATEGORIES},
 					new Column[] { Categories.category_id },
-					new Column[] { Categories.category_name, Categories.user_id }, new String[] { "AND" },
-					BeanCategory.class, user,null);
+					and,
+					BeanCategory.class, user,null,null);
 			int c_id = list.get(0).getCategory_id();
 			BeanCategory obj=new BeanCategory();
 			obj.setCategory_id(c_id);
 			obj.setContact_id(user.getContact_id());
-			int k = QueryLayer.buildInsertQuery(Tables.CATEGORY_USERS, obj,
-					new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id });
+			int k = QueryLayer.buildInsertQuery(Tables.CATEGORY_USERS, obj,new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id });
 		}
-
 	}
 
-	public void deleteAltMail(BeanUserDetails user) {
+	public void deleteAltMail(BeanMail mail) {
 		try {
-			Column[] condition = new Column[] { AllMail.user_id, AllMail.usermail };
+			Column[] condition = new Column[] { AllMail.user_id, AllMail.altMail };
 			String[] logics = { "AND" };
-			//Object[] obj = new Object[] { user.getUser_id(), user.getUsermail() };
-			int k = QueryLayer.buildDeleteQuery(Tables.ALL_MAIL, condition, logics, user);
+			int k = QueryLayer.buildDeleteQuery(Tables.ALL_MAIL, condition, logics, mail);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public void deleteAltPhone(BeanUserDetails user) {
+	public void deleteAltPhone(BeanPhone phone) {
 		try {
-			Column[] condition = new Column[] { AllPhone.phonenumber, AllPhone.user_id };
-			//Object[] values = new Object[] { user.getPhonenumber(), user.getUser_id() };
-			int deleteCount = QueryLayer.buildDeleteQuery(Tables.ALL_PHONE, condition, null, user);
+			Column[] condition = new Column[] { AllPhone.altPhone, AllPhone.user_id };
+			int deleteCount = QueryLayer.buildDeleteQuery(Tables.ALL_PHONE, condition, null, phone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -393,9 +373,8 @@ public class DaoRegisterLogin {
 		boolean rs = false;
 		try {
 			Column[] condition = new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id };
-			//Object[] values = new Object[] { c_id, contactId };
 			BeanCategory obj=new BeanCategory();
-			obj.setC_id(c_id);
+			obj.setCategory_id(c_id);
 			obj.setContact_id(contactId);
 			int deleteCount = QueryLayer.buildDeleteQuery(Tables.CATEGORY_USERS, condition, null, obj);
 			rs = (deleteCount > 0);
@@ -410,12 +389,10 @@ public class DaoRegisterLogin {
 		boolean rs = false;
 		try {
 			Column[] insertColumns = new Column[] { CategoryUsers.category_id, CategoryUsers.contact_id };
-		//	Object[] insertValues = new Object[] { c_id, contactId };
 			BeanCategory obj=new BeanCategory();
-			obj.setC_id(c_id);
+			obj.setCategory_id(c_id);
 			obj.setContact_id(contactId);
 			int insertCount = QueryLayer.buildInsertQuery(Tables.CATEGORY_USERS, obj, insertColumns);
-			//System.out.print(insertCount);
 			if (insertCount != 0)
 			{
 				rs=true;
@@ -430,13 +407,11 @@ public class DaoRegisterLogin {
 		boolean rs = false;
 		try {
 			Column[] categoryUsersCondition = new Column[] { CategoryUsers.category_id };
-			//Object[] categoryUsersValues = new Object[] { c_id };
 			BeanCategory obj=new BeanCategory();
-			obj.setC_id(c_id);
+			obj.setCategory_id(c_id);
 			int categoryUsersDeleteCount = QueryLayer.buildDeleteQuery(Tables.CATEGORY_USERS, categoryUsersCondition,
 					null, obj);
 			Column[] categoriesCondition = new Column[] { Categories.category_id };
-			//Object[] categoriesValues = new Object[] { c_id };
 
 			int categoriesDeleteCount = QueryLayer.buildDeleteQuery(Tables.CATEGORIES, categoriesCondition, null,
 					obj);
@@ -451,7 +426,6 @@ public class DaoRegisterLogin {
 	public int insertCategoryByName(BeanCategory category)
 			throws SQLException, NoSuchFieldException, IllegalAccessException {
            category.setUser_id(user_id); 
-		// Object[] values = new Object[] { categoryName, user_id };
 		Column[] columns = new Column[] { Categories.category_name, Categories.user_id };
 		return QueryLayer.buildInsertQuery(Tables.CATEGORIES, category, columns);
 

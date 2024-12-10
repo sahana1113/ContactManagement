@@ -281,11 +281,11 @@ option:hover {
                  
                 <li><strong>Groups:</strong>
                         <ul>
-                            <% List<String> categories = contact.getCategory();
+                            <% List<BeanCategory> categories = contact.getCategory();
                             if (categories != null && !categories.isEmpty()) {
-                               for (String group : categories) {
-                                if (!group.isEmpty()) { %>
-                                    <li><%= group %></li>
+                               for (BeanCategory group : categories) {
+                                if (group!=null) { %>
+                                    <li><%= group.getCategory_name() %></li>
                             <% } } } else {
                     out.print("No groups assigned.");
                 }

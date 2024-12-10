@@ -1,0 +1,15 @@
+2024-12-10 11:11:35 INFO  AppContextListener - Server started at Tue Dec 10 11:11:35 IST 2024
+2024-12-10 11:11:35 INFO  FilterSession - 127.0.0.1 - - [Tue Dec 10 11:11:35 IST 2024] "GET / HTTP/1.1"
+2024-12-10 11:11:36 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:36 IST 2024] "GET / HTTP/1.1"
+2024-12-10 11:11:36 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:36 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-10 11:11:40 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:40 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-10 11:11:45 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:45 IST 2024] "POST /update HTTP/1.1"
+2024-12-10 11:11:45 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:45 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-10 11:11:49 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:49 IST 2024] "POST /update HTTP/1.1"
+2024-12-10 11:11:49 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:49 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-10 11:11:56 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:56 IST 2024] "POST /update HTTP/1.1"
+2024-12-10 11:11:56 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:11:56 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-10 11:12:02 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:12:02 IST 2024] "POST /update HTTP/1.1"
+2024-12-10 11:12:02 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:12:02 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-10 11:12:06 INFO  FilterSession -  24 d1a992e6-8e09-42ba-8af4-7838c3f2dab0: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 11:12:06 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-12-10 11:12:16 INFO  AppContextListener - Server stoped at Tue Dec 10 11:12:16 IST 2024

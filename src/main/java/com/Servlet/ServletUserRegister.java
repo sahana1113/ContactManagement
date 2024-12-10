@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanMail;
+import com.Bean.BeanPhone;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 
@@ -25,7 +27,7 @@ public class ServletUserRegister extends HttpServlet {
      * login page; otherwise, an error message is displayed.
      *
      * <p>This method retrieves the user's email, username, gender, 
-     * birthday, phonenumber number, and password from the request, and 
+     * birthday, altPhone number, and password from the request, and 
      * attempts to register the user using the DaoRegisterLogin class.</p>
      *
      * @param request  The HttpServletRequest object that contains the 
@@ -45,13 +47,17 @@ public class ServletUserRegister extends HttpServlet {
         user.setBirthday(request.getParameter("birthday"));
         user.setPhonenumber(request.getParameter("phone"));
         user.setPassword(request.getParameter("password"));
+        BeanMail mail=new BeanMail();
+        mail.setAltMail(request.getParameter("email"));
+        BeanPhone phone=new BeanPhone();
+        phone.setAltPhone(request.getParameter("phone"));
         DaoRegisterLogin rld=new DaoRegisterLogin();
         try {
               if(rld.UserDetailsRegister(user))
             {
-            	  rld.allMailInsert(user);
+            	  rld.allMailInsert(mail);
                   rld.credentialsInsert(user);
-                  rld.allPhoneInsert(user);
+                  rld.allPhoneInsert(phone);
                   rld.defaultGroup(user);
             	response.sendRedirect("login.jsp");
             }
