@@ -2,6 +2,11 @@ package com.example;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,6 +14,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.Dao.DaoServer;
+import com.Server.ServerNotifier;
+import com.Session.SessionData;
 import com.Session.SessionScheduler;
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 /**
@@ -36,6 +44,23 @@ public class AppContextListener implements ServletContextListener {
         PropertyConfigurator.configure(log4jConfig);
         SessionScheduler.startScheduler();
         Logger logger = Logger.getLogger(getClass());
+        
+        try {
+            String ipAddress = InetAddress.getLocalHost().getHostAddress();
+            int port = Integer.parseInt(sce.getServletContext().getInitParameter("serverPort"));
+            DaoServer dao=new DaoServer();
+            dao.registerServer(ipAddress, port);
+            SessionData.setServers(dao.getAllServerUrls("/syncSession"));
+            ServerNotifier.notifyServers(null, null, "FETCH_DB");
+            logger.info("Server registered with IP: " + ipAddress + " and Port: " + port);
+        } 
+        catch (UnknownHostException e) {
+            logger.error("Error retrieving IP address: " + e.getMessage(), e);
+        } 
+        catch (Exception e) {
+            logger.error("Server registration failed: " + e.getMessage(), e);
+        }
+        
         logger.info("Server started at " + new java.util.Date());
         System.out.println("Scheduler started!");
     }

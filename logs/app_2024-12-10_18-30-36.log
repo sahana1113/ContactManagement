@@ -1,0 +1,6 @@
+2024-12-10 18:30:36 INFO  AppContextListener - Server started at Tue Dec 10 18:30:36 IST 2024
+2024-12-10 18:30:37 INFO  FilterSession - 127.0.0.1 - - [Tue Dec 10 18:30:37 IST 2024] "GET / HTTP/1.1"
+2024-12-10 18:30:38 INFO  FilterSession -  24 43c56ac4-7c3a-4d1e-94c7-e193cace119a: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 18:30:38 IST 2024] "GET / HTTP/1.1"
+2024-12-10 18:30:38 INFO  FilterSession -  24 43c56ac4-7c3a-4d1e-94c7-e193cace119a: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 18:30:38 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-10 18:30:40 INFO  FilterSession -  24 43c56ac4-7c3a-4d1e-94c7-e193cace119a: 0:0:0:0:0:0:0:1 - - [Tue Dec 10 18:30:40 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-10 21:18:01 INFO  AppContextListener - Server stoped at Tue Dec 10 21:18:01 IST 2024

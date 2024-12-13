@@ -31,7 +31,11 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
 		
 	}
 
-    public String getSessionid() {
+    public BeanSession(String sessionId2) {
+		this.sessionid=sessionId2;
+	}
+
+	public String getSessionid() {
         return sessionid;
     }
 

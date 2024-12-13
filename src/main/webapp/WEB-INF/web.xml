@@ -80,6 +80,10 @@
     <filter-name>SessionFilter</filter-name>
     <url-pattern>/*</url-pattern> 
 </filter-mapping>
+<context-param>
+    <param-name>serverPort</param-name>
+    <param-value>8080</param-value> <!-- Replace 8080 with your server port -->
+</context-param>
  <listener>
     <listener-class>com.example.AppContextListener</listener-class>
 </listener>

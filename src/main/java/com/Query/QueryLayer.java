@@ -52,7 +52,6 @@ public class QueryLayer {
             builder = ((MySQLQueryBuilder) builder).where(conditions);
         }
         String query=builder.build();
-        System.out.println(conditions.getFieldNames());
         
         return getQueryBuilder().executeSelect(query,obj,type,conditions.getFieldNames());    }
 

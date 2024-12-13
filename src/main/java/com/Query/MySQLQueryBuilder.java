@@ -15,9 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-import javax.naming.NamingException;
-
 import com.Bean.Bean;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoUserContact;
@@ -214,14 +211,8 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 	        throw new RuntimeException("Error mapping object fields to query parameters", e);
 	    }
-	  //  System.out.println(preparedStatement.);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		List<T> results = mapUsingReflection(resultSet,type);
-     //   System.out.println(results);
-//		while (resultSet.next()) {
-//			results.add(mapRowUsingReflection(resultSet, type));
-//		}
-
 		resultSet.close();
 		con.close();
 		return results; 
@@ -233,7 +224,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    ResultSetMetaData metaData = rs.getMetaData();
 	    int columnCount = metaData.getColumnCount();
 
-	    List<String> columnNames = new ArrayList<>();
+	    Set<String> columnNames = new HashSet<>();
 	    for (int i = 1; i <= columnCount; i++) {
 	        columnNames.add(metaData.getColumnLabel(i));
 	    }
@@ -270,7 +261,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    return results;
     }
 	
-	private <T> void populateMainFields(ResultSet rs, T instance, List<String> columnNames) throws Exception {
+	private <T> void populateMainFields(ResultSet rs, T instance, Set<String> columnNames) throws Exception {
 	    for (Field field : instance.getClass().getDeclaredFields()) {
 	        field.setAccessible(true);
 
@@ -290,7 +281,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    }
 	}
 
-	private <T> void populateNestedFields(ResultSet rs, T instance, List<String> columnNames) throws Exception {
+	private <T> void populateNestedFields(ResultSet rs, T instance, Set<String> columnNames) throws Exception {
 		for (Field field : instance.getClass().getDeclaredFields()) {
 	        field.setAccessible(true);
 
@@ -300,7 +291,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 
 	            Object nestedInstance = listType.getDeclaredConstructor().newInstance();
 	            boolean populated = false;
-                System.out.println(nestedInstance);
 	            for (Field nestedField : listType.getDeclaredFields()) {
 	            	//System.out.println("Feild:"+nestedField);
 	                nestedField.setAccessible(true);

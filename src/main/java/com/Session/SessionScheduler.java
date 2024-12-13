@@ -27,7 +27,7 @@ public class SessionScheduler {
 	public static void startScheduler() {
         scheduler.scheduleWithFixedDelay (() -> {
             try {
-                DaoSession.updateSession(SessionTreeUpdate.getSessionSet()); 
+                DaoSession.updateSession(SessionData.getSessionSet()); 
                DaoSession.autoDeleteExpiredSessions(); 
             } catch (Exception e) {
                 e.printStackTrace();

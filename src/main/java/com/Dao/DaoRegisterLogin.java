@@ -29,7 +29,6 @@ public class DaoRegisterLogin {
 			Column[] col = new Column[] { UserDetails.username, UserDetails.usermail, UserDetails.gender,
 					UserDetails.phonenumber, UserDetails.birthday };
 			int key = QueryLayer.buildInsertQuery(Tables.USER_DETAILS, user, col);
-			System.out.print(key);
 			if (key != -1) {
 				user.setUser_id(key);
 			}

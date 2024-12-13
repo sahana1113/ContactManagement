@@ -1,26 +1,24 @@
 package com.Dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.TreeSet;
 
-import javax.naming.NamingException;
 import javax.servlet.http.Cookie;
-import com.example.*;
+
 import com.Bean.BeanSession;
+import com.Bean.BeanUserDetails;
 import com.Query.Column;
-import com.Query.Condition;
 import com.Query.Enum.Session;
 import com.Query.Enum.Tables;
-import com.Query.Enum.UserDetails;
 import com.Query.QueryLayer;
-import com.Session.SessionTreeUpdate;
+import com.Server.ServerNotifier;
+import com.Session.*;
+import com.example.HikariCPDataSource;
 /**
  * Data Access Object (DAO) for managing user sessions in the database.
  * This singleton class provides methods to create, validate, update, and delete sessions.
@@ -36,15 +34,16 @@ public class DaoSession {
 	 *
 	 * @param SESSION The SESSION ID to update last accessed time.
 	 * @return The singleton instance of DaoSession.
+	 * @throws IOException 
 	 * @since 1.0
 	 */
-	public static synchronized DaoSession getInstance(String session) {
+	public static synchronized DaoSession getInstance(String session) throws IOException {
 	        if (instance == null) {
 	            instance = new DaoSession();
 	        }
 	        if(session!=null)
 				try {
-					SessionTreeUpdate.updateLastAccessed(session, Timestamp.valueOf(LocalDateTime.now()));
+					SessionData.updateLastAccessed(session, Timestamp.valueOf(LocalDateTime.now()));
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -57,17 +56,19 @@ public class DaoSession {
 	 * @param userId The ID of the user associated with the SESSION.
 	 * @param expiryTime The expiration time of the SESSION.
 	 * @return true if the SESSION was created successfully, false otherwise.
-	 * @throws SQLException 
-	 * @throws IllegalAccessException 
-	 * @throws NoSuchFieldException 
+	 * @throws Exception 
 	 */
-	 public boolean createSession(String sessionId, int userId, LocalDateTime expiryTime) throws NoSuchFieldException, IllegalAccessException, SQLException {
+	 public boolean createSession(String sessionId, int userId, LocalDateTime expiryTime) throws Exception {
 		 BeanSession obj=new BeanSession();
 		 obj.setUser_id(userId);
 		 obj.setLast_accessed(Timestamp.valueOf(LocalDateTime.now()));
 		 obj.setExpiry_time(Timestamp.valueOf(expiryTime));
 		 obj.setSessionid(sessionId);
+		 SessionData.getSessionSet().add(obj);
 		 int k=QueryLayer.buildInsertQuery(Tables.SESSION, obj, new Column[] {Session.sessionid,Session.user_id,Session.expiry_time,Session.last_accessed});
+		 DaoUserContact rd=new DaoUserContact();
+		 BeanUserDetails user=rd.getUserDetailsById(userId);
+		 SessionData.setUserDataValue(user, userId);
 		 return k!=0;
 	    }
 	 /**
@@ -87,7 +88,7 @@ public class DaoSession {
 		        
 		        for (BeanSession obj : list1) {
 		            stmt.setTimestamp(1, obj.getLast_accessed()); 
-		            stmt.setTimestamp(2, Timestamp.from(obj.getLast_accessed().toInstant().plus(Duration.ofMinutes(30)))); 
+		            stmt.setTimestamp(2, obj.getExpiry_time()); 
 		            stmt.setString(3, obj.getSessionid());
 		            stmt.setTimestamp(4, obj.getLast_accessed()); 
 		            stmt.addBatch();  
@@ -127,40 +128,16 @@ public class DaoSession {
 	 public int validateSession(String sessionId, Cookie[] cookies) throws Exception {
 		    BeanSession obj=new BeanSession();
 		    obj.setSessionid(sessionId);
-			Condition condition=new Condition(Session.sessionid,"=",false);
-		     List<BeanSession> list=QueryLayer.buildSelectQuery(
-		    		 new Tables[] {Tables.SESSION},
-		    		 new Column[] {Session.user_id,Session.expiry_time},
-		    		 condition,
-		    		 BeanSession.class,
-		    		 obj, 
-		    		 null,null);
-		     for(BeanSession ses:list)
-		     {
-		    	 if (cookies == null ||ses.getExpiry_time().before(new Timestamp(System.currentTimeMillis())))
-		    	 {
-		    		 invalidateSession(sessionId);
-	            	 return 0;
-		    	 }
-		    	 return ses.getUser_id();
-		    			 
-		     }
-//	        String sql = "SELECT user_id,expiry_time FROM session WHERE sessionid = ?";
-//	        try (	            Connection con = HikariCPDataSource.getConnection();
-//	             PreparedStatement stmt = con.prepareStatement(sql)) {
-//	            stmt.setString(1, sessionId);
-//	            ResultSet rs = stmt.executeQuery();
-//	            if (rs.next()) {
-//	            	if(cookies==null ||rs.getTimestamp("expiry_time").before(new Timestamp(System.currentTimeMillis())))
-//	            	{
-//	            		invalidateSession(sessionId);
-//	            		return 0;
-//	            	}
-//	                return rs.getInt("user_id");
-//	            }
-//	        } catch (SQLException e) {
-//	            e.printStackTrace();
-//	        }
+		    for (BeanSession session : SessionData.getSessionSet()) {
+	            if (session.getSessionid().equals(sessionId)) {
+	            	if (cookies == null ||session.getExpiry_time().before(new Timestamp(System.currentTimeMillis())))
+			    	 {
+			    		 invalidateSession(sessionId);
+		            	 return 0;
+			    	 }
+	                return session.getUser_id(); 
+	            }
+	        }
 	        return 0;
 	    }
 	 /**
@@ -169,24 +146,15 @@ public class DaoSession {
 	  * @param sessionId The ID of the SESSION to invalidate.
 	  * @return true if the SESSION was successfully invalidated, false otherwise.
 	  * @throws SQLException 
+	 * @throws IOException 
 	  */
-	public boolean invalidateSession(String sessionId) throws SQLException {
+	public boolean invalidateSession(String sessionId) throws SQLException, IOException {
 		BeanSession s=new BeanSession();
 		s.setSessionid(sessionId);
 		int k=QueryLayer.buildDeleteQuery(
 				Tables.SESSION, new Column[] {Session.user_id}, null, s);
-		SessionTreeUpdate.removeObj(sessionId);
+		SessionData.removeObj(sessionId);
+		ServerNotifier.notifyServers(sessionId, null, "DELETE");
 		return k>0;
-//        String sql = "DELETE FROM session WHERE sessionid = ?";
-//        try  {
-//            Connection con = HikariCPDataSource.getConnection();
-//	    	PreparedStatement stmt = con.prepareStatement(sql);
-//            stmt.setString(1, sessionId);
-//            SessionTreeUpdate.removeObj(sessionId);
-//            return stmt.executeUpdate() > 0;
-//        } catch (SQLException  e) {
-//            e.printStackTrace();
-//            return false;
-//        }
     }
 }
