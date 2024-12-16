@@ -3,6 +3,7 @@ package com.Query;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -74,27 +75,21 @@ public class QueryLayer {
         return getQueryBuilder().executeInsert(query, obj,columns);
     }
 
-    public static int buildUpdateQuery(Tables table, Column[] conditionsColumns, String[] logics,Bean obj, Column... columns) throws SQLException {
+    public static int buildUpdateQuery(Tables table, Condition conditionsColumns, String[] logics,Bean obj, Column... columns) throws SQLException {
         String[] columnValuePairs = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnValuePairs[i] = columns[i].getColumnName() + " = ?";
         }
-        QueryBuilder builder = getQueryBuilder().update(table).set(columnValuePairs);
-        if (conditionsColumns != null && conditionsColumns.length > 0) {
-        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics,false);
-        }
+        QueryBuilder builder = getQueryBuilder().update(table).set(columnValuePairs).where(conditionsColumns);
         String query=builder.build();
-        Column[] all=combineColumns(columns,conditionsColumns);
-        return getQueryBuilder().executeUpdateDelete(query, obj,all);
+        Column[] all=combineColumns(columns,conditionsColumns.getFieldNames());
+        return getQueryBuilder().executeUpdateDelete(query, obj,Arrays.asList(all));
     }
 
-	public static int buildDeleteQuery(Tables table, Column[] conditionsColumns, String[] logics,Bean obj) throws SQLException {
-        QueryBuilder builder = getQueryBuilder().deleteFrom(table);
-        if (conditionsColumns != null && conditionsColumns.length > 0) {
-        	builder = ((MySQLQueryBuilder) builder).conditions(conditionsColumns, logics,false);
-        }
+	public static int buildDeleteQuery(Tables table, Condition conditionsColumns, String[] logics,Bean obj) throws SQLException {
+        QueryBuilder builder = getQueryBuilder().deleteFrom(table).where(conditionsColumns);
         String query=builder.build();
-        return getQueryBuilder().executeUpdateDelete(query, obj,conditionsColumns);
+        return getQueryBuilder().executeUpdateDelete(query, obj,conditionsColumns.getFieldNames());
     }
     
 
@@ -120,13 +115,13 @@ public class QueryLayer {
                 throw new IllegalArgumentException("Unsupported table: " + String.valueOf(table));
         }
     }
-    private static Column[] combineColumns(Column[] updateColumns, Column[] conditionColumns) {
-        if (conditionColumns == null || conditionColumns.length == 0) {
+    private static Column[] combineColumns(Column[] updateColumns, List<Column> conditionColumns) {
+        if (conditionColumns == null || conditionColumns.size() == 0) {
             return updateColumns; 
         }
-        Column[] allColumns = new Column[updateColumns.length + conditionColumns.length];
+        Column[] allColumns = new Column[updateColumns.length + conditionColumns.size()];
         System.arraycopy(updateColumns, 0, allColumns, 0, updateColumns.length);
-        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionColumns.length);
+        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionColumns.size());
         return allColumns;
     }
 }

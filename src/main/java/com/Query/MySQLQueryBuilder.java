@@ -173,14 +173,14 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeUpdateDelete(String sql, Bean entity,Column[]columns) throws SQLException {
+	public int executeUpdateDelete(String sql, Bean entity,List<Column> columns) throws SQLException {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(sql);
 		System.out.println(sql);
 		 Class<?> clazz = entity.getClass();
 		    try {
-		        for (int i = 0; i < columns.length; i++) {
-		            String fieldName = columns[i].getColumnName(); 
+		        for (int i = 0; i < columns.size(); i++) {
+		            String fieldName = columns.get(i).getColumnName(); 
 		            Field field = clazz.getDeclaredField(fieldName);
 		            field.setAccessible(true); 
 		            Object value = field.get(entity); 
@@ -321,6 +321,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    }
 	    return false;
 	}
+
 
 
 

@@ -15,7 +15,7 @@ public class Enum {
 	    CREDENTIALS("credentials", "c", BeanUserDetails.class),
 	    SESSION("session", "s", BeanSession.class),
 	    USER_DETAILS("userDetails", "ud", BeanUserDetails.class),
-	    TEST("test", "t", Test.class);
+		SERVERS("servers","ser",BeanServer.class);
 
 	    private final String tableName;
 	    private final String alias;
@@ -292,5 +292,31 @@ public class Enum {
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
+    }
+    public enum Servers implements Column{
+		id,
+		ip_address,
+		port_number,
+		created_time;
+
+    	public String getColumnName() {
+            return this.name();
+        }
+
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "ser";
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "servers";  
+        }
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
+        }
+    	
     }
 }

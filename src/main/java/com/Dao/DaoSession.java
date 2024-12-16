@@ -13,6 +13,7 @@ import javax.servlet.http.Cookie;
 import com.Bean.BeanSession;
 import com.Bean.BeanUserDetails;
 import com.Query.Column;
+import com.Query.Condition;
 import com.Query.Enum.Session;
 import com.Query.Enum.Tables;
 import com.Query.QueryLayer;
@@ -152,7 +153,7 @@ public class DaoSession {
 		BeanSession s=new BeanSession();
 		s.setSessionid(sessionId);
 		int k=QueryLayer.buildDeleteQuery(
-				Tables.SESSION, new Column[] {Session.user_id}, null, s);
+				Tables.SESSION, new Condition(Session.user_id,"=",false), null, s);
 		SessionData.removeObj(sessionId);
 		ServerNotifier.notifyServers(sessionId, null, "DELETE");
 		return k>0;

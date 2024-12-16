@@ -75,11 +75,6 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		return 0;
 	}
 	@Override
-	public int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
 	public QueryBuilder join(Tables table, String onCondition, String join) {
 		// TODO Auto-generated method stub
 		return null;
@@ -93,6 +88,11 @@ public class PostgresQueryBuilder implements QueryBuilder {
 	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, List<Column> columns) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int executeUpdateDelete(String sql, Bean entity, List<Column> columns) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

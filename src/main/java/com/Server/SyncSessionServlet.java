@@ -31,7 +31,7 @@ public class SyncSessionServlet extends HttpServlet {
         if (sessionId != null && lastAccessed != null) {
             synchronized (sessionSet) {
             	BeanSession sessionData = new BeanSession(sessionId, last);
-              sessionSet.remove(sessionData); // Remove if it already exists
+              sessionSet.remove(sessionData);
               sessionSet.add(sessionData); 
             }
             response.setStatus(HttpServletResponse.SC_OK);
@@ -44,19 +44,17 @@ public class SyncSessionServlet extends HttpServlet {
         	SessionData.setServers(new DaoServer().getAllServerUrls("/syncSession"));
         	response.setStatus(HttpServletResponse.SC_OK);
         }
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String sessionId = request.getParameter("session_id");
-
-        if (sessionId != null) {
-            synchronized (sessionSet) {
-                sessionSet.remove(sessionId);
+        else if(action.equals("DELETE"))
+        {
+        	if (sessionId != null) {
+                synchronized (sessionSet) {
+                    sessionSet.remove(sessionId);
+                }
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
-            response.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
+
 }

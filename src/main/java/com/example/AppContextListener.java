@@ -35,6 +35,9 @@ public class AppContextListener implements ServletContextListener {
      * @param sce the ServletContextEvent containing the servlet context that 
      *            was initialized.
      */
+    DaoServer dao=new DaoServer();
+    String ipAddress;
+    int port;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
     	String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
@@ -46,9 +49,8 @@ public class AppContextListener implements ServletContextListener {
         Logger logger = Logger.getLogger(getClass());
         
         try {
-            String ipAddress = InetAddress.getLocalHost().getHostAddress();
-            int port = Integer.parseInt(sce.getServletContext().getInitParameter("serverPort"));
-            DaoServer dao=new DaoServer();
+            ipAddress = InetAddress.getLocalHost().getHostAddress();
+            port = Integer.parseInt(sce.getServletContext().getInitParameter("serverPort"));
             dao.registerServer(ipAddress, port);
             SessionData.setServers(dao.getAllServerUrls("/syncSession"));
             ServerNotifier.notifyServers(null, null, "FETCH_DB");
@@ -61,7 +63,7 @@ public class AppContextListener implements ServletContextListener {
             logger.error("Server registration failed: " + e.getMessage(), e);
         }
         
-        logger.info("Server started at " + new java.util.Date());
+        logger.info("Server started at " + new java.util.Date());			
         System.out.println("Scheduler started!");
     }
     /**
@@ -75,6 +77,7 @@ public class AppContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         SessionScheduler.stopScheduler();
         System.out.println("Scheduler stopped!");
+        dao.remove(ipAddress,port);
         HikariCPDataSource.close();
         AbandonedConnectionCleanupThread.checkedShutdown();
         Logger logger = Logger.getLogger(getClass());
