@@ -3,17 +3,6 @@ package com.Bean;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-/**
- * Represents a user SESSION in the application.
- * This class encapsulates SESSION-related details, including the SESSION ID,
- * user ID, and timestamps for creation, access, and expiration.
- * 
- * <p>This class implements the Comparable interface to allow sorting based
- * on the accessed time of the sessions.</p>
- * 
- * @author Sahana
- * @version 1.0
- */
 public class BeanSession implements Comparable<BeanSession>,Bean{
 
     private String sessionid;

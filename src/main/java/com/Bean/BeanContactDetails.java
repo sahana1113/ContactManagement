@@ -2,14 +2,6 @@ package com.Bean;
 
 import java.util.List;
 
-/**
- * Represents the contact details of a person.
- * This class encapsulates various attributes related to a contact, 
- * including name, email, altPhone number, and other personal details.
- * 
- * @author Sahana
- * @version 1.0
- */
 public class BeanContactDetails implements Bean{
 
     private String name;

@@ -1,11 +1,5 @@
 package com.Bean;
 
-/**
- * Represents a category_name with an ID and a name.
- * This class is used to manage category_name data in the application.
- * @author Sahana
- * @version 1.0
- */
 public class BeanCategory implements Bean{
 
     private int category_id;

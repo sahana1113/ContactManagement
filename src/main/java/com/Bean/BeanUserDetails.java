@@ -3,18 +3,6 @@ package com.Bean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents user details in the application. This class encapsulates
- * information about a user, including personal details, contact information,
- * and lists of alternative contacts.
- * 
- * <p>
- * This class provides methods to get and set user attributes.
- * </p>
- * 
- * @author Sahana
- * @version 1.0
- */
 public class BeanUserDetails implements Bean {
 
 	private String username;
@@ -108,33 +96,16 @@ public class BeanUserDetails implements Bean {
 		this.birthday = birthday;
 	}
   
-
-	public List<BeanMail> getAllMail() {
-		return getAltMail();
-	}
-
 	public List<BeanMail> getAltMail() {
 		return altMail;
-	}
-
-	public void setAllMail(List<BeanMail> allMail) {
-		setAltMail(allMail);
 	}
 
 	public void setAltMail(List<BeanMail> allMail) {
 		this.altMail = allMail;
 	}
 
-	public List<BeanPhone> getAllPhone() {
-		return getAltPhone();
-	}
-
 	public List<BeanPhone> getAltPhone() {
 		return altPhone;
-	}
-
-	public void setAllPhone(List<BeanPhone> allPhone) {
-		setAltPhone(allPhone);
 	}
 
 	public void setAltPhone(List<BeanPhone> allPhone) {
