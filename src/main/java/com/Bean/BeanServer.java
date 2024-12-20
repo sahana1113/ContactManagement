@@ -7,6 +7,10 @@ public class BeanServer {
     String ip_address;
     int port_number;
     Timestamp created_time;
+    
+	public BeanServer() {
+		
+	}
 	public int getId() {
 		return id;
 	}

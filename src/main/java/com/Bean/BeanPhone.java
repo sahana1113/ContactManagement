@@ -20,15 +20,9 @@ public class BeanPhone implements Bean{
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getPhonenumber() {
-		return getAltPhone();
-	}
 
 	public String getAltPhone() {
 		return altPhone;
-	}
-	public void setPhonenumber(String phonenumber) {
-		setAltPhone(phonenumber);
 	}
 
 	public void setAltPhone(String phonenumber) {

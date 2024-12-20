@@ -10,25 +10,8 @@ import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoUserContact;
 
-/**
- * Servlet that handles the password change functionality for users.
- *
- * @author Sahana
- * @version 1.0
- */
+
 public class ServletChangePassword extends HttpServlet {
-	 /**
-     * Processes the password change request. Validates the current password 
-     * and updates the password if the new password and confirmation match.
-     *
-     * @param request  The HttpServletRequest object that contains the request 
-     *                 data.
-     * @param response The HttpServletResponse object used to send a response 
-     *                 to the client.
-     * @throws ServletException If an error occurs during the request processing.
-     * @throws IOException If an input or output error is detected when the 
-     *                     servlet handles the request.
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
    	 

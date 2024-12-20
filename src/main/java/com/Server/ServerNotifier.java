@@ -15,9 +15,13 @@ import com.Session.SessionData;
 public class ServerNotifier {
     public static void notifyServers(String sessionId, Timestamp lastAccessed, String action) throws IOException {
     	List<String> serverUrls = SessionData.getServers();
+    	if (serverUrls == null || serverUrls.isEmpty()) {
+            System.out.println("No servers available to notify.");
+            return;
+        }
         for(String url:serverUrls) {
             HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-            connection.setRequestMethod(action);
+            connection.setRequestMethod("POST");
             connection.setDoOutput(true);
 
             if (action.equals("POST")) {

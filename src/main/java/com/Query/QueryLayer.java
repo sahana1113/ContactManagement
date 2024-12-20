@@ -119,9 +119,10 @@ public class QueryLayer {
         if (conditionColumns == null || conditionColumns.size() == 0) {
             return updateColumns; 
         }
+        Column[] conditionArray = conditionColumns.toArray(new Column[0]);
         Column[] allColumns = new Column[updateColumns.length + conditionColumns.size()];
         System.arraycopy(updateColumns, 0, allColumns, 0, updateColumns.length);
-        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionColumns.size());
+        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionArray.length);
         return allColumns;
     }
 }

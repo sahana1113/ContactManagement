@@ -1,0 +1,38 @@
+17/Dec/2024:07:14:59 +0530  - - [17/Dec/2024:07:14:59 +0530] "Server registration failed: Invalid HTTP method: FETCH_DB %U HTTP/1.1" %s %b
+java.net.ProtocolException: Invalid HTTP method: FETCH_DB
+	at java.base/java.net.HttpURLConnection.setRequestMethod(HttpURLConnection.java:491)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.setRequestMethod(HttpURLConnection.java:592)
+	at com.Server.ServerNotifier.notifyServers(ServerNotifier.java:20)
+	at com.example.AppContextListener.contextInitialized(AppContextListener.java:56)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4005)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4446)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:721)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:211)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:874)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+17/Dec/2024:07:14:59 +0530  - - [17/Dec/2024:07:14:59 +0530] "Server started at Tue Dec 17 07:14:59 IST 2024 %U HTTP/1.1" %s %b
+17/Dec/2024:07:15:00 +0530  - - [17/Dec/2024:07:15:00 +0530] "127.0.0.1 - - [Tue Dec 17 07:15:00 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+17/Dec/2024:07:15:53 +0530  - - [17/Dec/2024:07:15:53 +0530] "Server stoped at Tue Dec 17 07:15:53 IST 2024 %U HTTP/1.1" %s %b
+17/Dec/2024:07:16:40 +0530  - - [17/Dec/2024:07:16:40 +0530] "127.0.0.1 - - [Tue Dec 17 07:16:40 IST 2024] "POST /syncSession HTTP/1.1" %U HTTP/1.1" %s %b

@@ -14,30 +14,19 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.Bean.BeanServer;
 import com.Dao.DaoServer;
 import com.Server.ServerNotifier;
 import com.Session.SessionData;
 import com.Session.SessionScheduler;
 import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
-/**
- * A servlet context listener that initializes and stops the SESSION scheduler 
- * when the web application context is created and destroyed.
- *
- *  @author Sahana
- *  @version 1.0
- */
+
 @WebListener
 public class AppContextListener implements ServletContextListener {
-	/**
-     * Called when the servlet context is initialized. 
-     * Starts the SESSION scheduler.
-     *
-     * @param sce the ServletContextEvent containing the servlet context that 
-     *            was initialized.
-     */
+	BeanServer obj=new BeanServer();
     DaoServer dao=new DaoServer();
-    String ipAddress;
-    int port;
+    public static String ipAddress;
+    public static int port;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
     	String timestamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
@@ -51,8 +40,10 @@ public class AppContextListener implements ServletContextListener {
         try {
             ipAddress = InetAddress.getLocalHost().getHostAddress();
             port = Integer.parseInt(sce.getServletContext().getInitParameter("serverPort"));
+            obj.setIp_address(ipAddress);
+            obj.setPort_number(port);
             dao.registerServer(ipAddress, port);
-            SessionData.setServers(dao.getAllServerUrls("/syncSession"));
+            SessionData.setServers(dao.getAllServerUrls("/syncSession",ipAddress,port));
             ServerNotifier.notifyServers(null, null, "FETCH_DB");
             logger.info("Server registered with IP: " + ipAddress + " and Port: " + port);
         } 
@@ -66,13 +57,6 @@ public class AppContextListener implements ServletContextListener {
         logger.info("Server started at " + new java.util.Date());			
         System.out.println("Scheduler started!");
     }
-    /**
-     * Called when the servlet context is destroyed. 
-     * Stops the SESSION scheduler.
-     *
-     * @param sce the ServletContextEvent containing the servlet context that 
-     *            was destroyed.
-     */     
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         SessionScheduler.stopScheduler();

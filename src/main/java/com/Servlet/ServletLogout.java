@@ -11,31 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Dao.DaoSession;
 
-/**
- * Servlet that handles user logout by invalidating the user's SESSION 
- * and clearing the SESSION cookie.
- *
- * @author Sahana
- * @version 1.0
- */
 public class ServletLogout extends HttpServlet {
-    /**
-     * Processes the logout request by invalidating the user SESSION 
-     * and removing the SESSION cookie. The user is then redirected 
-     * to the login page.
-     *
-     * <p>This method checks for the SESSIONID cookie, invalidates the 
-     * corresponding SESSION if the user is logged in, and sets the 
-     * cookie's maximum age to zero to delete it.</p>
-     *
-     * @param request  The HttpServletRequest object that contains the 
-     *                 request data.
-     * @param response The HttpServletResponse object used to send a 
-     *                 response to the client.
-     * @throws ServletException If an error occurs during request processing.
-     * @throws IOException If an input or output error is detected while 
-     *                     handling the request.
-     */
+    
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         DaoSession ses=new DaoSession();

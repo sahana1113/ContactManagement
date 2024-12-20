@@ -20,17 +20,10 @@ public class BeanMail implements Bean{
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	public String getUsermail() {
-		return getAltMail();
-	}
 
 	public String getAltMail() {
 		return altMail;
 	}
-	public void setUsermail(String usermail) {
-		setAltMail(usermail);
-	}
-
 	public void setAltMail(String usermail) {
 		this.altMail = usermail;
 	}

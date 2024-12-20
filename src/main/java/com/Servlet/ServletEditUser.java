@@ -12,31 +12,8 @@ import com.Bean.BeanPhone;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 
-/**
- * Servlet that handles editing user details, including adding, 
- * deleting, and updating contact information.
- *
- * @author Sahana
- * @version 1.0
- */
+
 public class ServletEditUser extends HttpServlet {
-	 /**
-     * Processes the request to edit user details based on user input 
-     * from the form.
-     *
-     * <p>This method can handle various actions such as adding or 
-     * deleting email and altPhone numbers, as well as updating primary 
-     * user information. It redirects the user to the appropriate page 
-     * based on the action performed.</p>
-     *
-     * @param request  The HttpServletRequest object that contains the 
-     *                 request data.
-     * @param response The HttpServletResponse object used to send a 
-     *                 response to the client.
-     * @throws ServletException If an error occurs during request processing.
-     * @throws IOException If an input or output error is detected while 
-     *                     handling the request.
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	int userId = (int) request.getAttribute("user_id");

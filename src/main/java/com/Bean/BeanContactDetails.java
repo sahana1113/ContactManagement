@@ -20,8 +20,6 @@ public class BeanContactDetails implements Bean{
     private String location;
     private int contact_id;
     private int user_id;
-    private String alt_mail;
-    private String alt_phone;
     private List<BeanCategory> category;
     private String category_name;
     private boolean is_archive;
@@ -49,22 +47,6 @@ public class BeanContactDetails implements Bean{
     }
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    public String getAlt_mail() {
-        return alt_mail;
-    }
-
-    public void setAlt_mail(String alt_mail) {
-        this.alt_mail = alt_mail;
-    }
-
-    public String getAlt_phone() {
-        return alt_phone;
-    }
-
-    public void setAlt_phone(String alt_phone) {
-        this.alt_phone = alt_phone;
     }
 
     public String getName() {

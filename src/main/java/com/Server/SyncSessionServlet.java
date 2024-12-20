@@ -1,6 +1,7 @@
 package com.Server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.example.*;
 import com.Bean.BeanSession;
 import com.Dao.DaoServer;
 import com.Session.SessionData;
@@ -41,7 +42,7 @@ public class SyncSessionServlet extends HttpServlet {
         }
         else if(action.equals("FETCH_DB"))
         {
-        	SessionData.setServers(new DaoServer().getAllServerUrls("/syncSession"));
+        	SessionData.setServers(new DaoServer().getAllServerUrls("/syncSession",AppContextListener.ipAddress,AppContextListener.port));
         	response.setStatus(HttpServletResponse.SC_OK);
         }
         else if(action.equals("DELETE"))

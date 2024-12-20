@@ -59,17 +59,9 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
         this.creation_time = creation_time;
     }
 
-    public Timestamp getAccessed_time() {
-		return getLast_accessed();
-	}
-
 	public Timestamp getLast_accessed() {
         return last_accessed;
     }
-
-    public void setAccessed_time(Timestamp accessed_time) {
-		setLast_accessed(accessed_time);
-	}
 
 	public void setLast_accessed(Timestamp timestamp) {
         this.last_accessed = timestamp;

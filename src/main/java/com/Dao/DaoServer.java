@@ -24,15 +24,20 @@ public class DaoServer {
         }
     }
 
-    public List<String> getAllServerUrls(String endpoint) {
+    public List<String> getAllServerUrls(String endpoint,String ip,int port) {
         List<String> serverUrls = new ArrayList<>();
         try (Connection connection =  HikariCPDataSource.getConnection()) {
             String query = "SELECT ip_address, port_number FROM servers";
             PreparedStatement stmt = connection.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
+            
             while (rs.next()) {
-                String serverUrl = "http://" + rs.getString("server_ip") + ":" + rs.getInt("server_port") + endpoint;
+            	int p=rs.getInt("port_number");
+                String ip1=rs.getString("ip_address");
+                if(p!=port && !ip.equals(ip1)) {
+                String serverUrl = "http://" + rs.getString("ip_address") + ":" + rs.getInt("port_number") + endpoint;
                 serverUrls.add(serverUrl);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

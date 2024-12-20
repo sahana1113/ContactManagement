@@ -1,0 +1,25 @@
+2024-12-17 07:16:34 ERROR AppContextListener - Server registration failed: Invalid HTTP method: FETCH_DB
+java.net.ProtocolException: Invalid HTTP method: FETCH_DB
+	at java.base/java.net.HttpURLConnection.setRequestMethod(HttpURLConnection.java:491)
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.setRequestMethod(HttpURLConnection.java:592)
+	at com.Server.ServerNotifier.notifyServers(ServerNotifier.java:20)
+	at com.example.AppContextListener.contextInitialized(AppContextListener.java:56)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4005)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4446)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3212)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:273)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:4801)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1172)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1154)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-12-17 07:16:34 INFO  AppContextListener - Server started at Tue Dec 17 07:16:34 IST 2024
+2024-12-17 07:16:35 INFO  AppContextListener - Server stoped at Tue Dec 17 07:16:35 IST 2024
