@@ -58,6 +58,7 @@ public class ServletEditUser extends HttpServlet {
                 user.setPhonenumber(request.getParameter("primaryPhone"));
                 if(user.getUsermail().length()!=0)
         		{
+                	System.out.println(user.getUsermail());
         			rld.updatePrimaryMail(user);
         		}
         		if(user.getPhonenumber().length()!=0)

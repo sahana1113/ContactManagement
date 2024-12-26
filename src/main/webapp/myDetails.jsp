@@ -5,6 +5,7 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page import="com.Session.*" %>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -140,18 +141,25 @@
                 <h3>My Account Details</h3>
                 
                 <%
-                                int user_Id = (Integer) request.getAttribute("user_id"); 
+                int user_Id = (Integer) request.getAttribute("user_id"); 
+                DaoUserContact contactDao = new DaoUserContact();
+                BeanUserDetails user = null;
 
-                                                                                    DaoUserContact contactDao = new DaoUserContact();
-                                                                                    BeanUserDetails user = null;
+                try {
+                	if(SessionData.getUserData().containsKey(user_Id))
+                	{
+                 	user=SessionData.getUserData().get(user_Id);
+                	}
+                	else
+                	{
+                		user=contactDao.getUserDetailsById(user_Id);
+                	}
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-                                                                                    try {
-                                                                                        user = contactDao.getUserDetailsById(user_Id);
-                                                                                    } catch (SQLException e) {
-                                                                                        e.printStackTrace();
-                                                                                    }
-
-                                                                                    if (user != null) {
+                if (user != null) {
+                                                                                    
                                 %>
                 <ul>
                     <li><strong>Username:</strong> <span><%= user.getUsername() %></span></li>

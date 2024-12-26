@@ -23,16 +23,15 @@ public class ServletUserRegister extends HttpServlet {
         user.setBirthday(request.getParameter("birthday"));
         user.setPhonenumber(request.getParameter("phone"));
         user.setPassword(request.getParameter("password"));
-        BeanMail mail=new BeanMail();
-        mail.setAltMail(request.getParameter("email"));
-        BeanPhone phone=new BeanPhone();
-        phone.setAltPhone(request.getParameter("phone"));
+        BeanMail mail=new BeanMail(request.getParameter("email"));
+        BeanPhone phone=new BeanPhone(request.getParameter("phone"));
         DaoRegisterLogin rld=new DaoRegisterLogin();
         try {
               if(rld.UserDetailsRegister(user))
             {
+            	  mail.setUser_id(user.getUser_id());
+            	  phone.setUser_id(user.getUser_id());
             	  rld.allMailInsert(mail);
-                  rld.credentialsInsert(user);
                   rld.allPhoneInsert(phone);
                   rld.defaultGroup(user);
             	response.sendRedirect("login.jsp");

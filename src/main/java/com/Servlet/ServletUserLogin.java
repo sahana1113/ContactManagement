@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanMail;
 import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoSession;
 
@@ -17,12 +18,13 @@ public class ServletUserLogin extends HttpServlet {
     private static final Logger logger = Logger.getLogger(ServletUserLogin.class.getName()); 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		String useremail=request.getParameter("email");
+		BeanMail mail=new BeanMail();
+		mail.setAltMail(request.getParameter("email"));
 		String password=request.getParameter("password");
 		DaoSession sessionDAO = new DaoSession();
 		DaoRegisterLogin rld=new DaoRegisterLogin();
 		try {
-			int user_id=rld.validateLogin(useremail, password);
+			int user_id=rld.validateLogin(mail, password);
 		if(user_id!=-1)
 		{
 			String sessionId = generateSessionId();

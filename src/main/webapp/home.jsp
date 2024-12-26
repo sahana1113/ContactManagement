@@ -7,10 +7,10 @@
 <%@ page import="com.Bean.*" %>
 <%@ page import="com.Session.*" %>
 <%@ page session="false" %>
+<%@ page import="com.Session.*" %>
 <%
 int uId = (Integer) request.getAttribute("user_id"); 
-DaoUserContact cd = new DaoUserContact(uId);
-String s = cd.getUsername();
+String s = SessionData.getUserData().get(uId).getUsername();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,21 +144,22 @@ String s = cd.getUsername();
                 <h3>My Account Details</h3>
                 <%
                 DaoUserContact contactDao = new DaoUserContact();
-                                                                    BeanUserDetails user = null;
+                BeanUserDetails user = null;
 
-                                                                    try {
-                                                                    	if(SessionData.getUserData().containsKey(uId))
-                                                                    	{
-                                                                    		user=SessionData.getUserData().get(uId);
-                                                                    	}
-                                                                    	else{
-                                                                    		user=contactDao.getUserDetailsById(uId);
-                                                                    	}
-                                                                    } catch (SQLException e) {
-                                                                        e.printStackTrace();
-                                                                    }
+                try {
+                	if(SessionData.getUserData().containsKey(uId))
+                	{
+                 	user=SessionData.getUserData().get(uId);
+                	}
+                	else
+                	{
+                		user=contactDao.getUserDetailsById(uId);
+                	}
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-                                                                    if (user != null) {
+                if (user != null) {                                                  
                 %>
                 <ul>
                     <li><strong>Username:</strong> <span><%= user.getUsername() %></span></li>

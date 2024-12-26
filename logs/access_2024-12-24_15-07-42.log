@@ -1,0 +1,9 @@
+24/Dec/2024:15:07:42 +0530  - - [24/Dec/2024:15:07:42 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:42 +0530  - - [24/Dec/2024:15:07:42 +0530] "Server started at Tue Dec 24 15:07:42 IST 2024 %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:42 +0530  - - [24/Dec/2024:15:07:42 +0530] "127.0.0.1 - - [Tue Dec 24 15:07:42 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:43 +0530  - - [24/Dec/2024:15:07:43 +0530] " 24 d8238238-fd27-47bf-8541-ddcb4ff40ac8: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 15:07:43 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:43 +0530  - - [24/Dec/2024:15:07:43 +0530] " 24 d8238238-fd27-47bf-8541-ddcb4ff40ac8: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 15:07:43 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:46 +0530  - - [24/Dec/2024:15:07:46 +0530] " 24 d8238238-fd27-47bf-8541-ddcb4ff40ac8: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 15:07:46 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:07:47 +0530  - - [24/Dec/2024:15:07:47 +0530] " 24 d8238238-fd27-47bf-8541-ddcb4ff40ac8: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 15:07:47 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:08:26 +0530  - - [24/Dec/2024:15:08:26 +0530] " 24 d8238238-fd27-47bf-8541-ddcb4ff40ac8: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 15:08:26 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+24/Dec/2024:15:10:40 +0530  - - [24/Dec/2024:15:10:40 +0530] "Server stoped at Tue Dec 24 15:10:40 IST 2024 %U HTTP/1.1" %s %b

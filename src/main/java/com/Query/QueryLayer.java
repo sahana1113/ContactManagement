@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -42,19 +43,22 @@ public class QueryLayer {
             throw new UnsupportedOperationException("Unsupported database type: " + dbType);
         }
     }
-    public static <T> List<T> buildSelectQuery(Tables[] table, Column[] columns, Condition conditions, Class<T> type,Bean obj,Column[][]join,String joining) throws Exception {
-        QueryBuilder builder = getQueryBuilder().select(columns).from(table[0]);
-        for (int i = 1; i < table.length; i++) {
-        	String left=join[i-1][0].getAlias()+"."+join[i-1][0];
-        	String right=join[i-1][1].getAlias()+"."+join[i-1][1];
-            builder = ((MySQLQueryBuilder) builder).join(table[i], left + " = " + right," "+joining+" ");  
+    public static <T> List<T> buildSelectQuery(Tables table, Column[] columns, Condition conditions, Class<T> type,Bean obj,Join[] joins,Column[] column) throws Exception {
+        QueryBuilder builder = getQueryBuilder().select(columns).from(table);
+        if(joins!=null)
+        {
+        	for(Join join:joins)
+        	{
+        		builder=builder.join(join.buildJoin());
+        	}
         }
         if (conditions != null) {
             builder = ((MySQLQueryBuilder) builder).where(conditions);
         }
         String query=builder.build();
         
-        return getQueryBuilder().executeSelect(query,obj,type,conditions.getFieldNames());    }
+        return getQueryBuilder().executeSelect(query,obj,type,column);  
+        }
 
     public static int buildInsertQuery(Tables table,Bean obj) throws SQLException, NoSuchFieldException, IllegalAccessException{
         Column[] columns = getColumnsByTable(table);
@@ -63,7 +67,7 @@ public class QueryLayer {
             columnNames[i] = columns[i].getColumnName();
         }
         String query= getQueryBuilder().insert(table, columnNames).values(columnNames).build();
-        return getQueryBuilder().executeInsert(query, obj,columns);
+        return getQueryBuilder().executeInsert(query, obj,columns,false);
     }
     
     public static int buildInsertQuery(Tables table,Bean obj, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
@@ -72,24 +76,33 @@ public class QueryLayer {
             columnNames[i] = columns[i].getColumnName();
         }
         String query=getQueryBuilder().insert(table, columnNames).values(columnNames).build();
-        return getQueryBuilder().executeInsert(query, obj,columns);
+        return getQueryBuilder().executeInsert(query, obj,columns,false);
+    }
+    
+    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj) throws SQLException {
+    	String[] columnNames = new String[columns.length];
+        for (int i = 0; i < columns.length; i++) {
+            columnNames[i] = columns[i].getColumnName();
+        }
+    	String query=getQueryBuilder().insertBatch(table,columnNames).values(data,1).build();
+        return getQueryBuilder().executeInsert(query, obj, columns,true);
     }
 
-    public static int buildUpdateQuery(Tables table, Condition conditionsColumns, String[] logics,Bean obj, Column... columns) throws SQLException {
+	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues, Column... columns) throws SQLException {
         String[] columnValuePairs = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnValuePairs[i] = columns[i].getColumnName() + " = ?";
         }
         QueryBuilder builder = getQueryBuilder().update(table).set(columnValuePairs).where(conditionsColumns);
         String query=builder.build();
-        Column[] all=combineColumns(columns,conditionsColumns.getFieldNames());
-        return getQueryBuilder().executeUpdateDelete(query, obj,Arrays.asList(all));
+        Column[] all=combineColumns(columns,columnValues);
+        return getQueryBuilder().executeUpdateDelete(query, obj,all);
     }
 
-	public static int buildDeleteQuery(Tables table, Condition conditionsColumns, String[] logics,Bean obj) throws SQLException {
+	public static int buildDeleteQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues) throws SQLException {
         QueryBuilder builder = getQueryBuilder().deleteFrom(table).where(conditionsColumns);
         String query=builder.build();
-        return getQueryBuilder().executeUpdateDelete(query, obj,conditionsColumns.getFieldNames());
+        return getQueryBuilder().executeUpdateDelete(query, obj,columnValues);
     }
     
 
@@ -115,14 +128,13 @@ public class QueryLayer {
                 throw new IllegalArgumentException("Unsupported table: " + String.valueOf(table));
         }
     }
-    private static Column[] combineColumns(Column[] updateColumns, List<Column> conditionColumns) {
-        if (conditionColumns == null || conditionColumns.size() == 0) {
+    private static Column[] combineColumns(Column[] updateColumns,Column[] conditionColumns) {
+    	if (conditionColumns == null || conditionColumns.length == 0) {
             return updateColumns; 
         }
-        Column[] conditionArray = conditionColumns.toArray(new Column[0]);
-        Column[] allColumns = new Column[updateColumns.length + conditionColumns.size()];
+        Column[] allColumns = new Column[updateColumns.length + conditionColumns.length];
         System.arraycopy(updateColumns, 0, allColumns, 0, updateColumns.length);
-        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionArray.length);
+        System.arraycopy(conditionColumns, 0, allColumns, updateColumns.length, conditionColumns.length);
         return allColumns;
     }
 }

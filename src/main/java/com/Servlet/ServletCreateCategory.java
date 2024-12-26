@@ -29,6 +29,7 @@ public class ServletCreateCategory extends HttpServlet {
 
 		if (contactIds != null && contactIds.length > 0) {
 		    for (String contactId : contactIds) {
+		    	System.out.println(contactId);
 		        rld.insertCategoryById(Integer.parseInt(contactId),categoryId);
 		    }
 		    

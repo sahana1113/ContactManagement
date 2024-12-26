@@ -1,0 +1,13 @@
+22/Dec/2024:15:12:13 +0530  - - [22/Dec/2024:15:12:13 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:13 +0530  - - [22/Dec/2024:15:12:13 +0530] "Server started at Sun Dec 22 15:12:13 IST 2024 %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:18 +0530  - - [22/Dec/2024:15:12:18 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:18 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:18 +0530  - - [22/Dec/2024:15:12:18 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:18 IST 2024] "GET /login.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:28 +0530  - - [22/Dec/2024:15:12:28 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:28 IST 2024] "POST /login HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:28 +0530  - - [22/Dec/2024:15:12:28 +0530] "User logged in: user_id=24 %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:28 +0530  - - [22/Dec/2024:15:12:28 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:28 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:29 +0530  - - [22/Dec/2024:15:12:29 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:29 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:12:33 +0530  - - [22/Dec/2024:15:12:33 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:12:33 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:13:22 +0530  - - [22/Dec/2024:15:13:22 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:13:22 IST 2024] "GET /myDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:14:03 +0530  - - [22/Dec/2024:15:14:03 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:14:03 IST 2024] "GET /contacts.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:14:05 +0530  - - [22/Dec/2024:15:14:05 +0530] " 24 dcb14ddd-9e89-4219-902d-a11d9ecc5b4b: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 15:14:05 IST 2024] "GET /contactDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+22/Dec/2024:15:24:53 +0530  - - [22/Dec/2024:15:24:53 +0530] "Server stoped at Sun Dec 22 15:24:53 IST 2024 %U HTTP/1.1" %s %b

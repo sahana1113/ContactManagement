@@ -30,7 +30,7 @@ public class Enum {
 	    public String getTableName() {
 	        return tableName;
 	    }
-
+      
 	    public String getAlias() {
 	        return alias;
 	    }
@@ -61,6 +61,7 @@ public class Enum {
         phonenumber,
         birthday;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -71,12 +72,14 @@ public class Enum {
         }
         
         private static final String alias = "ud";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "userDetails";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -87,6 +90,7 @@ public class Enum {
         altMail,
         is_primary;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -96,12 +100,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "a";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "all_mail";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -112,6 +118,7 @@ public class Enum {
         altPhone,
         is_primary;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -121,12 +128,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "p";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "all_phone";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -137,6 +146,7 @@ public class Enum {
         user_id,
         category_name;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -146,12 +156,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "cat";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "categories";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -161,6 +173,7 @@ public class Enum {
         category_id,
         contact_id;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -170,12 +183,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "cu";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "category_users";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -193,6 +208,7 @@ public class Enum {
         created_time,
         is_archive;
         
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -202,12 +218,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "cd";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "contactDetails";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -218,6 +236,7 @@ public class Enum {
         password,
         flag;
 
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -227,12 +246,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "c";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "credentials";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -245,7 +266,7 @@ public class Enum {
         last_accessed,
         expiry_time;
 
-
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -255,12 +276,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "s";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "session";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -273,7 +296,7 @@ public class Enum {
         last_accessed,
         expiry_time;
 
-
+    	@Override
         public String getColumnName() {
             return this.name();
         }
@@ -283,12 +306,14 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "t";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "test";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
@@ -298,7 +323,7 @@ public class Enum {
 		ip_address,
 		port_number,
 		created_time;
-
+    	@Override
     	public String getColumnName() {
             return this.name();
         }
@@ -308,15 +333,53 @@ public class Enum {
                     .toArray(Column[]::new);
         }
         private static final String alias = "ser";
+        @Override
         public String getAlias() {
             return alias;
         }
         public static String getTableName() {
             return "servers";  
         }
+        @Override
         public String getColumnNamesWithAlias() {
             return alias+"."+this.name();
         }
     	
+    }
+    public enum Default implements Column{
+    	QUESTION_MARK("?"),
+    	FALSE("false"),
+    	TRUE("true"),
+    	NULL("NULL"),
+    	CUSTOM("");
+    	private String value;
+
+        Default(String value) {
+            this.value = value;
+        }
+        
+        public Default setValue(String value) {
+            if (this == CUSTOM) {
+                this.value = value;
+            } else {
+                throw new UnsupportedOperationException("Cannot set value for predefined enum constants.");
+            }
+			return this;
+        }
+
+        @Override
+        public String getColumnName() {
+            return this.value;  
+        }
+
+		@Override
+		public String getAlias() {
+			return this.value;
+		}
+
+		@Override
+		public String getColumnNamesWithAlias() {
+			return this.value;
+		}
     }
 }

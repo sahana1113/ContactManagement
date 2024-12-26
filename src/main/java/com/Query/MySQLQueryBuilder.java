@@ -50,8 +50,8 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		return this;
 	}
 	@Override
-	public QueryBuilder join(Tables table, String onCondition,String join) {
-	    query.append(join).append(table.withAlias()).append(" ON ").append(onCondition);
+	public QueryBuilder join(String joinClause) {
+	    query.append(" ").append(joinClause);
 	    return this;
 	}
 
@@ -74,39 +74,16 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public QueryBuilder conditions(Column[] conditionsColumns, String[] logics,boolean alias) {
-//		if(alias) {
-//		this.where(conditionsColumns[0].getColumnNamesWithAlias() + " = ?");
-//		}
-//		else {
-//			this.where(conditionsColumns[0].getColumnName() + " = ?");
-//		}
-		for (int i = 1; i < conditionsColumns.length; i++) {
-			String condition;
-			if(alias) {
-			condition= conditionsColumns[i].getColumnNamesWithAlias() + " = ?";
-			}
-			else {
-				condition=conditionsColumns[i].getColumnName() + " = ?";
-			}
-			if (logics != null && i - 1 < logics.length) {
-				if ("OR".equalsIgnoreCase(logics[i - 1])) {
-					this.orWhere(condition);
-				} else {
-					this.andWhere(condition);
-				}
-			} else {
-				this.andWhere(condition);
-			}
-		}
-		return this;
-	}
-
-	@Override
 	public QueryBuilder insert(Tables table, String... columns) {
 		query.append("INSERT INTO ").append(table.getTableName()).append(" (").append(String.join(", ", columns)).append(")");
 		return this;
 	}
+	@Override
+	public QueryBuilder insertBatch(Tables table, String... columns) {
+	    query.append("INSERT INTO ").append(table.getTableName()).append(" (").append(String.join(", ", columns)).append(") ");
+	    return this;
+	}
+
 
 	@Override
 	public QueryBuilder values(String... columns) {
@@ -120,6 +97,23 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		query.append(")");
 		return this;
 	}
+	@Override
+	public QueryBuilder values(List<String> categoryNames, int placeholderIndex) {
+	    query.append("VALUES ");
+	    int size = categoryNames.size();
+	    for (int i = 0; i < size ; i++) {
+	        query.append("(");
+	        query.append("'").append(categoryNames.get(i)).append("'");
+	        query.append(", ?"); 
+	        query.append(")");
+
+	        if (i < size - 1) {
+	            query.append(", ");
+	        }
+	    }
+	    return this;
+	}
+
 
 	@Override
 	public QueryBuilder update(Tables table) {
@@ -145,9 +139,16 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns) throws SQLException{
+	public int executeInsert(String query, Bean entity, Column[] columns,boolean batch) throws SQLException{
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		if(batch) {
+			for(int i=1;i<=4;i++)
+			{
+				preparedStatement.setInt(i,entity.getUser_id());
+			}
+			return preparedStatement.executeUpdate();
+		}
 		System.out.println(query);
 		Class<?> clazz = entity.getClass();
 		  try {
@@ -173,19 +174,26 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeUpdateDelete(String sql, Bean entity,List<Column> columns) throws SQLException {
+	public int executeUpdateDelete(String sql, Bean entity,Column[] columns) throws SQLException {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(sql);
 		System.out.println(sql);
+//		System.out.print("[");
+//		for(int i=0;i<columns.length;i++)
+//		{
+//			System.out.print(columns[i]+", ");
+//		}
+//		System.out.println("]");
 		 Class<?> clazz = entity.getClass();
 		    try {
-		        for (int i = 0; i < columns.size(); i++) {
-		            String fieldName = columns.get(i).getColumnName(); 
+		        for (int i = 0; i < columns.length; i++) {
+		            String fieldName = columns[i].getColumnName(); 
 		            Field field = clazz.getDeclaredField(fieldName);
 		            field.setAccessible(true); 
 		            Object value = field.get(entity); 
 		            preparedStatement.setObject(i + 1, value); 
 		        }
+//		        System.out.println(preparedStatement.toString());
 		    } catch (NoSuchFieldException | IllegalAccessException e) {
 		        throw new RuntimeException("Error mapping object fields to query parameters", e);
 		    }
@@ -195,19 +203,23 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type,List<Column> columns) throws Exception {
+	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type,Column[] columns) throws Exception {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query);
 		System.out.println(query);
+	//	System.out.println(columns);
 		Class<?> clazz = entity.getClass();
 	    try {
-	        for (int i = 0; i < columns.size(); i++) {
-	            String fieldName = columns.get(i).getColumnName(); 
+	        for (int i = 0; i < columns.length; i++) {
+	            String fieldName = columns[i].getColumnName(); 
+	          
 	            Field field = clazz.getDeclaredField(fieldName);
 	            field.setAccessible(true); 
 	            Object value = field.get(entity); 
+	         //   System.out.println(fieldName+" "+entity);
 	            preparedStatement.setObject(i + 1, value); 
 	        }
+	     //   System.out.print(preparedStatement.toString());
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 	        throw new RuntimeException("Error mapping object fields to query parameters", e);
 	    }
@@ -235,7 +247,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    	    groupingKey = rs.getObject("usermail"); 
 	    	} catch (SQLException e) {
 	    	    try {
-	    	        groupingKey = rs.getObject("username");
+	    	        groupingKey = rs.getObject("contact_id");
 	    	    } catch (SQLException ex) {
 	    	        try {
 	    	            groupingKey = rs.getObject("user_id");
@@ -269,7 +281,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	        if (columnNames.contains(columnName)) {
 	            Object value = rs.getObject(columnName);
 	            if (value != null && !List.class.isAssignableFrom(field.getType())) {
-	            	//System.out.println("value:"+value+" feild:"+field);
 	                if (field.getType().equals(boolean.class) || field.getType().equals(Boolean.class)) {
 	                    if (value instanceof Integer) {
 	                        value = ((Integer) value) == 1;
@@ -292,7 +303,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	            Object nestedInstance = listType.getDeclaredConstructor().newInstance();
 	            boolean populated = false;
 	            for (Field nestedField : listType.getDeclaredFields()) {
-	            	//System.out.println("Feild:"+nestedField);
 	                nestedField.setAccessible(true);
 	                String columnName = nestedField.getName();
 	                if (columnNames.contains(columnName)) {
@@ -306,8 +316,9 @@ public class MySQLQueryBuilder implements QueryBuilder {
 
 	            if (populated) {
 	                List<Object> nestedList = (List<Object>) field.get(instance);
-	                if((nestedList!=null && !nestedList.contains(nestedInstance)))
-	                nestedList.add(nestedInstance);
+	                if((nestedList!=null && !nestedList.contains(nestedInstance))) {
+	                    nestedList.add(nestedInstance);
+	                }
 	            }
 	        }
 	   }
@@ -322,9 +333,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    return false;
 	}
 
-
-
-
-
+	
 	
 }

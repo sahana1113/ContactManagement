@@ -18,11 +18,12 @@ public interface QueryBuilder {
     String build();  
 	QueryBuilder andWhere(String condition);
 	QueryBuilder orWhere(String condition);
-	QueryBuilder conditions(Column[] conditionsColumns, String[] logics, boolean alias);
-	int executeInsert(String query, Bean entity, Column[] columns) throws SQLException;
-	QueryBuilder join(Tables table, String onCondition, String join);
 	QueryBuilder where(Condition condition);
-	<T> List<T> executeSelect(String query, Bean entity, Class<T> type, List<Column> columns) throws Exception;
-	int executeUpdateDelete(String sql, Bean entity, List<Column> columns) throws SQLException;
+	QueryBuilder insertBatch(Tables table, String... columns);
+	QueryBuilder values(List<String> categoryNames, int placeholderIndex);
+	int executeInsert(String query, Bean entity, Column[] columns, boolean batch) throws SQLException;
+	QueryBuilder join(String joinClause);
+	<T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception;
+	int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException;
 	
 }

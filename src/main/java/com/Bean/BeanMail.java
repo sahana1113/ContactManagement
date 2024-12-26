@@ -10,8 +10,13 @@ public class BeanMail implements Bean{
 	public BeanMail() {
 	}
 	
-	public BeanMail(String string) {
+	public BeanMail(String string,int user_id) {
 		this.altMail=string;
+		this.user_id=user_id;
+	}
+
+	public BeanMail(String parameter) {
+		this.altMail=parameter;
 	}
 
 	public int getUser_id() {

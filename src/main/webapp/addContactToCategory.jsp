@@ -9,6 +9,7 @@
 int contactId = Integer.parseInt(request.getParameter("contactId"));
 int c_id= Integer.parseInt(request.getParameter("category"));
 int uId= (int) request.getAttribute("user_id");
+System.out.print(contactId);
     DaoRegisterLogin contactDao = new DaoRegisterLogin(uId);
 
     boolean additionSuccess = false;

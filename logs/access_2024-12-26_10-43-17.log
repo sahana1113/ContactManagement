@@ -1,0 +1,13 @@
+26/Dec/2024:10:43:17 +0530  - - [26/Dec/2024:10:43:17 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:17 +0530  - - [26/Dec/2024:10:43:17 +0530] "Server started at Thu Dec 26 10:43:17 IST 2024 %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:18 +0530  - - [26/Dec/2024:10:43:18 +0530] "127.0.0.1 - - [Thu Dec 26 10:43:18 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:18 +0530  - - [26/Dec/2024:10:43:18 +0530] "0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:18 IST 2024] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:18 +0530  - - [26/Dec/2024:10:43:18 +0530] "0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:18 IST 2024] "GET /login.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:33 +0530  - - [26/Dec/2024:10:43:33 +0530] "0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:33 IST 2024] "POST /login HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:34 +0530  - - [26/Dec/2024:10:43:34 +0530] "User logged in: user_id=24 %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:34 +0530  - - [26/Dec/2024:10:43:34 +0530] " 24 b5f468c8-3244-43ff-bf9f-51c90cdfaa3c: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:34 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:38 +0530  - - [26/Dec/2024:10:43:38 +0530] " 24 b5f468c8-3244-43ff-bf9f-51c90cdfaa3c: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:38 IST 2024] "GET /category.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:40 +0530  - - [26/Dec/2024:10:43:40 +0530] " 24 b5f468c8-3244-43ff-bf9f-51c90cdfaa3c: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:40 IST 2024] "GET /categoryDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:43 +0530  - - [26/Dec/2024:10:43:43 +0530] " 24 b5f468c8-3244-43ff-bf9f-51c90cdfaa3c: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:43 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:43:43 +0530  - - [26/Dec/2024:10:43:43 +0530] " 24 b5f468c8-3244-43ff-bf9f-51c90cdfaa3c: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 10:43:43 IST 2024] "GET /categoryDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+26/Dec/2024:10:47:37 +0530  - - [26/Dec/2024:10:47:37 +0530] "Server stoped at Thu Dec 26 10:47:37 IST 2024 %U HTTP/1.1" %s %b

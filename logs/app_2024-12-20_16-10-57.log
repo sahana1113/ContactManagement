@@ -1,0 +1,17 @@
+2024-12-20 16:10:57 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-20 16:10:57 INFO  AppContextListener - Server started at Fri Dec 20 16:10:57 IST 2024
+2024-12-20 16:10:58 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 16:10:58 IST 2024] "GET / HTTP/1.1"
+2024-12-20 16:10:58 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:10:58 IST 2024] "GET / HTTP/1.1"
+2024-12-20 16:10:58 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:10:58 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-20 16:11:05 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:05 IST 2024] "POST /login HTTP/1.1"
+2024-12-20 16:11:06 INFO  ServletUserLogin - User logged in: user_id=24
+2024-12-20 16:11:06 INFO  FilterSession -  24 345180a6-0219-4acc-958a-4755a28f0436: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:06 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 16:11:08 INFO  FilterSession -  24 345180a6-0219-4acc-958a-4755a28f0436: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:08 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-20 16:11:18 INFO  FilterSession -  24 345180a6-0219-4acc-958a-4755a28f0436: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:18 IST 2024] "POST /update HTTP/1.1"
+2024-12-20 16:11:18 INFO  FilterSession -  24 345180a6-0219-4acc-958a-4755a28f0436: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:18 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 16:11:21 INFO  FilterSession -  24 345180a6-0219-4acc-958a-4755a28f0436: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:21 IST 2024] "GET /logout HTTP/1.1"
+2024-12-20 16:11:21 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:21 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-20 16:11:27 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:27 IST 2024] "POST /login HTTP/1.1"
+2024-12-20 16:11:27 INFO  ServletUserLogin - User logged in: user_id=24
+2024-12-20 16:11:27 INFO  FilterSession -  24 7e935db2-9aaa-48a4-bab8-02b3aac6d091: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 16:11:27 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 16:12:27 INFO  AppContextListener - Server stoped at Fri Dec 20 16:12:27 IST 2024

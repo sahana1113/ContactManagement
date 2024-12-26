@@ -65,32 +65,38 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		return null;
 	}
 	@Override
-	public QueryBuilder conditions(Column[] conditionsColumns, String[] logics, boolean alias) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	@Override
-	public QueryBuilder join(Tables table, String onCondition, String join) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
 	public QueryBuilder where(Condition condition) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	@Override
-	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, List<Column> columns) throws Exception {
+	public QueryBuilder insertBatch(Tables table, String... columns) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public int executeUpdateDelete(String sql, Bean entity, List<Column> columns) throws SQLException {
+	public QueryBuilder values(List<String> categoryNames, int placeholderIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public QueryBuilder join(String joinClause) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}

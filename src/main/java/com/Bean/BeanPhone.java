@@ -10,8 +10,13 @@ public class BeanPhone implements Bean{
 	public BeanPhone() {
 	}
 	
-	public BeanPhone(String string) {
+	public BeanPhone(String string,int user_id) {
 		this.altPhone=string;
+		this.user_id=user_id;
+	}
+
+	public BeanPhone(String parameter) {
+		this.altPhone=parameter;
 	}
 
 	public int getUser_id() {

@@ -1,0 +1,12 @@
+2024-12-24 11:02:00 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-24 11:02:00 INFO  AppContextListener - Server started at Tue Dec 24 11:02:00 IST 2024
+2024-12-24 11:02:00 INFO  FilterSession - 127.0.0.1 - - [Tue Dec 24 11:02:00 IST 2024] "GET / HTTP/1.1"
+2024-12-24 11:02:01 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:01 IST 2024] "GET / HTTP/1.1"
+2024-12-24 11:02:01 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:01 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-24 11:02:09 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:09 IST 2024] "POST /login HTTP/1.1"
+2024-12-24 11:02:09 INFO  ServletUserLogin - User logged in: user_id=24
+2024-12-24 11:02:09 INFO  FilterSession -  24 d9089f58-2c8c-45fa-87ca-e8a2a3954609: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:09 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-24 11:02:11 INFO  FilterSession -  24 d9089f58-2c8c-45fa-87ca-e8a2a3954609: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:11 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-12-24 11:02:13 INFO  FilterSession -  24 d9089f58-2c8c-45fa-87ca-e8a2a3954609: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:13 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-12-24 11:02:17 INFO  FilterSession -  24 d9089f58-2c8c-45fa-87ca-e8a2a3954609: 0:0:0:0:0:0:0:1 - - [Tue Dec 24 11:02:17 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1"
+2024-12-24 11:04:47 INFO  AppContextListener - Server stoped at Tue Dec 24 11:04:47 IST 2024

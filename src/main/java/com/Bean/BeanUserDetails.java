@@ -25,6 +25,10 @@ public class BeanUserDetails implements Bean {
 		this.phonenumber = phonenumber;
 	}
 
+	public BeanUserDetails(int userid) {
+		this.user_id=userid;
+	}
+
 	public int getUser_id() {
 		return user_id;
 	}

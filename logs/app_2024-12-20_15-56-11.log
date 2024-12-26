@@ -1,0 +1,14 @@
+2024-12-20 15:56:11 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-20 15:56:11 INFO  AppContextListener - Server started at Fri Dec 20 15:56:11 IST 2024
+2024-12-20 15:56:11 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:56:11 IST 2024] "GET / HTTP/1.1"
+2024-12-20 15:56:12 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:12 IST 2024] "GET / HTTP/1.1"
+2024-12-20 15:56:12 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:12 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-20 15:56:21 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:21 IST 2024] "POST /login HTTP/1.1"
+2024-12-20 15:56:21 INFO  ServletUserLogin - User logged in: user_id=24
+2024-12-20 15:56:21 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:21 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 15:56:24 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:24 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-20 15:56:27 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:27 IST 2024] "POST /update HTTP/1.1"
+2024-12-20 15:56:28 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:28 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 15:56:30 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:56:30 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-20 15:57:08 INFO  FilterSession -  24 e583127e-6660-4959-9174-18b0ad269677: 0:0:0:0:0:0:0:1 - - [Fri Dec 20 15:57:08 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-12-20 15:57:51 INFO  AppContextListener - Server stoped at Fri Dec 20 15:57:51 IST 2024

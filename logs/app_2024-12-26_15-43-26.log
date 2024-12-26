@@ -1,0 +1,17 @@
+2024-12-26 15:43:27 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-26 15:43:27 INFO  AppContextListener - Server started at Thu Dec 26 15:43:27 IST 2024
+2024-12-26 15:43:27 INFO  FilterSession - 127.0.0.1 - - [Thu Dec 26 15:43:27 IST 2024] "GET / HTTP/1.1"
+2024-12-26 15:43:27 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:27 IST 2024] "GET / HTTP/1.1"
+2024-12-26 15:43:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:28 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-26 15:43:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:28 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-12-26 15:43:28 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:28 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-26 15:43:35 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:35 IST 2024] "POST /login HTTP/1.1"
+2024-12-26 15:43:36 INFO  ServletUserLogin - User logged in: user_id=24
+2024-12-26 15:43:36 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:36 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-26 15:43:36 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:36 IST 2024] "GET /favicon.ico HTTP/1.1"
+2024-12-26 15:43:40 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:40 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-26 15:43:41 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:41 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-26 15:43:42 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:42 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-12-26 15:43:45 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:43:45 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-12-26 15:44:16 INFO  FilterSession -  24 ee8645d3-fbf4-4b99-a266-64ca50062025: 0:0:0:0:0:0:0:1 - - [Thu Dec 26 15:44:16 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-12-26 15:44:57 INFO  AppContextListener - Server stoped at Thu Dec 26 15:44:57 IST 2024

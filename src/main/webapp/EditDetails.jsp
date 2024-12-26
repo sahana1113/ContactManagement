@@ -250,7 +250,7 @@ input[readonly] {
                     <%
                     for (BeanMail email : altEmails) {
                     %>
-                    <option value="<%= email %>"><%=email.getAltMail()%></option>
+                    <option value="<%= email.getAltMail() %>"><%=email.getAltMail()%></option>
                     <%
                     }
                     %>
@@ -261,7 +261,7 @@ input[readonly] {
                     <%
                     for (BeanPhone phone : altPhone) {
                     %>
-                    <option value="<%=phone%>"><%=phone.getAltPhone()%></option>
+                    <option value="<%=phone.getAltPhone() %>"><%=phone.getAltPhone()%></option>
                     <%
                     }
                     %>

@@ -1,0 +1,19 @@
+2024-12-20 15:24:04 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-20 15:24:04 INFO  AppContextListener - Server started at Fri Dec 20 15:24:04 IST 2024
+2024-12-20 15:27:05 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:05 IST 2024] "HEAD / HTTP/1.1"
+2024-12-20 15:27:05 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:05 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD / HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /docs HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /examples HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /manager HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /host-manager HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD / HTTP/1.1"
+2024-12-20 15:27:06 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:06 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:27:07 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:07 IST 2024] "HEAD / HTTP/1.1"
+2024-12-20 15:27:07 INFO  FilterSession - 127.0.0.1 - - [Fri Dec 20 15:27:07 IST 2024] "HEAD /login.jsp HTTP/1.1"
+2024-12-20 15:41:08 INFO  AppContextListener - Server stoped at Fri Dec 20 15:41:08 IST 2024

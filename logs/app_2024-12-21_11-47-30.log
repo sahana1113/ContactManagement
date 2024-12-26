@@ -1,0 +1,12 @@
+2024-12-21 11:47:30 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-21 11:47:30 INFO  AppContextListener - Server started at Sat Dec 21 11:47:30 IST 2024
+2024-12-21 11:47:30 INFO  FilterSession - 127.0.0.1 - - [Sat Dec 21 11:47:30 IST 2024] "GET / HTTP/1.1"
+2024-12-21 11:48:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:48:11 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-12-21 11:48:14 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:48:14 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-12-21 11:48:53 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:48:53 IST 2024] "POST /register HTTP/1.1"
+2024-12-21 11:48:53 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:48:53 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-21 11:49:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:49:11 IST 2024] "POST /login HTTP/1.1"
+2024-12-21 11:49:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:49:11 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-21 11:49:40 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:49:40 IST 2024] "POST /login HTTP/1.1"
+2024-12-21 11:49:40 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Sat Dec 21 11:49:40 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-21 11:52:30 INFO  AppContextListener - Server stoped at Sat Dec 21 11:52:30 IST 2024

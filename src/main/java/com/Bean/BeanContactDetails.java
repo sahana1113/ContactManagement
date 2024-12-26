@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BeanContactDetails implements Bean{
@@ -12,7 +13,7 @@ public class BeanContactDetails implements Bean{
     private String location;
     private int contact_id;
     private int user_id;
-    private List<BeanCategory> category;
+    private List<BeanCategory> category=new ArrayList<>();
     private String category_name;
     private boolean is_archive;
     private long created_time; 
@@ -122,4 +123,22 @@ public class BeanContactDetails implements Bean{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String toString() {
+	    String categoryString = (category != null) ? category.toString() : "null";
+	    return "BeanContactDetails{" +
+	            "name='" + name + '\'' +
+	            ", mail='" + mail + '\'' +
+	            ", gender='" + gender + '\'' +
+	            ", phonenumber='" + phonenumber + '\'' +
+	            ", birthday='" + birthday + '\'' +
+	            ", location='" + location + '\'' +
+	            ", contact_id=" + contact_id +
+	            ", user_id=" + user_id +
+	            ", category=" + categoryString +
+	            ", is_archive=" + is_archive +
+	            ", created_time=" + created_time +
+	            '}';
+	}
+
 }

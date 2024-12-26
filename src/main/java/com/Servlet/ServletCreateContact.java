@@ -27,12 +27,14 @@ public class ServletCreateContact extends HttpServlet {
 		contact.setLocation(request.getParameter("location"));
 		contact.setCreated_time(System.currentTimeMillis() / 1000);
 		String[] selectedCategories = request.getParameterValues("categories");
+		System.out.println(Arrays.asList(selectedCategories));
 		if (selectedCategories != null && selectedCategories.length != 0) {
 			List<BeanCategory>list=new ArrayList<>();
 			for(String s:selectedCategories)
 			{
 				list.add(new BeanCategory(s));
 			}
+			
 			contact.setCategory(list);
 		}
 		DaoUserContact cd = new DaoUserContact((int) request.getAttribute("user_id"));

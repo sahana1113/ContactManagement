@@ -16,9 +16,14 @@ public class BeanCategory implements Bean{
     public BeanCategory(String categoryName) {
 		this.category_name=categoryName;
 	}
-    public int getUser_id() {
+    public BeanCategory(int user_id) {
+		this.user_id=user_id;
+	}
+    @Override
+	public int getUser_id() {
 		return user_id;
 	}
+    @Override
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}

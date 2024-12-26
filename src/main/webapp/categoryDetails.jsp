@@ -165,7 +165,7 @@
 
                                     DaoUserContact categoryDao = new DaoUserContact(userId);
                                     List<BeanContactDetails> contactsInCategory = categoryDao.getContactsInCategory(category);
-                                    List<BeanContactDetails> contactsNotInCategory = categoryDao.getContactsNotInCategory(category);
+                                    List<BeanContactDetails> contactsNotInCategory = categoryDao.getContactsNotInCategory(category, userId);
             %>
 
             <h2>Contacts in Category: <%=categoryDao.getCategoryName(category)%></h2>
@@ -209,6 +209,7 @@
                 <%
                 if (contactsNotInCategory != null && !contactsNotInCategory.isEmpty()) {
                                                     for (BeanContactDetails contact : contactsNotInCategory) {
+                                 
                 %>
                         <tr>
                             <td><%=contact.getName()%></td>
