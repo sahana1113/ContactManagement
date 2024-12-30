@@ -17,6 +17,7 @@ public class BeanContactDetails implements Bean{
     private String category_name;
     private boolean is_archive;
     private long created_time; 
+	private long updated_time;
     public BeanContactDetails() {
     }
     public BeanContactDetails(String contactname, String phonenumber, int contact_id) {
@@ -117,6 +118,13 @@ public class BeanContactDetails implements Bean{
 
 	public void setIs_archive(boolean is_archive) {
 		this.is_archive = is_archive;
+	}
+	
+	public long getUpdated_time() {
+		return updated_time;
+	}
+	public void setUpdated_time(long updated_time) {
+		this.updated_time = updated_time;
 	}
 	@Override
 	public void display() {

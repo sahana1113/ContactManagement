@@ -1,6 +1,7 @@
 package com.Dao;
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import com.Query.Enum.CategoryUsers;
 import com.Query.Enum.ContactDetails;
 import com.Query.Enum.Default;
 import com.Query.Enum.Tables;
-import com.Query.Enum.Test;
 import com.Query.Enum.UserDetails;
 import com.Query.Join;
 import com.Query.QueryLayer;
@@ -46,39 +46,39 @@ public class DaoUserContact{
 				null,new Column[] {Categories.category_id});
         return list.get(0).getCategory_name();
 	}
-//	public String getUsername() throws Exception
-//	{
-//		BeanUserDetails user1=new BeanUserDetails();
-//		user1.setUser_id(user_id);
-//		Condition condition=new Condition(UserDetails.user_id,"=",false);
-//		//List<BeanUserDetails>list=QueryLayer.getQueryBuilder().select(new Column[] {UserDetails.username}).from(Tables.USER_DETAILS).conditions(new Column[] {UserDetails.user_id}, null, true).build();
-//		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
-//				Tables.USER_DETAILS,
-//				new Column[] {UserDetails.username},
-//				condition,
-//		        BeanUserDetails.class,
-//				user1,
-//			   null,new Column[] {UserDetails.user_id});
-//        return user.get(0).getUsername();
-//     }
+	public String getUsername() throws Exception
+	{
+		BeanUserDetails user1=new BeanUserDetails();
+		user1.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
+		//List<BeanUserDetails>list=QueryLayer.getQueryBuilder().select(new Column[] {UserDetails.username}).from(Tables.USER_DETAILS).conditions(new Column[] {UserDetails.user_id}, null, true).build();
+		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
+				Tables.USER_DETAILS,
+				new Column[] {UserDetails.username},
+				condition,
+		        BeanUserDetails.class,
+				user1,
+			   null,new Column[] {UserDetails.user_id});
+        return user.get(0).getUsername();
+     }
 	
-//	public String getUsermail() throws Exception
-//	{
-//		BeanUserDetails user1=new BeanUserDetails();
-//		user1.setUser_id(user_id);
-//		Condition condition=new Condition(UserDetails.user_id,"=",false);
-//		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
-//		            Tables.USER_DETAILS,
-//		            new Column[] {UserDetails.usermail},  
-//		            condition,
-//		            BeanUserDetails.class,
-//		            user1,
-//		            null,new Column[] {UserDetails.user_id} );
-//		    if (!userDetailsList.isEmpty()) {
-//		        return userDetailsList.get(0).getUsermail();  
-//		    }
-//        return "";
-//	}
+	public String getUsermail() throws Exception
+	{
+		BeanUserDetails user1=new BeanUserDetails();
+		user1.setUser_id(user_id);
+		Condition condition=new Condition(UserDetails.user_id,"=",false);
+		 List<BeanUserDetails> userDetailsList = QueryLayer.buildSelectQuery(
+		            Tables.USER_DETAILS,
+		            new Column[] {UserDetails.usermail},  
+		            condition,
+		            BeanUserDetails.class,
+		            user1,
+		            null,new Column[] {UserDetails.user_id} );
+		    if (!userDetailsList.isEmpty()) {
+		        return userDetailsList.get(0).getUsermail();  
+		    }
+        return "";
+	}
 //	public String getUserphone() throws Exception
 //	{
 //		BeanUserDetails user1=new BeanUserDetails();

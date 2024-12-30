@@ -25,7 +25,6 @@ public class ServletEditContact extends HttpServlet {
         user.setPhonenumber(request.getParameter("primaryPhone"));
         user.setContact_id(contactid);
         String[] list1=request.getParameterValues("categoryContact");
-        System.out.println("listttttt:"+Arrays.asList(list1));
         if(list1!=null && list1.length!=0) {
     			List<BeanCategory>list=new ArrayList<>();
     			for(String s:list1)

@@ -30,6 +30,7 @@ public class ServletUserRegister extends HttpServlet {
               if(rld.UserDetailsRegister(user))
             {
             	  mail.setUser_id(user.getUser_id());
+
             	  phone.setUser_id(user.getUser_id());
             	  rld.allMailInsert(mail);
                   rld.allPhoneInsert(phone);

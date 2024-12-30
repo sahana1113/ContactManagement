@@ -10,7 +10,12 @@
 <%@ page import="com.Session.*" %>
 <%
 int uId = (Integer) request.getAttribute("user_id"); 
-String s = SessionData.getUserData().get(uId).getUsername();
+BeanUserDetails user=SessionData.getUserData().get(uId);
+if(user==null){
+	DaoUserContact dao=new DaoUserContact();
+	user=dao.getUserDetailsById(uId);
+}
+String s=user.getUsername();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,8 +149,6 @@ String s = SessionData.getUserData().get(uId).getUsername();
                 <h3>My Account Details</h3>
                 <%
                 DaoUserContact contactDao = new DaoUserContact();
-                BeanUserDetails user = null;
-
                 try {
                 	if(SessionData.getUserData().containsKey(uId))
                 	{

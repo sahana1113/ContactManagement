@@ -209,25 +209,25 @@ input[readonly] {
 
             <%
             int user_Id = (Integer) request.getAttribute("user_id"); 
-                                                                        DaoUserContact contactDao = new DaoUserContact();
-                                                                        BeanUserDetails user = new BeanUserDetails();
+            DaoUserContact contactDao = new DaoUserContact();
+            BeanUserDetails user = new BeanUserDetails();
 
-                                                                        try {
-                                                                        	if(SessionData.getUserData().containsKey(user_Id))
-                                                                        	{
-                                                                        		user=SessionData.getUserData().get(user_Id);
-                                                                        	}
-                                                                        	else{
-                                                                        		user=contactDao.getUserDetailsById(user_Id);
-                                                                        	}
-                                                                            user = contactDao.getUserDetailsById(user_Id);
-                                                                        } catch (SQLException e) {
-                                                                            e.printStackTrace();
-                                                                        }
+            try {
+            	if(SessionData.getUserData().containsKey(user_Id))
+            	{
+            		user=SessionData.getUserData().get(user_Id);
+            	}
+            	else{
+            		user=contactDao.getUserDetailsById(user_Id);
+            	}
+              //  user = contactDao.getUserDetailsById(user_Id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-                                                                        if (user != null) {
-                                                                        	List<BeanMail>altEmails=user.getAltMail();
-                                                                        	List<BeanPhone>altPhone=user.getAltPhone();
+            if (user != null) {
+            	List<BeanMail>altEmails=user.getAltMail();
+            	List<BeanPhone>altPhone=user.getAltPhone();                                                          
             %>
 
             <form action="update" method="post">

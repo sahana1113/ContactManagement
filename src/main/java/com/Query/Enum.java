@@ -15,7 +15,8 @@ public class Enum {
 	    CREDENTIALS("credentials", "c", BeanUserDetails.class),
 	    SESSION("session", "s", BeanSession.class),
 	    USER_DETAILS("userDetails", "ud", BeanUserDetails.class),
-		SERVERS("servers","ser",BeanServer.class);
+		SERVERS("servers","ser",BeanServer.class),
+		AUDITLOG("audit_log","al",BeanAudit.class);
 
 	    private final String tableName;
 	    private final String alias;
@@ -59,7 +60,9 @@ public class Enum {
         usermail,
         gender,
         phonenumber,
-        birthday;
+        birthday,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -88,7 +91,12 @@ public class Enum {
     public enum AllMail implements Column{
         user_id,
         altMail,
-        is_primary;
+        is_primary,
+        email_verified,
+        verify_token,
+        expiry_time,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -116,7 +124,9 @@ public class Enum {
     public enum AllPhone implements Column{
         user_id,
         altPhone,
-        is_primary;
+        is_primary,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -144,7 +154,9 @@ public class Enum {
     public enum Categories implements Column{
         category_id,
         user_id,
-        category_name;
+        category_name,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -171,7 +183,9 @@ public class Enum {
 
     public enum CategoryUsers implements Column{
         category_id,
-        contact_id;
+        contact_id,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -206,7 +220,8 @@ public class Enum {
         birthday,
         location,
         created_time,
-        is_archive;
+        is_archive,
+        updated_time;
         
     	@Override
         public String getColumnName() {
@@ -234,7 +249,9 @@ public class Enum {
     public enum Credentials implements Column{
         user_id,
         password,
-        flag;
+        flag,
+        created_time,
+        updated_time;
 
     	@Override
         public String getColumnName() {
@@ -289,35 +306,6 @@ public class Enum {
         }
     }
     
-    public enum Test implements Column{
-        sessionid,
-        user_id,
-        created_time,
-        last_accessed,
-        expiry_time;
-
-    	@Override
-        public String getColumnName() {
-            return this.name();
-        }
-
-        public static Column[] getColumnNames() {
-        	return Arrays.stream(values())
-                    .toArray(Column[]::new);
-        }
-        private static final String alias = "t";
-        @Override
-        public String getAlias() {
-            return alias;
-        }
-        public static String getTableName() {
-            return "test";  
-        }
-        @Override
-        public String getColumnNamesWithAlias() {
-            return alias+"."+this.name();
-        }
-    }
     public enum Servers implements Column{
 		id,
 		ip_address,
@@ -381,5 +369,36 @@ public class Enum {
 		public String getColumnNamesWithAlias() {
 			return this.value;
 		}
+    }
+    public enum AuditLog implements Column{
+		audit_id,
+		table_name,
+		record_key,
+		created_time,
+		previous_update_time,
+		changed_data;
+        
+    	@Override
+    	public String getColumnName() {
+            return this.name();
+        }
+
+        public static Column[] getColumnNames() {
+        	return Arrays.stream(values())
+                    .toArray(Column[]::new);
+        }
+        private static final String alias = "al";
+        @Override
+        public String getAlias() {
+            return alias;
+        }
+        public static String getTableName() {
+            return "audit_log";  
+        }
+        @Override
+        public String getColumnNamesWithAlias() {
+            return alias+"."+this.name();
+        }
+    	
     }
 }

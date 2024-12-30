@@ -11,6 +11,8 @@ public class BeanUserDetails implements Bean {
 	private String phonenumber;
 	private String birthday;
 	private String password;
+	private long created_time;
+	private long updated_time;
 	private boolean flag;
 	private boolean is_primary;
 	private int user_id;
@@ -39,6 +41,23 @@ public class BeanUserDetails implements Bean {
 
 	public String getPassword() {
 		return password;
+	}
+	
+
+	public long getCreated_time() {
+		return created_time;
+	}
+
+	public void setCreated_time(long created_time) {
+		this.created_time = created_time;
+	}
+
+	public long getUpdated_time() {
+		return updated_time;
+	}
+
+	public void setUpdated_time(long updated_time) {
+		this.updated_time = updated_time;
 	}
 
 	public void setPassword(String password) {
@@ -121,4 +140,21 @@ public class BeanUserDetails implements Bean {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public String toString() {
+	    return "BeanUserDetails {" +
+	            "username='" + username + '\'' +
+	            ", usermail='" + usermail + '\'' +
+	            ", gender='" + gender + '\'' +
+	            ", phonenumber='" + phonenumber + '\'' +
+	            ", birthday='" + birthday + '\'' +
+	            ", password='" + password + '\'' +
+	            ", flag=" + flag +
+	            ", is_primary=" + is_primary +
+	            ", user_id=" + user_id +
+	            ", altMail=" + altMail.toString() +
+	            ", altPhone=" + altPhone.toString() +
+	            '}';
+	}
+
 }

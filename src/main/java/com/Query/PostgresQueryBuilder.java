@@ -100,6 +100,11 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public QueryBuilder setColumns(String function, Column... columns) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 

@@ -6,7 +6,16 @@ public class BeanCategory implements Bean{
     private int user_id;
     private int contact_id;
     private String category_name;
-    public BeanCategory() {
+    private long created_time;
+	private long updated_time;
+    
+	public long getUpdated_time() {
+		return updated_time;
+	}
+	public void setUpdated_time(long updated_time) {
+		this.updated_time = updated_time;
+	}
+	public BeanCategory() {
     	
     }
     public BeanCategory(int c_id, String category) {
@@ -45,6 +54,12 @@ public class BeanCategory implements Bean{
     public void setCategory_name(String category) {
         this.category_name = category;
     }
+    public long getCreated_time() {
+		return created_time;
+	}
+	public void setCreated_time(long created_time) {
+		this.created_time = created_time;
+	}
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub

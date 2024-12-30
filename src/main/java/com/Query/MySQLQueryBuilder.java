@@ -97,6 +97,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		query.append(")");
 		return this;
 	}
+	
 	@Override
 	public QueryBuilder values(List<String> categoryNames, int placeholderIndex) {
 	    query.append("VALUES ");
@@ -120,6 +121,19 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		query.append("UPDATE ").append(table.getTableName());
 		return this;
 	}
+	@Override
+	public QueryBuilder setColumns(String function,Column... columns) {
+        String[] columnValuePairs = new String[columns.length];
+        for (int i = 0; i < columns.length; i++) {
+        	if(function.length()!=0)
+        	{
+        		columnValuePairs[i]= columns[i].getColumnName() +" = "+function+" ( ? , "+columns[i].getColumnName()+" )";
+        	}
+        	else
+            columnValuePairs[i] = columns[i].getColumnName() + " = ?";
+        }
+        return set(columnValuePairs);
+    }
 
 	@Override
 	public QueryBuilder set(String... columnValuePairs) {
@@ -178,12 +192,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(sql);
 		System.out.println(sql);
-//		System.out.print("[");
-//		for(int i=0;i<columns.length;i++)
-//		{
-//			System.out.print(columns[i]+", ");
-//		}
-//		System.out.println("]");
 		 Class<?> clazz = entity.getClass();
 		    try {
 		        for (int i = 0; i < columns.length; i++) {
@@ -193,7 +201,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		            Object value = field.get(entity); 
 		            preparedStatement.setObject(i + 1, value); 
 		        }
-//		        System.out.println(preparedStatement.toString());
 		    } catch (NoSuchFieldException | IllegalAccessException e) {
 		        throw new RuntimeException("Error mapping object fields to query parameters", e);
 		    }

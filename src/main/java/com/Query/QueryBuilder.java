@@ -25,5 +25,6 @@ public interface QueryBuilder {
 	QueryBuilder join(String joinClause);
 	<T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception;
 	int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException;
+	QueryBuilder setColumns(String function, Column... columns);
 	
 }

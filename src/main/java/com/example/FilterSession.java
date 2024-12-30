@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.Bean.BeanUserDetails;
 import com.Dao.DaoSession;
+import com.Dao.DaoUserContact;
+import com.Session.SessionData;
 
 public class FilterSession implements Filter {
     private static final Logger logger = Logger.getLogger(FilterSession.class);
@@ -74,6 +77,15 @@ public class FilterSession implements Filter {
         boolean indexReq = requestedUri.equals(index);
         boolean regReq = requestedUri.equals(register);
     	req.setAttribute("user_id", user_id);
+    	if(isValidSession && SessionData.getUserData().get(user_id)==null)
+    	{
+    		System.out.print("Added");
+    		try {
+				SessionData.getDataFromDB(user_id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    	}
         if(isValidSession && (loginReq || requestedUri.equals("/")))
         {
         	res.sendRedirect("home.jsp");

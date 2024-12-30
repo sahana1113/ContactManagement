@@ -47,9 +47,7 @@ public class DaoSession {
 		SessionData.getSessionSet().add(obj);
 		int k = QueryLayer.buildInsertQuery(Tables.SESSION, obj,
 				new Column[] { Session.sessionid, Session.user_id, Session.expiry_time, Session.last_accessed });
-		DaoUserContact rd = new DaoUserContact();
-		BeanUserDetails user = rd.getUserDetailsById(userId);
-		SessionData.setUserDataValue(user, userId);
+		SessionData.getDataFromDB(userId);
 		return k != 0;
 	}
 
@@ -104,12 +102,13 @@ public class DaoSession {
 		}
 		Condition condition = new Condition(Session.sessionid, "=", false);
 		List<BeanSession> list = QueryLayer.buildSelectQuery(Tables.SESSION,
-				new Column[] { Session.user_id, Session.expiry_time }, condition, BeanSession.class, obj, null,new Column[] {Session.sessionid});
+				new Column[] { Session.user_id, Session.expiry_time,Session.last_accessed,Session.sessionid }, condition, BeanSession.class, obj, null,new Column[] {Session.sessionid});
 		for (BeanSession ses : list) {
 			if (cookies == null || ses.getExpiry_time().before(new Timestamp(System.currentTimeMillis()))) {
 				invalidateSession(sessionId);
 				return 0;
 			}
+			SessionData.getSessionSet().add(ses);
 			return ses.getUser_id();
 		}
 

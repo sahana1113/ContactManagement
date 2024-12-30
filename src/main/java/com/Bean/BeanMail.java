@@ -6,6 +6,8 @@ public class BeanMail implements Bean{
 	private int user_id;
 	private String altMail;
 	private boolean is_primary;
+	private long created_time;
+	private long updated_time;
 	
 	public BeanMail() {
 	}
@@ -38,6 +40,23 @@ public class BeanMail implements Bean{
 	public void setIs_primary(boolean is_primary) {
 		this.is_primary = is_primary;
 	}
+	
+	public long getCreated_time() {
+		return created_time;
+	}
+
+	public void setCreated_time(long created_time) {
+		this.created_time = created_time;
+	}
+
+	public long getUpdated_time() {
+		return updated_time;
+	}
+
+	public void setUpdated_time(long updated_time) {
+		this.updated_time = updated_time;
+	}
+
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub

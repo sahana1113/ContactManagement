@@ -60,16 +60,6 @@ public class QueryLayer {
         return getQueryBuilder().executeSelect(query,obj,type,column);  
         }
 
-    public static int buildInsertQuery(Tables table,Bean obj) throws SQLException, NoSuchFieldException, IllegalAccessException{
-        Column[] columns = getColumnsByTable(table);
-        String[] columnNames = new String[columns.length];
-        for (int i = 0; i < columns.length; i++) {
-            columnNames[i] = columns[i].getColumnName();
-        }
-        String query= getQueryBuilder().insert(table, columnNames).values(columnNames).build();
-        return getQueryBuilder().executeInsert(query, obj,columns,false);
-    }
-    
     public static int buildInsertQuery(Tables table,Bean obj, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
         String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
@@ -88,12 +78,12 @@ public class QueryLayer {
         return getQueryBuilder().executeInsert(query, obj, columns,true);
     }
 
-	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues, Column... columns) throws SQLException {
-        String[] columnValuePairs = new String[columns.length];
-        for (int i = 0; i < columns.length; i++) {
-            columnValuePairs[i] = columns[i].getColumnName() + " = ?";
-        }
-        QueryBuilder builder = getQueryBuilder().update(table).set(columnValuePairs).where(conditionsColumns);
+	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues,String function, Column... columns) throws SQLException {
+//        String[] columnValuePairs = new String[columns.length];
+//        for (int i = 0; i < columns.length; i++) {
+//            columnValuePairs[i] = columns[i].getColumnName() + " = ?";
+//        }
+        QueryBuilder builder = getQueryBuilder().update(table).setColumns(function,columns).where(conditionsColumns);
         String query=builder.build();
         Column[] all=combineColumns(columns,columnValues);
         return getQueryBuilder().executeUpdateDelete(query, obj,all);
@@ -105,29 +95,6 @@ public class QueryLayer {
         return getQueryBuilder().executeUpdateDelete(query, obj,columnValues);
     }
     
-
-    public static Column[] getColumnsByTable(Tables table) {
-        switch (String.valueOf(table)) {
-            case "UserDetails":
-                return Enum.UserDetails.getColumnNames();
-            case "ALL_MAIL":
-                return Enum.AllMail.getColumnNames();
-            case "ALL_PHONE":
-                return Enum.AllPhone.getColumnNames();
-            case "CATEGORIES":
-                return Enum.Categories.getColumnNames();
-            case "CATEGORY_USERS":
-                return Enum.CategoryUsers.getColumnNames();
-            case "CONTACT_DETAILS":
-                return Enum.ContactDetails.getColumnNames();
-            case "CREDENTIALS":
-                return Enum.Credentials.getColumnNames();
-            case "SESSION":
-                return Enum.Session.getColumnNames();
-            default:
-                throw new IllegalArgumentException("Unsupported table: " + String.valueOf(table));
-        }
-    }
     private static Column[] combineColumns(Column[] updateColumns,Column[] conditionColumns) {
     	if (conditionColumns == null || conditionColumns.length == 0) {
             return updateColumns; 
