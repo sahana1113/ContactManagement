@@ -1,0 +1,10 @@
+2024-12-30 13:21:17 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-30 13:21:17 INFO  AppContextListener - Server started at Mon Dec 30 13:21:17 IST 2024
+2024-12-30 13:21:25 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:25 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-30 13:21:25 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:25 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-30 13:21:25 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:25 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-30 13:21:27 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:27 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-30 13:21:32 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:32 IST 2024] "POST /update HTTP/1.1"
+2024-12-30 13:21:32 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:21:32 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-30 13:22:02 INFO  FilterSession -  54 33f1f4bb-61a3-49d0-8bfb-e305bc4eeb45: 0:0:0:0:0:0:0:1 - - [Mon Dec 30 13:22:02 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-30 13:22:07 INFO  AppContextListener - Server stoped at Mon Dec 30 13:22:07 IST 2024
