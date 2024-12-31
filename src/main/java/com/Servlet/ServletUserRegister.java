@@ -23,8 +23,16 @@ public class ServletUserRegister extends HttpServlet {
         user.setBirthday(request.getParameter("birthday"));
         user.setPhonenumber(request.getParameter("phone"));
         user.setPassword(request.getParameter("password"));
+        user.setCreated_time(System.currentTimeMillis()/1000);
+        user.setUpdated_time(System.currentTimeMillis()/1000);
         BeanMail mail=new BeanMail(request.getParameter("email"));
         BeanPhone phone=new BeanPhone(request.getParameter("phone"));
+        mail.setIs_primary(true);
+        phone.setIs_primary(true);
+        mail.setCreated_time((System.currentTimeMillis() / 1000));
+        phone.setCreated_time((System.currentTimeMillis() / 1000));
+        mail.setUpdated_time((System.currentTimeMillis() / 1000));
+        phone.setUpdated_time((System.currentTimeMillis() / 1000));
         DaoRegisterLogin rld=new DaoRegisterLogin();
         try {
               if(rld.UserDetailsRegister(user))

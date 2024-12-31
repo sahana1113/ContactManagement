@@ -35,7 +35,6 @@ public class DaoUserContact{
 		BeanCategory obj=new BeanCategory();
 		obj.setCategory_id(id);
 		Tables.USER_DETAILS.getClass();
-		//select category_name from categories where category_id=?
 		Condition condition=new Condition(Categories.category_id,"=",false);
 		List<BeanCategory>list=QueryLayer.buildSelectQuery(
 				Tables.CATEGORIES, 
@@ -52,6 +51,7 @@ public class DaoUserContact{
 		user1.setUser_id(user_id);
 		Condition condition=new Condition(UserDetails.user_id,"=",false);
 		//List<BeanUserDetails>list=QueryLayer.getQueryBuilder().select(new Column[] {UserDetails.username}).from(Tables.USER_DETAILS).conditions(new Column[] {UserDetails.user_id}, null, true).build();
+		
 		List<BeanUserDetails>user=QueryLayer.buildSelectQuery(
 				Tables.USER_DETAILS,
 				new Column[] {UserDetails.username},
@@ -113,13 +113,14 @@ public class DaoUserContact{
 				null,new Column[] {ContactDetails.user_id,ContactDetails.is_archive});
         return list;
 	}
+	
 	public boolean contactDetailsRegister(BeanContactDetails user) throws Exception {
 		boolean rs=false;
 		user.setUser_id(user_id);
 		int key=QueryLayer.buildInsertQuery(
 				Tables.CONTACT_DETAILS, 
 				user, 
-				new Column[] {ContactDetails.name,ContactDetails.mail,ContactDetails.phonenumber,ContactDetails.gender,ContactDetails.birthday,ContactDetails.location,ContactDetails.user_id,ContactDetails.created_time});
+				new Column[] {ContactDetails.name,ContactDetails.mail,ContactDetails.phonenumber,ContactDetails.gender,ContactDetails.birthday,ContactDetails.location,ContactDetails.user_id,ContactDetails.created_time,ContactDetails.updated_time});
 		if(key!=-1)
 		{
 			user.setContact_id(key);
@@ -130,11 +131,15 @@ public class DaoUserContact{
          rld.insertCategory(user);
          return rs;
 	}
-	public BeanContactDetails getContactDetailsById(int contact_id) throws Exception
+	
+	public BeanContactDetails getContactDetailsById(int contact_id,int user_id) throws Exception
 	{
 		  BeanContactDetails obj=new BeanContactDetails();
 		  obj.setContact_id(contact_id);
+		  obj.setUser_id(user_id);
 			Condition condition=new Condition(ContactDetails.contact_id,"=",true);
+			Condition condition1=new Condition(ContactDetails.user_id,"=",true);
+			Condition and=new Condition("AND").addSubCondition(condition1).addSubCondition(condition);
 			Join join1=new Join("LEFT",Tables.CATEGORY_USERS).on(ContactDetails.contact_id, "=", CategoryUsers.contact_id);
 			Join join2=new Join("LEFT",Tables.CATEGORIES).on(CategoryUsers.category_id, "=", Categories.category_id);
 			
@@ -151,7 +156,7 @@ public class DaoUserContact{
 						  ContactDetails.created_time, 
 						  ContactDetails.is_archive, 
 						  Categories.category_name} ,
-				  condition, 
+				  and, 
 				  BeanContactDetails.class,
 				  obj,
 				  new Join[] {join1,join2},
@@ -178,6 +183,7 @@ public class DaoUserContact{
 		return user.get(0);
         
 	}
+	
     public BeanUserDetails getPrimeDetailsById(int userId) throws Exception{
     	BeanUserDetails user=new BeanUserDetails();
     	user.setUser_id(userId);
@@ -191,6 +197,7 @@ public class DaoUserContact{
     			null,new Column[] {UserDetails.user_id});
         return list.get(0);
     }
+   
     public List<BeanCategory> getCategoriesByUserId() throws Exception
     {
     	BeanCategory obj=new BeanCategory();

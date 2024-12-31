@@ -45,15 +45,20 @@ public class ServletEditUser extends HttpServlet {
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addEmail".equals(action)) {
-            	
+            	mail.setIs_primary(false);
+            	mail.setCreated_time(System.currentTimeMillis() / 1000);
+            	mail.setUpdated_time(System.currentTimeMillis() / 1000);
                 mail.setAltMail(request.getParameter("newAltEmail"));
-                rld.addAltMail(mail);
+                rld.allMailInsert(mail);
                 userObj.getAltMail().add(mail);
                 response.sendRedirect("EditDetails.jsp");
                 return;
             } else if ("addPhone".equals(action)) {
+            	phone.setIs_primary(false);
+            	phone.setCreated_time(System.currentTimeMillis() / 1000);
+            	phone.setUpdated_time(System.currentTimeMillis() / 1000);
                 phone.setAltPhone(request.getParameter("newAltPhone"));
-                rld.addAltPhone(phone); 
+                rld.allPhoneInsert(phone);
                 userObj.getAltPhone().add(phone);
                 response.sendRedirect("EditDetails.jsp");
                 return;
@@ -78,6 +83,7 @@ public class ServletEditUser extends HttpServlet {
                 if(!userObj.getUsermail().equals(request.getParameter("primaryEmail")) && request.getParameter("primaryEmail").length()!=0)
         		{
                     obj.setUsermail(request.getParameter("primaryEmail"));
+                    obj.setUpdated_time(System.currentTimeMillis()/1000);
         			if(!rld.updatePrimaryMail(obj))
         			{
         				response.getWriter().println("Update unsuccessful!");
@@ -86,12 +92,14 @@ public class ServletEditUser extends HttpServlet {
         		if(!userObj.getPhonenumber().equals(request.getParameter("primaryPhone")) && request.getParameter("primaryPhone").length()!=0)
         		{
         			obj.setPhonenumber(request.getParameter("primaryPhone"));
+        			obj.setUpdated_time(System.currentTimeMillis()/1000);
         			if(!rld.updatePrimaryPhone(obj))
         			{
         				response.getWriter().println("Update unsuccessful!");
         			}
         		}
                 if (check) {
+                	obj.setUpdated_time(System.currentTimeMillis() / 1000);
                 	if(!rld.updateUserDetails(obj))
                         response.getWriter().println("Update unsuccessful!");
                     }

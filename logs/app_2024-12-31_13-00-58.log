@@ -1,0 +1,12 @@
+2024-12-31 13:00:58 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-31 13:00:58 INFO  AppContextListener - Server started at Tue Dec 31 13:00:58 IST 2024
+2024-12-31 13:01:02 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:02 IST 2024] "GET /deleteContactCategory.jsp HTTP/1.1"
+2024-12-31 13:01:02 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:02 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-12-31 13:01:03 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:03 IST 2024] "GET /addContactToCategory.jsp HTTP/1.1"
+2024-12-31 13:01:03 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:03 IST 2024] "GET /categoryDetails.jsp HTTP/1.1"
+2024-12-31 13:01:23 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:23 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:01:25 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:25 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-12-31 13:01:26 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:26 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-12-31 13:01:29 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:29 IST 2024] "GET /logout HTTP/1.1"
+2024-12-31 13:01:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:01:29 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-31 13:06:18 INFO  AppContextListener - Server stoped at Tue Dec 31 13:06:18 IST 2024

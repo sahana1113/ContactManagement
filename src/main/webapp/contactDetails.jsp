@@ -14,7 +14,7 @@ int contactId = Integer.parseInt(request.getParameter("id"));
     DaoUserContact contactDao = new DaoUserContact();
     BeanContactDetails contact = new BeanContactDetails();
     try {
-        contact = contactDao.getContactDetailsById(contactId);
+        contact = contactDao.getContactDetailsById(contactId,uId);
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -282,12 +282,14 @@ option:hover {
                 <li><strong>Groups:</strong>
                         <ul>
                             <% List<BeanCategory> categories = contact.getCategory();
+                            boolean count=false;
                             if (categories != null && !categories.isEmpty()) {
                                for (BeanCategory group : categories) {
-                                if (group!=null) { %>
+                                if (group.getCategory_name()!=null) {
+                                	count=true;%>
                                     <li><%= group.getCategory_name() %></li>
-                            <% } } } else {
-                    out.print("No groups assigned.");
+                            <% } } } if(!count){
+                    out.print("No groups assigned");
                 }
                 %>
                         </ul>

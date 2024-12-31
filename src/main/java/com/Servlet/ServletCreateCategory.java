@@ -22,7 +22,10 @@ public class ServletCreateCategory extends HttpServlet {
         DaoRegisterLogin rld = new DaoRegisterLogin(userId);
 		int categoryId=0;
 		try {
-			categoryId = rld.insertCategoryByName(new BeanCategory(categoryName));
+			BeanCategory obj=new BeanCategory(categoryName);
+			obj.setCreated_time(System.currentTimeMillis()/1000);
+			obj.setUpdated_time(System.currentTimeMillis()/1000);
+			categoryId = rld.insertCategoryByName(obj);
 		} catch (NoSuchFieldException | IllegalAccessException | SQLException e) {
 			e.printStackTrace();
 		}

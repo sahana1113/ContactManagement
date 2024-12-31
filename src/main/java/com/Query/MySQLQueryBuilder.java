@@ -50,10 +50,26 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		return this;
 	}
 	@Override
-	public QueryBuilder join(String joinClause) {
-	    query.append(" ").append(joinClause);
+//	public QueryBuilder join(String joinClause) {
+//	    query.append(" ").append(joinClause);
+//	    return this;
+//	}
+	public QueryBuilder join(Join[] joins) {
+		if(joins!=null) {
+			for (Join join : joins) {
+				query.append(" ").append(join.buildJoin()); 
+			}
+		}
 	    return this;
 	}
+	@Override
+	public QueryBuilder conditions(Condition conditions) {
+	    if (conditions != null) {
+	        query.append(" WHERE ").append(conditions);
+	    }
+	    return this;
+	}
+
 
 	@Override
 	public QueryBuilder where(Condition condition) {
@@ -99,13 +115,17 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 	
 	@Override
-	public QueryBuilder values(List<String> categoryNames, int placeholderIndex) {
+	public QueryBuilder values(List<String> categoryNames, int index) {
 	    query.append("VALUES ");
 	    int size = categoryNames.size();
 	    for (int i = 0; i < size ; i++) {
+	    	int temp=index;
 	        query.append("(");
 	        query.append("'").append(categoryNames.get(i)).append("'");
-	        query.append(", ?"); 
+	        while(temp>1) {
+	        query.append(", ?");
+	        temp--;
+	        }
 	        query.append(")");
 
 	        if (i < size - 1) {
@@ -114,8 +134,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	    }
 	    return this;
 	}
-
-
 	@Override
 	public QueryBuilder update(Tables table) {
 		query.append("UPDATE ").append(table.getTableName());
@@ -125,7 +143,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	public QueryBuilder setColumns(String function,Column... columns) {
         String[] columnValuePairs = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
-        	if(function.length()!=0)
+        	if(function!=null && function.length()!=0)
         	{
         		columnValuePairs[i]= columns[i].getColumnName() +" = "+function+" ( ? , "+columns[i].getColumnName()+" )";
         	}
@@ -153,18 +171,32 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
 
 	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns,boolean batch) throws SQLException{
+	public int executeInsert(String query, Bean entity, Column[] columns,boolean batch) throws SQLException, NoSuchFieldException, SecurityException{
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		Class<?> clazz = entity.getClass();
+		System.out.println(query);
 		if(batch) {
+			int k=1;
 			for(int i=1;i<=4;i++)
 			{
-				preparedStatement.setInt(i,entity.getUser_id());
+				try {
+			        for (int j = 1; j < columns.length; j++) {
+			            String fieldName = columns[j].getColumnName();
+			            Field field = clazz.getDeclaredField(fieldName);
+			            field.setAccessible(true); 
+			            Object value = field.get(entity); 
+			            preparedStatement.setObject(k, value); 
+			          //  System.out.println(fieldName+" "+value);
+			            k++;
+			        }
+			    } catch (NoSuchFieldException | IllegalAccessException e) {
+			        throw new RuntimeException("Error mapping object fields to query parameters", e);
+			    }
 			}
+			System.out.print(preparedStatement.toString());
 			return preparedStatement.executeUpdate();
 		}
-		System.out.println(query);
-		Class<?> clazz = entity.getClass();
 		  try {
 		        for (int i = 0; i < columns.length; i++) {
 		            String fieldName = columns[i].getColumnName();
@@ -214,7 +246,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		Connection con = getCon();
 		preparedStatement = con.prepareStatement(query);
 		System.out.println(query);
-	//	System.out.println(columns);
 		Class<?> clazz = entity.getClass();
 	    try {
 	        for (int i = 0; i < columns.length; i++) {
@@ -223,10 +254,8 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	            Field field = clazz.getDeclaredField(fieldName);
 	            field.setAccessible(true); 
 	            Object value = field.get(entity); 
-	         //   System.out.println(fieldName+" "+entity);
 	            preparedStatement.setObject(i + 1, value); 
 	        }
-	     //   System.out.print(preparedStatement.toString());
 	    } catch (NoSuchFieldException | IllegalAccessException e) {
 	        throw new RuntimeException("Error mapping object fields to query parameters", e);
 	    }

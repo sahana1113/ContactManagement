@@ -36,6 +36,7 @@ public class ServletChangePassword extends HttpServlet {
         			if(newPass.equals(cnfmPass))
         			{
         				user.setPassword(cnfmPass);
+        				user.setUpdated_time(System.currentTimeMillis()/1000);
         				rld.changePassword(user);
         			}
         			else

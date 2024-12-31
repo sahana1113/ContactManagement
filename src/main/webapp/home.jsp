@@ -165,7 +165,7 @@ String s=user.getUsername();
                 if (user != null) {                                                  
                 %>
                 <ul>
-                    <li><strong>Username:</strong> <span><%= user.getUsername() %></span></li>
+                    <li><strong>Username:</strong> <span><%= (user.getUsername()).toString() %></span></li>
                     <li><strong>Primary Email:</strong> <span><%= user.getUsermail() %></span></li>
                     <li><strong>Gender:</strong> <span><%= user.getGender() %></span></li>
                     <li><strong>Primary Phone Number:</strong> <span><%= user.getPhonenumber() %></span></li>
@@ -174,9 +174,9 @@ String s=user.getUsername();
                         <ul>
                             <%
                             boolean r=false;
-                                                        for (BeanMail email : user.getAltMail()) {
-                                                            if (email!=null) {
-                                                            	r=true;
+                            for (BeanMail email : user.getAltMail()) {
+                                  if (email!=null) {
+                                        r=true;
                             %>
                                     <li><%=email.getAltMail()%></li>
                             <% } }if(!r)
@@ -187,9 +187,9 @@ String s=user.getUsername();
                         <ul>
                             <%
                             boolean r1=false;
-                                                        for (BeanPhone phone : user.getAltPhone()) {
-                                                            if (phone!=null) {
-                                                            	r1=true;
+                            for (BeanPhone phone : user.getAltPhone()) {
+                                       if (phone!=null) {
+                                              r1=true;
                             %>
                                     <li><%=phone.getAltPhone()%></li>
                             <% } }if(!r)

@@ -26,6 +26,7 @@ public class ServletCreateContact extends HttpServlet {
 		contact.setPhonenumber(request.getParameter("phone"));
 		contact.setLocation(request.getParameter("location"));
 		contact.setCreated_time(System.currentTimeMillis() / 1000);
+		contact.setUpdated_time((System.currentTimeMillis() / 1000));
 		String[] selectedCategories = request.getParameterValues("categories");
 		System.out.println(Arrays.asList(selectedCategories));
 		if (selectedCategories != null && selectedCategories.length != 0) {

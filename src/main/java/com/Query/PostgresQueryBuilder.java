@@ -85,11 +85,7 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Override
-	public QueryBuilder join(String joinClause) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception {
 		// TODO Auto-generated method stub
@@ -102,6 +98,16 @@ public class PostgresQueryBuilder implements QueryBuilder {
 	}
 	@Override
 	public QueryBuilder setColumns(String function, Column... columns) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public QueryBuilder join(Join[] joins) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public QueryBuilder conditions(Condition conditions) {
 		// TODO Auto-generated method stub
 		return null;
 	}

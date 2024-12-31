@@ -44,17 +44,7 @@ public class QueryLayer {
         }
     }
     public static <T> List<T> buildSelectQuery(Tables table, Column[] columns, Condition conditions, Class<T> type,Bean obj,Join[] joins,Column[] column) throws Exception {
-        QueryBuilder builder = getQueryBuilder().select(columns).from(table);
-        if(joins!=null)
-        {
-        	for(Join join:joins)
-        	{
-        		builder=builder.join(join.buildJoin());
-        	}
-        }
-        if (conditions != null) {
-            builder = ((MySQLQueryBuilder) builder).where(conditions);
-        }
+        QueryBuilder builder = getQueryBuilder().select(columns).from(table).join(joins).conditions(conditions);
         String query=builder.build();
         
         return getQueryBuilder().executeSelect(query,obj,type,column);  
@@ -69,23 +59,20 @@ public class QueryLayer {
         return getQueryBuilder().executeInsert(query, obj,columns,false);
     }
     
-    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj) throws SQLException {
+    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj) throws SQLException, NoSuchFieldException, SecurityException {
     	String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
-    	String query=getQueryBuilder().insertBatch(table,columnNames).values(data,1).build();
+    	String query=getQueryBuilder().insertBatch(table,columnNames).values(data,columns.length).build();
         return getQueryBuilder().executeInsert(query, obj, columns,true);
     }
 
-	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues,String function, Column... columns) throws SQLException {
-//        String[] columnValuePairs = new String[columns.length];
-//        for (int i = 0; i < columns.length; i++) {
-//            columnValuePairs[i] = columns[i].getColumnName() + " = ?";
-//        }
+	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnConditions,String function, Column... columns) throws SQLException {
+
         QueryBuilder builder = getQueryBuilder().update(table).setColumns(function,columns).where(conditionsColumns);
         String query=builder.build();
-        Column[] all=combineColumns(columns,columnValues);
+        Column[] all=combineColumns(columns,columnConditions);
         return getQueryBuilder().executeUpdateDelete(query, obj,all);
     }
 

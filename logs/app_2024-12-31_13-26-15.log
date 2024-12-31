@@ -1,0 +1,24 @@
+2024-12-31 13:26:16 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-31 13:26:16 INFO  AppContextListener - Server started at Tue Dec 31 13:26:16 IST 2024
+2024-12-31 13:26:16 INFO  FilterSession - 127.0.0.1 - - [Tue Dec 31 13:26:16 IST 2024] "GET / HTTP/1.1"
+2024-12-31 13:26:21 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:26:21 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-12-31 13:26:26 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:26:26 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-12-31 13:27:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:17 IST 2024] "POST /register HTTP/1.1"
+2024-12-31 13:27:17 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:17 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-31 13:27:26 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:26 IST 2024] "POST /login HTTP/1.1"
+2024-12-31 13:27:26 INFO  ServletUserLogin - User logged in: user_id=67
+2024-12-31 13:27:26 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:26 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-31 13:27:34 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:34 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 13:27:45 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:45 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:27:48 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:48 IST 2024] "GET /category.jsp HTTP/1.1"
+2024-12-31 13:27:50 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:27:50 IST 2024] "GET /myDetails.jsp HTTP/1.1"
+2024-12-31 13:28:01 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:01 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:28:01 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:01 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:28:03 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:03 IST 2024] "GET /createContact.jsp HTTP/1.1"
+2024-12-31 13:28:29 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:29 IST 2024] "POST /create HTTP/1.1"
+2024-12-31 13:28:30 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:30 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:28:33 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:28:33 IST 2024] "GET /contactDetails.jsp HTTP/1.1"
+2024-12-31 13:29:41 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:29:41 IST 2024] "GET /contacts.jsp HTTP/1.1"
+2024-12-31 13:29:44 INFO  FilterSession -  67 3409dc24-aaa3-4133-a057-53ded8be8a6c: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:29:44 IST 2024] "GET /logout HTTP/1.1"
+2024-12-31 13:29:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 13:29:44 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-31 13:34:06 INFO  AppContextListener - Server stoped at Tue Dec 31 13:34:06 IST 2024

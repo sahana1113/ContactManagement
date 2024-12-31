@@ -1,0 +1,28 @@
+2024-12-31 12:22:45 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2024-12-31 12:22:45 INFO  AppContextListener - Server started at Tue Dec 31 12:22:45 IST 2024
+2024-12-31 12:22:45 INFO  FilterSession - 127.0.0.1 - - [Tue Dec 31 12:22:45 IST 2024] "GET / HTTP/1.1"
+2024-12-31 12:22:57 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:22:57 IST 2024] "GET /index.jsp HTTP/1.1"
+2024-12-31 12:22:59 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:22:59 IST 2024] "GET /register.jsp HTTP/1.1"
+2024-12-31 12:23:30 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:23:30 IST 2024] "POST /register HTTP/1.1"
+2024-12-31 12:23:30 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:23:30 IST 2024] "GET /login.jsp HTTP/1.1"
+2024-12-31 12:23:39 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:23:39 IST 2024] "POST /login HTTP/1.1"
+2024-12-31 12:23:39 INFO  ServletUserLogin - User logged in: user_id=64
+2024-12-31 12:23:39 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:23:39 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-31 12:35:40 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:35:40 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:35:49 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:35:49 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:35:49 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:35:49 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-31 12:36:39 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:36:39 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:36:44 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:36:44 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:36:44 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:36:44 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:36:55 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:36:55 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:36:55 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:36:55 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:37:19 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:37:19 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:37:19 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:37:19 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-31 12:40:58 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:40:58 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:41:06 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:41:06 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:41:06 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:41:06 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:41:14 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:41:14 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:41:14 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:41:14 IST 2024] "GET /EditDetails.jsp HTTP/1.1"
+2024-12-31 12:43:54 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:43:54 IST 2024] "POST /update HTTP/1.1"
+2024-12-31 12:43:54 INFO  FilterSession -  64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:43:54 IST 2024] "GET /home.jsp HTTP/1.1"
+2024-12-31 12:45:06 INFO  AppContextListener - Server stoped at Tue Dec 31 12:45:06 IST 2024

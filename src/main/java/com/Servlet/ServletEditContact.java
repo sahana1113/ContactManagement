@@ -17,13 +17,14 @@ public class ServletEditContact extends HttpServlet {
             throws ServletException, IOException {
    	 int contactid=Integer.parseInt(request.getParameter("contactId"));
    	int userid=(int) request.getAttribute("user_id");
-    	BeanContactDetails user=new BeanContactDetails();
-        user.setName(request.getParameter("username"));
-        user.setGender(request.getParameter("gender"));
-        user.setBirthday(request.getParameter("birthday"));
-        user.setMail(request.getParameter("primaryEmail"));
-        user.setPhonenumber(request.getParameter("primaryPhone"));
-        user.setContact_id(contactid);
+    	BeanContactDetails contact=new BeanContactDetails();
+        contact.setName(request.getParameter("username"));
+        contact.setGender(request.getParameter("gender"));
+        contact.setBirthday(request.getParameter("birthday"));
+        contact.setMail(request.getParameter("primaryEmail"));
+        contact.setPhonenumber(request.getParameter("primaryPhone"));
+        contact.setUpdated_time((System.currentTimeMillis() / 1000));
+        contact.setContact_id(contactid);
         String[] list1=request.getParameterValues("categoryContact");
         if(list1!=null && list1.length!=0) {
     			List<BeanCategory>list=new ArrayList<>();
@@ -32,11 +33,11 @@ public class ServletEditContact extends HttpServlet {
     				list.add(new BeanCategory(s));
     				System.out.println(s);
     			}
-    			user.setCategory(list);
+    			contact.setCategory(list);
         }
         DaoRegisterLogin rld=new DaoRegisterLogin(userid);
         try {
-              if(rld.updateContactDetails(user))
+              if(rld.updateContactDetails(contact))
             {
             	response.sendRedirect("contacts.jsp");
             }
