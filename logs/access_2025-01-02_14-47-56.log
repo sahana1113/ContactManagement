@@ -1,0 +1,5 @@
+02/Jan/2025:14:47:56 +0530  - - [02/Jan/2025:14:47:56 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+02/Jan/2025:14:47:56 +0530  - - [02/Jan/2025:14:47:56 +0530] "Server started at Thu Jan 02 14:47:56 IST 2025 %U HTTP/1.1" %s %b
+02/Jan/2025:14:50:19 +0530  - - [02/Jan/2025:14:50:19 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 14:50:19 IST 2025] "GET /myDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:14:50:20 +0530  - - [02/Jan/2025:14:50:20 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 14:50:20 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:14:56:05 +0530  - - [02/Jan/2025:14:56:05 +0530] "Server stoped at Thu Jan 02 14:56:05 IST 2025 %U HTTP/1.1" %s %b

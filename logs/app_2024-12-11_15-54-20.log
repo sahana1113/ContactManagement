@@ -1,8 +1,0 @@
-2024-12-11 15:54:20 INFO  AppContextListener - Server started at Wed Dec 11 15:54:20 IST 2024
-2024-12-11 15:54:21 INFO  FilterSession - 127.0.0.1 - - [Wed Dec 11 15:54:21 IST 2024] "GET / HTTP/1.1"
-2024-12-11 15:54:22 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Dec 11 15:54:22 IST 2024] "GET / HTTP/1.1"
-2024-12-11 15:54:22 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Dec 11 15:54:22 IST 2024] "GET /login.jsp HTTP/1.1"
-2024-12-11 15:54:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Wed Dec 11 15:54:29 IST 2024] "POST /login HTTP/1.1"
-2024-12-11 15:54:29 INFO  ServletUserLogin - User logged in: user_id=24
-2024-12-11 15:54:29 INFO  FilterSession -  24 67f30654-6412-4e58-aa74-ea731960e11f: 0:0:0:0:0:0:0:1 - - [Wed Dec 11 15:54:29 IST 2024] "GET /home.jsp HTTP/1.1"
-2024-12-11 15:54:30 INFO  AppContextListener - Server stoped at Wed Dec 11 15:54:30 IST 2024

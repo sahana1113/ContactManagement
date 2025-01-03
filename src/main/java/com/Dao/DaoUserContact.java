@@ -160,7 +160,7 @@ public class DaoUserContact{
 				  BeanContactDetails.class,
 				  obj,
 				  new Join[] {join1,join2},
-				  new Column[] {ContactDetails.contact_id});
+				  new Column[] {ContactDetails.user_id,ContactDetails.contact_id});
 		  return list.get(0);
         
 	}
@@ -174,7 +174,7 @@ public class DaoUserContact{
 		
 		List<BeanUserDetails> user=QueryLayer.buildSelectQuery(
 				Tables.USER_DETAILS,
-				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,AllMail.altMail,AllPhone.altPhone},
+				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,AllMail.altMail,AllPhone.altPhone,AllMail.email_id,AllPhone.phone_id},
 				condition,
 				BeanUserDetails.class,
 				obj,

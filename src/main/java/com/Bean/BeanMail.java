@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class BeanMail implements Bean{
 	private int user_id;
+	private int email_id;
 	private String altMail;
 	private boolean is_primary;
 	private long created_time;
@@ -19,6 +20,15 @@ public class BeanMail implements Bean{
 
 	public BeanMail(String parameter) {
 		this.altMail=parameter;
+	}
+
+	
+	public int getEmail_id() {
+		return email_id;
+	}
+
+	public void setEmail_id(int email_id) {
+		this.email_id = email_id;
 	}
 
 	public int getUser_id() {

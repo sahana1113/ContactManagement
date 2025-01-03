@@ -1,3 +1,0 @@
-20/Dec/2024:15:03:02 +0530  - - [20/Dec/2024:15:03:02 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
-20/Dec/2024:15:03:02 +0530  - - [20/Dec/2024:15:03:02 +0530] "Server started at Fri Dec 20 15:03:02 IST 2024 %U HTTP/1.1" %s %b
-20/Dec/2024:15:07:31 +0530  - - [20/Dec/2024:15:07:31 +0530] "Server stoped at Fri Dec 20 15:07:31 IST 2024 %U HTTP/1.1" %s %b

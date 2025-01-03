@@ -183,7 +183,7 @@
                 List<BeanCategory> all_categories = contactDao.getCategoriesByUserId();
 
                 try {
-                    user = contactDao.getContactDetailsById(cont_Id);
+                    user = contactDao.getContactDetailsById(cont_Id,uId);
                 } catch (SQLException e) {
                     e.printStackTrace();
                     out.println("Error retrieving contact details.");

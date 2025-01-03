@@ -1,0 +1,7 @@
+2025-01-02 11:56:04 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-02 11:56:04 INFO  AppContextListener - Server started at Thu Jan 02 11:56:04 IST 2025
+2025-01-02 11:56:06 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:56:06 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-02 11:56:07 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:56:07 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-02 11:56:08 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:56:08 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-02 11:56:08 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:56:08 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-02 11:59:05 INFO  AppContextListener - Server stoped at Thu Jan 02 11:59:05 IST 2025

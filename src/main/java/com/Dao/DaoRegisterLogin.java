@@ -435,4 +435,25 @@ public class DaoRegisterLogin {
 
 	}
 
+	public boolean alterMail(BeanMail mail) throws SQLException {
+		int k=QueryLayer.buildUpdateQuery(Tables.ALL_MAIL,
+				new Condition(AllMail.email_id,"=",false),
+				mail,
+				new Column[] {AllMail.email_id}, 
+				null,
+				new Column[] {AllMail.altMail});
+		return k>0;
+	}
+
+	public boolean alterPhone(BeanPhone phone) throws SQLException {
+		int k=QueryLayer.buildUpdateQuery(Tables.ALL_PHONE,
+				new Condition(AllPhone.altPhone,"=",false),
+				phone,
+				new Column[] {AllPhone.altPhone}, 
+				null,
+				new Column[] {AllPhone.altPhone});
+		return k>0;
+		
+	}
+
 }

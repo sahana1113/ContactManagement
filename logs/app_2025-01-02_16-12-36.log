@@ -1,0 +1,14 @@
+2025-01-02 16:12:36 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-02 16:12:36 INFO  AppContextListener - Server started at Thu Jan 02 16:12:36 IST 2025
+2025-01-02 16:12:37 INFO  FilterSession - 127.0.0.1 - - [Thu Jan 02 16:12:37 IST 2025] "GET / HTTP/1.1"
+2025-01-02 16:12:37 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:37 IST 2025] "GET / HTTP/1.1"
+2025-01-02 16:12:37 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:37 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-02 16:12:44 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:44 IST 2025] "POST /login HTTP/1.1"
+2025-01-02 16:12:44 INFO  ServletUserLogin - User logged in: user_id=24
+2025-01-02 16:12:44 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:44 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-02 16:12:47 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:47 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 16:12:53 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:53 IST 2025] "POST /mail HTTP/1.1"
+2025-01-02 16:12:53 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:12:53 IST 2025] "GET /myDetails.jsp HTTP/1.1"
+2025-01-02 16:13:46 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:13:46 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 16:13:49 INFO  FilterSession -  24 6bf877b0-6cf4-43a5-bcbc-271bc32b36e4: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 16:13:49 IST 2025] "POST /mail HTTP/1.1"
+2025-01-02 16:14:37 INFO  AppContextListener - Server stoped at Thu Jan 02 16:14:37 IST 2025

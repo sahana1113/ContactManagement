@@ -89,6 +89,7 @@ public class Enum {
     }
 
     public enum AllMail implements Column{
+    	email_id,
         user_id,
         altMail,
         is_primary,
@@ -122,6 +123,7 @@ public class Enum {
     }
 
     public enum AllPhone implements Column{
+    	phone_id,
         user_id,
         altPhone,
         is_primary,

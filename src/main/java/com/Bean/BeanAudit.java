@@ -72,10 +72,6 @@ public class BeanAudit {
         this.changedData = changedData;
     }
 
-//    public Map<String, Object> getChangedDataAsMap() {
-//       return new Gson().fromJson(changedData, Map.class);
-//    }
-
     @Override
     public String toString() {
         return "AuditLog{" +

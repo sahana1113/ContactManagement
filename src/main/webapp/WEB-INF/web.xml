@@ -70,6 +70,22 @@
         <servlet-name>CreateCategoryServlet</servlet-name>
         <url-pattern>/createCategory</url-pattern>
     </servlet-mapping>
+     <servlet>
+        <servlet-name>ServletMail</servlet-name>
+        <servlet-class>com.Servlet.ServletMail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletMail</servlet-name>
+        <url-pattern>/mail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletPhone</servlet-name>
+        <servlet-class>com.Servlet.ServletPhone</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletPhone</servlet-name>
+        <url-pattern>/phone</url-pattern>
+    </servlet-mapping>
 
  <filter>
     <filter-name>SessionFilter</filter-name>

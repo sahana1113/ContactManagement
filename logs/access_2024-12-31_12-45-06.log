@@ -1,6 +1,0 @@
-31/Dec/2024:12:45:06 +0530  - - [31/Dec/2024:12:45:06 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
-31/Dec/2024:12:45:06 +0530  - - [31/Dec/2024:12:45:06 +0530] "Server started at Tue Dec 31 12:45:06 IST 2024 %U HTTP/1.1" %s %b
-31/Dec/2024:12:46:30 +0530  - - [31/Dec/2024:12:46:30 +0530] " 64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:46:30 IST 2024] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-31/Dec/2024:12:46:34 +0530  - - [31/Dec/2024:12:46:34 +0530] " 64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:46:34 IST 2024] "POST /update HTTP/1.1" %U HTTP/1.1" %s %b
-31/Dec/2024:12:46:34 +0530  - - [31/Dec/2024:12:46:34 +0530] " 64 75c6bce7-b329-4314-9ef6-9a41a2854f7f: 0:0:0:0:0:0:0:1 - - [Tue Dec 31 12:46:34 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-31/Dec/2024:12:48:57 +0530  - - [31/Dec/2024:12:48:57 +0530] "Server stoped at Tue Dec 31 12:48:57 IST 2024 %U HTTP/1.1" %s %b

@@ -1,0 +1,18 @@
+02/Jan/2025:15:07:16 +0530  - - [02/Jan/2025:15:07:16 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:16 +0530  - - [02/Jan/2025:15:07:16 +0530] "Server started at Thu Jan 02 15:07:16 IST 2025 %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:16 +0530  - - [02/Jan/2025:15:07:16 +0530] "127.0.0.1 - - [Thu Jan 02 15:07:16 IST 2025] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:21 +0530  - - [02/Jan/2025:15:07:21 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:07:21 IST 2025] "GET /index.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:23 +0530  - - [02/Jan/2025:15:07:23 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:07:23 IST 2025] "GET /login.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:23 +0530  - - [02/Jan/2025:15:07:23 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:07:23 IST 2025] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:07:26 +0530  - - [02/Jan/2025:15:07:26 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:07:26 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:08:01 +0530  - - [02/Jan/2025:15:08:01 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:08:01 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:08:50 +0530  - - [02/Jan/2025:15:08:50 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:08:50 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:08:59 +0530  - - [02/Jan/2025:15:08:59 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:08:59 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:12:13 +0530  - - [02/Jan/2025:15:12:13 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:12:13 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:15:20 +0530  - - [02/Jan/2025:15:15:20 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:15:20 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:16:12 +0530  - - [02/Jan/2025:15:16:12 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:16:12 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:16:13 +0530  - - [02/Jan/2025:15:16:13 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:16:13 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:16:13 +0530  - - [02/Jan/2025:15:16:13 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:16:13 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:16:14 +0530  - - [02/Jan/2025:15:16:14 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:16:14 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:16:14 +0530  - - [02/Jan/2025:15:16:14 +0530] " 24 b26ddea4-c72c-4000-b6af-990eb876b3d8: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 15:16:14 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+02/Jan/2025:15:42:39 +0530  - - [02/Jan/2025:15:42:39 +0530] "Server stoped at Thu Jan 02 15:42:39 IST 2025 %U HTTP/1.1" %s %b

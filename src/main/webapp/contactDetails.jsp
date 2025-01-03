@@ -14,7 +14,7 @@ int contactId = Integer.parseInt(request.getParameter("id"));
     DaoUserContact contactDao = new DaoUserContact();
     BeanContactDetails contact = new BeanContactDetails();
     try {
-        contact = contactDao.getContactDetailsById(contactId,uId);
+        contact = contactDao.getContactDetailsById(contactId, uId);
     } catch (SQLException e) {
         e.printStackTrace();
     }

@@ -1,0 +1,11 @@
+2025-01-02 11:23:17 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-02 11:23:17 INFO  AppContextListener - Server started at Thu Jan 02 11:23:17 IST 2025
+2025-01-02 11:23:17 INFO  FilterSession - 127.0.0.1 - - [Thu Jan 02 11:23:17 IST 2025] "GET / HTTP/1.1"
+2025-01-02 11:23:24 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:23:24 IST 2025] "GET / HTTP/1.1"
+2025-01-02 11:23:24 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:23:24 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-02 11:23:27 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:23:27 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 11:28:43 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:28:43 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 11:28:50 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:28:50 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 11:28:56 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:28:56 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-02 11:28:59 INFO  FilterSession -  24 532e7e1d-4e98-4e8d-bc8e-967a4b2d422e: 0:0:0:0:0:0:0:1 - - [Thu Jan 02 11:28:59 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-02 11:42:49 INFO  AppContextListener - Server stoped at Thu Jan 02 11:42:49 IST 2025

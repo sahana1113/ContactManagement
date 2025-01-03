@@ -187,7 +187,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 			            field.setAccessible(true); 
 			            Object value = field.get(entity); 
 			            preparedStatement.setObject(k, value); 
-			          //  System.out.println(fieldName+" "+value);
 			            k++;
 			        }
 			    } catch (NoSuchFieldException | IllegalAccessException e) {
@@ -323,7 +322,7 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	                    }
 	                }
 	                field.set(instance, value);
-	            }
+	            }	
 	        }
 	    }
 	}

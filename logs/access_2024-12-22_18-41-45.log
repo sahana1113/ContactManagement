@@ -1,8 +1,0 @@
-22/Dec/2024:18:41:45 +0530  - - [22/Dec/2024:18:41:45 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:45 +0530  - - [22/Dec/2024:18:41:45 +0530] "Server started at Sun Dec 22 18:41:45 IST 2024 %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:46 +0530  - - [22/Dec/2024:18:41:46 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:41:46 IST 2024] "GET /login.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:55 +0530  - - [22/Dec/2024:18:41:55 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:41:55 IST 2024] "POST /login HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:55 +0530  - - [22/Dec/2024:18:41:55 +0530] "User logged in: user_id=24 %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:55 +0530  - - [22/Dec/2024:18:41:55 +0530] " 24 fc9ac209-b819-4b7b-bb90-68cc2670e4f7: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:41:55 IST 2024] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:41:57 +0530  - - [22/Dec/2024:18:41:57 +0530] " 24 fc9ac209-b819-4b7b-bb90-68cc2670e4f7: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:41:57 IST 2024] "GET /category.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:42:21 +0530  - - [22/Dec/2024:18:42:21 +0530] "Server stoped at Sun Dec 22 18:42:21 IST 2024 %U HTTP/1.1" %s %b

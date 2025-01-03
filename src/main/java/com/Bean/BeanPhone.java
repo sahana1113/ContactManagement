@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class BeanPhone implements Bean{
 	private int user_id;
+	private int phone_id;
 	private String altPhone;
 	private boolean is_primary;
 	private long created_time;
@@ -19,6 +20,13 @@ public class BeanPhone implements Bean{
 
 	public BeanPhone(String parameter) {
 		this.altPhone=parameter;
+	}
+	public int getPhone_id() {
+		return phone_id;
+	}
+
+	public void setPhone_id(int phone_id) {
+		this.phone_id = phone_id;
 	}
 
 	public int getUser_id() {

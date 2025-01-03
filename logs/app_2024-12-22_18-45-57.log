@@ -1,7 +1,0 @@
-2024-12-22 18:45:57 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
-2024-12-22 18:45:57 INFO  AppContextListener - Server started at Sun Dec 22 18:45:57 IST 2024
-2024-12-22 18:46:05 INFO  FilterSession -  24 fc9ac209-b819-4b7b-bb90-68cc2670e4f7: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:46:05 IST 2024] "POST /login HTTP/1.1"
-2024-12-22 18:46:05 INFO  ServletUserLogin - User logged in: user_id=24
-2024-12-22 18:46:05 INFO  FilterSession -  24 697d03ea-0f6e-47e3-a90f-e0f1b9f83f3a: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:46:05 IST 2024] "GET /home.jsp HTTP/1.1"
-2024-12-22 18:46:07 INFO  FilterSession -  24 697d03ea-0f6e-47e3-a90f-e0f1b9f83f3a: 0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:46:07 IST 2024] "GET /contacts.jsp HTTP/1.1"
-2024-12-22 18:46:10 INFO  AppContextListener - Server stoped at Sun Dec 22 18:46:10 IST 2024

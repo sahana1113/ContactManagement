@@ -14,8 +14,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
     <style>
-        body {
+body {
     font-family: Arial, sans-serif;
     background-color: #ECF0F1;
     margin: 0;
@@ -129,11 +130,11 @@ button {
     background-color: #f9f9f9;
 }
 .delete-btn {
-            margin-top: 30px;
-   		     padding: 12px;
-            background-color: #E74C3C;
-            color: white;
-            border: none;
+    margin-top: 30px;
+    padding: 12px;
+    background-color: #E74C3C;
+    color: white;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -145,6 +146,20 @@ button {
         .delete-btn:hover {
             background-color: #C0392B;
         }
+  .edit-btn {
+    padding: 12px;
+    width: 100px;
+    background-color: #EAF4FB; /* Light background color to differentiate */
+    color: #3498DB;
+    border: 2px solid #3498DB;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+        
 input[readonly] {
     background-color: #e9e9e9;
     cursor: not-allowed;
@@ -164,10 +179,32 @@ input[readonly] {
     transition: background-color 0.3s ease;
 }
 
+
+.edit-btn:hover {
+    background-color: #D4E6F1;
+}
+
 .button:hover {
     background-color: #2980B9;
 }
 
+       .action-buttons {
+            display: flex;
+            gap: 10px;
+         }
+        .action-buttons i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .action-buttons i.edit {
+            color: #3498DB;
+        }
+        .action-buttons i.delete {
+            color: #E74C3C;
+        }
+        .action-buttons i:hover {
+            opacity: 0.7;
+        }
 
 @media (max-width: 768px) {
     .edit-container {
@@ -269,56 +306,67 @@ input[readonly] {
                  <input type="hidden" name="action" value="updateUserDetails">
                 <input type="submit" class="button" value="Save">
             </form>
-                <label for="altEmail">Alternate Email:</label>
-                <div id="alternateEmails">
-                    <form action="update" method="post" style="display:inline;">
-                        <input type="email" name="newAltEmail" placeholder="Enter alternate email" required />
-                        <input type="hidden" name="action" value="addEmail" />
-                        <button type="submit" class="button">Add</button>
-                    </form>
-                    <%
-                    for (BeanMail email : altEmails) {
-                    %>
-                    <div>
-                        <form action="update" method="post" style="display:inline;">
-                            <input type="email" name="altEmail" value="<%=email.getAltMail()%>" readonly />
-                            <input type="hidden" name="action" value="deleteEmail" />
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this email?')" class="delete-btn">Delete</button>
-                        </form>
-                    </div>
-                    <%
-                    }
-                    %>
-                </div>
-                 <br>
-                <label for="altPhone">Alternate Phone Number:</label>
-                <div id="alternatePhones">
-                    <form action="update" method="post" style="display:inline;">
-                        <input type="text" name="newAltPhone" placeholder="Enter alternate phone" required />
-                        <input type="hidden" name="action" value="addPhone" />
-                        <button type="submit" class="button">Add</button>
-                    </form>
-                    <%
-                    for (BeanPhone phone : altPhone) {
-                    %>
-                    <div>
-                        <form action="update" method="post" style="display:inline;">
-                            <input type="text" name="altPhone" value="<%=phone.getAltPhone()%>" readonly />
-                            <input type="hidden" name="action" value="deletePhone" />
-                            <button type="submit" onclick="return confirm('Are you sure you want to delete this phone number?')" class="delete-btn">Delete</button>
-                        </form>
-                    </div>
-                    <% } %>
-                </div>
+            <!-- Alternate Emails -->
+<label for="altEmail">Alternate Email:</label>
+<div id="alternateEmails">
+    <form action="mail?action=addEmail" method="post" style="display: inline;">
+        <input type="email" name="newAltEmail" placeholder="Enter alternate email" required />
+        <button type="submit" class="button">Add</button>
+    </form>
+    <% for (BeanMail email : altEmails) { %>
+        <div style="align-items: center; margin-bottom: 10px;">
+        
+                <form action="mail?action=editEmail" method="post" style="display: inline;">
+                    <input type="email" name="altEmail" value="<%=email.getAltMail()%>" style="width: 900px;" />
+                    <input type="hidden" name="id" value="<%=email.getEmail_id() %>" />
+                    <button type="submit" class="edit-btn" title="Edit">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </form>
                 
+                <form action="mail?action=deleteEmail" method="post" style="display: inline;">
+                    <input type="hidden" name="altEmail" value="<%=email.getAltMail()%>" />
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this email?')" class="delete-btn" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+        </div>
+    <% } %>
+</div>
 
-            <% } else { %>
+<label for="altPhone">Alternate Phone Number:</label>
+<div id="alternatePhones">
+
+    <form action="phone?action=addPhone" method="post" style="display: inline;">
+        <input type="text" name="newAltPhone" placeholder="Enter alternate phone number" required />
+        <input type="hidden" name="action" value="addPhone" />
+        <button type="submit" class="button">Add</button>
+    </form>
+    
+    <% for (BeanPhone phone : altPhone) { %>
+        <div style=" align-items: center; margin-bottom: 10px;">
+        
+                <form action="phone?action=editPhone" method="post" style="display: inline; margin-right:10px">
+                    <input type="text" name="altPhone" value="<%=phone.getAltPhone()%>" style="width: 880px;" />
+                    <input type="hidden" name="id" value="<%=phone.getPhone_id()  %>" />
+                    <button type="submit" class="edit-btn" title="Edit">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </form>
+
+                <form action="phone?action=deletePhone" method="post" style="display: inline;">
+                    <input type="hidden" name="altPhone" value="<%=phone.getAltPhone()%>" />
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this phone number?')" class="delete-btn" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+        </div>
+    <% } }else { %>
                 <p>No user details found. Please log in.</p>
             <% } %>
+</div>
         </div>
     </div>
-
-</div>
 
 </body>
 </html>

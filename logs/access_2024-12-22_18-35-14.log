@@ -1,5 +1,0 @@
-22/Dec/2024:18:35:14 +0530  - - [22/Dec/2024:18:35:14 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
-22/Dec/2024:18:35:14 +0530  - - [22/Dec/2024:18:35:14 +0530] "Server started at Sun Dec 22 18:35:14 IST 2024 %U HTTP/1.1" %s %b
-22/Dec/2024:18:35:18 +0530  - - [22/Dec/2024:18:35:18 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:35:18 IST 2024] "GET /category.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:35:18 +0530  - - [22/Dec/2024:18:35:18 +0530] "0:0:0:0:0:0:0:1 - - [Sun Dec 22 18:35:18 IST 2024] "GET /login.jsp HTTP/1.1" %U HTTP/1.1" %s %b
-22/Dec/2024:18:36:34 +0530  - - [22/Dec/2024:18:36:34 +0530] "Server stoped at Sun Dec 22 18:36:34 IST 2024 %U HTTP/1.1" %s %b

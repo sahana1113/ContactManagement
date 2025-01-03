@@ -18,51 +18,16 @@ public class ServletEditUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	int userId = (int) request.getAttribute("user_id");
-
         String action = request.getParameter("action");
         DaoRegisterLogin rld = new DaoRegisterLogin();
-        BeanMail mail=new BeanMail();
-        BeanPhone phone=new BeanPhone();
         BeanUserDetails obj=new BeanUserDetails(userId);
-        mail.setUser_id(userId);
-        phone.setUser_id(userId);
         BeanUserDetails userObj=SessionData.getUserData().get(userId);
         boolean check=false;
         String username=request.getParameter("username");
         String gender=request.getParameter("gender");
         String birthday=request.getParameter("birthday");
         try {
-            if ("deleteEmail".equals(action)) {
-            	mail.setAltMail(request.getParameter("altEmail"));
-                rld.deleteAltMail(mail);
-                userObj.getAltMail().removeIf(users -> users.getAltMail().equals(mail.getAltMail()));
-                response.sendRedirect("EditDetails.jsp");
-                return;
-            } else if ("deletePhone".equals(action)) {
-            	phone.setAltPhone(request.getParameter("altPhone"));
-                rld.deleteAltPhone(phone);
-                userObj.getAltPhone().removeIf(phones ->phones.getAltPhone().equals(phone.getAltPhone()));
-                response.sendRedirect("EditDetails.jsp");
-                return;
-            } else if ("addEmail".equals(action)) {
-            	mail.setIs_primary(false);
-            	mail.setCreated_time(System.currentTimeMillis() / 1000);
-            	mail.setUpdated_time(System.currentTimeMillis() / 1000);
-                mail.setAltMail(request.getParameter("newAltEmail"));
-                rld.allMailInsert(mail);
-                userObj.getAltMail().add(mail);
-                response.sendRedirect("EditDetails.jsp");
-                return;
-            } else if ("addPhone".equals(action)) {
-            	phone.setIs_primary(false);
-            	phone.setCreated_time(System.currentTimeMillis() / 1000);
-            	phone.setUpdated_time(System.currentTimeMillis() / 1000);
-                phone.setAltPhone(request.getParameter("newAltPhone"));
-                rld.allPhoneInsert(phone);
-                userObj.getAltPhone().add(phone);
-                response.sendRedirect("EditDetails.jsp");
-                return;
-            } else if ("updateUserDetails".equals(action)){
+          if ("updateUserDetails".equals(action)){
                 if(userObj.getUsername()==null || (userObj.getUsername()!=null &&!userObj.getUsername().equals(username))) 
                 {
                 	obj.setUsername(username);
@@ -105,7 +70,7 @@ public class ServletEditUser extends HttpServlet {
                     }
                 }
            SessionData.getDataFromDB(userId);
-                response.sendRedirect("home.jsp");          
+           response.sendRedirect("home.jsp");          
         } catch (Exception e) {
             e.printStackTrace();
         }
