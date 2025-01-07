@@ -31,7 +31,7 @@ public class SyncSessionServlet extends HttpServlet {
         if(action.equals("POST")) {
         if (sessionId != null && lastAccessed != null) {
             synchronized (sessionSet) {
-            	BeanSession sessionData = new BeanSession(sessionId, last);
+              BeanSession sessionData = new BeanSession(sessionId, last);
               sessionSet.remove(sessionData);
               sessionSet.add(sessionData); 
             }

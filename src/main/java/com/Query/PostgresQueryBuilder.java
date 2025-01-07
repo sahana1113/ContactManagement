@@ -80,21 +80,11 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	@Override
-	public int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 	@Override
 	public QueryBuilder setColumns(String function, Column... columns) {
@@ -110,6 +100,24 @@ public class PostgresQueryBuilder implements QueryBuilder {
 	public QueryBuilder conditions(Condition conditions) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public int executeUpdate(String sql, Bean entity, Bean audit, Column[] columns)
+			throws SQLException, NoSuchFieldException, IllegalAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch, Bean audit)
+			throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int executeDelete(String sql, Bean entity, Bean audit, Column[] columns)
+			throws SQLException, NoSuchFieldException, IllegalAccessException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

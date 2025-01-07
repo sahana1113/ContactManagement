@@ -50,36 +50,36 @@ public class QueryLayer {
         return getQueryBuilder().executeSelect(query,obj,type,column);  
         }
 
-    public static int buildInsertQuery(Tables table,Bean obj, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+    public static int buildInsertQuery(Tables table,Bean obj,Bean audit, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
         String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
         String query=getQueryBuilder().insert(table, columnNames).values(columnNames).build();
-        return getQueryBuilder().executeInsert(query, obj,columns,false);
+        return getQueryBuilder().executeInsert(query, obj,columns,false,audit);
     }
     
-    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj) throws SQLException, NoSuchFieldException, SecurityException {
+    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj,Bean audit) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
     	String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
     	String query=getQueryBuilder().insertBatch(table,columnNames).values(data,columns.length).build();
-        return getQueryBuilder().executeInsert(query, obj, columns,true);
+        return getQueryBuilder().executeInsert(query, obj, columns,true,audit);
     }
 
-	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnConditions,String function, Column... columns) throws SQLException {
+	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnConditions,String function,Bean audit,Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
 
         QueryBuilder builder = getQueryBuilder().update(table).setColumns(function,columns).where(conditionsColumns);
         String query=builder.build();
         Column[] all=combineColumns(columns,columnConditions);
-        return getQueryBuilder().executeUpdateDelete(query, obj,all);
+        return getQueryBuilder().executeUpdate(query, obj,audit,all);
     }
 
-	public static int buildDeleteQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues) throws SQLException {
+	public static int buildDeleteQuery(Tables table, Condition conditionsColumns,Bean obj,Bean audit,Column[]columnValues) throws SQLException, NoSuchFieldException, IllegalAccessException {
         QueryBuilder builder = getQueryBuilder().deleteFrom(table).where(conditionsColumns);
         String query=builder.build();
-        return getQueryBuilder().executeUpdateDelete(query, obj,columnValues);
+        return getQueryBuilder().executeDelete(query, obj,audit,columnValues);
     }
     
     private static Column[] combineColumns(Column[] updateColumns,Column[] conditionColumns) {

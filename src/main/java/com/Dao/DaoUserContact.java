@@ -114,12 +114,13 @@ public class DaoUserContact{
         return list;
 	}
 	
-	public boolean contactDetailsRegister(BeanContactDetails user) throws Exception {
+	public boolean contactDetailsRegister(BeanContactDetails user,BeanAudit audit) throws Exception {
 		boolean rs=false;
 		user.setUser_id(user_id);
 		int key=QueryLayer.buildInsertQuery(
 				Tables.CONTACT_DETAILS, 
-				user, 
+				user,
+				audit,
 				new Column[] {ContactDetails.name,ContactDetails.mail,ContactDetails.phonenumber,ContactDetails.gender,ContactDetails.birthday,ContactDetails.location,ContactDetails.user_id,ContactDetails.created_time,ContactDetails.updated_time});
 		if(key!=-1)
 		{
@@ -128,7 +129,7 @@ public class DaoUserContact{
 		}
 		 DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
          if(user.getCategory()!=null)
-         rld.insertCategory(user);
+         rld.insertCategory(user,audit);
          return rs;
 	}
 	
@@ -154,7 +155,8 @@ public class DaoUserContact{
 						  ContactDetails.birthday, 
 						  ContactDetails.location, 
 						  ContactDetails.created_time, 
-						  ContactDetails.is_archive, 
+						  ContactDetails.is_archive,
+						  ContactDetails.updated_time,
 						  Categories.category_name} ,
 				  and, 
 				  BeanContactDetails.class,

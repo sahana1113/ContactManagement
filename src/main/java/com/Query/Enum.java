@@ -378,7 +378,9 @@ public class Enum {
 		record_key,
 		created_time,
 		previous_update_time,
-		changed_data;
+		new_value,
+		old_value,
+		action;
         
     	@Override
     	public String getColumnName() {

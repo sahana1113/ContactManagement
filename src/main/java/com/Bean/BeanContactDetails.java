@@ -20,6 +20,7 @@ public class BeanContactDetails implements Bean{
 	private long updated_time;
     public BeanContactDetails() {
     }
+    
     public BeanContactDetails(String contactname, String phonenumber, int contact_id) {
         this.name = contactname;
         this.phonenumber = phonenumber;

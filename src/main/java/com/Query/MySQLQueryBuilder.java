@@ -50,10 +50,6 @@ public class MySQLQueryBuilder implements QueryBuilder {
 		return this;
 	}
 	@Override
-//	public QueryBuilder join(String joinClause) {
-//	    query.append(" ").append(joinClause);
-//	    return this;
-//	}
 	public QueryBuilder join(Join[] joins) {
 		if(joins!=null) {
 			for (Join join : joins) {
@@ -169,100 +165,84 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	public String build() {
 		return query.toString();
 	}
-
+    
 	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns,boolean batch) throws SQLException, NoSuchFieldException, SecurityException{
-		Connection con = getCon();
-		preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-		Class<?> clazz = entity.getClass();
-		System.out.println(query);
-		if(batch) {
-			int k=1;
-			for(int i=1;i<=4;i++)
-			{
-				try {
-			        for (int j = 1; j < columns.length; j++) {
-			            String fieldName = columns[j].getColumnName();
-			            Field field = clazz.getDeclaredField(fieldName);
-			            field.setAccessible(true); 
-			            Object value = field.get(entity); 
-			            preparedStatement.setObject(k, value); 
-			            k++;
-			        }
-			    } catch (NoSuchFieldException | IllegalAccessException e) {
-			        throw new RuntimeException("Error mapping object fields to query parameters", e);
-			    }
-			}
-			System.out.print(preparedStatement.toString());
-			return preparedStatement.executeUpdate();
-		}
-		  try {
-		        for (int i = 0; i < columns.length; i++) {
-		            String fieldName = columns[i].getColumnName();
-		            Field field = clazz.getDeclaredField(fieldName);
-		            field.setAccessible(true); 
-		            Object value = field.get(entity); 
-		            preparedStatement.setObject(i + 1, value); 
-		        }
-		    } catch (NoSuchFieldException | IllegalAccessException e) {
-		        throw new RuntimeException("Error mapping object fields to query parameters", e);
-		    }
-		preparedStatement.executeUpdate();
-		ResultSet key = preparedStatement.getGeneratedKeys();
-		if (key.next()) {
-			int k = key.getInt(1);
-			con.close();
-			return k;
-		}
-		con.close();
-		return -1;
-	}
+	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch,Bean audit) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+	    try (Connection con = getCon()) {
+	        preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	        Class<?> clazz = entity.getClass();
+	        System.out.println(query);
 
-	@Override
-	public int executeUpdateDelete(String sql, Bean entity,Column[] columns) throws SQLException {
-		Connection con = getCon();
-		preparedStatement = con.prepareStatement(sql);
-		System.out.println(sql);
-		 Class<?> clazz = entity.getClass();
-		    try {
-		        for (int i = 0; i < columns.length; i++) {
-		            String fieldName = columns[i].getColumnName(); 
-		            Field field = clazz.getDeclaredField(fieldName);
-		            field.setAccessible(true); 
-		            Object value = field.get(entity); 
-		            preparedStatement.setObject(i + 1, value); 
-		        }
-		    } catch (NoSuchFieldException | IllegalAccessException e) {
-		        throw new RuntimeException("Error mapping object fields to query parameters", e);
-		    }
-		int k = preparedStatement.executeUpdate();
-		con.close();
-		return k;
-	}
-
-	@Override
-	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type,Column[] columns) throws Exception {
-		Connection con = getCon();
-		preparedStatement = con.prepareStatement(query);
-		System.out.println(query);
-		Class<?> clazz = entity.getClass();
-	    try {
-	        for (int i = 0; i < columns.length; i++) {
-	            String fieldName = columns[i].getColumnName(); 
-	          
-	            Field field = clazz.getDeclaredField(fieldName);
-	            field.setAccessible(true); 
-	            Object value = field.get(entity); 
-	            preparedStatement.setObject(i + 1, value); 
+	        if (batch) {
+	            int k = 1;
+	            for (int i = 1; i <= 4; i++) {
+	                setPreparedStatementParameters(entity, columns, clazz, k);
+	            }
+	            System.out.print(preparedStatement.toString());
+	            return preparedStatement.executeUpdate();
 	        }
-	    } catch (NoSuchFieldException | IllegalAccessException e) {
-	        throw new RuntimeException("Error mapping object fields to query parameters", e);
+
+	        setPreparedStatementParameters(entity, columns, clazz, 1);
+	        preparedStatement.executeUpdate();
+
+	        try (ResultSet key = preparedStatement.getGeneratedKeys()) {
+	            if (key.next()) {
+	                return key.getInt(1);
+	            }
+	        }
+	        return -1;
 	    }
-		ResultSet resultSet = preparedStatement.executeQuery();
-		List<T> results = mapUsingReflection(resultSet,type);
-		resultSet.close();
-		con.close();
-		return results; 
+	}
+
+	private void setPreparedStatementParameters(Bean entity, Column[] columns, Class<?> clazz, int startingIndex) throws NoSuchFieldException, IllegalAccessException, SQLException {
+	    int k = startingIndex;
+	    for (Column column : columns) {
+	        String fieldName = column.getColumnName();
+	        Field field = clazz.getDeclaredField(fieldName);
+	        field.setAccessible(true);
+	        Object value = field.get(entity);
+	        preparedStatement.setObject(k++, value);
+	    }
+	}
+
+	@Override
+	public int executeUpdate(String sql, Bean entity,Bean audit, Column[] columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	    try (Connection con = getCon()) {
+	        preparedStatement = con.prepareStatement(sql);
+	        System.out.println(sql);
+
+	        Class<?> clazz = entity.getClass();
+	        setPreparedStatementParameters(entity, columns, clazz, 1);
+
+	        return preparedStatement.executeUpdate();
+	    }
+	}
+	
+	@Override
+	public int executeDelete(String sql, Bean entity,Bean audit, Column[] columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	    try (Connection con = getCon()) {
+	        preparedStatement = con.prepareStatement(sql);
+	        System.out.println(sql);
+
+	        Class<?> clazz = entity.getClass();
+	        setPreparedStatementParameters(entity, columns, clazz, 1);
+
+	        return preparedStatement.executeUpdate();
+	    }
+	}
+
+	@Override
+	public <T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception {
+	    try (Connection con = getCon()) {
+	        preparedStatement = con.prepareStatement(query);
+	        System.out.println(query);
+
+	        Class<?> clazz = entity.getClass();
+	        setPreparedStatementParameters(entity, columns, clazz, 1);
+
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        return mapUsingReflection(resultSet, type);
+	    }
 	}
 	
 	private <T> List<T> mapUsingReflection(ResultSet rs, Class<T> type) throws Exception {

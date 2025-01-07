@@ -5,6 +5,8 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page import="com.Session.*" %>
+
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -184,6 +186,7 @@
 
                 try {
                     user = contactDao.getContactDetailsById(cont_Id,uId);
+                    SessionData.getList().add(user);
                 } catch (SQLException e) {
                     e.printStackTrace();
                     out.println("Error retrieving contact details.");
@@ -236,6 +239,7 @@
             <% } else { %>
                 <p>No user details found. Please log in.</p>
             <% } %>
+            
         </div>
     </div>
 

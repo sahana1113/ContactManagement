@@ -21,11 +21,15 @@ public interface QueryBuilder {
 	QueryBuilder where(Condition condition);
 	QueryBuilder insertBatch(Tables table, String... columns);
 	QueryBuilder values(List<String> categoryNames, int placeholderIndex);
-	int executeInsert(String query, Bean entity, Column[] columns, boolean batch) throws SQLException, NoSuchFieldException, SecurityException;
 	<T> List<T> executeSelect(String query, Bean entity, Class<T> type, Column[] columns) throws Exception;
-	int executeUpdateDelete(String sql, Bean entity, Column[] columns) throws SQLException;
 	QueryBuilder setColumns(String function, Column... columns);
 	QueryBuilder join(Join[] joins);
 	QueryBuilder conditions(Condition conditions);
+	int executeUpdate(String sql, Bean entity, Bean audit, Column[] columns)
+			throws SQLException, NoSuchFieldException, IllegalAccessException;
+	int executeInsert(String query, Bean entity, Column[] columns, boolean batch, Bean audit)
+			throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException;
+	int executeDelete(String sql, Bean entity, Bean audit, Column[] columns)
+			throws SQLException, NoSuchFieldException, IllegalAccessException;
 	
 }

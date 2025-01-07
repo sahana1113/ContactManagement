@@ -2,85 +2,119 @@ package com.Bean;
 
 import java.util.Map;
 
-public class BeanAudit {
+public class BeanAudit implements Bean{
     private long auditId;                
-    private String tableName;            
-    private String recordKey;            
-    private long createdTime;            
-    private Long previousUpdateTime;     
-    private String changedData;          
-
+    private String table_name;
+    private String record_key;
+    private long created_time;            
+    private Long previous_update_time;
+    private String new_value;
+    private String old_value;
+    private String action;
     // Default constructor
     public BeanAudit() {}
 
     // Parameterized constructor
-    public BeanAudit(long auditId, String tableName, String recordKey, long createdTime,Long previousUpdateTime, String changedData) {
-        this.auditId = auditId;
-        this.tableName = tableName;
-        this.recordKey = recordKey;
-        this.createdTime = createdTime;
-        this.previousUpdateTime = previousUpdateTime;
-        this.changedData = changedData;
-    }
-
+    public BeanAudit(long auditId, String table_name, String record_key, long created_time, Long previous_update_time,String new_value, String old_value,String action) {
+		this.auditId = auditId;
+		this.table_name = table_name;
+		this.record_key = record_key;
+		this.created_time = created_time;
+		this.previous_update_time = previous_update_time;
+		this.new_value = new_value;
+		this.old_value = old_value;
+		this.action=action;
+	}
+    
     // Getters and Setters
     public long getAuditId() {
         return auditId;
     }
 
-    public void setAuditId(long auditId) {
+	public void setAuditId(long auditId) {
         this.auditId = auditId;
     }
 
     public String getTableName() {
-        return tableName;
+        return table_name;
     }
 
     public void setTableName(String tableName) {
-        this.tableName = tableName;
+        this.table_name = tableName;
     }
 
     public String getRecordKey() {
-        return recordKey;
+        return record_key;
     }
 
     public void setRecordKey(String recordKey) {
-        this.recordKey = recordKey;
+        this.record_key = recordKey;
     }
 
     public long getCreatedTime() {
-        return createdTime;
+        return created_time;
     }
 
     public void setCreatedTime(long createdTime) {
-        this.createdTime = createdTime;
+        this.created_time = createdTime;
     }
 
     public Long getPreviousUpdateTime() {
-        return previousUpdateTime;
+        return previous_update_time;
     }
 
     public void setPreviousUpdateTime(Long previousUpdateTime) {
-        this.previousUpdateTime = previousUpdateTime;
+        this.previous_update_time = previousUpdateTime;
     }
+    
+    public String getNew_value() {
+		return new_value;
+	}
 
-    public String getChangedData() {
-        return changedData;
-    }
+	public void setNew_value(String new_value) {
+		this.new_value = new_value;
+	}
 
-    public void setChangedData(String changedData) {
-        this.changedData = changedData;
-    }
+	public String getOld_value() {
+		return old_value;
+	}
 
-    @Override
-    public String toString() {
-        return "AuditLog{" +
-                "auditId=" + auditId +
-                ", tableName='" + tableName + '\'' +
-                ", recordKey='" + recordKey + '\'' +
-                ", createdTime=" + createdTime +
-                ", previousUpdateTime=" + previousUpdateTime +
-                ", changedData='" + changedData + '\'' +
-                '}';
-    }
+	public void setOld_value(String oldValues) {
+		this.old_value = oldValues != null ? oldValues.toString() : null;
+	}
+	
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	@Override
+	public String toString() {
+		return "BeanAudit [auditId=" + auditId + ", table_name=" + table_name + ", record_key=" + record_key
+				+ ", created_time=" + created_time + ", previous_update_time=" + previous_update_time + ", new_value="
+				+ new_value + ", old_value=" + old_value + ", action=" + action + "]";
+	}
+
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getUser_id() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setUser_id(int user_id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

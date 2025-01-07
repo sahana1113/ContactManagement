@@ -1,0 +1,28 @@
+2025-01-06 14:53:31 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-06 14:53:31 INFO  AppContextListener - Server started at Mon Jan 06 14:53:31 IST 2025
+2025-01-06 14:53:31 INFO  FilterSession - 127.0.0.1 - - [Mon Jan 06 14:53:31 IST 2025] "GET / HTTP/1.1"
+2025-01-06 14:53:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:53:31 IST 2025] "GET / HTTP/1.1"
+2025-01-06 14:53:31 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:53:31 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-06 14:54:00 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:54:00 IST 2025] "POST /login HTTP/1.1"
+2025-01-06 14:54:00 INFO  ServletUserLogin - User logged in: user_id=24
+2025-01-06 14:54:00 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:54:00 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-06 14:54:09 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:54:09 IST 2025] "GET /contacts.jsp HTTP/1.1"
+2025-01-06 14:54:11 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:54:11 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-06 14:54:13 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 14:54:13 IST 2025] "GET /editContact.jsp HTTP/1.1"
+2025-01-06 15:15:41 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:15:41 IST 2025] "GET /contacts.jsp HTTP/1.1"
+2025-01-06 15:15:44 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:15:44 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-06 15:15:46 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:15:46 IST 2025] "GET /editContact.jsp HTTP/1.1"
+2025-01-06 15:22:29 INFO  FilterSession -  24 b88fa060-2a2f-4616-a970-a9db0bc875b6: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:22:29 IST 2025] "GET /logout HTTP/1.1"
+2025-01-06 15:22:29 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:22:29 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-06 15:22:43 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:22:43 IST 2025] "POST /login HTTP/1.1"
+2025-01-06 15:22:43 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:22:43 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-06 15:23:46 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:23:46 IST 2025] "POST /login HTTP/1.1"
+2025-01-06 15:23:46 INFO  ServletUserLogin - User logged in: user_id=24
+2025-01-06 15:23:46 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:23:46 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-06 15:30:11 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:30:11 IST 2025] "GET /category.jsp HTTP/1.1"
+2025-01-06 15:30:17 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:30:17 IST 2025] "GET /contacts.jsp HTTP/1.1"
+2025-01-06 15:30:25 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:30:25 IST 2025] "GET /contactDetails.jsp HTTP/1.1"
+2025-01-06 15:30:28 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:30:28 IST 2025] "GET /editContact.jsp HTTP/1.1"
+2025-01-06 15:31:04 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:31:04 IST 2025] "POST /update2 HTTP/1.1"
+2025-01-06 15:31:04 INFO  FilterSession -  24 135e742d-d082-4738-8021-c008f45f4ebe: 0:0:0:0:0:0:0:1 - - [Mon Jan 06 15:31:04 IST 2025] "GET /contacts.jsp HTTP/1.1"
+2025-01-06 15:41:08 INFO  AppContextListener - Server stoped at Mon Jan 06 15:41:08 IST 2025

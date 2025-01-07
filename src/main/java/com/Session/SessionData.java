@@ -23,8 +23,16 @@ public class SessionData {
     private static TreeSet<BeanSession> sessionSet = new TreeSet<>();
     private static Map<Integer,BeanUserDetails> userData = new HashMap<>();
     private static List<String> servers=new ArrayList<>();
-
-    public static void updateLastAccessed(String sessionId, Timestamp newLastAccessed) throws SQLException, IOException {
+    private static List<BeanContactDetails> list;
+    
+    
+    public static List<BeanContactDetails> getList() {
+		return list;
+	}
+	public static void setList(List<BeanContactDetails> list) {
+		SessionData.list = list;
+	}
+	public static void updateLastAccessed(String sessionId, Timestamp newLastAccessed) throws SQLException, IOException {
     	BeanSession tempSession = new BeanSession(sessionId, newLastAccessed);
 
         if (sessionSet.contains(tempSession)) {
