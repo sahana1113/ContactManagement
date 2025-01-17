@@ -1,5 +1,6 @@
 package com.Bean;
 
+import java.util.List;
 import java.util.Objects;
 
 public class BeanMail implements Bean{
@@ -66,7 +67,21 @@ public class BeanMail implements Bean{
 	public void setUpdated_time(long updated_time) {
 		this.updated_time = updated_time;
 	}
-
+    
+	 public static BeanMail findByEmail(List<BeanMail> objects, String targetEmail) {
+	        return objects.stream()
+	                      .filter(obj -> obj.getAltMail().equals(targetEmail))
+	                      .findFirst()
+	                      .orElse(null);  
+	    }
+	 
+	 public static BeanMail findByEmailId(List<BeanMail> objects, int targetEmailId) {
+	        return objects.stream()
+	                      .filter(obj -> obj.getEmail_id() == targetEmailId)
+	                      .findFirst()
+	                      .orElse(null);
+	    }
+	 
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
@@ -87,4 +102,22 @@ public class BeanMail implements Bean{
     public int hashCode() {
         return Objects.hash(user_id, altMail, is_primary);
     }
+
+	@Override
+	public int getPrimaryId() {
+		return email_id;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "email_id";
+	}
+
+	@Override
+	public String toString() {
+		return "BeanMail [user_id=" + user_id + ", email_id=" + email_id + ", altMail=" + altMail + ", is_primary="
+				+ is_primary + ", created_time=" + created_time + ", updated_time=" + updated_time + "]";
+	}
+	
 }

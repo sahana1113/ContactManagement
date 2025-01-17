@@ -11,7 +11,7 @@
             <entry path="null"/>
         </endorsedDirs>
     </libraryInfo>
-    <libraryInfo home="/usr/lib/jvm/java-8-openjdk-amd64" version="1.8.0_422">
+    <libraryInfo home="/usr/lib/jvm/java-8-openjdk-amd64" version="1.8.0_432">
         <bootpath>
             <entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar"/>
             <entry path="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar"/>

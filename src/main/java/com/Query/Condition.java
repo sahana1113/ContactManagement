@@ -6,7 +6,8 @@ import java.util.List;
 import com.Query.Enum.Default;
 
 public class Condition {
-    private Column field;            
+    private Column field;  
+    private String field1;
     private String operator;         
     private Object value=Default.QUESTION_MARK;            
     private String logicalOperator;  
@@ -30,6 +31,15 @@ public class Condition {
          this.logicalOperator = null;  
          this.subConditions = null;
     }
+    public Condition(String field1,String operator,Object value)
+    {
+    	this.field1=field1;
+    	 this.operator = operator;
+    	 this.value=value;
+         this.alias=false;
+         this.logicalOperator = null;  
+         this.subConditions = null;
+    }
 
     public Condition(String logicalOperator) {
         this.field = null;           
@@ -47,21 +57,44 @@ public class Condition {
         return this;
     }
     
-//    public List<Column> getFieldNames() {
-//       
-//         if (field != null && value==Default.QUESTION_MARK) {
-//            fieldNames.add(field); 
-//        }
-//                if (subConditions != null &&  value==Default.QUESTION_MARK) {
-//            for (Condition subCondition : subConditions) {
-//                fieldNames.addAll(subCondition.getFieldNames());
-//            }
-//        }
-//        
-//        return fieldNames;
-//    }
 
-    @Override
+    public Column getField() {
+		return field;
+	}
+	public void setField(Column field) {
+		this.field = field;
+	}
+	public String getOperator() {
+		return operator;
+	}
+	public void setOperator(String operator) {
+		this.operator = operator;
+	}
+	public Object getValue() {
+		return value;
+	}
+	public void setValue(Object value) {
+		this.value = value;
+	}
+	public String getLogicalOperator() {
+		return logicalOperator;
+	}
+	public void setLogicalOperator(String logicalOperator) {
+		this.logicalOperator = logicalOperator;
+	}
+	public List<Condition> getSubConditions() {
+		return subConditions;
+	}
+	public void setSubConditions(List<Condition> subConditions) {
+		this.subConditions = subConditions;
+	}
+	public boolean isAlias() {
+		return alias;
+	}
+	public void setAlias(boolean alias) {
+		this.alias = alias;
+	}
+	@Override
     public String toString() {
         if (subConditions != null) {
             StringBuilder builder = new StringBuilder("(");
@@ -78,7 +111,9 @@ public class Condition {
         	if(alias)
         		return field.getColumnNamesWithAlias() + " " + operator + " " + 
         	    (value instanceof Column ? ((Column) value).getColumnNamesWithAlias() : value.toString());
-            return field + " " + operator + " " + ((Column) value).getColumnName();
+            return (field!=null?field:field1) + " " + operator + " " +  
+        	    (value instanceof Column ? ((Column) value).getColumnNamesWithAlias() : value.toString());
+
         }
     }
 }

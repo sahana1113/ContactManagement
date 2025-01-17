@@ -1,0 +1,4 @@
+16/Jan/2025:13:37:40 +0530  - - [16/Jan/2025:13:37:40 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+16/Jan/2025:13:37:40 +0530  - - [16/Jan/2025:13:37:40 +0530] "Server started at Thu Jan 16 13:37:40 IST 2025 %U HTTP/1.1" %s %b
+16/Jan/2025:13:37:42 +0530  - - [16/Jan/2025:13:37:42 +0530] " 24 71237990-a37f-434c-983a-f98548440b98: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 13:37:42 IST 2025] "POST /mail HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:13:38:20 +0530  - - [16/Jan/2025:13:38:20 +0530] "Server stoped at Thu Jan 16 13:38:20 IST 2025 %U HTTP/1.1" %s %b

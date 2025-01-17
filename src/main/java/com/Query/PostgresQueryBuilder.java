@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.Bean.Bean;
+import com.Bean.BeanAudit;
 import com.Query.Enum.Tables;
 
 public class PostgresQueryBuilder implements QueryBuilder {
@@ -102,23 +103,24 @@ public class PostgresQueryBuilder implements QueryBuilder {
 		return null;
 	}
 	@Override
-	public int executeUpdate(String sql, Bean entity, Bean audit, Column[] columns)
+	public int executeDelete(String sql, Bean entity, BeanAudit audit, Column[] columns)
 			throws SQLException, NoSuchFieldException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch, Bean audit)
+	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch, BeanAudit audit)
 			throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
-	public int executeDelete(String sql, Bean entity, Bean audit, Column[] columns)
+	public int executeUpdate(String sql, Bean entity, BeanAudit audit, Column[] columns, Column[] updateColums)
 			throws SQLException, NoSuchFieldException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 }
 

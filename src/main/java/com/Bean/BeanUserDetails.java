@@ -16,6 +16,7 @@ public class BeanUserDetails implements Bean {
 	private boolean flag;
 	private boolean is_primary;
 	private int user_id;
+	private int id;
 	private List<BeanMail> altMail = new ArrayList<>();
 	private List<BeanPhone> altPhone = new ArrayList<>();
 
@@ -135,6 +136,15 @@ public class BeanUserDetails implements Bean {
 		this.altPhone = allPhone;
 	}
 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public void display() {
 		// TODO Auto-generated method stub
@@ -155,6 +165,17 @@ public class BeanUserDetails implements Bean {
 	            ", altMail=" + altMail.toString() +
 	            ", altPhone=" + altPhone.toString() +
 	            '}';
+	}
+
+	@Override
+	public int getPrimaryId() {
+		return user_id;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "user_id";
 	}
 
 }

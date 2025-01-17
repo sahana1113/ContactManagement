@@ -32,7 +32,7 @@ public class ServletLogout extends HttpServlet {
         if(request.getAttribute("user_id")!=null) {
         	try {
 				ses.invalidateSession(session_id);
-			} catch (SQLException e) {
+			} catch (SQLException | NoSuchFieldException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
         }

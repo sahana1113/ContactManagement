@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanAudit;
 import com.Bean.BeanMail;
 import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoUserContact;
+import com.Query.Enum.Credentials;
 import com.Session.SessionData;
 
 
@@ -19,7 +21,6 @@ public class ServletChangePassword extends HttpServlet {
    	 
    	    int userid=(int) request.getAttribute("user_id");
     	BeanUserDetails user=SessionData.getUserData().get(userid);
-    	
         String curr=(request.getParameter("currentPassword"));
         String newPass=(request.getParameter("newPassword"));
         String cnfmPass=(request.getParameter("confirmPassword"));
@@ -28,8 +29,14 @@ public class ServletChangePassword extends HttpServlet {
 		mail.setAltMail(user.getUsermail());
 		
         DaoRegisterLogin rld=new DaoRegisterLogin();
+        BeanUserDetails user1=new BeanUserDetails();
+		try {
+			user1 = rld.validateLogin(mail, curr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
         try {
-        	if(rld.validateLogin(mail, curr)>0)
+        	if(user1!=null && user1.getUser_id()>0)
         	{
         		if(newPass.length()!=0 && cnfmPass.length()!=0)
         		{

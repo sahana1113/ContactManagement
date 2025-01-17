@@ -45,7 +45,7 @@ public class DaoSession {
 		obj.setExpiry_time(Timestamp.valueOf(expiryTime));
 		obj.setSessionid(sessionId);
 		SessionData.getSessionSet().add(obj);
-		int k = QueryLayer.buildInsertQuery(Tables.SESSION, obj,null,
+		int k = QueryLayer.buildInsertQuery(Tables.SESSION, obj,
 				new Column[] { Session.sessionid, Session.user_id, Session.expiry_time, Session.last_accessed });
 		SessionData.getDataFromDB(userId);
 		return k != 0;
@@ -118,7 +118,7 @@ public class DaoSession {
 	public boolean invalidateSession(String sessionId) throws SQLException, IOException, NoSuchFieldException, IllegalAccessException {
 		BeanSession s = new BeanSession();
 		s.setSessionid(sessionId);
-		int k = QueryLayer.buildDeleteQuery(Tables.SESSION, new Condition(Session.user_id, "=", false), s,null,new Column[] {Session.user_id});
+		int k = QueryLayer.buildDeleteQuery(Tables.SESSION, new Condition(Session.sessionid, "=", false), s,new Column[] {Session.sessionid});
 		SessionData.removeObj(sessionId);
 		ServerNotifier.notifyServers(sessionId, null, "DELETE");
 		return k > 0;

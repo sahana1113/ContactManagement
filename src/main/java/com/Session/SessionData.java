@@ -24,7 +24,7 @@ public class SessionData {
     private static Map<Integer,BeanUserDetails> userData = new HashMap<>();
     private static List<String> servers=new ArrayList<>();
     private static List<BeanContactDetails> list;
-    
+    private static Map<String,Object> auditCache=new HashMap<>();
     
     public static List<BeanContactDetails> getList() {
 		return list;
@@ -86,5 +86,19 @@ public class SessionData {
 	public static void removeObj(String sessionId) {
         sessionSet.removeIf(session -> session.getSessionid().equals(sessionId)); 
     }
+	public static Map<String, Object> getAuditCache() {
+		return auditCache;
+	}
+	public static void setAuditCache(Map<String, Object> auditCache) {
+		SessionData.auditCache = auditCache;
+	}
+	public static void addAuditCache(String key,Object value)
+	{
+		auditCache.put(key,value);
+	}
+	public static void removeAuditCache(String key)
+	{
+		auditCache.remove(key);
+	}
 }
 

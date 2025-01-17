@@ -91,4 +91,21 @@ public class BeanSession implements Comparable<BeanSession>,Bean{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int getPrimaryId() {
+		
+		return Integer.parseInt(sessionid);
+	}
+
+	@Override
+	public long getUpdated_time() {
+		return 0;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "session_id";
+	}
 }

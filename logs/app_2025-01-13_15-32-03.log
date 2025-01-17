@@ -1,0 +1,14 @@
+2025-01-13 15:32:04 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-13 15:32:04 INFO  AppContextListener - Server started at Mon Jan 13 15:32:04 IST 2025
+2025-01-13 15:32:04 INFO  FilterSession - 127.0.0.1 - - [Mon Jan 13 15:32:04 IST 2025] "GET / HTTP/1.1"
+2025-01-13 15:32:13 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:13 IST 2025] "GET /index.jsp HTTP/1.1"
+2025-01-13 15:32:13 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:13 IST 2025] "GET /favicon.ico HTTP/1.1"
+2025-01-13 15:32:13 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:13 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-13 15:32:15 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:15 IST 2025] "GET /register.jsp HTTP/1.1"
+2025-01-13 15:32:15 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:15 IST 2025] "GET /favicon.ico HTTP/1.1"
+2025-01-13 15:32:15 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:15 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-13 15:32:48 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:48 IST 2025] "POST /register HTTP/1.1"
+2025-01-13 15:32:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:49 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-13 15:32:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:49 IST 2025] "GET /favicon.ico HTTP/1.1"
+2025-01-13 15:32:49 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Mon Jan 13 15:32:49 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-13 15:35:34 INFO  AppContextListener - Server stoped at Mon Jan 13 15:35:34 IST 2025

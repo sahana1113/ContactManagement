@@ -86,6 +86,17 @@ public class BeanPhone implements Bean{
     public int hashCode() {
         return Objects.hash(user_id, altPhone, is_primary);
     }
+
+	@Override
+	public int getPrimaryId() {
+		return phone_id;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "phone_id";
+	}
 	
 	
 	

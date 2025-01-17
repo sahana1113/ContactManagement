@@ -1,0 +1,4 @@
+2025-01-17 11:57:11 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-17 11:57:11 INFO  AppContextListener - Server started at Fri Jan 17 11:57:11 IST 2025
+2025-01-17 11:57:15 INFO  FilterSession -  24 1838b0fe-5c3f-4145-afe6-32504d2288b5: 0:0:0:0:0:0:0:1 - - [Fri Jan 17 11:57:15 IST 2025] "GET /categoryDetails.jsp HTTP/1.1"
+2025-01-17 12:12:52 INFO  AppContextListener - Server stoped at Fri Jan 17 12:12:52 IST 2025

@@ -150,4 +150,15 @@ public class BeanContactDetails implements Bean{
 	            '}';
 	}
 
+	@Override
+	public int getPrimaryId() {
+		return contact_id;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "contact_id";
+	}
+
 }

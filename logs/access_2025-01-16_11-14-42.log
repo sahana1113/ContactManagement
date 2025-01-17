@@ -1,0 +1,8 @@
+16/Jan/2025:11:14:42 +0530  - - [16/Jan/2025:11:14:42 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:42 +0530  - - [16/Jan/2025:11:14:42 +0530] "Server started at Thu Jan 16 11:14:42 IST 2025 %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:45 +0530  - - [16/Jan/2025:11:14:45 +0530] " 24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:14:45 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:49 +0530  - - [16/Jan/2025:11:14:49 +0530] " 24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:14:49 IST 2025] "POST /mail HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:49 +0530  - - [16/Jan/2025:11:14:49 +0530] " 24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:14:49 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:52 +0530  - - [16/Jan/2025:11:14:52 +0530] " 24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:14:52 IST 2025] "POST /mail HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:11:14:52 +0530  - - [16/Jan/2025:11:14:52 +0530] " 24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:14:52 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:11:17:23 +0530  - - [16/Jan/2025:11:17:23 +0530] "Server stoped at Thu Jan 16 11:17:23 IST 2025 %U HTTP/1.1" %s %b

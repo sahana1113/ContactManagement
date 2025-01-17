@@ -1,0 +1,5 @@
+2025-01-16 11:05:25 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-16 11:05:25 INFO  AppContextListener - Server started at Thu Jan 16 11:05:25 IST 2025
+2025-01-16 11:05:25 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:05:25 IST 2025] "GET /logout HTTP/1.1"
+2025-01-16 11:05:25 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:05:25 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-16 11:05:33 INFO  AppContextListener - Server stoped at Thu Jan 16 11:05:33 IST 2025

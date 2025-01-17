@@ -1,0 +1,4 @@
+07/Jan/2025:13:17:26 +0530  - - [07/Jan/2025:13:17:26 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+07/Jan/2025:13:17:26 +0530  - - [07/Jan/2025:13:17:26 +0530] "Server started at Tue Jan 07 13:17:26 IST 2025 %U HTTP/1.1" %s %b
+07/Jan/2025:13:17:26 +0530  - - [07/Jan/2025:13:17:26 +0530] "127.0.0.1 - - [Tue Jan 07 13:17:26 IST 2025] "GET / HTTP/1.1" %U HTTP/1.1" %s %b
+07/Jan/2025:13:17:35 +0530  - - [07/Jan/2025:13:17:35 +0530] "Server stoped at Tue Jan 07 13:17:35 IST 2025 %U HTTP/1.1" %s %b

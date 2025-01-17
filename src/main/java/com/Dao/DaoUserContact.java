@@ -114,13 +114,12 @@ public class DaoUserContact{
         return list;
 	}
 	
-	public boolean contactDetailsRegister(BeanContactDetails user,BeanAudit audit) throws Exception {
+	public boolean contactDetailsRegister(BeanContactDetails user) throws Exception {
 		boolean rs=false;
 		user.setUser_id(user_id);
 		int key=QueryLayer.buildInsertQuery(
 				Tables.CONTACT_DETAILS, 
 				user,
-				audit,
 				new Column[] {ContactDetails.name,ContactDetails.mail,ContactDetails.phonenumber,ContactDetails.gender,ContactDetails.birthday,ContactDetails.location,ContactDetails.user_id,ContactDetails.created_time,ContactDetails.updated_time});
 		if(key!=-1)
 		{
@@ -129,7 +128,7 @@ public class DaoUserContact{
 		}
 		 DaoRegisterLogin rld=new DaoRegisterLogin(user_id);
          if(user.getCategory()!=null)
-         rld.insertCategory(user,audit);
+         rld.insertCategory(user);
          return rs;
 	}
 	
@@ -176,7 +175,8 @@ public class DaoUserContact{
 		
 		List<BeanUserDetails> user=QueryLayer.buildSelectQuery(
 				Tables.USER_DETAILS,
-				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,AllMail.altMail,AllPhone.altPhone,AllMail.email_id,AllPhone.phone_id},
+				new Column[] {UserDetails.birthday,UserDetails.phonenumber,UserDetails.usermail,UserDetails.username,UserDetails.gender,
+						AllMail.altMail,AllPhone.altPhone,AllMail.email_id,AllPhone.phone_id,AllMail.is_primary,AllMail.created_time,AllMail.updated_time,AllPhone.is_primary,AllPhone.created_time,AllPhone.updated_time,AllMail.user_id,AllPhone.user_id},
 				condition,
 				BeanUserDetails.class,
 				obj,

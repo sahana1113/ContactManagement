@@ -2,12 +2,13 @@ package com.Bean;
 
 import java.util.Map;
 
+import com.Query.Condition;
+
 public class BeanAudit implements Bean{
     private long auditId;                
     private String table_name;
     private String record_key;
-    private long created_time;            
-    private Long previous_update_time;
+    private long created_time;        
     private String new_value;
     private String old_value;
     private String action;
@@ -15,12 +16,11 @@ public class BeanAudit implements Bean{
     public BeanAudit() {}
 
     // Parameterized constructor
-    public BeanAudit(long auditId, String table_name, String record_key, long created_time, Long previous_update_time,String new_value, String old_value,String action) {
+    public BeanAudit(long auditId, String table_name, String record_key, long created_time, String new_value, String old_value,String action) {
 		this.auditId = auditId;
 		this.table_name = table_name;
 		this.record_key = record_key;
 		this.created_time = created_time;
-		this.previous_update_time = previous_update_time;
 		this.new_value = new_value;
 		this.old_value = old_value;
 		this.action=action;
@@ -58,14 +58,6 @@ public class BeanAudit implements Bean{
     public void setCreatedTime(long createdTime) {
         this.created_time = createdTime;
     }
-
-    public Long getPreviousUpdateTime() {
-        return previous_update_time;
-    }
-
-    public void setPreviousUpdateTime(Long previousUpdateTime) {
-        this.previous_update_time = previousUpdateTime;
-    }
     
     public String getNew_value() {
 		return new_value;
@@ -95,7 +87,7 @@ public class BeanAudit implements Bean{
 	@Override
 	public String toString() {
 		return "BeanAudit [auditId=" + auditId + ", table_name=" + table_name + ", record_key=" + record_key
-				+ ", created_time=" + created_time + ", previous_update_time=" + previous_update_time + ", new_value="
+				+ ", created_time=" + created_time   + ", new_value="
 				+ new_value + ", old_value=" + old_value + ", action=" + action + "]";
 	}
 
@@ -115,6 +107,23 @@ public class BeanAudit implements Bean{
 	public void setUser_id(int user_id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getPrimaryId() {
+		return (int) auditId;
+	}
+
+	@Override
+	public long getUpdated_time() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "audit_id";
 	}
 
 }

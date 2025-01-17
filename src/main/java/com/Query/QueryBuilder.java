@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.Bean.Bean;
+import com.Bean.BeanAudit;
 import com.Query.Enum.Tables;
 
 public interface QueryBuilder {
@@ -25,11 +26,11 @@ public interface QueryBuilder {
 	QueryBuilder setColumns(String function, Column... columns);
 	QueryBuilder join(Join[] joins);
 	QueryBuilder conditions(Condition conditions);
-	int executeUpdate(String sql, Bean entity, Bean audit, Column[] columns)
+	int executeDelete(String sql, Bean entity,BeanAudit audit, Column[] columns)
 			throws SQLException, NoSuchFieldException, IllegalAccessException;
-	int executeInsert(String query, Bean entity, Column[] columns, boolean batch, Bean audit)
+	int executeInsert(String query, Bean entity, Column[] columns, boolean batch, BeanAudit audit)
 			throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException;
-	int executeDelete(String sql, Bean entity, Bean audit, Column[] columns)
+	int executeUpdate(String sql, Bean entity, BeanAudit audit, Column[] columns, Column[] updateColums)
 			throws SQLException, NoSuchFieldException, IllegalAccessException;
 	
 }

@@ -4,6 +4,7 @@
 <%@ include file="sessionValidation.jsp" %>
 <%@ page import="com.Dao.*" %>
 <%@ page import="com.Bean.*" %>
+<%@ page import="com.Session.*" %>
 <%@ page session="false" %>
 <%
 int uId= (Integer) request.getAttribute("user_id"); 
@@ -144,6 +145,7 @@ List<BeanContactDetails> contactList = cd.Contactdisplay();
                         <li>
                             <span><%=contact.getName()%></span>
                             <span><%= contact.getPhonenumber() %></span>
+                            SessionData.getAuditCache().put("contactDetails"+contact.getContact_id(),contact);
                             <a href="contactDetails.jsp?id=<%= contact.getContact_id() %>" class="btn">View</a>
         
                         </li>

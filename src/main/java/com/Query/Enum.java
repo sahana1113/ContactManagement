@@ -7,25 +7,31 @@ import com.Bean.*;
 
 public class Enum { 
 	public enum Tables {
-	    ALL_MAIL("all_mail", "a", BeanMail.class),
-	    ALL_PHONE("all_phone", "p", BeanPhone.class),
-	    CATEGORIES("categories", "cat", BeanCategory.class),
-	    CATEGORY_USERS("category_users", "cu", BeanCategory.class),
-	    CONTACT_DETAILS("contactDetails", "cd", BeanContactDetails.class),
-	    CREDENTIALS("credentials", "c", BeanUserDetails.class),
-	    SESSION("session", "s", BeanSession.class),
-	    USER_DETAILS("userDetails", "ud", BeanUserDetails.class),
-		SERVERS("servers","ser",BeanServer.class),
-		AUDITLOG("audit_log","al",BeanAudit.class);
+	    ALL_MAIL("all_mail", "a", BeanMail.class,"email_id"),
+	    ALL_PHONE("all_phone", "p", BeanPhone.class,"phone_id"),
+	    CATEGORIES("categories", "cat", BeanCategory.class,"category_id"),
+	    CATEGORY_USERS("category_users", "cu", BeanCategory.class,"cat_id"),
+	    CONTACT_DETAILS("contactDetails", "cd", BeanContactDetails.class,"contact_id"),
+	    CREDENTIALS("credentials", "c", BeanUserDetails.class,"id"),
+	    SESSION("session", "s", BeanSession.class,"session_id"),
+	    USER_DETAILS("userDetails", "ud", BeanUserDetails.class,"user_id"),
+		SERVERS("servers","ser",BeanServer.class,"server_id"),
+		AUDITLOG("audit_log","al",BeanAudit.class,"audit_id");
 
 	    private final String tableName;
 	    private final String alias;
 	    private final Class<?> clazz; 
+	    private final String primary;
 
-	    Tables(String tableName, String alias, Class<?> clazz) {
+	    Tables(String tableName, String alias, Class<?> clazz,String primary) {
 	        this.tableName = tableName;
 	        this.alias = alias;
 	        this.clazz = clazz;
+	        this.primary=primary;
+	    }
+	    public String getPrimary()
+	    {
+	    	return primary;
 	    }
 
 	    public String getTableName() {
@@ -72,6 +78,10 @@ public class Enum {
         public static Column[] getColumnNames() {
         	return Arrays.stream(values())
                     .toArray(Column[]::new);
+        }
+        
+        public static Column getPrimary() {
+        	return user_id;
         }
         
         private static final String alias = "ud";
@@ -249,6 +259,7 @@ public class Enum {
     }
 
     public enum Credentials implements Column{
+    	id,
         user_id,
         password,
         flag,
@@ -377,7 +388,6 @@ public class Enum {
 		table_name,
 		record_key,
 		created_time,
-		previous_update_time,
 		new_value,
 		old_value,
 		action;

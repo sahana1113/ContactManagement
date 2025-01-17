@@ -15,12 +15,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import com.Audit.AuditLogService;
 import com.Bean.Bean;
+import com.Bean.BeanAudit;
 import com.Bean.BeanUserDetails;
+import com.Dao.DaoAudit;
 import com.Dao.DaoUserContact;
 import com.Query.Enum.AllMail;
 import com.Query.Enum.Tables;
 import com.Query.Enum.UserDetails;
+import com.Session.SessionData;
 import com.example.HikariCPDataSource;
 
 public class MySQLQueryBuilder implements QueryBuilder {
@@ -167,7 +172,10 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	}
     
 	@Override
-	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch,Bean audit) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+	public int executeInsert(String query, Bean entity, Column[] columns, boolean batch,BeanAudit audit) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+		int z=-1;
+		
+		
 	    try (Connection con = getCon()) {
 	        preparedStatement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	        Class<?> clazz = entity.getClass();
@@ -176,58 +184,105 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	        if (batch) {
 	            int k = 1;
 	            for (int i = 1; i <= 4; i++) {
-	                setPreparedStatementParameters(entity, columns, clazz, k);
+	                setPreparedStatementParameters(entity, columns, clazz, k,null);
 	            }
 	            System.out.print(preparedStatement.toString());
-	            return preparedStatement.executeUpdate();
+//	            z= preparedStatement.executeUpdate();
+//	            if(audit!=null)
+//	            DaoAudit.insertAuditLog(audit);
+	            return z;
 	        }
-
-	        setPreparedStatementParameters(entity, columns, clazz, 1);
+	        Map<String,Object>map=new HashMap<>();
+	       setPreparedStatementParameters(entity, columns, clazz, 1,map);
+	       if(audit!=null) {
+	   		audit.setAction("Insert");
+	   		audit.setOld_value(null);
+	       audit.setNew_value(AuditLogService.prepareValue(map));
+	       }
 	        preparedStatement.executeUpdate();
-
 	        try (ResultSet key = preparedStatement.getGeneratedKeys()) {
 	            if (key.next()) {
-	                return key.getInt(1);
+	                z= key.getInt(1);
+	                if(audit!=null) {
+	                audit.setRecordKey(new Condition(entity.getPrimaryColumn(),"=",z).toString());
+	                DaoAudit.insertAuditLog(audit);
+	                }
+	                return z;
 	            }
 	        }
 	        return -1;
 	    }
 	}
 
-	private void setPreparedStatementParameters(Bean entity, Column[] columns, Class<?> clazz, int startingIndex) throws NoSuchFieldException, IllegalAccessException, SQLException {
+	private void setPreparedStatementParameters(Bean entity, Column[] columns, Class<?> clazz, int startingIndex,Map<String,Object>map) throws NoSuchFieldException, IllegalAccessException, SQLException {
 	    int k = startingIndex;
 	    for (Column column : columns) {
 	        String fieldName = column.getColumnName();
 	        Field field = clazz.getDeclaredField(fieldName);
 	        field.setAccessible(true);
 	        Object value = field.get(entity);
+	        if(map!=null)
+	        {
+	        	map.put(fieldName, value);
+	        }
 	        preparedStatement.setObject(k++, value);
 	    }
+
 	}
 
 	@Override
-	public int executeUpdate(String sql, Bean entity,Bean audit, Column[] columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
-	    try (Connection con = getCon()) {
+	public int executeUpdate(String sql, Bean entity,BeanAudit audit, Column[] columns,Column[] updateColumns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	    int k=0;
+		try (Connection con = getCon()) {
 	        preparedStatement = con.prepareStatement(sql);
 	        System.out.println(sql);
-
+	        
 	        Class<?> clazz = entity.getClass();
-	        setPreparedStatementParameters(entity, columns, clazz, 1);
-
-	        return preparedStatement.executeUpdate();
+	        setPreparedStatementParameters(entity, columns, clazz, 1,null);
+	        k= preparedStatement.executeUpdate();
+	        long updatedTime=System.currentTimeMillis()/1000;
+	        Map<String,Object>oldMap=new HashMap<>();
+	        Map<String,Object>newMap=new HashMap<>();
+        	Bean obj=(Bean) SessionData.getAuditCache().get(audit.getTableName()+entity.getPrimaryId());
+        	
+        	if(obj==null)
+        	{
+        		Tables table=Tables.fromTableName(audit.getTableName());
+        		DaoAudit.selectPrevious(updateColumns,table,entity.getPrimaryId());
+        	}
+        	
+	        setPreparedStatementParameters(entity, updateColumns, clazz, 1,newMap);
+	        setPreparedStatementParameters(obj, updateColumns, clazz, 1,oldMap);
+            newMap.put("updated_time",updatedTime);
+            if(audit!=null) {
+            	audit.setAction("Update");
+            	audit.setRecordKey(new Condition(entity.getPrimaryColumn(),"=",entity.getPrimaryId()).toString());
+            	audit.setOld_value(AuditLogService.convertMapToJsonString(oldMap));
+            	audit.setNew_value(AuditLogService.convertMapToJsonString(newMap));
+                DaoAudit.insertAuditLog(audit);
+            }
+            return k;
 	    }
 	}
 	
 	@Override
-	public int executeDelete(String sql, Bean entity,Bean audit, Column[] columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	public int executeDelete(String sql, Bean entity,BeanAudit audit, Column[] columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+		int k=0;
 	    try (Connection con = getCon()) {
 	        preparedStatement = con.prepareStatement(sql);
 	        System.out.println(sql);
 
 	        Class<?> clazz = entity.getClass();
-	        setPreparedStatementParameters(entity, columns, clazz, 1);
-
-	        return preparedStatement.executeUpdate();
+	        setPreparedStatementParameters(entity, columns, clazz, 1,null);
+            k= preparedStatement.executeUpdate();
+            if(audit!=null) {
+    	   		audit.setAction("Delete");
+    	   		audit.setRecordKey(new Condition(entity.getPrimaryColumn(),"=",entity.getPrimaryId()).toString());
+    	   		audit.setOld_value(AuditLogService.mapFields(entity));
+    	        audit.setNew_value(null);
+    	        DaoAudit.insertAuditLog(audit);
+    	       }
+            return k;
 	    }
 	}
 
@@ -238,9 +293,11 @@ public class MySQLQueryBuilder implements QueryBuilder {
 	        System.out.println(query);
 
 	        Class<?> clazz = entity.getClass();
-	        setPreparedStatementParameters(entity, columns, clazz, 1);
+	        if(columns!=null)
+	        setPreparedStatementParameters(entity, columns, clazz, 1,null);
 
 	        ResultSet resultSet = preparedStatement.executeQuery();
+	        System.out.println(preparedStatement.toString());
 	        return mapUsingReflection(resultSet, type);
 	    }
 	}

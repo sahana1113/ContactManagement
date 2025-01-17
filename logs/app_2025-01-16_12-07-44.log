@@ -1,0 +1,10 @@
+2025-01-16 12:07:44 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-16 12:07:44 INFO  AppContextListener - Server started at Thu Jan 16 12:07:44 IST 2025
+2025-01-16 12:08:03 INFO  FilterSession -  24 3d8740d8-264a-47a2-b39c-ece3823838a5: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:03 IST 2025] "GET /logout HTTP/1.1"
+2025-01-16 12:08:03 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:03 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-16 12:08:11 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:11 IST 2025] "POST /login HTTP/1.1"
+2025-01-16 12:08:11 INFO  ServletUserLogin - User logged in: user_id=24
+2025-01-16 12:08:11 INFO  FilterSession -  24 97fcbef9-afec-4250-9103-25120a1ebc0f: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:11 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-16 12:08:12 INFO  FilterSession -  24 97fcbef9-afec-4250-9103-25120a1ebc0f: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:12 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-16 12:08:19 INFO  FilterSession -  24 97fcbef9-afec-4250-9103-25120a1ebc0f: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:08:19 IST 2025] "POST /mail HTTP/1.1"
+2025-01-16 12:10:54 INFO  AppContextListener - Server stoped at Thu Jan 16 12:10:54 IST 2025

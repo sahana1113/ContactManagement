@@ -1,0 +1,8 @@
+16/Jan/2025:12:15:25 +0530  - - [16/Jan/2025:12:15:25 +0530] "Server registered with IP: 127.0.1.1 and Port: 8080 %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:25 +0530  - - [16/Jan/2025:12:15:25 +0530] "Server started at Thu Jan 16 12:15:25 IST 2025 %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:31 +0530  - - [16/Jan/2025:12:15:31 +0530] "0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:15:31 IST 2025] "POST /login HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:32 +0530  - - [16/Jan/2025:12:15:32 +0530] "User logged in: user_id=24 %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:32 +0530  - - [16/Jan/2025:12:15:32 +0530] " 24 a864031f-60a4-4cac-ade3-17251fd9230b: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:15:32 IST 2025] "GET /home.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:33 +0530  - - [16/Jan/2025:12:15:33 +0530] " 24 a864031f-60a4-4cac-ade3-17251fd9230b: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:15:33 IST 2025] "GET /EditDetails.jsp HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:12:15:38 +0530  - - [16/Jan/2025:12:15:38 +0530] " 24 a864031f-60a4-4cac-ade3-17251fd9230b: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 12:15:38 IST 2025] "POST /mail HTTP/1.1" %U HTTP/1.1" %s %b
+16/Jan/2025:12:18:55 +0530  - - [16/Jan/2025:12:18:55 +0530] "Server stoped at Thu Jan 16 12:18:55 IST 2025 %U HTTP/1.1" %s %b

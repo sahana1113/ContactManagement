@@ -1,0 +1,8 @@
+2025-01-10 14:59:54 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-10 14:59:54 INFO  AppContextListener - Server started at Fri Jan 10 14:59:54 IST 2025
+2025-01-10 14:59:54 INFO  FilterSession - 127.0.0.1 - - [Fri Jan 10 14:59:54 IST 2025] "GET / HTTP/1.1"
+2025-01-10 15:00:57 INFO  FilterSession - 10.15.223.25 - - [Fri Jan 10 15:00:57 IST 2025] "GET / HTTP/1.1"
+2025-01-10 15:00:57 INFO  FilterSession - 10.15.223.25 - - [Fri Jan 10 15:00:57 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-10 15:00:57 INFO  FilterSession - 10.15.223.25 - - [Fri Jan 10 15:00:57 IST 2025] "GET /favicon.ico HTTP/1.1"
+2025-01-10 15:00:57 INFO  FilterSession - 10.15.223.25 - - [Fri Jan 10 15:00:57 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-10 15:01:59 INFO  AppContextListener - Server stoped at Fri Jan 10 15:01:59 IST 2025

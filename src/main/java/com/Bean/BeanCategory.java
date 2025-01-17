@@ -65,4 +65,13 @@ public class BeanCategory implements Bean{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int getPrimaryId() {
+		return category_id;
+	}
+	@Override
+	public String getPrimaryColumn() {
+		// TODO Auto-generated method stub
+		return "category_id";
+	}
 }

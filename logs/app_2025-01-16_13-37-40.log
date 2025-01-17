@@ -1,0 +1,4 @@
+2025-01-16 13:37:40 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-16 13:37:40 INFO  AppContextListener - Server started at Thu Jan 16 13:37:40 IST 2025
+2025-01-16 13:37:42 INFO  FilterSession -  24 71237990-a37f-434c-983a-f98548440b98: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 13:37:42 IST 2025] "POST /mail HTTP/1.1"
+2025-01-16 13:38:20 INFO  AppContextListener - Server stoped at Thu Jan 16 13:38:20 IST 2025

@@ -1,0 +1,15 @@
+2025-01-16 11:18:23 INFO  AppContextListener - Server registered with IP: 127.0.1.1 and Port: 8080
+2025-01-16 11:18:23 INFO  AppContextListener - Server started at Thu Jan 16 11:18:23 IST 2025
+2025-01-16 11:20:46 INFO  FilterSession -  24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:46 IST 2025] "POST /mail HTTP/1.1"
+2025-01-16 11:20:46 INFO  FilterSession -  24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:46 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-16 11:20:52 INFO  FilterSession -  24 7cad6618-2cf2-4f65-8ee8-37b5e6567edd: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:52 IST 2025] "GET /logout HTTP/1.1"
+2025-01-16 11:20:52 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:52 IST 2025] "GET /login.jsp HTTP/1.1"
+2025-01-16 11:20:59 INFO  FilterSession - 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:59 IST 2025] "POST /login HTTP/1.1"
+2025-01-16 11:20:59 INFO  ServletUserLogin - User logged in: user_id=24
+2025-01-16 11:20:59 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:20:59 IST 2025] "GET /home.jsp HTTP/1.1"
+2025-01-16 11:21:01 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:21:01 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-16 11:21:05 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:21:05 IST 2025] "POST /mail HTTP/1.1"
+2025-01-16 11:21:05 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:21:05 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-16 11:21:09 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:21:09 IST 2025] "POST /mail HTTP/1.1"
+2025-01-16 11:21:09 INFO  FilterSession -  24 689891e0-61ac-4824-b148-005488e35711: 0:0:0:0:0:0:0:1 - - [Thu Jan 16 11:21:09 IST 2025] "GET /EditDetails.jsp HTTP/1.1"
+2025-01-16 11:35:54 INFO  AppContextListener - Server stoped at Thu Jan 16 11:35:54 IST 2025

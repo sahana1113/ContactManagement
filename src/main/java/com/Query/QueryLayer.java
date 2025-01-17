@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Properties;
 
 import com.Bean.Bean;
+import com.Bean.BeanAudit;
 import com.Bean.BeanUserDetails;
 import com.Query.Enum.Tables;
+import com.Session.SessionData;
 public class QueryLayer {
     private static String dbType;
 
@@ -50,36 +52,54 @@ public class QueryLayer {
         return getQueryBuilder().executeSelect(query,obj,type,column);  
         }
 
-    public static int buildInsertQuery(Tables table,Bean obj,Bean audit, Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+    public static int buildInsertQuery(Tables table,Bean obj,Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
         String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
         String query=getQueryBuilder().insert(table, columnNames).values(columnNames).build();
+        if(!table.getTableName().equals("audit_log")) {
+        BeanAudit audit=new BeanAudit();
+        audit.setTableName(table.getTableName());
         return getQueryBuilder().executeInsert(query, obj,columns,false,audit);
+
+       }
+        return getQueryBuilder().executeInsert(query, obj,columns,false,null);
     }
     
-    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj,Bean audit) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
+    public static int buildBatchInsert(Tables table, List<String> data, Column[] columns,Bean obj) throws SQLException, NoSuchFieldException, SecurityException, IllegalAccessException {
     	String[] columnNames = new String[columns.length];
         for (int i = 0; i < columns.length; i++) {
             columnNames[i] = columns[i].getColumnName();
         }
     	String query=getQueryBuilder().insertBatch(table,columnNames).values(data,columns.length).build();
-        return getQueryBuilder().executeInsert(query, obj, columns,true,audit);
+    	BeanAudit audit=new BeanAudit();
+        audit.setTableName(table.getTableName());
+        return getQueryBuilder().executeInsert(query, obj, columns, true,audit);
     }
 
-	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnConditions,String function,Bean audit,Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	public static int buildUpdateQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnConditions,String function,Column... columns) throws SQLException, NoSuchFieldException, IllegalAccessException {
 
         QueryBuilder builder = getQueryBuilder().update(table).setColumns(function,columns).where(conditionsColumns);
         String query=builder.build();
         Column[] all=combineColumns(columns,columnConditions);
-        return getQueryBuilder().executeUpdate(query, obj,audit,all);
+        BeanAudit audit=new BeanAudit();
+        audit.setTableName(table.getTableName());
+        return getQueryBuilder().executeUpdate(query, obj,audit,all,columns);
     }
 
-	public static int buildDeleteQuery(Tables table, Condition conditionsColumns,Bean obj,Bean audit,Column[]columnValues) throws SQLException, NoSuchFieldException, IllegalAccessException {
+	public static int buildDeleteQuery(Tables table, Condition conditionsColumns,Bean obj,Column[]columnValues) throws SQLException, NoSuchFieldException, IllegalAccessException {
         QueryBuilder builder = getQueryBuilder().deleteFrom(table).where(conditionsColumns);
         String query=builder.build();
+        if(!table.getTableName().equals("audit_log") && !table.getTableName().equals("session")) {
+            
+        Bean obj1=(Bean) SessionData.getAuditCache().get(table.getTableName()+obj.getPrimaryId());
+        BeanAudit audit=new BeanAudit();
+        audit.setTableName(table.getTableName());
         return getQueryBuilder().executeDelete(query, obj,audit,columnValues);
+        }
+        return getQueryBuilder().executeDelete(query, obj,null,columnValues);
+
     }
     
     private static Column[] combineColumns(Column[] updateColumns,Column[] conditionColumns) {

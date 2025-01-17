@@ -166,7 +166,7 @@
             <%
                 int cont_Id = -1;
                 int uId = (Integer) request.getAttribute("user_id");
-                String idParam = request.getParameter("id");
+                String idParam = request.getParameter("id");https://www.eclipse.org/downloads/packages/release/kepler/sr2/eclipse-ide-java-ee-developers	
 
                 if (idParam == null || idParam.isEmpty()) {
                     out.println("Invalid ID parameter.");
@@ -186,7 +186,6 @@
 
                 try {
                     user = contactDao.getContactDetailsById(cont_Id,uId);
-                    SessionData.getList().add(user);
                 } catch (SQLException e) {
                     e.printStackTrace();
                     out.println("Error retrieving contact details.");

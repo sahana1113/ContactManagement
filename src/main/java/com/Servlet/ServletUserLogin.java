@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.Bean.BeanAudit;
 import com.Bean.BeanMail;
+import com.Bean.BeanUserDetails;
 import com.Dao.DaoRegisterLogin;
 import com.Dao.DaoSession;
 
@@ -24,15 +26,15 @@ public class ServletUserLogin extends HttpServlet {
 		DaoSession sessionDAO = new DaoSession();
 		DaoRegisterLogin rld=new DaoRegisterLogin();
 		try {
-			int user_id=rld.validateLogin(mail, password);
-		if(user_id!=-1)
+			BeanUserDetails user=rld.validateLogin(mail, password);
+		if(user.getUser_id()!=-1)
 		{
 			String sessionId = generateSessionId();
 			LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30);
-            boolean sessionCreated = sessionDAO.createSession(sessionId, user_id, expiryTime);
+            boolean sessionCreated = sessionDAO.createSession(sessionId, user.getUser_id(), expiryTime);
 
             if (sessionCreated) {
-            	logger.info("User logged in: user_id=" + user_id);
+            	logger.info("User logged in: user_id=" + user.getUser_id());
                 Cookie sessionCookie1 = new Cookie("SESSIONID", sessionId);
                 sessionCookie1.setMaxAge(60 * 60 * 24);
                 sessionCookie1.setHttpOnly(true); 
